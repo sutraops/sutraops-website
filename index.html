@@ -1,932 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SutraOps Solutions | Simplifying Business. Empowering Growth.</title>
-
-<meta name="description"
-content="SutraOps Solutions provides SAP consulting, accounting and finance, intelligent automation and travel solutions.">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:#172033;
-    line-height:1.6;
-    background:#ffffff;
-}
-
-nav{
-    background:#071f3d;
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-.logo{
-    text-decoration:none;
-    font-size:28px;
-    font-weight:700;
-    color:#ffffff;
-}
-
-.logo span{
-    color:#f58220;
-}
-
-.nav-links{
-    display:flex;
-    gap:28px;
-}
-
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    font-size:15px;
-}
-
-.nav-links a:hover{
-    color:#f58220;
-}
-
-/* HERO */
-
-.hero{
-    min-height:650px;
-    padding:110px 7%;
-    display:flex;
-    align-items:center;
-    background:
-    linear-gradient(120deg,#f5f9fc 0%,#ffffff 60%);
-}
-
-.hero-content{
-    max-width:850px;
-}
-
-.badge{
-    display:inline-block;
-    padding:8px 16px;
-    border-radius:30px;
-    background:#fff1e6;
-    color:#e86f00;
-    font-size:14px;
-    font-weight:bold;
-    margin-bottom:22px;
-}
-
-.hero h1{
-    font-size:clamp(44px,6vw,76px);
-    line-height:1.05;
-    color:#071f3d;
-    margin-bottom:25px;
-}
-
-.orange{
-    color:#f58220;
-}
-
-.hero p{
-    max-width:720px;
-    font-size:20px;
-    color:#596779;
-    margin-bottom:30px;
-}
-
-.btn{
-    display:inline-block;
-    background:#071f3d;
-    color:white;
-    text-decoration:none;
-    padding:15px 28px;
-    border-radius:8px;
-    font-weight:bold;
-    margin-right:10px;
-}
-
-.btn:hover{
-    background:#f58220;
-}
-
-.btn-orange{
-    background:#f58220;
-}
-
-.btn-orange:hover{
-    background:#071f3d;
-}
-
-/* SECTIONS */
-
-section{
-    padding:80px 7%;
-}
-
-.section-heading{
-    text-align:center;
-    max-width:750px;
-    margin:0 auto 50px;
-}
-
-.section-heading h2{
-    font-size:40px;
-    color:#071f3d;
-    margin-bottom:12px;
-}
-
-.section-heading p{
-    color:#667085;
-    font-size:17px;
-}
-
-/* SERVICES */
-
-.services{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:25px;
-}
-
-.card{
-    padding:32px 28px;
-    background:#ffffff;
-    border-radius:16px;
-    box-shadow:0 10px 35px rgba(7,31,61,.10);
-    border-top:4px solid #f58220;
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-7px);
-    box-shadow:0 18px 40px rgba(7,31,61,.15);
-}
-
-.icon{
-    width:55px;
-    height:55px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#071f3d;
-    color:#ffffff;
-    border-radius:50%;
-    font-size:25px;
-    margin-bottom:20px;
-}
-
-.card h3{
-    color:#071f3d;
-    font-size:21px;
-    margin-bottom:12px;
-}
-
-.card p{
-    color:#667085;
-    font-size:15px;
-}
-
-.card a{
-    display:inline-block;
-    margin-top:18px;
-    color:#f58220;
-    font-weight:bold;
-    text-decoration:none;
-}
-
-/* ABOUT */
-
-.about{
-    background:#f6f9fb;
-}
-
-.about-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:60px;
-    align-items:center;
-}
-
-.about h2{
-    font-size:40px;
-    color:#071f3d;
-    margin-bottom:20px;
-}
-
-.about p{
-    color:#596779;
-    margin-bottom:18px;
-}
-
-.check{
-    margin:12px 0;
-    color:#071f3d;
-    font-weight:bold;
-}
-
-.check span{
-    color:#f58220;
-    margin-right:8px;
-}
-
-/* STATS */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:25px;
-    text-align:center;
-}
-
-.stat{
-    padding:30px;
-}
-
-.stat h3{
-    font-size:42px;
-    color:#f58220;
-}
-
-.stat p{
-    color:#667085;
-}
-
-/* INDUSTRIES */
-
-.industries{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.industry{
-    padding:24px;
-    background:#f6f9fb;
-    border-radius:12px;
-    text-align:center;
-    font-weight:bold;
-    color:#071f3d;
-}
-
-/* CTA */
-
-.cta-section{
-    padding:70px 7%;
-}
-
-.cta{
-    background:#071f3d;
-    color:white;
-    padding:60px;
-    border-radius:22px;
-    text-align:center;
-}
-
-.cta h2{
-    font-size:40px;
-    margin-bottom:15px;
-}
-
-.cta p{
-    color:#d7e0ea;
-    margin-bottom:25px;
-}
-
-/* FOOTER */
-
-footer{
-    background:#071f3d;
-    color:white;
-    padding:55px 7% 25px;
-}
-
-.footer-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:50px;
-}
-
-footer h3{
-    margin-bottom:15px;
-    color:white;
-}
-
-footer p{
-    color:#c7d2df;
-    margin-bottom:7px;
-}
-
-footer a{
-    color:#c7d2df;
-    text-decoration:none;
-}
-
-.copyright{
-    border-top:1px solid #29415f;
-    margin-top:35px;
-    padding-top:20px;
-    color:#aebdce;
-    font-size:14px;
-}
-
-/* MOBILE */
-
-@media(max-width:1000px){
-
-.services{
-    grid-template-columns:repeat(2,1fr);
-}
-
-.stats{
-    grid-template-columns:repeat(2,1fr);
-}
-
-}
-
-@media(max-width:700px){
-
-nav{
-    padding:16px 5%;
-}
-
-.nav-links{
-    display:none;
-}
-
-.hero{
-    padding:75px 6%;
-}
-
-.hero h1{
-    font-size:46px;
-}
-
-.hero p{
-    font-size:18px;
-}
-
-.services,
-.about-grid,
-.stats,
-.industries,
-.footer-grid{
-    grid-template-columns:1fr;
-}
-
-section{
-    padding:65px 6%;
-}
-
-.section-heading h2,
-.about h2,
-.cta h2{
-    font-size:32px;
-}
-
-.cta{
-    padding:40px 25px;
-}
-
-.btn{
-    margin-bottom:10px;
-}
-
-}
-
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SutraOps Solutions | Smart Travel. Smart Finance. Smart Operations.</title>
+  <meta name="description" content="SutraOps Solutions - SAP Consulting, Finance & Accounting, Intelligent Automation and Travel Services. Simplifying Business. Empowering Growth." />
+  <link rel="icon" type="image/png" href="assets/so-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-
-
-<!-- NAVIGATION -->
-
-<nav>
-
-<a href="#home" class="logo">
-Sutra<span>Ops</span>
-</a>
-
-<div class="nav-links">
-
-<a href="#home">Home</a>
-
-<a href="#services">Services</a>
-
-<a href="#about">About</a>
-
-<a href="#industries">Industries</a>
-
-<a href="#contact">Contact</a>
-
-</div>
-
-</nav>
-
-
-<!-- HERO -->
-
-<section class="hero" id="home">
-
-<div class="hero-content">
-
-<div class="badge">
-SMART TRAVEL • SMART FINANCE • SMART OPERATIONS
-</div>
-
-<h1>
-
-Simplifying Business.
-
-<br>
-
-<span class="orange">
-Empowering Growth.
-</span>
-
-</h1>
-
-<p>
-
-SutraOps Solutions helps businesses simplify operations,
-strengthen finance processes and leverage technology through
-SAP consulting, intelligent automation and professional travel solutions.
-
-</p>
-
-<a href="#services" class="btn">
-Explore Our Services
-</a>
-
-<a href="mailto:info.sutraops@gmail.com" class="btn btn-orange">
-Talk to Us
-</a>
-
-</div>
-
-</section>
-
-
-<!-- SERVICES -->
-
-<section id="services">
-
-<div class="section-heading">
-
-<h2>
-Our Core Services
-</h2>
-
-<p>
-Business solutions designed around process efficiency,
-technology and practical business outcomes.
-</p>
-
-</div>
-
-
-<div class="services">
-
-
-<div class="card">
-
-<div class="icon">
-⚙
-</div>
-
-<h3>
-SAP Consulting
-</h3>
-
-<p>
-SAP FICO and S/4HANA Finance consulting, business process
-analysis, functional design, testing, support and optimization.
-</p>
-
-<a href="#contact">
-Learn More →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<div class="icon">
-₹
-</div>
-
-<h3>
-Accounting & Finance
-</h3>
-
-<p>
-R2R, General Ledger, Accounts Payable, Accounts Receivable,
-reconciliation, month-end closing and financial reporting.
-</p>
-
-<a href="#contact">
-Learn More →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<div class="icon">
-⚡
-</div>
-
-<h3>
-Intelligent Automation
-</h3>
-
-<p>
-SAP automation, Excel VBA, Python, reporting automation
-and repetitive process optimization.
-</p>
-
-<a href="#contact">
-Learn More →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<div class="icon">
-✈
-</div>
-
-<h3>
-Travel Solutions
-</h3>
-
-<p>
-Air ticketing, hotel reservations, corporate travel,
-visa assistance and travel planning services.
-</p>
-
-<a href="#contact">
-Learn More →
-</a>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section class="about" id="about">
-
-<div class="about-grid">
-
-<div>
-
-<h2>
-Business Understanding.
-Technology Expertise.
-</h2>
-
-<p>
-
-SutraOps Solutions brings together finance knowledge,
-SAP expertise and automation capabilities to help businesses
-reduce complexity and improve operational efficiency.
-
-</p>
-
-<p>
-
-Our approach is simple: understand the business problem first,
-then apply the right process, technology and automation solution.
-
-</p>
-
-<div class="check">
-<span>✓</span> Business-focused approach
-</div>
-
-<div class="check">
-<span>✓</span> Finance & accounting expertise
-</div>
-
-<div class="check">
-<span>✓</span> SAP FICO & S/4HANA focus
-</div>
-
-<div class="check">
-<span>✓</span> Process automation mindset
-</div>
-
-</div>
-
-
-<div>
-
-<div class="card">
-
-<h3>
-Our Philosophy
-</h3>
-
-<p>
-
-<strong>
-Simplify.
-Automate.
-Improve.
-</strong>
-
-</p>
-
-<p>
-
-We believe technology should make business easier —
-not more complicated.
-
-</p>
-
-<p>
-
-That's why SutraOps focuses on practical solutions
-that create measurable business value.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- STATS -->
-
-<section>
-
-<div class="section-heading">
-
-<h2>
-Why SutraOps?
-</h2>
-
-<p>
-Experience, process knowledge and technology working together.
-</p>
-
-</div>
-
-
-<div class="stats">
-
-<div class="stat">
-
-<h3>
-11+
-</h3>
-
-<p>
-Years Finance Experience
-</p>
-
-</div>
-
-
-<div class="stat">
-
-<h3>
-SAP
-</h3>
-
-<p>
-Finance & Process Expertise
-</p>
-
-</div>
-
-
-<div class="stat">
-
-<h3>
-Automation
-</h3>
-
-<p>
-Efficiency Mindset
-</p>
-
-</div>
-
-
-<div class="stat">
-
-<h3>
-Global
-</h3>
-
-<p>
-Business Delivery Focus
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- INDUSTRIES -->
-
-<section class="about" id="industries">
-
-<div class="section-heading">
-
-<h2>
-Industries We Serve
-</h2>
-
-<p>
-Our solutions can be adapted to different business environments
-and operational needs.
-</p>
-
-</div>
-
-
-<div class="industries">
-
-<div class="industry">
-Manufacturing
-</div>
-
-<div class="industry">
-FMCG
-</div>
-
-<div class="industry">
-Retail
-</div>
-
-<div class="industry">
-IT & Technology
-</div>
-
-<div class="industry">
-Professional Services
-</div>
-
-<div class="industry">
-Travel & Hospitality
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CONTACT CTA -->
-
-<section class="cta-section" id="contact">
-
-<div class="cta">
-
-<h2>
-Let's Simplify Your Business.
-</h2>
-
-<p>
-
-Have a SAP, finance, automation or travel requirement?
-
-Let's start a conversation.
-
-</p>
-
-<a
-href="mailto:info.sutraops@gmail.com"
-class="btn btn-orange">
-
-Email SutraOps
-
-</a>
-
-<a
-href="https://wa.me/919288223003"
-class="btn">
-
-WhatsApp Us
-
-</a>
-
-</div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<div class="footer-grid">
-
-
-<div>
-
-<h3>
-SutraOps Solutions
-</h3>
-
-<p>
-Simplifying Business. Empowering Growth.
-</p>
-
-<p>
-Smart Travel. Smart Finance. Smart Operations.
-</p>
-
-</div>
-
-
-<div>
-
-<h3>
-Contact
-</h3>
-
-<p>
-Fani Bhushan Sharma
-</p>
-
-<p>
-+91 92882 23003
-</p>
-
-<p>
-+91 4045766397
-</p>
-
-</div>
-
-
-<div>
-
-<h3>
-Email
-</h3>
-
-<p>
-<a href="mailto:info.sutraops@gmail.com">
-info.sutraops@gmail.com
-</a>
-</p>
-
-<p>
-India
-</p>
-
-</div>
-
-
-</div>
-
-
-<div class="copyright">
-
-© 2026 SutraOps Solutions. All Rights Reserved.
-
-</div>
-
-</footer>
-
-
+  <div class="top-line"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-wrap">
+      <a class="brand" href="#home" aria-label="SutraOps Solutions Home">
+        <img class="brand-mark" src="assets/so-icon.png" alt="SutraOps SO logo mark">
+        <span class="brand-text">
+          <span class="brand-name"><b>Sutra</b><i>Ops</i></span>
+          <span class="brand-sub">SOLUTIONS</span>
+          <span class="brand-tag">Smart Travel. Smart Finance. Smart Operations.</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="active" href="index.html">HOME</a>
+        <a href="about.html">ABOUT US</a>
+        <a href="services.html">SERVICES</a>
+        <a href="services.html#industries">INDUSTRIES</a>
+        <a href="contact.html">CONTACT</a>
+      </nav>
+
+      <a class="consult-btn" href="contact.html">📅 SCHEDULE CONSULTATION</a>
+      <button class="menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section id="home" class="hero">
+      <div class="map-bg" aria-hidden="true"></div>
+      <div class="skyline" aria-hidden="true"></div>
+
+      <div class="hero-wrap">
+        <div class="hero-copy">
+          <p class="eyebrow">WELCOME TO SUTRAOPS SOLUTIONS</p>
+          <h1>Simplifying Business.<br><span>Empowering Growth.</span></h1>
+          <p class="lead">We help organizations streamline finance operations, optimize SAP systems, automate business processes, and deliver smart travel solutions that drive measurable business results.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="contact.html">📅 Schedule a Consultation</a>
+            <a class="outline-btn" href="services.html">Explore Services <span>→</span></a>
+          </div>
+        </div>
+
+        <!-- Orbit graphic -->
+        <div class="hero-graphic" aria-label="SutraOps service orbit">
+          <div class="dash-orbit orbit-large"></div>
+          <div class="dash-orbit orbit-small"></div>
+
+          <div class="hub-line top"></div>
+          <div class="hub-line left"></div>
+          <div class="hub-line right"></div>
+          <div class="hub-line bottom"></div>
+
+          <div class="center-logo">
+            <img src="assets/so-icon.png" alt="SutraOps SO logo mark">
+          </div>
+
+          <div class="service-node sap"><div class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12.5" rx="1.6"/><path d="M9 20.5h6M12 16.5v4"/><text x="12" y="12" text-anchor="middle" font-size="6.2" font-weight="800" fill="#fff" stroke="none" font-family="Inter,Arial,sans-serif">SAP</text></svg></div><strong>SAP</strong><span>CONSULTING</span></div>
+          <div class="service-node finance"><div class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="1.8"/><path d="M8 6h8"/><path d="M8 10h3M13 10h3M8 13h3M13 13h3M8 16h3M13 16h3"/></svg></div><strong>FINANCE &amp;</strong><span>ACCOUNTING</span></div>
+          <div class="service-node automate"><div class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a8 8 0 0 1 13-2.5l2 2"/><path d="M20 4v4h-4"/><path d="M20 16a8 8 0 0 1-13 2.5l-2-2"/><path d="M4 20v-4h4"/></svg></div><strong>AUTOMATION</strong><span>SOLUTIONS</span></div>
+          <div class="service-node travel"><div class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l20-6.5c1-.3 1-1.7 0-2-1.4-.4-3-.2-4.2.6L4 15l-2.5-1c-.5-.2-1 .4-.6.8L3 17"/></svg></div><strong>TRAVEL</strong><span>SERVICES</span></div>
+        </div>
+      </div>
+
+      <aside class="social-rail">
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.5 8.65 22 11 22 15v6h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg></a>
+        <a href="https://wa.me/919288223003" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.43-.58 1.63-1.15.2-.56.2-1.05.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg></a>
+        <a href="mailto:info.sutraops@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+      </aside>
+    </section>
+
+    <!-- ===== STATS BAR ===== -->
+    <section class="stats-bar">
+      <div class="stat"><span class="stat-icon">👥</span><div><strong>11+</strong><p>Years of Experience</p></div></div>
+      <div class="stat"><span class="stat-icon">📈</span><div><strong>100+</strong><p>Business Processes<br>Improved</p></div></div>
+      <div class="stat"><span class="stat-icon">🧑‍💼</span><div><strong>50+</strong><p>Happy Clients<br>Worldwide</p></div></div>
+      <div class="stat"><span class="stat-icon">🌐</span><div><strong>Global</strong><p>Delivery &amp; Support</p></div></div>
+      <div class="stat"><span class="stat-icon">🛡️</span><div><strong>Trusted</strong><p>By Businesses<br>Across Industries</p></div></div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section id="services" class="services">
+      <div class="section-title">
+        <h2>Our Core Services</h2>
+        <div class="title-mark"><span></span><i></i><span></span></div>
+        <p>End-to-end solutions designed to optimize your business operations and accelerate growth.</p>
+      </div>
+
+      <div class="service-cards">
+        <article class="card">
+          <div class="round blue"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12.5" rx="1.6"/><path d="M9 20.5h6M12 16.5v4"/><text x="12" y="12" text-anchor="middle" font-size="6.2" font-weight="800" fill="#fff" stroke="none" font-family="Inter,Arial,sans-serif">SAP</text></svg></div>
+          <div><h3>SAP Consulting</h3>
+            <p>End-to-end SAP implementation, S/4HANA migration, FICO consulting, support &amp; optimization.</p>
+            <a href="services.html" class="blue-link">Learn More →</a></div>
+        </article>
+        <article class="card">
+          <div class="round navy"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="1.8"/><path d="M8 6h8"/><path d="M8 10h3M13 10h3M8 13h3M13 13h3M8 16h3M13 16h3"/></svg></div>
+          <div><h3>Accounting &amp; Finance</h3>
+            <p>Record to Report, AP, AR, General Ledger, Fixed Assets, Bank Reconciliation &amp; Reporting.</p>
+            <a href="services.html" class="blue-link">Learn More →</a></div>
+        </article>
+        <article class="card">
+          <div class="round purple"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a8 8 0 0 1 13-2.5l2 2"/><path d="M20 4v4h-4"/><path d="M20 16a8 8 0 0 1-13 2.5l-2-2"/><path d="M4 20v-4h4"/></svg></div>
+          <div><h3>Intelligent Automation</h3>
+            <p>VBA, Python, SAP automation, workflow automation and reporting solutions.</p>
+            <a href="services.html" class="purple-link">Learn More →</a></div>
+        </article>
+        <article class="card">
+          <div class="round orange"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l20-6.5c1-.3 1-1.7 0-2-1.4-.4-3-.2-4.2.6L4 15l-2.5-1c-.5-.2-1 .4-.6.8L3 17"/></svg></div>
+          <div><h3>Travel Services</h3>
+            <p>Corporate travel, flight booking, hotel reservations, visa assistance &amp; holiday packages.</p>
+            <a href="services.html" class="orange-link">Learn More →</a></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT BAND ===== -->
+    <section id="contact" class="contact-band">
+      <div class="contact-left">
+        <div class="phone-circle">📞</div>
+        <div class="contact-intro">
+          <h2>Ready to Transform Your Business?</h2>
+          <p>Let's discuss how SAP, Finance, and Automation can help your organization improve efficiency and accelerate growth.</p>
+        </div>
+      </div>
+      <div class="contact-details">
+        <div class="contact-item"><span>📱</span><div><strong>+91 92882 23003</strong><p>Mobile</p></div></div>
+        <div class="contact-item"><span>☎️</span><div><strong>+91 4045766397</strong><p>Landline</p></div></div>
+        <div class="contact-item"><span>✉️</span><div><strong>info.sutraops@gmail.com</strong><p>Email Us</p></div></div>
+        <div class="contact-item"><span>📍</span><div><strong>India</strong><p>Our Location</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-wrap">
+      <div class="footer-col footer-brand">
+        <img src="assets/so-icon.png" alt="SutraOps Solutions logo">
+        <p class="foot-name"><b>Sutra</b><i>Ops</i> <span>SOLUTIONS</span></p>
+        <p class="foot-tag">Smart Travel. Smart Finance. Smart Operations.</p>
+        <p class="foot-desc">Helping organizations streamline finance operations, optimize SAP systems, automate processes and deliver smart travel solutions.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.5 8.65 22 11 22 15v6h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg></a>
+          <a href="https://wa.me/919288223003" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.43-.58 1.63-1.15.2-.56.2-1.05.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg></a>
+          <a href="mailto:info.sutraops@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Our Services</h4>
+        <a href="services.html#sap">SAP Consulting</a>
+        <a href="services.html#finance">Accounting &amp; Finance</a>
+        <a href="services.html#automation">Intelligent Automation</a>
+        <a href="services.html#travel">Travel Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <p class="foot-contact"><span>📱</span> +91 92882 23003</p>
+        <p class="foot-contact"><span>☎️</span> +91 4045766397</p>
+        <p class="foot-contact"><span>✉️</span> info.sutraops@gmail.com</p>
+        <p class="foot-contact"><span>📍</span> India</p>
+        <a class="foot-cta" href="contact.html">Schedule Consultation →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 SutraOps Solutions. All rights reserved.</p>
+      <p>Smart Travel · Smart Finance · Smart Operations</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp float -->
+  <a class="wa-float" href="https://wa.me/919288223003" aria-label="Chat on WhatsApp">✆</a>
+
+  <script src="script.js"></script>
 </body>
-
 </html>
