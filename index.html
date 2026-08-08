@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SutraOps Solutions | Simplifying Business. Empowering Growth.</title>
+
+    <meta name="description"
+          content="SutraOps Solutions provides SAP consulting, accounting and finance, intelligent automation and travel solutions.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #172033;
+            line-height: 1.6;
+            background: #ffffff;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            background: #071f3d;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #f58220;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: #f58220;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(135deg, #f7fafc, #eaf1f6);
+            padding: 100px 7%;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.1;
+            color: #071f3d;
+            margin-bottom: 20px;
+        }
+
+        .orange {
+            color: #f58220;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #526070;
+            max-width: 720px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #071f3d;
+            color: white;
+            padding: 14px 26px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #f58220;
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 75px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            color: #071f3d;
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #667085;
+        }
+
+        /* SERVICES */
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(7, 31, 61, 0.10);
+            border-top: 4px solid #f58220;
+        }
+
+        .service-card h3 {
+            color: #071f3d;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: #667085;
+            margin-bottom: 15px;
+        }
+
+        .service-card a {
+            color: #f58220;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* WHY SUTRAOPS */
+
+        .why {
+            background: #f7fafc;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 38px;
+            color: #f58220;
+        }
+
+        .stat p {
+            color: #526070;
+        }
+
+        /* CTA */
+
+        .cta {
+            background: #071f3d;
+            color: white;
+            border-radius: 20px;
+            padding: 55px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            margin-bottom: 20px;
+            color: #dbe4ef;
+        }
+
+        .cta .btn {
+            background: white;
+            color: #071f3d;
+        }
+
+        .cta .btn:hover {
+            background: #f58220;
+            color: white;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #071f3d;
+            color: white;
+            padding: 45px 7%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        footer h3 {
+            margin-bottom: 12px;
+        }
+
+        footer p {
+            color: #cbd5e1;
+            margin-bottom: 6px;
+        }
+
+        .copyright {
+            border-top: 1px solid #29415f;
+            margin-top: 30px;
+            padding-top: 20px;
+            color: #aebdce;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding: 70px 7%;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                padding: 35px 20px;
+            }
+
+            .cta h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="index.html" class="logo">
+        Sutra<span>Ops</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>
+            Simplifying Business.
+            <br>
+            <span class="orange">Empowering Growth.</span>
+        </h1>
+
+        <p>
+            SutraOps Solutions helps organizations simplify their
+            business operations through SAP consulting, finance expertise,
+            intelligent automation and travel solutions.
+        </p>
+
+        <a href="#contact" class="btn">
+            Talk to SutraOps
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section id="services">
+
+    <div class="section-title">
+
+        <h2>Our Core Services</h2>
+
+        <p>
+            Practical solutions built around business needs and outcomes.
+        </p>
+
+    </div>
+
+
+    <div class="services">
+
+        <div class="service-card">
+
+            <h3>SAP Consulting</h3>
+
+            <p>
+                SAP FICO, S/4HANA Finance, business process analysis,
+                functional design, testing and support.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <h3>Accounting & Finance</h3>
+
+            <p>
+                Record-to-Report, General Ledger, AP, AR,
+                reconciliation, closing and financial reporting.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <h3>Intelligent Automation</h3>
+
+            <p>
+                SAP automation, Excel VBA, Python solutions,
+                reporting automation and process optimization.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <h3>Travel Solutions</h3>
+
+            <p>
+                Air ticketing, hotel reservations, corporate travel,
+                visa assistance and travel planning.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="why" id="about">
+
+    <div class="section-title">
+
+        <h2>Why SutraOps?</h2>
+
+        <p>
+            Business understanding combined with technology and
+            process expertise.
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <h3>11+</h3>
+
+            <p>
+                Years Finance Experience
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h3>SAP</h3>
+
+            <p>
+                Finance & Process Expertise
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h3>AI</h3>
+
+            <p>
+                Automation Mindset
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h3>Global</h3>
+
+            <p>
+                Business Delivery Mindset
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT CTA -->
+
+<section id="contact">
+
+    <div class="cta">
+
+        <h2>
+            Ready to simplify your business?
+        </h2>
+
+        <p>
+            Let's discuss your SAP, finance, automation or travel requirement.
+        </p>
+
+        <a
+            href="mailto:info.sutraops@gmail.com"
+            class="btn"
+        >
+            Contact SutraOps
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <h3>SutraOps Solutions</h3>
+
+            <p>
+                Simplifying Business. Empowering Growth.
+            </p>
+
+            <p>
+                Smart Travel. Smart Finance. Smart Operations.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>Contact</h3>
+
+            <p>
+                Fani Bhushan Sharma
+            </p>
+
+            <p>
+                +91 92882 23003
+            </p>
+
+            <p>
+                +91 4045766397
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>Email</h3>
+
+            <p>
+                info.sutraops@gmail.com
+            </p>
+
+            <p>
+                India
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 SutraOps Solutions. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+</body>
+</html>
