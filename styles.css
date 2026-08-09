@@ -971,3 +971,139 @@ img,svg{display:block}
 
   .hero.hero-premium .hero-wrap {
     grid-template-columns: 
+/* ==================================================
+   HERO BACKGROUND BLEND FIX
+   Shows hero JPG behind left text area with softer white fade
+   ================================================== */
+
+.hero.hero-premium {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 700px !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.78) 0%,
+      rgba(255,255,255,0.62) 22%,
+      rgba(255,255,255,0.38) 42%,
+      rgba(255,255,255,0.12) 68%,
+      rgba(255,255,255,0.00) 100%
+    ),
+    url("assets/hero-cityscape.jpg") center center / auto 100% no-repeat !important;
+}
+
+/* Remove any old pseudo overlay layers */
+.hero.hero-premium::before,
+.hero.hero-premium::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Remove extra dotted overlay since hero JPG already has world map */
+.hero.hero-premium .map-bg {
+  display: none !important;
+}
+
+/* Hide old CSS skyline */
+.hero.hero-premium .skyline {
+  display: none !important;
+}
+
+/* Hide extra CSS plane and route because the JPG already contains them */
+.hero.hero-premium .plane-mark,
+.hero.hero-premium .flight-route,
+.plane-mark,
+.flight-route {
+  display: none !important;
+}
+
+/* Main hero spacing */
+.hero.hero-premium .hero-wrap {
+  position: relative !important;
+  z-index: 5 !important;
+  grid-template-columns: 0.92fr 1.08fr !important;
+  padding: 58px 78px 110px 26px !important;
+}
+
+/* Keep text readable over image */
+.hero.hero-premium .hero-copy {
+  position: relative !important;
+  z-index: 7 !important;
+  max-width: 590px !important;
+}
+
+/* Heading */
+.hero.hero-premium .hero-copy h1 {
+  color: var(--navy) !important;
+  font-size: 56px !important;
+  line-height: 1.04 !important;
+  font-weight: 800 !important;
+  letter-spacing: -1px !important;
+  text-shadow: 0 4px 20px rgba(255,255,255,0.90) !important;
+}
+
+.hero.hero-premium .hero-copy h1 span {
+  color: var(--orange) !important;
+}
+
+/* Eyebrow */
+.hero.hero-premium .eyebrow {
+  color: var(--orange) !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 12px !important;
+}
+
+/* Paragraph */
+.hero.hero-premium .lead {
+  max-width: 560px !important;
+  color: #08264d !important;
+  font-size: 16.5px !important;
+  font-weight: 500 !important;
+  margin-top: 22px !important;
+  margin-bottom: 28px !important;
+  text-shadow: 0 2px 12px rgba(255,255,255,0.85) !important;
+}
+
+/* Service orbit */
+.hero.hero-premium .hero-graphic {
+  position: relative !important;
+  z-index: 6 !important;
+  transform: scale(0.86) !important;
+  transform-origin: center center !important;
+  margin-right: 0 !important;
+}
+
+/* Remove schedule consultation */
+.hero.hero-premium .primary-btn {
+  display: none !important;
+}
+
+/* Explore Services button */
+.hero.hero-premium .outline-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  border: 1.8px solid var(--navy) !important;
+  color: var(--navy) !important;
+  background: rgba(255,255,255,0.82) !important;
+  font-weight: 800 !important;
+  padding: 15px 28px !important;
+  border-radius: 9px !important;
+  min-width: 220px !important;
+  justify-content: center !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.hero.hero-premium .outline-btn:hover {
+  border-color: var(--orange) !important;
+  color: var(--orange) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Stats bar */
+.stats-bar {
+  margin-top: -44px !important;
+}
+``
