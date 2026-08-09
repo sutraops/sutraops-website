@@ -634,3 +634,170 @@ img,svg{display:block}
     font-size: 38px !important;
   }
 }
+/* ==================================================
+   FINAL HERO IMAGE SIZE & POSITION FIX
+   Reduces hero JPG size so more of the picture is visible
+   ================================================== */
+
+.hero.hero-premium {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 760px !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.96) 0%,
+      rgba(255,255,255,0.90) 28%,
+      rgba(255,255,255,0.50) 55%,
+      rgba(255,255,255,0.12) 100%
+    ),
+    url("assets/hero-cityscape.jpg") right bottom / 82% auto no-repeat !important;
+}
+
+/* Remove previous heavy pseudo overlays */
+.hero.hero-premium::before,
+.hero.hero-premium::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Keep dot/map overlay very light */
+.hero.hero-premium .map-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+
+  background:
+    radial-gradient(circle at 72% 28%, rgba(31,127,209,0.05), transparent 35%),
+    radial-gradient(#5da3d5 1px, transparent 1px) !important;
+
+  background-size: auto, 20px 20px !important;
+  opacity: 0.035 !important;
+}
+
+/* Hide old CSS skyline */
+.hero.hero-premium .skyline {
+  display: none !important;
+}
+
+/* Hide extra CSS plane and route because the JPG already has them */
+.hero.hero-premium .plane-mark,
+.hero.hero-premium .flight-route,
+.plane-mark,
+.flight-route {
+  display: none !important;
+}
+
+/* Keep hero content above background */
+.hero.hero-premium .hero-wrap {
+  position: relative !important;
+  z-index: 5 !important;
+  padding: 76px 78px 160px 26px !important;
+}
+
+/* Text block */
+.hero.hero-premium .hero-copy {
+  position: relative !important;
+  z-index: 6 !important;
+  max-width: 620px !important;
+}
+
+/* Restore brand heading */
+.hero.hero-premium .hero-copy h1 {
+  color: var(--navy) !important;
+  font-size: 66px !important;
+  line-height: 1.02 !important;
+  font-weight: 800 !important;
+  letter-spacing: -1px !important;
+  text-shadow: 0 4px 18px rgba(255,255,255,0.72) !important;
+}
+
+.hero.hero-premium .hero-copy h1 span {
+  color: var(--orange) !important;
+}
+
+/* Eyebrow */
+.hero.hero-premium .eyebrow {
+  color: var(--orange) !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.5px !important;
+}
+
+/* Paragraph */
+.hero.hero-premium .lead {
+  max-width: 560px !important;
+  color: #08264d !important;
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  text-shadow: 0 2px 10px rgba(255,255,255,0.65) !important;
+}
+
+/* Orbit remains unchanged but above background */
+.hero.hero-premium .hero-graphic {
+  position: relative !important;
+  z-index: 6 !important;
+}
+
+/* Remove Schedule Consultation if cached HTML still has it */
+.hero.hero-premium .primary-btn {
+  display: none !important;
+}
+
+/* Explore Services button */
+.hero.hero-premium .outline-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  border: 1.8px solid var(--navy) !important;
+  color: var(--navy) !important;
+  background: rgba(255,255,255,0.88) !important;
+  font-weight: 800 !important;
+  padding: 16px 28px !important;
+  border-radius: 9px !important;
+  min-width: 220px !important;
+  justify-content: center !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.hero.hero-premium .outline-btn:hover {
+  border-color: var(--orange) !important;
+  color: var(--orange) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Stats bar position */
+.stats-bar {
+  margin-top: -56px !important;
+}
+
+/* Tablet */
+@media(max-width:1100px) {
+  .hero.hero-premium {
+    min-height: auto !important;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.95) 0%,
+        rgba(255,255,255,0.78) 45%,
+        rgba(255,255,255,0.32) 100%
+      ),
+      url("assets/hero-cityscape.jpg") center bottom / cover no-repeat !important;
+  }
+
+  .hero.hero-premium .hero-wrap {
+    padding: 60px 26px 150px !important;
+  }
+
+  .hero.hero-premium .hero-copy h1 {
+    font-size: 48px !important;
+  }
+}
+
+/* Mobile */
+@media(max-width:620px) {
+  .hero.hero-premium .hero-copy h1 {
+    font-size: 38px !important;
+  }
+}
