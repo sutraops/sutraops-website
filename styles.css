@@ -656,3 +656,255 @@ img,svg{display:block}
         rgba(255,255,255,0.97) 0%,
         rgba(245,250,255,0.90) 52%,
         rgba(220,239,255,0
+/* ==================================================
+   FINAL HERO FIX - CITYSCAPE ONLY AT BOTTOM
+   Paste this at the very bottom of styles.css
+   ================================================== */
+
+/* Main hero should stay clean and light */
+.hero.hero-premium {
+  position: relative;
+  overflow: hidden;
+  min-height: 780px;
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 34%,
+    #f4faff 60%,
+    #dff2ff 100%
+  ) !important;
+}
+
+/* Put cityscape only at the bottom, not behind full title */
+.hero.hero-premium::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48%;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.98) 0%,
+      rgba(255,255,255,0.72) 22%,
+      rgba(255,255,255,0.18) 55%,
+      rgba(255,255,255,0.05) 100%
+    ),
+    url("assets/hero-cityscape.jpg") center bottom / cover no-repeat;
+
+  opacity: 0.72;
+}
+
+/* Extra white fade from left to keep heading clean */
+.hero.hero-premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.98) 0%,
+    rgba(255,255,255,0.95) 34%,
+    rgba(255,255,255,0.66) 58%,
+    rgba(255,255,255,0.18) 100%
+  );
+}
+
+/* Make dotted world-map effect very soft */
+.hero.hero-premium .map-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 72% 28%, rgba(31,127,209,0.08), transparent 35%),
+    radial-gradient(#5da3d5 1px, transparent 1px);
+
+  background-size: auto, 16px 16px;
+  opacity: 0.08;
+
+  -webkit-mask-image: radial-gradient(
+    ellipse at 68% 35%,
+    #000 0%,
+    #000 38%,
+    transparent 72%
+  );
+
+  mask-image: radial-gradient(
+    ellipse at 68% 35%,
+    #000 0%,
+    #000 38%,
+    transparent 72%
+  );
+}
+
+/* Hide old CSS skyline */
+.hero.hero-premium .skyline {
+  display: none !important;
+}
+
+/* Main content above background layers */
+.hero.hero-premium .hero-wrap {
+  position: relative;
+  z-index: 5;
+  padding: 82px 78px 190px 26px;
+}
+
+/* Text area cleaner */
+.hero.hero-premium .hero-copy {
+  position: relative;
+  z-index: 8;
+  max-width: 620px;
+}
+
+.hero.hero-premium .hero-copy h1 {
+  text-shadow: 0 4px 18px rgba(255,255,255,0.85);
+}
+
+.hero.hero-premium .lead {
+  max-width: 560px;
+  color: #102b4e;
+  font-weight: 500;
+  text-shadow: 0 2px 12px rgba(255,255,255,0.75);
+}
+
+/* Orbit stays visible */
+.hero.hero-premium .hero-graphic {
+  position: relative;
+  z-index: 7;
+}
+
+/* Softer route */
+.flight-route {
+  position: absolute;
+  right: 8%;
+  top: 22%;
+  width: 42%;
+  height: 34%;
+  z-index: 4;
+  border-top: 3px dashed rgba(31,127,209,0.28);
+  border-radius: 50%;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+.flight-route::after {
+  content: "";
+  position: absolute;
+  left: 14%;
+  top: 48%;
+  width: 72%;
+  height: 74%;
+  border-bottom: 3px dashed rgba(31,127,209,0.20);
+  border-radius: 50%;
+  transform: rotate(-22deg);
+}
+
+/* Move airplane higher and away from Automation circle */
+.plane-mark {
+  position: absolute;
+  right: 5%;
+  top: 16%;
+  z-index: 8;
+  font-size: 62px;
+  color: #164f86;
+  opacity: 0.72;
+  text-shadow: 0 12px 24px rgba(10,47,94,0.20);
+  transform: rotate(-17deg);
+  animation: planeFloat 5.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes planeFloat {
+  0%, 100% {
+    transform: translate(0,0) rotate(-17deg);
+  }
+
+  50% {
+    transform: translate(14px,-10px) rotate(-13deg);
+  }
+}
+
+/* Keep button above overlays */
+.hero.hero-premium .hero-actions {
+  position: relative;
+  z-index: 9;
+  margin-top: 8px;
+}
+
+/* Remove schedule consultation if cached HTML still has it */
+.hero.hero-premium .primary-btn {
+  display: none !important;
+}
+
+/* Explore Services styling */
+.hero.hero-premium .outline-btn {
+  border: 1.8px solid var(--navy);
+  color: var(--navy);
+  background: rgba(255,255,255,0.90);
+  font-weight: 800;
+  min-width: 220px;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.hero.hero-premium .outline-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  transform: translateY(-2px);
+}
+
+/* Stats bar overlap */
+.stats-bar {
+  margin-top: -64px;
+}
+
+/* Tablet */
+@media(max-width:1100px) {
+  .hero.hero-premium {
+    min-height: auto;
+  }
+
+  .hero.hero-premium::before {
+    height: 42%;
+  }
+
+  .hero.hero-premium .hero-wrap {
+    padding: 64px 26px 160px;
+  }
+
+  .plane-mark {
+    right: 6%;
+    top: 50%;
+    font-size: 52px;
+  }
+}
+
+/* Mobile */
+@media(max-width:620px) {
+  .hero.hero-premium .hero-copy h1 {
+    font-size: 38px;
+  }
+
+  .hero.hero-premium::before {
+    height: 36%;
+  }
+
+  .plane-mark {
+    font-size: 42px;
+    top: 56%;
+  }
+
+  .flight-route {
+    width: 80%;
+    right: -8%;
+    top: 48%;
+  }
+}
