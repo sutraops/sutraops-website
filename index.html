@@ -4,177 +4,1239 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SutraOps Solutions | Smart Travel. Smart Finance. Smart Operations.</title>
-  <meta name="description" content="SutraOps Solutions - SAP Consulting, Finance & Accounting, Intelligent Automation and Travel Services. Simplifying Business. Empowering Growth." />
-  <link rel="icon" type="image/png" href="assets/so-icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+
+  https://fonts.googleapis.com
+  https://fonts.gstatic.com
+  https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap
+
+  <style>
+    :root {
+      --navy: #062b55;
+      --deep-navy: #082c55;
+      --dark-navy: #051f40;
+      --orange: #ff7a1a;
+      --blue: #1d9ce5;
+      --purple: #6742b8;
+      --text: #10213d;
+      --muted: #617089;
+      --white: #ffffff;
+      --light-bg: #f6f9fd;
+      --border: #dce5f0;
+      --shadow: 0 18px 45px rgba(7, 34, 68, 0.16);
+      --soft-shadow: 0 10px 30px rgba(13, 47, 84, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: linear-gradient(90deg, #06264d, #031d3d);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-wrap {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-panel {
+      position: relative;
+      width: 330px;
+      height: 82px;
+      background: #ffffff;
+      border-bottom-right-radius: 38px;
+      border-bottom-left-radius: 3px;
+      display: flex;
+      align-items: center;
+      padding-left: 28px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .logo-panel img {
+      width: 240px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 42px;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-menu a {
+      position: relative;
+      opacity: 0.95;
+      transition: 0.3s ease;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--orange);
+    }
+
+    .nav-menu a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -13px;
+      width: 100%;
+      height: 3px;
+      background: var(--orange);
+      border-radius: 3px;
+    }
+
+    .mobile-menu {
+      display: none;
+      color: #ffffff;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO SECTION
+    ========================= */
+
+    .hero {
+      position: relative;
+      min-height: 920px;
+      padding-top: 82px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(245,250,255,0.82) 42%, rgba(221,240,255,0.74) 100%),
+        url("assets/images/hero-cityscape.jpg") center bottom / cover no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 82px 0 0 0;
+      background: url("assets/images/world-map.svg") center 40px / 82% auto no-repeat;
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 310px;
+      background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.12) 38%, rgba(255,255,255,0.1) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      min-height: 720px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+      padding-top: 70px;
+      padding-bottom: 90px;
+    }
+
+    .hero-kicker {
+      color: var(--orange);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 18px;
+      font-size: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(44px, 5vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -2.5px;
+      margin-bottom: 20px;
+      font-weight: 800;
+      color: #061f44;
+    }
+
+    .hero-title span {
+      color: var(--orange);
+      display: block;
+    }
+
+    .hero-line {
+      width: 52px;
+      height: 3px;
+      background: var(--orange);
+      margin: 20px 0;
+      border-radius: 2px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+      font-weight: 700;
+      color: #07234a;
+    }
+
+    .hero-tags span:not(:last-child)::after {
+      content: "|";
+      color: var(--orange);
+      margin-left: 12px;
+      font-weight: 800;
+    }
+
+    .hero-description {
+      max-width: 560px;
+      color: #243650;
+      font-size: 18px;
+      line-height: 1.75;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    .btn-primary-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 28px;
+      border: 2px solid #09264b;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.65);
+      color: #071f40;
+      font-weight: 800;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-primary-outline:hover {
+      background: #08284f;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .mini-proof {
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .mini-proof-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #08264d;
+      font-weight: 800;
+    }
+
+    .mini-proof-icon {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(8, 43, 85, 0.2);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+    }
+
+    .mini-proof-item small {
+      display: block;
+      color: #51647d;
+      font-weight: 600;
+      font-size: 12px;
+      margin-top: -2px;
+    }
+
+    /* =========================
+       SERVICE HUB
+    ========================= */
+
+    .visual-area {
+      position: relative;
+      min-height: 560px;
+    }
+
+    .service-hub {
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      right: 40px;
+      top: 28px;
+    }
+
+    .center-logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 172px;
+      height: 172px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 18px 45px rgba(8, 45, 85, 0.22);
+      border: 5px solid rgba(255,255,255,0.9);
+      z-index: 5;
+    }
+
+    .center-logo::after {
+      content: "";
+      position: absolute;
+      inset: -18px;
+      border: 2px solid rgba(25, 129, 207, 0.12);
+      border-radius: 50%;
+    }
+
+    .center-logo img {
+      width: 118px;
+      height: auto;
+    }
+
+    .orbit {
+      position: absolute;
+      inset: 45px;
+      border: 2px dashed rgba(24, 119, 190, 0.42);
+      border-radius: 50%;
+      animation: orbitRotate 32s linear infinite;
+    }
+
+    @keyframes orbitRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .service-node {
+      position: absolute;
+      width: 126px;
+      height: 126px;
+      border-radius: 50%;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 1.2;
+      border: 5px solid #ffffff;
+      box-shadow: 0 14px 35px rgba(6, 32, 64, 0.24);
+      z-index: 6;
+    }
+
+    .service-node .icon {
+      font-size: 33px;
+      margin-bottom: 7px;
+    }
+
+    .node-sap {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(145deg, #25a9ee, #0871bf);
+    }
+
+    .node-finance {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background: linear-gradient(145deg, #0c3d78, #08275a);
+    }
+
+    .node-automation {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: linear-gradient(145deg, #7b52c9, #4f2da0);
+    }
+
+    .node-travel {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(145deg, #ff9733, #f06d00);
+    }
+
+    .connector {
+      position: absolute;
+      background: rgba(6, 75, 138, 0.75);
+      z-index: 4;
+    }
+
+    .connector.vertical-top {
+      width: 5px;
+      height: 68px;
+      left: 50%;
+      top: 116px;
+      transform: translateX(-50%);
+    }
+
+    .connector.vertical-bottom {
+      width: 5px;
+      height: 68px;
+      left: 50%;
+      bottom: 116px;
+      transform: translateX(-50%);
+      background: rgba(255, 122, 26, 0.8);
+    }
+
+    .connector.horizontal-left {
+      height: 5px;
+      width: 68px;
+      left: 114px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .connector.horizontal-right {
+      height: 5px;
+      width: 68px;
+      right: 114px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(103, 66, 184, 0.8);
+    }
+
+    .airplane {
+      position: absolute;
+      right: -20px;
+      top: 95px;
+      width: 210px;
+      z-index: 7;
+      animation: airplaneFloat 5.5s ease-in-out infinite;
+    }
+
+    @keyframes airplaneFloat {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-14px) translateX(12px); }
+    }
+
+    .flight-path {
+      position: absolute;
+      right: 30px;
+      top: 160px;
+      width: 330px;
+      height: 190px;
+      border-top: 4px dotted rgba(5, 77, 145, 0.68);
+      border-radius: 50%;
+      transform: rotate(-18deg);
+      z-index: 2;
+      opacity: 0.8;
+    }
+
+    /* =========================
+       HERO DIFFERENTIATOR BAR
+    ========================= */
+
+    .hero-proof-bar {
+      position: relative;
+      z-index: 5;
+      margin-top: -60px;
+      margin-bottom: 70px;
+    }
+
+    .proof-card {
+      background: linear-gradient(90deg, #06284e, #082d59);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 26px 34px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      color: #ffffff;
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 8px 22px;
+      border-right: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .proof-item:last-child {
+      border-right: none;
+    }
+
+    .proof-icon {
+      font-size: 32px;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .proof-item h4 {
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 5px;
+      color: #ffffff;
+    }
+
+    .proof-item p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.35;
+    }
+
+    /* =========================
+       CORE SERVICES
+    ========================= */
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.1;
+      color: #0b3568;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .title-mark {
+      width: 110px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), var(--orange));
+      margin: 0 auto 20px;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .title-mark::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      background: var(--orange);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      border: 5px solid #ffffff;
+    }
+
+    .section-title p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #617089;
+      font-size: 19px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      min-height: 250px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      box-shadow: 0 12px 28px rgba(8, 45, 85, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--soft-shadow);
+      border-color: rgba(29, 156, 229, 0.45);
+    }
+
+    .service-card-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      flex-shrink: 0;
+    }
+
+    .service-card h3 {
+      color: #0a3469;
+      font-size: 21px;
+      line-height: 1.24;
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+
+    .service-card p {
+      color: #65748a;
+      font-size: 15.5px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .learn-more {
+      color: #0b78d0;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .learn-more.orange {
+      color: var(--orange);
+    }
+
+    .bg-blue { background: linear-gradient(145deg, #2aa8ed, #0c84ce); }
+    .bg-navy { background: linear-gradient(145deg, #0c3f7a, #062a58); }
+    .bg-purple { background: linear-gradient(145deg, #7951ca, #5b33ad); }
+    .bg-orange { background: linear-gradient(145deg, #ff9633, #fd7a17); }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      background: #082c55;
+      color: #ffffff;
+      padding: 70px 0 34px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.1fr;
+      gap: 60px;
+    }
+
+    .footer-logo img {
+      width: 125px;
+      margin-bottom: 18px;
+    }
+
+    .footer-brand {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .footer-brand span {
+      color: var(--orange);
+    }
+
+    .footer-sub {
+      letter-spacing: 8px;
+      font-size: 15px;
+      color: #d8e5f5;
+      margin-bottom: 16px;
+    }
+
+    .footer-tagline {
+      color: var(--orange);
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-links a {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.09);
+      color: #ffffff;
+      transition: 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--orange);
+      transform: translateY(-3px);
+    }
+
+    .footer h4 {
+      font-size: 18px;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+
+    .footer ul {
+      list-style: none;
+    }
+
+    .footer li {
+      margin-bottom: 16px;
+      color: #b6c8dd;
+      font-size: 16px;
+    }
+
+    .footer li a {
+      color: #b6c8dd;
+      transition: 0.3s ease;
+    }
+
+    .footer li a:hover {
+      color: var(--orange);
+    }
+
+    .contact-list li {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #20d25f;
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      box-shadow: 0 16px 35px rgba(32, 210, 95, 0.35);
+      z-index: 999;
+    }
+
+    .side-social {
+      position: fixed;
+      right: 0;
+      top: 46%;
+      transform: translateY(-50%);
+      background: #062b55;
+      z-index: 999;
+      border-radius: 14px 0 0 14px;
+      overflow: hidden;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.18);
+    }
+
+    .side-social a {
+      width: 64px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      transition: 0.3s ease;
+    }
+
+    .side-social a:hover {
+      background: var(--orange);
+    }
+
+    .side-social a:last-child {
+      border-bottom: none;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1100px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .proof-card {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .proof-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-area {
+        min-height: 500px;
+      }
+
+      .service-hub {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .logo-panel {
+        width: 265px;
+      }
+
+      .logo-panel img {
+        width: 205px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        padding-top: 45px;
+        padding-bottom: 45px;
+      }
+
+      .hero-title {
+        font-size: 42px;
+      }
+
+      .hero-tags span:not(:last-child)::after {
+        display: none;
+      }
+
+      .visual-area {
+        min-height: 420px;
+      }
+
+      .service-hub {
+        width: 350px;
+        height: 350px;
+        top: 20px;
+      }
+
+      .service-node {
+        width: 96px;
+        height: 96px;
+        font-size: 10px;
+      }
+
+      .service-node .icon {
+        font-size: 25px;
+      }
+
+      .center-logo {
+        width: 135px;
+        height: 135px;
+      }
+
+      .center-logo img {
+        width: 92px;
+      }
+
+      .airplane {
+        width: 145px;
+        right: 0;
+      }
+
+      .proof-card {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        flex-direction: column;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .side-social {
+        display: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="top-line"></div>
 
-  <!-- ===== HEADER ===== -->
+  <!-- Header -->
   <header class="site-header">
-    <div class="header-wrap">
-      <a class="brand" href="#home" aria-label="SutraOps Solutions Home">
-        <img class="brand-mark" src="assets/so-icon.png" alt="SutraOps SO logo mark">
-        <span class="brand-text">
-          <span class="brand-name"><b>Sutra</b><i>Ops</i></span>
-          <span class="brand-sub">SOLUTIONS</span>
-          <span class="brand-tag">Smart Travel. Smart Finance. Smart Operations.</span>
-        </span>
-      </a>
+    <div class="nav-wrap">
+      <div class="logo-panel">
+        <!-- Keep your original logo file here -->
+        index.html
+          assets/images/sutraops-logo.png
+        </a>
+      </div>
 
-      <nav class="main-nav" aria-label="Main navigation">
-        <a class="active" href="index.html">HOME</a>
-        <a href="about.html">ABOUT US</a>
-        <a href="services.html">SERVICES</a>
-        <a href="services.html#industries">INDUSTRIES</a>
-        <a href="insights.html">INSIGHTS</a>
-        <a href="contact.html">CONTACT</a>
+      <nav class="nav-menu">
+        index.htmlHome</a>
+        #servicesServices</a>
+        about.htmlAbout</a>
+        industries.htmlIndustries</a>
+        contact.htmlContact</a>
       </nav>
-      <button class="menu-btn" aria-label="Open menu">☰</button>
+
+      <div class="mobile-menu">☰</div>
     </div>
-  </er>
+  </header>
 
-  <main>
-    <!-- ===== HERO ===== -->
-    <section id="home" class="hero">
-      <div class="map-bg" aria-hidden="true"></div>
-      <div class="skyline" aria-hidden="true"></div>
+  <!-- Hero Section -->
+  <section class="hero">
 
-      <div class="hero-wrap">
-        <div class="hero-copy">
-          <p class="eyebrow">WELCOME TO SUTRAOPS SOLUTIONS</p>
-          <h1>Simplifying Business.<br><span>Empowering Growth.</span></h1>
-          <p class="lead">We help organizations streamline finance operations, optimize SAP systems, automate business processes, and deliver smart travel solutions that drive measurable business results.</p>
-          <div class="hero-actions">
-            <a class="primary-btn" href="contact.html">📅 Schedule a Consultation</a>
-            <a class="outline-btn" href="services.html">Explore Services <span>→</span></a>
-          </div>
+    <div class="container hero-inner">
+
+      <div class="hero-content">
+        <div class="hero-kicker">Welcome to SutraOps Solutions</div>
+
+        <h1 class="hero-title">
+          Simplifying Business.
+          <span>Empowering Growth.</span>
+        </h1>
+
+        <div class="hero-line"></div>
+
+        <div class="hero-tags">
+          <span>SAP Consulting</span>
+          <span>Finance & Accounting</span>
+          <span>Automation Solutions</span>
+          <span>Travel Services</span>
         </div>
 
-        <!-- Orbit graphic -->
-        <div class="hero-graphic" aria-label="SutraOps service orbit">
-          <div class="dash-orbit orbit-large"></div>
-          <div class="dash-orbit orbit-small"></div>
+        <p class="hero-description">
+          We help organizations streamline finance operations, optimize SAP systems,
+          automate business processes, and deliver smart travel solutions that drive
+          measurable business results.
+        </p>
 
-          <div class="hub-line top"></div>
-          <div class="hub-line left"></div>
-          <div class="hub-line right"></div>
-          <div class="hub-line bottom"></div>
+        <div class="hero-actions">
+          #services
+            Explore Services
+            <span>→</span>
+          </a>
+        </div>
+
+        <div class="mini-proof">
+          <div class="mini-proof-item">
+            <div class="mini-proof-icon">👥</div>
+            <div>
+              11+
+              <small>Years Experience</small>
+            </div>
+          </div>
+
+          <div class="mini-proof-item">
+            <div class="mini-proof-icon">🌐</div>
+            <div>
+              Global
+              <small>Delivery Support</small>
+            </div>
+          </div>
+
+          <div class="mini-proof-item">
+            <div class="mini-proof-icon">🛡️</div>
+            <div>
+              SAP S/4HANA
+              <small>Expertise</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="visual-area">
+
+        <div class="flight-path"></div>
+
+        <!-- Airplane image -->
+        assets/images/airplane.png
+
+        <div class="service-hub">
+
+          <div class="orbit"></div>
+
+          <div class="connector vertical-top"></div>
+          <div class="connector vertical-bottom"></div>
+          <div class="connector horizontal-left"></div>
+          <div class="connector horizontal-right"></div>
 
           <div class="center-logo">
-            <img src="assets/so-icon.png" alt="SutraOps SO logo mark">
+            assets/images/sutraops-icon.png
           </div>
 
-          <div class="service-node sap"><div class="node-icon">📊</div><strong>SAP</strong><span>CONSULTING</span></div>
-          <div class="service-node finance"><div class="node-icon">🧮</div><strong>FINANCE &amp;</strong><span>ACCOUNTING</span></div>
-          <div class="service-node automate"><div class="node-icon">⚙️</div><strong>AUTOMATION</strong><span>SOLUTIONS</span></div>
-          <div class="service-node travel"><div class="node-icon">✈️</div><strong>TRAVEL</strong><span>SERVICES</span></div>
+          <div class="service-node node-sap">
+            <div class="icon">📊</div>
+            SAP<br>Consulting
+          </div>
+
+          <div class="service-node node-finance">
+            <div class="icon">🧾</div>
+            Finance &<br>Accounting
+          </div>
+
+          <div class="service-node node-automation">
+            <div class="icon">⚙️</div>
+            Automation<br>Solutions
+          </div>
+
+          <div class="service-node node-travel">
+            <div class="icon">✈️</div>
+            Travel<br>Services
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Hero Differentiator Strip -->
+  <div class="container hero-proof-bar">
+    <div class="proof-card">
+
+      <div class="proof-item">
+        <div class="proof-icon">👥</div>
+        <div>
+          <h4>11+</h4>
+          <p>Years of Experience</p>
         </div>
       </div>
 
-      <aside class="social-rail">
-        <a href="#" aria-label="LinkedIn">in</a>
-        <a href="https://wa.me/919288223003" aria-label="WhatsApp">✆</a>
-        <a href="mailto:info.sutraops@gmail.com" aria-label="Email">✉</a>
-      </aside>
-    </section>
+      <div class="proof-item">
+        <div class="proof-icon">🏭</div>
+        <div>
+          <h4>Manufacturing</h4>
+          <p>Industry Expertise</p>
+        </div>
+      </div>
 
-    <!-- ===== STATS BAR ===== -->
-    <section class="stats-bar">
-      <div class="stat"><span class="stat-icon">👥</span><div><strong>11+</strong><p>Years of Experience</p></div></div>
-      <div class="stat"><span class="stat-icon">📈</span><div><strong>SAP FICO</strong><p>Consulting &amp; S/4HANA</p></div></div>
-      <div class="stat"><span class="stat-icon">⚡</span><div><strong>Automation</strong><p>Process Improvement</p></div></div>
-      <div class="stat"><span class="stat-icon">🌐</span><div><strong>Global</strong><p>Delivery &amp; Support</p></div></div>
-      <div class="stat"><span class="stat-icon">🛡️</span><div><strong>Business Focus</strong><p>Practical Solutions</p></div></div>
-    </section>
+      <div class="proof-item">
+        <div class="proof-icon">📈</div>
+        <div>
+          <h4>SAP S/4HANA</h4>
+          <p>Finance & FICO Support</p>
+        </div>
+      </div>
 
-    <!-- ===== SERVICES ===== -->
-    <section id="services" class="services">
+      <div class="proof-item">
+        <div class="proof-icon">🌐</div>
+        <div>
+          <h4>Global</h4>
+          <p>Delivery Capability</p>
+        </div>
+      </div>
+
+      <div class="proof-item">
+        <div class="proof-icon">🛡️</div>
+        <div>
+          <h4>Business Focus</h4>
+          <p>Practical Solutions</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Core Services -->
+  <section class="section" id="services">
+    <div class="container">
+
       <div class="section-title">
         <h2>Our Core Services</h2>
-        <div class="title-mark"><span></span><i></i><span></span></div>
-        <p>End-to-end solutions designed to optimize your business operations and accelerate growth.</p>
+        <div class="title-mark"></div>
+        <p>
+          End-to-end solutions designed to optimize your business operations and accelerate growth.
+        </p>
       </div>
 
-      <div class="service-cards">
-        <article class="card">
-          <div class="round blue">📊</div>
-          <div><h3>SAP Consulting</h3>
-            <p>End-to-end SAP implementation, S/4HANA migration, FICO consulting, support &amp; optimization.</p>
-            <a href="services.html" class="blue-link">Learn More →</a></div>
-        </article>
-        <article class="card">
-          <div class="round navy">🧮</div>
-          <div><h3>Accounting &amp; Finance</h3>
-            <p>Record to Report, AP, AR, General Ledger, Fixed Assets, Bank Reconciliation &amp; Reporting.</p>
-            <a href="services.html" class="blue-link">Learn More →</a></div>
-        </article>
-        <article class="card">
-          <div class="round purple">⚙️</div>
-          <div><h3>Intelligent Automation</h3>
-            <p>VBA, Python, SAP automation, workflow automation and reporting solutions.</p>
-            <a href="services.html" class="purple-link">Learn More →</a></div>
-        </article>
-        <article class="card">
-          <div class="round orange">✈️</div>
-          <div><h3>Travel Services</h3>
-            <p>Corporate travel, flight booking, hotel reservations, visa assistance &amp; holiday packages.</p>
-            <a href="services.html" class="orange-link">Learn More →</a></div>
-        </article>
-      </div>
-    </section></main>
+      <div class="services-grid">
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer">
-    <div class="footer-wrap">
-      <div class="footer-col footer-brand">
-        <img src="assets/so-icon.png" alt="SutraOps Solutions logo">
-        <p class="foot-name"><b>Sutra</b><i>Ops</i> <span>SOLUTIONS</span></p>
-        <p class="foot-tag">Smart Travel. Smart Finance. Smart Operations.</p>
-        <div class="foot-social">
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="https://wa.me/919288223003" aria-label="WhatsApp">✆</a>
-          <a href="mailto:info.sutraops@gmail.com" aria-label="Email">✉</a>
+        <div class="service-card">
+          <div class="service-card-icon bg-blue">📊</div>
+          <div>
+            <h3>SAP Consulting</h3>
+            <p>
+              End-to-end SAP implementation, S/4HANA migration, FICO consulting,
+              support and optimization.
+            </p>
+            sap-consulting.htmlLearn More →</a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-icon bg-navy">🧾</div>
+          <div>
+            <h3>Accounting & Finance</h3>
+            <p>
+              Record to Report, AP, AR, General Ledger, Fixed Assets,
+              Bank Reconciliation and reporting.
+            </p>
+            accounting-finance.htmlLearn More →</a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-icon bg-purple">⚙️</div>
+          <div>
+            <h3>Intelligent Automation</h3>
+            <p>
+              VBA, Python, SAP automation, workflow automation and reporting solutions.
+            </p>
+            automation.htmlLearn More →</a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-icon bg-orange">✈️</div>
+          <div>
+            <h3>Travel Services</h3>
+            <p>
+              Corporate travel, flight booking, hotel reservations, visa assistance
+              and holiday packages.
+            </p>
+            travel-services.htmlLearn More →</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+
+      <div>
+        <div class="footer-logo">
+          assets/images/sutraops-icon.png
+        </div>
+
+        <div class="footer-brand">Sutra<span>Ops</span></div>
+        <div class="footer-sub">SOLUTIONS</div>
+
+        <p class="footer-tagline">
+          Smart Travel. Smart Finance. Smart Operations.
+        </p>
+
+        <div class="social-links">
+          #in</a>
+          #◉</a>
+          info.sutraops@gmail.com✉</a>
         </div>
       </div>
 
-      <div class="footer-col">
+      <div>
         <h4>Quick Links</h4>
-        <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
+        <ul>
+          <li>index.htmlHome</a></li>
+          <li>about.htmlAbout Us</a></li>
+          <li>#servicesServices</a></li>
+          <li>contact.htmlContact</a></li>
+        </ul>
       </div>
 
-      <div class="footer-col">
+      <div>
         <h4>Our Services</h4>
-        <a href="services.html#sap">SAP Consulting</a>
-        <a href="services.html#finance">Accounting &amp; Finance</a>
-        <a href="services.html#automation">Intelligent Automation</a>
-        <a href="services.html#travel">Travel Services</a>
+        <ul>
+          <li>sap-consulting.htmlSAP Consulting</a></li>
+          <li>accounting-finance.htmlAccounting & Finance</a></li>
+          <li>automation.htmlIntelligent Automation</a></li>
+          <li>travel-services.htmlTravel Services</a></li>
+        </ul>
       </div>
 
-      <div class="footer-col">
+      <div>
         <h4>Get In Touch</h4>
-        <p class="foot-contact"><span>📱</span> +91 92882 23003</p>
-        <p class="foot-contact"><span>☎️</span> +91 4045766397</p>
-        <p class="foot-contact"><span>✉️</span> info.sutraops@gmail.com</p>
-        <p class="foot-contact"><span>📍</span> India</p>
-    
+        <ul class="contact-list">
+          <li>📱 <span>+91 92882 23003</span></li>
+          <li>☎️ <span>+91 4045766397</span></li>
+          <li>✉️ <span>info.sutraops@gmail.com</span></li>
+          <li>📍 <span>India</span></li>
+        </ul>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 SutraOps Solutions. All rights reserved.</p>
+
     </div>
   </footer>
 
-  <!-- WhatsApp float -->
-  <a class="wa-float" href="https://wa.me/919288223003" aria-label="Chat on WhatsApp">✆</a>
+  <!-- Side Social Icons -->
+  <div class="side-social">
+    #in</a>
+    #☏</a>
+    info.sutraops@gmail.com✉</a>
+  </div>
 
-  <script src="script.js"></script>
+  <!-- WhatsApp Floating Button -->
+  #
+    ☏
+  </a>
+
 </body>
 </html>
