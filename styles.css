@@ -458,3 +458,201 @@ img,svg{display:block}
     top:48%;
   }
 }
+/* ==================================================
+   FINAL SUTRAOPS HERO CLEANUP
+   Cityscape lower, text cleaner, airplane repositioned
+   ================================================== */
+
+.hero.hero-premium {
+  position: relative;
+  overflow: hidden;
+  min-height: 780px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.98) 0%,
+      rgba(255,255,255,0.96) 35%,
+      rgba(245,250,255,0.88) 58%,
+      rgba(224,241,255,0.76) 100%
+    ),
+    url("assets/hero-cityscape.jpg") center bottom / 100% auto no-repeat !important;
+}
+
+/* Strong white fade on left side so heading remains clean */
+.hero.hero-premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.96) 0%,
+      rgba(255,255,255,0.90) 32%,
+      rgba(255,255,255,0.58) 55%,
+      rgba(255,255,255,0.18) 100%
+    );
+}
+
+/* Make dotted/world-map effect very subtle */
+.hero.hero-premium .map-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 72% 30%, rgba(31,127,209,0.09), transparent 35%),
+    radial-gradient(#5da3d5 1px, transparent 1px);
+
+  background-size: auto, 13px 13px;
+  opacity: 0.11;
+
+  -webkit-mask-image: radial-gradient(
+    ellipse at 68% 35%,
+    #000 0%,
+    #000 38%,
+    transparent 72%
+  );
+
+  mask-image: radial-gradient(
+    ellipse at 68% 35%,
+    #000 0%,
+    #000 38%,
+    transparent 72%
+  );
+}
+
+/* Hide old CSS skyline since real cityscape image is now used */
+.hero.hero-premium .skyline {
+  display: none !important;
+}
+
+/* Keep main content above all background layers */
+.hero.hero-premium .hero-wrap {
+  position: relative;
+  z-index: 5;
+  padding: 82px 78px 190px 26px;
+}
+
+/* Improve title readability */
+.hero.hero-premium .hero-copy {
+  position: relative;
+  z-index: 7;
+  max-width: 620px;
+}
+
+.hero.hero-premium .hero-copy h1 {
+  text-shadow: 0 4px 16px rgba(255,255,255,0.70);
+}
+
+.hero.hero-premium .lead {
+  max-width: 560px;
+  color: #102b4e;
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(255,255,255,0.55);
+}
+
+/* Keep service orbit above background */
+.hero.hero-premium .hero-graphic {
+  position: relative;
+  z-index: 6;
+}
+
+/* Softer flight route */
+.flight-route {
+  position: absolute;
+  right: 7%;
+  top: 20%;
+  width: 45%;
+  height: 38%;
+  z-index: 3;
+  border-top: 3px dashed rgba(31,127,209,0.34);
+  border-radius: 50%;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+.flight-route::after {
+  content: "";
+  position: absolute;
+  left: 14%;
+  top: 48%;
+  width: 72%;
+  height: 74%;
+  border-bottom: 3px dashed rgba(31,127,209,0.26);
+  border-radius: 50%;
+  transform: rotate(-22deg);
+}
+
+/* Move airplane away from Automation circle */
+.plane-mark {
+  position: absolute;
+  right: 4.5%;
+  top: 21%;
+  z-index: 7;
+  font-size: 74px;
+  color: #164f86;
+  opacity: 0.82;
+  text-shadow: 0 14px 26px rgba(10,47,94,0.22);
+  transform: rotate(-17deg);
+  animation: planeFloat 5.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes planeFloat {
+  0%, 100% {
+    transform: translate(0,0) rotate(-17deg);
+  }
+
+  50% {
+    transform: translate(16px,-12px) rotate(-13deg);
+  }
+}
+
+/* Keep Explore Services clean */
+.hero.hero-premium .hero-actions {
+  position: relative;
+  z-index: 8;
+  margin-top: 8px;
+}
+
+/* Remove old consultation button if browser still loads it */
+.hero.hero-premium .primary-btn {
+  display: none !important;
+}
+
+.hero.hero-premium .outline-btn {
+  border: 1.8px solid var(--navy);
+  color: var(--navy);
+  background: rgba(255,255,255,0.86);
+  font-weight: 800;
+  min-width: 220px;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.hero.hero-premium .outline-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  transform: translateY(-2px);
+}
+
+/* Stats bar should overlap slightly like premium layout */
+.stats-bar {
+  margin-top: -64px;
+}
+
+/* Tablet */
+@media(max-width:1100px) {
+  .hero.hero-premium {
+    min-height: auto;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.97) 0%,
+        rgba(245,250,255,0.90) 52%,
+        rgba(220,239,255,0
