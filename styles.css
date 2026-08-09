@@ -635,45 +635,45 @@ img,svg{display:block}
   }
 }
 /* ==================================================
-   FINAL HERO IMAGE SIZE & POSITION FIX
-   Reduces hero JPG size so more of the picture is visible
+   SUTRAOPS HERO FINAL BALANCED VERSION
+   Full image visible as background, no rectangle cut,
+   reduced zoom feel, cleaner text area
    ================================================== */
 
 .hero.hero-premium {
-  position: relative !important;
-  overflow: hidden !important;
-  min-height: 760px !important;
+  position* relative !important;
+  overflow: *idden !important;
+  min-height: 70*px !important;
 
   background:
     linear-gradient(
       90deg,
-      rgba(255,255,255,0.96) 0%,
-      rgba(255,255,255,0.90) 28%,
-      rgba(255,255,255,0.50) 55%,
-      rgba(255,255,255,0.12) 100%
+      rgba(255,255,255,0.97) 0%,
+      rgba(255,255,255,0.91) 32%,
+      rgba(255,255,255,0.48) 58%,
+      rgba(255,255,255,0.08) 100%
     ),
-    url("assets/hero-cityscape.jpg") right bottom / 82% auto no-repeat !important;
+    url("assets/hero-cityscape.jpg") center center / cover no-repeat !important;
 }
 
-/* Remove previous heavy pseudo overlays */
+/* Remove extra pseudo overlays */
 .hero.hero-premium::before,
-.hero.hero-premium::after {
+.her*.hero-premium::after {
   display: none !important;
   content: none !important;
 }
 
-/* Keep dot/map overlay very light */
+/* Very light dots only */
 .hero.hero-premium .map-bg {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 1 !important;
-  pointer-events: none !important;
+  p*sition: absolute !important;
+  ins*t: 0 !important;
+  z-index: 1 !imp*rtant;
+  pointer-events: none !imp*rtant;
 
   background:
-    radial-gradient(circle at 72% 28%, rgba(31,127,209,0.05), transparent 35%),
-    radial-gradient(#5da3d5 1px, transparent 1px) !important;
+    radial-g*adient(#5da3d5 1px, transparent 1p*) !important;
 
-  background-size: auto, 20px 20px !important;
+  background-size: 22px 22px !important;
   opacity: 0.035 !important;
 }
 
@@ -682,7 +682,7 @@ img,svg{display:block}
   display: none !important;
 }
 
-/* Hide extra CSS plane and route because the JPG already has them */
+/* Hide extra CSS plane and route because image already has them */
 .hero.hero-premium .plane-mark,
 .hero.hero-premium .flight-route,
 .plane-mark,
@@ -690,28 +690,29 @@ img,svg{display:block}
   display: none !important;
 }
 
-/* Keep hero content above background */
+/* Main hero layout */
 .hero.hero-premium .hero-wrap {
   position: relative !important;
   z-index: 5 !important;
-  padding: 76px 78px 160px 26px !important;
+  grid-template-columns: 0.95fr 1.05fr !important;
+  padding: 64px 78px 120px 26px !important;
 }
 
-/* Text block */
+/* Left content block */
 .hero.hero-premium .hero-copy {
   position: relative !important;
   z-index: 6 !important;
-  max-width: 620px !important;
+  max-width: 600px !important;
 }
 
-/* Restore brand heading */
+/* Heading size reduced slightly */
 .hero.hero-premium .hero-copy h1 {
   color: var(--navy) !important;
-  font-size: 66px !important;
-  line-height: 1.02 !important;
+  font-size: 58px !important;
+  line-height: 1.04 !important;
   font-weight: 800 !important;
   letter-spacing: -1px !important;
-  text-shadow: 0 4px 18px rgba(255,255,255,0.72) !important;
+  text-shadow: 0 4px 18px rgba(255,255,255,0.78) !important;
 }
 
 .hero.hero-premium .hero-copy h1 span {
@@ -723,29 +724,35 @@ img,svg{display:block}
   color: var(--orange) !important;
   font-weight: 800 !important;
   letter-spacing: 1.5px !important;
+  margin-bottom: 12px !important;
 }
 
 /* Paragraph */
 .hero.hero-premium .lead {
   max-width: 560px !important;
   color: #08264d !important;
-  font-size: 17px !important;
+  font-size: 16.5px !important;
   font-weight: 500 !important;
-  text-shadow: 0 2px 10px rgba(255,255,255,0.65) !important;
+  margin-top: 22px !important;
+  margin-bottom: 28px !important;
+  text-shadow: 0 2px 10px rgba(255,255,255,0.70) !important;
 }
 
-/* Orbit remains unchanged but above background */
+/* Orbit positioning */
 .hero.hero-premium .hero-graphic {
   position: relative !important;
   z-index: 6 !important;
+  transform: scale(0.92) !important;
+  transform-origin: center center !important;
+  margin-right: 8px !important;
 }
 
-/* Remove Schedule Consultation if cached HTML still has it */
+/* Remove schedule consultation if old HTML still has it */
 .hero.hero-premium .primary-btn {
   display: none !important;
 }
 
-/* Explore Services button */
+/* Explore Services button restored */
 .hero.hero-premium .outline-btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -754,7 +761,7 @@ img,svg{display:block}
   color: var(--navy) !important;
   background: rgba(255,255,255,0.88) !important;
   font-weight: 800 !important;
-  padding: 16px 28px !important;
+  padding: 15px 28px !important;
   border-radius: 9px !important;
   min-width: 220px !important;
   justify-content: center !important;
@@ -767,9 +774,9 @@ img,svg{display:block}
   transform: translateY(-2px) !important;
 }
 
-/* Stats bar position */
+/* Stats bar */
 .stats-bar {
-  margin-top: -56px !important;
+  margin-top: -48px !important;
 }
 
 /* Tablet */
@@ -779,19 +786,25 @@ img,svg{display:block}
     background:
       linear-gradient(
         180deg,
-        rgba(255,255,255,0.95) 0%,
-        rgba(255,255,255,0.78) 45%,
-        rgba(255,255,255,0.32) 100%
+        rgba(255,255,255,0.96) 0%,
+        rgba(255,255,255,0.78) 48%,
+        rgba(255,255,255,0.28) 100%
       ),
-      url("assets/hero-cityscape.jpg") center bottom / cover no-repeat !important;
+      url("assets/hero-cityscape.jpg") center center / cover no-repeat !important;
   }
 
   .hero.hero-premium .hero-wrap {
-    padding: 60px 26px 150px !important;
+    grid-template-columns: 1fr !important;
+    padding: 58px 26px 140px !important;
   }
 
   .hero.hero-premium .hero-copy h1 {
     font-size: 48px !important;
+  }
+
+  .hero.hero-premium .hero-graphic {
+    transform: scale(0.86) !important;
+    margin: 10px auto 0 !important;
   }
 }
 
@@ -799,5 +812,9 @@ img,svg{display:block}
 @media(max-width:620px) {
   .hero.hero-premium .hero-copy h1 {
     font-size: 38px !important;
+  }
+
+  .hero.hero-premium .hero-wrap {
+    padding: 44px 18px 130px !important;
   }
 }
