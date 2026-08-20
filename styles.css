@@ -1242,3 +1242,19 @@ img,svg{display:block}
 .stats-bar {
   margin-top: -44px !important;
 }
+.founder-photo img{
+    width:100%;
+    max-width:350px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    object-fit:cover;
+}
+
+.founder-section{
+    align-items:center;
+}
+
+.founder-section h3{
+    margin-top:30px;
+    color:#0e5077;
+}
