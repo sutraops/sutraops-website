@@ -1249,50 +1249,37 @@ img,svg{display:block}
     box-shadow:0 15px 40px rgba(0,0,0,.15);
     object-fit:cover;
 }
-
 .founder-section{
-    align-items:center;
+    display:grid;
+    grid-template-columns: 2fr 280px;
+    gap:40px;
+    align-items:start;
 }
 
 .founder-section h3{
     margin-top:30px;
     color:#0e5077;
 }
-
-  .founder-section {
-  align-items: center;
-  gap: 60px;
+.visual.founder-photo{
+    background:none !important;
+    padding:0 !important;
+    box-shadow:none !important;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
 
+.visual.founder-photo img{
+    width:220px !important;
+    height:280px !important;
+    max-width:220px !important;
+    object-fit:cover;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
 .founder-photo{
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-.founder-photo img{
-    width:250px;
-    height:320px;
-    object-fit:cover;
-    border-radius:16px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-}
-/* Override visual style only for founder image */
-
-.visual.founder-photo{
-    background:none !important;
-    padding:0 !important;
-    box-shadow:none !important;
-    display:flex !important;
-    justify-content:center;
-    align-items:flex-start;
-}
-
-.visual.founder-photo img{
-    width:240px !important;
-    height:300px !important;
-    max-width:240px !important;
-    object-fit:cover;
-    border-radius:18px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-}
