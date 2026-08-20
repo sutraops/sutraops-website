@@ -1283,3 +1283,9 @@ img,svg{display:block}
     align-items:center;
 }
 
+.founder-section{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 260px !important;
+    gap:40px !important;
+    align-items:start !important;
+}
