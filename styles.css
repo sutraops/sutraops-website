@@ -1277,3 +1277,19 @@ img,svg{display:block}
     border-radius:16px;
     box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
+.founder-photo{
+    background: transparent !important;
+    padding: 0 !important;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.founder-photo img{
+    width:220px !important;
+    height:280px !important;
+    max-width:220px !important;
+    object-fit:cover;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
