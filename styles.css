@@ -1261,6 +1261,7 @@ img,svg{display:block}
     color:#0e5077;
 }
 .visual.founder-photo{
+    width:260px !important;
     background:none !important;
     padding:0 !important;
     box-shadow:none !important;
