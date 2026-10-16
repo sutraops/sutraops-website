@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAP FI/CO Table Explorer | SutraOps Solutions</title>
+<meta name="description" content="Interactive SAP FI/CO explorer — enterprise structure, table map, end-to-end document flow, table explorer and key field reference.">
+<link rel="canonical" href="https://sutraops.in/insights/sap-fico-tables.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=15">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   SAP FI/CO Table Explorer — SCOPED styles (#tbl-exp)
+   The site-wide header/footer/theme stay in ../styles.css
+   ═══════════════════════════════════════════════════════════ */
+#tbl-exp{
+  --fi:#1d4ed8; --fi-l:#dbeafe; --fi-b:#3b82f6;
+  --co:#047857; --co-l:#d1fae5; --co-b:#10b981;
+  --ac:#6d28d9; --ac-l:#ede9fe; --ac-b:#8b5cf6;
+  --md:#b45309; --md-l:#fef3c7; --md-b:#f59e0b;
+  --bg:#f1f5f9; --card:#fff; --tx:#0f172a; --txm:#64748b;
+  --bd:#cbd5e1;
+  --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
+  --shl:0 10px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
+  --r:12px;
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  color:var(--tx);
+  line-height:1.55;
+  text-align:left;
+}
+#tbl-exp *,#tbl-exp *::before,#tbl-exp *::after{margin:0;padding:0;box-sizing:border-box}
+#tbl-exp code{font-family:'Consolas','Courier New',monospace}
+
+/* ── Page shell (breadcrumb + hero) ── */
+.exp-page{width:min(1280px,calc(100% - 40px));margin:0 auto;padding:42px 0 64px}
+.exp-breadcrumb{font-size:13px;margin:0 0 22px;color:#66758a}
+.exp-breadcrumb a{color:#f58220;text-decoration:none}
+.exp-breadcrumb a:hover{text-decoration:underline}
+.exp-hero{background:linear-gradient(135deg,#071f3d 0%,#123b68 100%);color:#fff;border-radius:18px;padding:clamp(26px,5vw,48px);margin-bottom:26px}
+.exp-hero .eyebrow{color:#ff9a42;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;font-size:12px;margin:0 0 10px}
+.exp-hero h1{color:#fff;font-size:clamp(28px,4vw,42px);line-height:1.15;margin:0 0 14px}
+.exp-hero p{color:#e4edf8;font-size:17px;max-width:820px;margin:0}
+
+/* ── Tabs ── */
+#tbl-exp .tabs{display:flex;gap:.4rem;flex-wrap:wrap;background:#fff;padding:.4rem;border-radius:14px;box-shadow:var(--sh);border:1px solid #e2e8f0;margin-bottom:1.2rem}
+#tbl-exp .tab{flex:1;min-width:130px;border:none;background:transparent;padding:.6rem .8rem;border-radius:10px;font-size:.82rem;font-weight:600;color:var(--txm);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:.4rem;font-family:inherit}
+#tbl-exp .tab:hover{background:#f1f5f9;color:var(--tx)}
+#tbl-exp .tab.active{background:linear-gradient(135deg,#1d4ed8,#047857);color:#fff;box-shadow:0 4px 10px -3px rgba(29,78,216,.5)}
+#tbl-exp .tab .ico{font-size:1rem}
+
+/* ── Panels ── */
+#tbl-exp .panel{display:none;animation:expFade .3s ease}
+#tbl-exp .panel.active{display:block}
+@keyframes expFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+#tbl-exp .card{background:var(--card);border-radius:var(--r);padding:1.5rem;box-shadow:var(--sh);border:1px solid #e2e8f0;margin-bottom:1.2rem}
+#tbl-exp .card h2{font-size:1.2rem;font-weight:700;margin-bottom:.2rem;display:flex;align-items:center;gap:.5rem;color:var(--tx)}
+#tbl-exp .card h2 .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;font-size:.8rem;font-weight:700;color:#fff;flex-shrink:0}
+#tbl-exp .num.fi{background:var(--fi)} #tbl-exp .num.co{background:var(--co)} #tbl-exp .num.ac{background:var(--ac)} #tbl-exp .num.md{background:var(--md)}
+#tbl-exp .card .desc{color:var(--txm);font-size:.85rem;margin-bottom:1.2rem}
+
+/* ── Enterprise Structure ── */
+#tbl-exp .org-wrap{overflow-x:auto;padding:1rem 0 .5rem}
+#tbl-exp .org{display:inline-block;min-width:820px;margin:0 auto}
+#tbl-exp .org ul{display:flex;justify-content:center;padding:22px 0 0;margin:0;list-style:none;position:relative}
+#tbl-exp .org>ul{padding-top:0}
+#tbl-exp .org ul::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:2px;height:22px;background:#94a3b8}
+#tbl-exp .org>ul::before{display:none}
+#tbl-exp .org li{position:relative;padding:22px 6px 0;display:flex;flex-direction:column;align-items:center}
+#tbl-exp .org>ul>li{padding:0}
+#tbl-exp .org li::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:2px;height:22px;background:#94a3b8}
+#tbl-exp .org li::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:#94a3b8}
+#tbl-exp .org li:first-child::after{left:50%;width:50%}
+#tbl-exp .org li:last-child::after{left:0;width:50%}
+#tbl-exp .org li:only-child::after{display:none}
+#tbl-exp .org>ul>li::before,#tbl-exp .org>ul>li::after{display:none}
+
+#tbl-exp .onode{border-radius:10px;padding:.55rem 1rem;font-size:.8rem;font-weight:600;text-align:center;white-space:nowrap;box-shadow:var(--sh);transition:all .18s;position:relative;z-index:1;cursor:pointer;border:2px solid transparent}
+#tbl-exp .onode:hover{transform:translateY(-2px);box-shadow:var(--shl)}
+#tbl-exp .onode.sel{box-shadow:0 0 0 3px rgba(29,78,216,.35);transform:translateY(-2px)}
+#tbl-exp .onode .code{display:block;font-size:.66rem;font-weight:400;opacity:.7;margin-top:1px;letter-spacing:.4px}
+#tbl-exp .onode .badge{display:inline-block;font-size:.55rem;font-weight:700;padding:1px 5px;border-radius:99px;margin-left:4px;vertical-align:middle;letter-spacing:.3px}
+#tbl-exp .badge.fi{background:var(--fi-l);color:var(--fi)}
+#tbl-exp .badge.co{background:var(--co-l);color:var(--co)}
+#tbl-exp .onode.client{background:linear-gradient(135deg,#1e293b,#334155);color:#fff;font-size:.92rem;padding:.8rem 1.4rem}
+#tbl-exp .onode.fi-node{background:linear-gradient(135deg,#eff6ff,#dbeafe);border-color:var(--fi-b);color:var(--fi)}
+#tbl-exp .onode.co-node{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-color:var(--co-b);color:var(--co)}
+#tbl-exp .onode.leaf{background:#fff;border-color:var(--bd);color:var(--tx);font-size:.74rem;padding:.45rem .8rem}
+#tbl-exp .onode.leaf.fi-leaf{border-color:#93c5fd;background:#f8faff}
+#tbl-exp .onode.leaf.co-leaf{border-color:#6ee7b7;background:#f0fdf9}
+
+#tbl-exp .org-detail{margin-top:1.2rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.2rem;min-height:80px;transition:all .2s}
+#tbl-exp .org-detail.empty{display:flex;align-items:center;justify-content:center;color:var(--txm);font-size:.85rem;font-style:italic}
+#tbl-exp .org-detail h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+#tbl-exp .org-detail p{font-size:.82rem;color:var(--txm);margin-bottom:.5rem}
+#tbl-exp .org-detail .chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem}
+#tbl-exp .chip{font-size:.68rem;font-family:'Consolas',monospace;background:#e2e8f0;border-radius:6px;padding:2px 8px;color:#334155;font-weight:600}
+
+/* ── Graph ── */
+#tbl-exp .graph-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;margin-bottom:1rem}
+#tbl-exp .mode-toggle{display:flex;background:#f1f5f9;border-radius:10px;padding:3px;border:1px solid #e2e8f0}
+#tbl-exp .mode-btn{border:none;background:transparent;padding:.45rem 1rem;border-radius:8px;font-size:.78rem;font-weight:600;color:var(--txm);cursor:pointer;transition:all .18s;font-family:inherit}
+#tbl-exp .mode-btn.active{background:#fff;color:var(--tx);box-shadow:var(--sh)}
+#tbl-exp .graph-hint{font-size:.75rem;color:var(--txm)}
+#tbl-exp .graph-wrap{overflow-x:auto;border:1px solid #e2e8f0;border-radius:12px;background:linear-gradient(180deg,#fbfdff,#f8fafc);padding:.5rem}
+#tbl-exp #graphCanvas{position:relative;width:1000px;height:580px}
+#tbl-exp #graphCanvas.s4{height:520px}
+#tbl-exp .graph-svg{position:absolute;top:0;left:0;pointer-events:none}
+#tbl-exp .graph-edge{stroke:#94a3b8;stroke-width:1.6;fill:none;transition:all .2s}
+#tbl-exp .graph-edge.integration{stroke:var(--ac-b);stroke-width:2;stroke-dasharray:6 4}
+#tbl-exp .graph-edge.active{stroke:#1d4ed8;stroke-width:2.8;filter:drop-shadow(0 0 4px rgba(29,78,216,.35))}
+#tbl-exp .graph-edge.dimmed{opacity:.12}
+#tbl-exp .edge-label{font-size:9px;font-family:'Consolas',monospace;fill:var(--txm);text-anchor:middle;pointer-events:none}
+#tbl-exp .edge-label.active{fill:var(--fi);font-weight:700}
+
+#tbl-exp .graph-node{position:absolute;border-radius:10px;padding:.45rem .6rem;text-align:center;box-shadow:var(--sh);transition:all .2s;cursor:pointer;z-index:2;border:2px solid var(--bd);background:#fff;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+#tbl-exp .graph-node:hover{transform:translateY(-2px) scale(1.03);box-shadow:var(--shl);z-index:5}
+#tbl-exp .graph-node.fi{border-color:var(--fi-b);background:linear-gradient(135deg,#f8faff,#fff)}
+#tbl-exp .graph-node.fi .gn-name{color:var(--fi)}
+#tbl-exp .graph-node.co{border-color:var(--co-b);background:linear-gradient(135deg,#f0fdf9,#fff)}
+#tbl-exp .graph-node.co .gn-name{color:var(--co)}
+#tbl-exp .graph-node.ac{border-color:var(--ac-b);background:linear-gradient(135deg,#f5f3ff,#fff)}
+#tbl-exp .graph-node.ac .gn-name{color:var(--ac)}
+#tbl-exp .graph-node.md{border-color:var(--md-b);background:linear-gradient(135deg,#fffbeb,#fff)}
+#tbl-exp .graph-node.md .gn-name{color:var(--md)}
+#tbl-exp .graph-node.view{border-style:dashed}
+#tbl-exp .graph-node.big{padding:.8rem 1rem}
+#tbl-exp .graph-node.big .gn-name{font-size:1rem}
+#tbl-exp .gn-name{font-family:'Consolas',monospace;font-weight:700;font-size:.82rem;letter-spacing:.3px}
+#tbl-exp .gn-desc{font-size:.62rem;color:var(--txm);margin-top:1px;line-height:1.25}
+#tbl-exp .gn-keys{font-size:.55rem;font-family:'Consolas',monospace;color:#94a3b8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tbl-exp .graph-node.selected{border-color:#1d4ed8;box-shadow:0 0 0 3px rgba(29,78,216,.3),var(--shl);transform:translateY(-2px) scale(1.04);z-index:6}
+#tbl-exp .graph-node.highlighted{border-color:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,.3),var(--sh)}
+#tbl-exp .graph-node.dimmed{opacity:.22}
+
+#tbl-exp .graph-detail{margin-top:1rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:1rem 1.2rem;min-height:80px;transition:all .2s}
+#tbl-exp .graph-detail.empty{display:flex;align-items:center;justify-content:center;color:var(--txm);font-size:.85rem;font-style:italic}
+#tbl-exp .graph-detail h4{font-size:1rem;font-weight:700;font-family:'Consolas',monospace;margin-bottom:.2rem}
+#tbl-exp .graph-detail .gd-desc{font-size:.82rem;color:var(--txm);margin-bottom:.6rem}
+#tbl-exp .graph-detail .gd-cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){#tbl-exp .graph-detail .gd-cols{grid-template-columns:1fr}}
+#tbl-exp .gd-block h5{font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;color:var(--txm);margin-bottom:.3rem}
+#tbl-exp .gd-block ul{list-style:none;font-size:.78rem}
+#tbl-exp .gd-block li{font-family:'Consolas',monospace;padding:1px 0;color:#334155}
+#tbl-exp .gd-block li::before{content:'▸ ';color:#94a3b8}
+#tbl-exp .rel-chip{display:inline-block;font-family:'Consolas',monospace;font-size:.72rem;background:var(--fi-l);color:var(--fi);border-radius:6px;padding:2px 8px;margin:2px 3px 2px 0;cursor:pointer;font-weight:600;transition:all .15s}
+#tbl-exp .rel-chip:hover{background:var(--fi);color:#fff}
+
+/* ── Simulation ── */
+#tbl-exp .sim-controls{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-bottom:1.2rem}
+#tbl-exp .btn{border:none;border-radius:10px;padding:.6rem 1.2rem;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .18s;display:inline-flex;align-items:center;gap:.4rem}
+#tbl-exp .btn-primary{background:linear-gradient(135deg,#1d4ed8,#047857);color:#fff;box-shadow:0 4px 12px -4px rgba(29,78,216,.5)}
+#tbl-exp .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 16px -4px rgba(29,78,216,.6)}
+#tbl-exp .btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none}
+#tbl-exp .btn-ghost{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0}
+#tbl-exp .btn-ghost:hover{background:#e2e8f0}
+#tbl-exp .sim-progress{display:flex;gap:.3rem;margin-left:auto}
+#tbl-exp .sim-dot{width:10px;height:10px;border-radius:50%;background:#e2e8f0;transition:all .3s}
+#tbl-exp .sim-dot.done{background:var(--co-b)}
+#tbl-exp .sim-dot.active{background:var(--fi);box-shadow:0 0 0 4px rgba(29,78,216,.18)}
+
+#tbl-exp .sim-step{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.1rem 1.3rem;margin-bottom:.9rem;opacity:0;transform:translateY(12px);transition:all .4s cubic-bezier(.16,1,.3,1);border-left:4px solid var(--bd)}
+#tbl-exp .sim-step.show{opacity:1;transform:none}
+#tbl-exp .sim-step.step-fi{border-left-color:var(--fi-b)}
+#tbl-exp .sim-step.step-co{border-left-color:var(--co-b)}
+#tbl-exp .sim-step.step-ac{border-left-color:var(--ac-b)}
+#tbl-exp .sim-step.step-done{border-left-color:var(--co-b);background:linear-gradient(135deg,#f0fdf9,#fff)}
+#tbl-exp .sim-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.2rem}
+#tbl-exp .sim-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;font-size:.75rem;font-weight:700;color:#fff;background:#64748b;flex-shrink:0}
+#tbl-exp .step-fi .sim-num{background:var(--fi)} #tbl-exp .step-co .sim-num{background:var(--co)} #tbl-exp .step-ac .sim-num{background:var(--ac)} #tbl-exp .step-done .sim-num{background:var(--co)}
+#tbl-exp .sim-title{font-size:.95rem;font-weight:700}
+#tbl-exp .sim-sub{font-size:.75rem;color:var(--txm);font-family:'Consolas',monospace}
+#tbl-exp .sim-note{font-size:.8rem;color:var(--txm);margin:.5rem 0 .8rem}
+
+#tbl-exp .sim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem}
+#tbl-exp .sim-tcard{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff}
+#tbl-exp .sim-tcard.fi{border-color:#bfdbfe} #tbl-exp .sim-tcard.co{border-color:#a7f3d0} #tbl-exp .sim-tcard.ac{border-color:#ddd6fe}
+#tbl-exp .stc-head{padding:.4rem .7rem;font-size:.72rem;font-weight:700;font-family:'Consolas',monospace;display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border-bottom:1px solid #e2e8f0}
+#tbl-exp .sim-tcard.fi .stc-head{background:var(--fi-l);color:var(--fi)}
+#tbl-exp .sim-tcard.co .stc-head{background:var(--co-l);color:var(--co)}
+#tbl-exp .sim-tcard.ac .stc-head{background:var(--ac-l);color:var(--ac)}
+#tbl-exp .stc-head span{font-weight:400;font-size:.62rem;opacity:.75;font-family:'Segoe UI',sans-serif}
+#tbl-exp .sim-tcard table{width:100%;border-collapse:collapse;font-size:.68rem;font-family:'Consolas',monospace}
+#tbl-exp .sim-tcard th{text-align:left;padding:.3rem .5rem;background:#f8fafc;color:var(--txm);font-weight:600;border-bottom:1px solid #f1f5f9;font-size:.6rem;text-transform:uppercase;letter-spacing:.3px}
+#tbl-exp .sim-tcard td{padding:.35rem .5rem;border-bottom:1px solid #f8fafc;color:#334155}
+#tbl-exp .sim-tcard tr:last-child td{border-bottom:none}
+#tbl-exp .sim-tcard tr:hover td{background:#f8fafc}
+
+#tbl-exp .kv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.5rem}
+#tbl-exp .kv-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.5rem .7rem}
+#tbl-exp .kv-item label{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.4px;color:var(--txm);font-weight:600}
+#tbl-exp .kv-item span{font-size:.8rem;font-family:'Consolas',monospace;font-weight:600;color:#1e293b}
+
+#tbl-exp .sim-summary{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.6rem}
+#tbl-exp .sum-item{flex:1;min-width:140px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.6rem .8rem;text-align:center}
+#tbl-exp .sum-item .sv{font-size:1.1rem;font-weight:700;font-family:'Consolas',monospace;color:var(--co)}
+#tbl-exp .sum-item .sl{font-size:.65rem;color:var(--txm);text-transform:uppercase;letter-spacing:.4px}
+
+/* ── Explorer ── */
+#tbl-exp .exp-toolbar{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+#tbl-exp .exp-search{flex:1;min-width:200px;position:relative}
+#tbl-exp .exp-search input{width:100%;padding:.6rem .9rem .6rem 2.2rem;border:1px solid #e2e8f0;border-radius:10px;font-size:.85rem;font-family:inherit;outline:none;transition:all .18s;background:#f8fafc;color:var(--tx)}
+#tbl-exp .exp-search input:focus{border-color:var(--fi-b);background:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+#tbl-exp .exp-search .sico{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:.9rem;pointer-events:none}
+#tbl-exp .filter-chip{border:1px solid #e2e8f0;background:#fff;border-radius:20px;padding:.4rem .9rem;font-size:.75rem;font-weight:600;color:var(--txm);cursor:pointer;transition:all .15s;font-family:inherit}
+#tbl-exp .filter-chip:hover{background:#f1f5f9}
+#tbl-exp .filter-chip.active{background:#1e293b;color:#fff;border-color:#1e293b}
+
+#tbl-exp .exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem}
+#tbl-exp .exp-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:.9rem 1rem;cursor:pointer;transition:all .18s;border-left:4px solid var(--bd)}
+#tbl-exp .exp-card:hover{transform:translateY(-2px);box-shadow:var(--shl);border-color:#cbd5e1}
+#tbl-exp .exp-card.mod-fi{border-left-color:var(--fi-b)}
+#tbl-exp .exp-card.mod-co{border-left-color:var(--co-b)}
+#tbl-exp .exp-card.mod-ac{border-left-color:var(--ac-b)}
+#tbl-exp .exp-card.mod-md{border-left-color:var(--md-b)}
+#tbl-exp .exp-card .ec-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem}
+#tbl-exp .exp-card .ec-name{font-family:'Consolas',monospace;font-weight:700;font-size:.9rem;color:#1e293b}
+#tbl-exp .exp-card .ec-mod{font-size:.58rem;font-weight:700;padding:2px 7px;border-radius:99px;letter-spacing:.3px;flex-shrink:0}
+#tbl-exp .mod-fi .ec-mod{background:var(--fi-l);color:var(--fi)}
+#tbl-exp .mod-co .ec-mod{background:var(--co-l);color:var(--co)}
+#tbl-exp .mod-ac .ec-mod{background:var(--ac-l);color:var(--ac)}
+#tbl-exp .mod-md .ec-mod{background:var(--md-l);color:var(--md)}
+#tbl-exp .exp-card .ec-desc{font-size:.75rem;color:var(--txm);margin-top:.25rem;line-height:1.4}
+#tbl-exp .exp-card .ec-keys{margin-top:.5rem;display:flex;gap:.25rem;flex-wrap:wrap}
+#tbl-exp .exp-card .ec-keys span{font-size:.58rem;font-family:'Consolas',monospace;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:4px;padding:1px 5px;color:#64748b}
+#tbl-exp .no-results{text-align:center;padding:2rem;color:var(--txm);font-size:.85rem;font-style:italic;grid-column:1/-1}
+
+/* ── Key fields table ── */
+#tbl-exp .kf-wrap{overflow-x:auto;border-radius:10px;border:1px solid #e2e8f0}
+#tbl-exp table.kf{width:100%;border-collapse:collapse;font-size:.8rem;min-width:700px}
+#tbl-exp table.kf thead th{text-align:left;padding:.65rem .8rem;font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:#1e293b;position:sticky;top:0}
+#tbl-exp table.kf tbody td{padding:.55rem .8rem;border-bottom:1px solid #f1f5f9;vertical-align:top}
+#tbl-exp table.kf tbody tr:hover{background:#f8fafc}
+#tbl-exp table.kf tbody tr:last-child td{border-bottom:none}
+#tbl-exp table.kf .mono{font-family:'Consolas',monospace;font-weight:700;font-size:.78rem}
+#tbl-exp .fld-fi{color:var(--fi)} #tbl-exp .fld-co{color:var(--co)} #tbl-exp .fld-md{color:var(--md)}
+#tbl-exp .copy-btn{border:none;background:transparent;cursor:pointer;font-size:.7rem;color:#94a3b8;padding:0 2px;vertical-align:middle;transition:color .15s}
+#tbl-exp .copy-btn:hover{color:var(--fi)}
+#tbl-exp .copied{color:var(--co)!important}
+
+#tbl-exp .legend{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1rem;padding-top:.9rem;border-top:1px solid #f1f5f9}
+#tbl-exp .legend-item{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--txm)}
+#tbl-exp .legend-dot{width:13px;height:13px;border-radius:4px;flex-shrink:0}
+#tbl-exp .ld-fi{background:var(--fi-l);border:2px solid var(--fi-b)}
+#tbl-exp .ld-co{background:var(--co-l);border:2px solid var(--co-b)}
+#tbl-exp .ld-ac{background:var(--ac-l);border:2px solid var(--ac-b)}
+#tbl-exp .ld-md{background:var(--md-l);border:2px solid var(--md-b)}
+
+/* ── Back button (matches Learning Hub style) ── */
+.exp-back{display:inline-block;background:#f58220;color:#fff!important;border-radius:8px;padding:12px 17px;font-weight:800;text-decoration:none;margin-top:18px}
+.exp-back:hover{filter:brightness(1.05)}
+
+@media(max-width:800px){
+  .exp-page{width:calc(100% - 30px);padding-top:28px}
+  .exp-hero{border-radius:14px}
+}
+@media(max-width:700px){
+  #tbl-exp .tab{font-size:.72rem;min-width:auto;padding:.5rem .5rem}
+  #tbl-exp .tab .ico{display:none}
+  #tbl-exp .card{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<div class="top-line"></div>
+<header class="site-header">
+  <div class="header-wrap">
+    <a class="brand" href="../index.html" aria-label="SutraOps Solutions Home">
+      <img class="brand-mark" src="../assets/so-icon.png" alt="SutraOps SO logo mark">
+      <span class="brand-text">
+        <span class="brand-name"><b>Sutra</b><i>Ops</i></span>
+        <span class="brand-sub">SOLUTIONS</span>
+        <span class="brand-tag">Smart Travel. Smart Finance. Smart Operations.</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../index.html">HOME</a>
+      <a href="../about.html">ABOUT US</a>
+      <a href="../services.html">SERVICES</a>
+      <a href="../services.html#industries">INDUSTRIES</a>
+      <a class="active" href="learning-hub.html">INSIGHTS</a>
+      <a href="../contact.html">CONTACT</a>
+    </nav>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="exp-page">
+
+  <p class="exp-breadcrumb">
+    <a href="../index.html">Home</a> ›
+    <a href="learning-hub.html">Learning Hub</a> ›
+    <a href="sap-fico.html">SAP FICO Learning</a> ›
+    Understanding table
+  </p>
+
+  <section class="exp-hero">
+    <p class="eyebrow">SAP FICO · REFERENCE TOOL</p>
+    <h1>SAP FI/CO — Interactive End-to-End Explorer</h1>
+    <p>Enterprise structure · Table mapping · Document flow · S/4HANA Universal Journal</p>
+  </section>
+
+  <div id="tbl-exp">
+
+    <!-- ═══════════════ TABS ═══════════════ -->
+    <nav class="tabs">
+      <button class="tab active" data-panel="org"><span class="ico">🏢</span> Enterprise Structure</button>
+      <button class="tab" data-panel="graph"><span class="ico">🗺️</span> Table Map</button>
+      <button class="tab" data-panel="sim"><span class="ico">⚡</span> End-to-End Flow</button>
+      <button class="tab" data-panel="exp"><span class="ico">🔍</span> Table Explorer</button>
+      <button class="tab" data-panel="kf"><span class="ico">🔑</span> Key Fields</button>
+    </nav>
+
+    <!-- ═══════════════ PANEL 1: ORG ═══════════════ -->
+    <div class="panel active" id="panel-org">
+      <div class="card">
+        <h2><span class="num fi">1</span> Enterprise Structure</h2>
+        <p class="desc">Click any node to see its definition, key fields, and relationship to other organizational units.</p>
+
+        <div class="org-wrap">
+          <div class="org">
+            <ul>
+              <li>
+                <div class="onode client" data-org="client">Client<span class="code">Mandant</span></div>
+                <ul>
+                  <li>
+                    <div class="onode fi-node" data-org="bukrs">Company Code<span class="code">BUKRS · FI</span><span class="badge fi">FI</span></div>
+                    <ul>
+                      <li><div class="onode leaf fi-leaf" data-org="werks">Plant<span class="code">WERKS</span></div></li>
+                      <li><div class="onode leaf fi-leaf" data-org="gsber">Business Area<span class="code">GSBER</span></div></li>
+                      <li><div class="onode leaf fi-leaf" data-org="prctr">Profit Center<span class="code">PRCTR</span></div></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="onode co-node" data-org="kokrs">Controlling Area<span class="code">KOKRS · CO</span><span class="badge co">CO</span></div>
+                    <ul>
+                      <li><div class="onode leaf co-leaf" data-org="kostl">Cost Center<span class="code">KOSTL</span></div></li>
+                      <li><div class="onode leaf co-leaf" data-org="prctr2">Profit Center<span class="code">PRCTR</span></div></li>
+                      <li><div class="onode leaf co-leaf" data-org="aufnr">Internal Order<span class="code">AUFNR</span></div></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="org-detail empty" id="orgDetail">👆 Click a node above to explore its definition and key fields.</div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot ld-fi"></span> Financial Accounting (FI)</div>
+          <div class="legend-item"><span class="legend-dot ld-co"></span> Controlling (CO)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ PANEL 2: GRAPH ═══════════════ -->
+    <div class="panel" id="panel-graph">
+      <div class="card">
+        <h2><span class="num fi">2</span> Table Map — Interactive Graph</h2>
+        <p class="desc">Click any table node to highlight its connections. Switch between ECC and S/4HANA data models.</p>
+
+        <div class="graph-toolbar">
+          <div class="mode-toggle">
+            <button class="mode-btn active" data-mode="ecc">SAP ECC</button>
+            <button class="mode-btn" data-mode="s4">SAP S/4HANA</button>
+          </div>
+          <div class="graph-hint">💡 Click a node · Click empty space to reset</div>
+        </div>
+
+        <div class="graph-wrap">
+          <div id="graphCanvas"></div>
+        </div>
+
+        <div class="graph-detail empty" id="graphDetail">👆 Select a table node to see its fields and related tables.</div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot ld-fi"></span> FI Tables</div>
+          <div class="legend-item"><span class="legend-dot ld-co"></span> CO Tables</div>
+          <div class="legend-item"><span class="legend-dot ld-ac"></span> Integration / Universal Journal</div>
+          <div class="legend-item"><span class="legend-dot ld-md"></span> Master Data</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ PANEL 3: SIM ═══════════════ -->
+    <div class="panel" id="panel-sim">
+      <div class="card">
+        <h2><span class="num ac">3</span> End-to-End Document Flow</h2>
+        <p class="desc">Watch a vendor invoice travel through FI → CO → Totals → Universal Journal. Press <strong>Play</strong> or step through manually.</p>
+
+        <div class="sim-controls">
+          <button class="btn btn-primary" id="simPlay">▶ Play All</button>
+          <button class="btn btn-ghost" id="simNext">Next Step ▸</button>
+          <button class="btn btn-ghost" id="simReset">↺ Reset</button>
+          <div class="sim-progress" id="simProgress"></div>
+        </div>
+
+        <div id="simContainer"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ PANEL 4: EXPLORER ═══════════════ -->
+    <div class="panel" id="panel-exp">
+      <div class="card">
+        <h2><span class="num md">4</span> Table Explorer</h2>
+        <p class="desc">Search and filter all FI, CO, and S/4HANA tables. Click a card for full details.</p>
+
+        <div class="exp-toolbar">
+          <div class="exp-search">
+            <span class="sico">🔍</span>
+            <input type="text" id="expSearch" placeholder="Search by table name, description, or field…">
+          </div>
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="FI">FI</button>
+          <button class="filter-chip" data-filter="CO">CO</button>
+          <button class="filter-chip" data-filter="S/4">S/4</button>
+          <button class="filter-chip" data-filter="Master">Master</button>
+        </div>
+
+        <div class="exp-grid" id="expGrid"></div>
+
+        <div class="graph-detail empty" id="expDetail" style="margin-top:1rem;">👆 Click a table card to see full details.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ PANEL 5: KEY FIELDS ═══════════════ -->
+    <div class="panel" id="panel-kf">
+      <div class="card">
+        <h2><span class="num md">5</span> Key Field Reference</h2>
+        <p class="desc">The essential join fields across FI and CO. Click any field name to copy it.</p>
+
+        <div class="kf-wrap">
+          <table class="kf">
+            <thead>
+              <tr>
+                <th>Field</th><th>Description</th><th>FI Tables</th><th>CO Tables</th><th>Master Data</th>
+              </tr>
+            </thead>
+            <tbody id="kfBody"></tbody>
+          </table>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot ld-fi"></span> FI — Financial Accounting</div>
+          <div class="legend-item"><span class="legend-dot ld-co"></span> CO — Controlling</div>
+          <div class="legend-item"><span class="legend-dot ld-ac"></span> Universal Journal</div>
+          <div class="legend-item"><span class="legend-dot ld-md"></span> Master Data</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#tbl-exp -->
+
+  <a class="exp-back" href="sap-fico.html">← Back to SAP FICO Learning</a>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <div class="footer-col footer-brand">
+      <img src="../assets/so-icon.png" alt="SutraOps Solutions logo">
+      <p class="foot-name"><b>Sutra</b><i>Ops</i> <span>SOLUTIONS</span></p>
+      <p class="foot-tag">Smart Travel. Smart Finance. Smart Operations.</p>
+      <div class="foot-social">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="https://wa.me/919288223003" aria-label="WhatsApp">✆</a>
+        <a href="mailto:info.sutraops@gmail.com" aria-label="Email">✉</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About Us</a>
+      <a href="../services.html">Services</a>
+      <a href="learning-hub.html">Learning Hub</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Our Services</h4>
+      <a href="../services.html#sap">SAP Consulting</a>
+      <a href="../services.html#finance">Accounting &amp; Finance</a>
+      <a href="../services.html#automation">Intelligent Automation</a>
+      <a href="../services.html#travel">Travel Services</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get In Touch</h4>
+      <p class="foot-contact"><span>📱</span> +91 92882 23003</p>
+      <p class="foot-contact"><span>☎️</span> +91 4045766397</p>
+      <p class="foot-contact"><span>✉️</span> info.sutraops@gmail.com</p>
+      <p class="foot-contact"><span>📍</span> India</p>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 SutraOps Solutions. All rights reserved.</p></div>
+</footer>
+<a class="wa-float" href="https://wa.me/919288223003" aria-label="Chat on WhatsApp">✆</a>
+
+<script src="../script.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   1. DATA
+   ═══════════════════════════════════════════════════════════ */
+
+const TABLES = {
+  BKPF: { module:'FI', desc:'Accounting Document Header', purpose:'Stores one row per accounting document. Contains header-level information such as document type, posting date, currency, and reference. Every FI document has exactly one BKPF entry.', keys:['BELNR','BUKRS','GJAHR'], fields:['BELNR — Document Number','BUKRS — Company Code','GJAHR — Fiscal Year','BLART — Document Type','BLDAT — Document Date','BUDAT — Posting Date','MONAT — Posting Period','WAERS — Currency','XBLNR — Reference Document','AWTYP — Reference Transaction','AWKEY — Reference Key'], related:['BSEG','FAGLCOFITRACE','ACDOCA'] },
+  BSEG: { module:'FI', desc:'Accounting Document Line Items', purpose:'Stores the individual debit and credit line items of an FI document. Each line has an account, amount, and optionally a cost object such as Cost Center or Internal Order.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['BELNR — Document Number','BUKRS — Company Code','GJAHR — Fiscal Year','BUZEI — Line Item Number','HKONT — G/L Account','SHKZG — Debit/Credit Indicator','DMBTR — Amount in Local Currency','WRBTR — Amount in Document Currency','KOSTL — Cost Center','PRCTR — Profit Center','AUFNR — Order Number','MWSKZ — Tax Code'], related:['BKPF','BSID','BSAD','BSIK','BSAK','BSIS','BSAS','ACDOCA'] },
+  BSID: { module:'FI', desc:'Customer Open Items', purpose:'Secondary index of open customer line items, derived from BSEG. Used for fast access to customer balances and dunning.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['KUNNR — Customer','BELNR — Document Number','BUKRS — Company Code','GJAHR — Fiscal Year','BUZEI — Line Item','DMBTR — Amount','UMSKS — Special G/L Transaction'], related:['BSEG','BSAD','BKPF'] },
+  BSAD: { module:'FI', desc:'Customer Cleared Items', purpose:'Secondary index of cleared customer line items. Populated when an open item is cleared by a payment or credit memo.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['KUNNR — Customer','BELNR — Document Number','BUKRS — Company Code','GJAHR — Fiscal Year','AUGDT — Clearing Date','AUGBL — Clearing Document'], related:['BSEG','BSID','BKPF'] },
+  BSIK: { module:'FI', desc:'Vendor Open Items', purpose:'Secondary index of open vendor line items. Core table for Accounts Payable reporting and payment runs.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['LIFNR — Vendor','BELNR — Document Number','BUKRS — Company Code','GJAHR — Fiscal Year','DMBTR — Amount','ZFBDT — Baseline Date','ZTERM — Payment Terms'], related:['BSEG','BSAK','BKPF'] },
+  BSAK: { module:'FI', desc:'Vendor Cleared Items', purpose:'Secondary index of cleared vendor line items. Populated when an invoice is paid.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['LIFNR — Vendor','BELNR — Document Number','BUKRS — Company Code','AUGDT — Clearing Date','AUGBL — Clearing Document'], related:['BSEG','BSIK','BKPF'] },
+  BSIS: { module:'FI', desc:'G/L Account Open Items', purpose:'Secondary index of open G/L line items for accounts managed on an open-item basis.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['HKONT — G/L Account','BELNR — Document Number','BUKRS — Company Code','DMBTR — Amount'], related:['BSEG','BSAS','BKPF'] },
+  BSAS: { module:'FI', desc:'G/L Account Cleared Items', purpose:'Secondary index of cleared G/L line items for open-item managed accounts.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['HKONT — G/L Account','BELNR — Document Number','AUGDT — Clearing Date'], related:['BSEG','BSIS','BKPF'] },
+  FAGLCOFITRACE: { module:'S/4', desc:'Real-Time Integration Trace', purpose:'Logs the real-time integration between FI and CO. Allows tracing of CO reconciliation postings back to their originating FI document.', keys:['BELNR','BUKRS','GJAHR'], fields:['BELNR — FI Document','BUKRS — Company Code','GJAHR — Fiscal Year','KOKRS — Controlling Area','STATUS — Integration Status'], related:['BKPF','COBK'] },
+  COBK: { module:'CO', desc:'CO Document Header', purpose:'Header table for Controlling documents. Each CO document has one COBK entry. Linked to FI via the originating FI document number.', keys:['BELNR','KOKRS','GJAHR'], fields:['BELNR — CO Document Number','KOKRS — Controlling Area','GJAHR — Fiscal Year','VRGNG — Business Transaction','BLTXT — Document Text','STFLG — Reversal Indicator'], related:['COEP','FAGLCOFITRACE','ACDOCA'] },
+  COEP: { module:'CO', desc:'CO Object: Line Items (by Period)', purpose:'Line-item table for Controlling. Contains detailed postings per cost object (Cost Center, Order, Project). In S/4HANA this is a compatibility view on ACDOCA.', keys:['BELNR','KOKRS','GJAHR','OBJNR'], fields:['BELNR — CO Document Number','KOKRS — Controlling Area','GJAHR — Fiscal Year','OBJNR — Object Number','KSTAR — Cost Element','WKGxxx — Total Value in Controlling Area Currency','WTGxxx — Total Value in Transaction Currency','PERIO — Period'], related:['COBK','COSP','COSS','ACDOCA'] },
+  COSP: { module:'CO', desc:'Cost Totals — External Postings', purpose:'Summarized cost totals per CO object for external postings (i.e., costs originating from FI). Keyed by object, controlling area, and fiscal year.', keys:['OBJNR','KOKRS','GJAHR'], fields:['OBJNR — Object Number','KOKRS — Controlling Area','GJAHR — Fiscal Year','KSTAR — Cost Element','WKG001–WKG016 — Total Value per Period','WTG001–WTG016 — Transaction Currency per Period'], related:['COEP','COSS','ACDOCA'] },
+  COSS: { module:'CO', desc:'Cost Totals — Internal Postings', purpose:'Summarized cost totals per CO object for internal postings (allocations, assessments, distributions between cost centers).', keys:['OBJNR','KOKRS','GJAHR'], fields:['OBJNR — Object Number','KOKRS — Controlling Area','GJAHR — Fiscal Year','KSTAR — Cost Element','WKG001–WKG016 — Total Value per Period'], related:['COEP','COSP','ACDOCA'] },
+  CSKS: { module:'Master', desc:'Cost Center Master Data', purpose:'Master data for cost centers. Stores the controlling area, cost center hierarchy, responsible person, and validity dates.', keys:['KOSTL','KOKRS','DATBI'], fields:['KOSTL — Cost Center','KOKRS — Controlling Area','DATBI — Valid To Date','DATAB — Valid From Date','KOSAR — Cost Center Category','VERAK — Responsible Person','ABTEI — Department'], related:['COEP','COSP','COSS'] },
+  CEPC: { module:'Master', desc:'Profit Center Master Data', purpose:'Master data for profit centers. Profit centers are used for internal profitability reporting and can be assigned to company codes.', keys:['PRCTR','KOKRS','DATBI'], fields:['PRCTR — Profit Center','KOKRS — Controlling Area','DATBI — Valid To Date','BUKRS — Company Code','ABTEI — Department','VERAK — Responsible Person'], related:['BSEG','COEP','ACDOCA'] },
+  AUFK: { module:'Master', desc:'Order Master Data', purpose:'Master data for internal orders, production orders, and CO orders. Stores order type, status, and assignment.', keys:['AUFNR'], fields:['AUFNR — Order Number','AUART — Order Type','BUKRS — Company Code','KOKRS — Controlling Area','OBJNR — Object Number','PHAS1 — Status'], related:['COEP','COSP','COSS'] },
+  SKA1: { module:'Master', desc:'G/L Account Master — Chart of Accounts', purpose:'Chart-of-accounts-level G/L master data. Contains account number, description, and account type.', keys:['KTOPL','SAKNR'], fields:['KTOPL — Chart of Accounts','SAKNR — G/L Account Number','TXT20 — Short Text','BILKT — Group Account Number','KTOKS — Account Group'], related:['SKB1','BSEG'] },
+  SKB1: { module:'Master', desc:'G/L Account Master — Company Code', purpose:'Company-code-level G/L master data. Controls whether the account is open-item managed, locked, and its currency.', keys:['BUKRS','SAKNR'], fields:['BUKRS — Company Code','SAKNR — G/L Account','XOPVW — Open Item Management','XKRES — Reconciliation Account','WAERS — Account Currency','FSTAG — Field Status Group'], related:['SKA1','BSEG','BSIS','BSAS'] },
+  KNA1: { module:'Master', desc:'Customer Master — General Data', purpose:'General customer master data such as name, address, and country. Company-code and sales-area data are in separate tables.', keys:['KUNNR'], fields:['KUNNR — Customer Number','NAME1 — Name','LAND1 — Country','ORT01 — City','PSTLZ — Postal Code','KTOKD — Account Group'], related:['BSID','BSAD','BSEG'] },
+  LFA1: { module:'Master', desc:'Vendor Master — General Data', purpose:'General vendor master data such as name, address, and country. Payment terms and reconciliation accounts are in LFB1.', keys:['LIFNR'], fields:['LIFNR — Vendor Number','NAME1 — Name','LAND1 — Country','ORT01 — City','KTOKK — Account Group'], related:['BSIK','BSAK','BSEG'] },
+  ACDOCA: { module:'S/4', desc:'Universal Journal — Line Items', purpose:'The single source of truth for all actual financial postings in S/4HANA. Combines FI line items and CO line items into one table. Replaces BSEG, BSIS/BSAS, COEP, COSP, and COSS as physical storage.', keys:['RCLNT','RLDNR','RBUKRS','BELNR','GJAHR','DOCLN'], fields:['RCLNT — Client','RLDNR — Ledger','RBUKRS — Company Code','BELNR — Document Number','GJAHR — Fiscal Year','DOCLN — Line Item','RACCT — Account Number','KOSTL — Cost Center','PRCTR — Profit Center','OBJNR — Object Number','KOKRS — Controlling Area','HSL — Amount in Local Currency','DRCRK — Debit/Credit Indicator','AWTYP — Reference Transaction'], related:['BKPF','BSEG','COEP','COSP','COSS'] },
+  ACDOCP: { module:'S/4', desc:'Universal Journal — Plan Data', purpose:'Stores planning data in S/4HANA. Separated from ACDOCA (actuals) to keep the actuals table lean and fast.', keys:['RCLNT','RLDNR','RBUKRS','BELNR','GJAHR'], fields:['RBUKRS — Company Code','RACCT — Account','KOSTL — Cost Center','PRCTR — Profit Center','HSL — Plan Amount','PLDAT — Plan Date'], related:['ACDOCA'] }
+};
+
+/* ── Graph configurations ── */
+const GRAPH = {
+  ecc: {
+    nodes: [
+      { id:'BKPF', x:40, y:30, w:170, h:70, group:'fi', desc:'Accounting Doc Header', keys:'BELNR · BUKRS · GJAHR' },
+      { id:'BSEG', x:40, y:150, w:170, h:70, group:'fi', desc:'Accounting Doc Line Items', keys:'BELNR · BUKRS · GJAHR · BUZEI' },
+      { id:'BSID', x:10, y:300, w:100, h:54, group:'fi', desc:'Customer Open' },
+      { id:'BSAD', x:120, y:300, w:100, h:54, group:'fi', desc:'Customer Cleared' },
+      { id:'BSIK', x:10, y:375, w:100, h:54, group:'fi', desc:'Vendor Open' },
+      { id:'BSAK', x:120, y:375, w:100, h:54, group:'fi', desc:'Vendor Cleared' },
+      { id:'BSIS', x:10, y:450, w:100, h:54, group:'fi', desc:'G/L Open' },
+      { id:'BSAS', x:120, y:450, w:100, h:54, group:'fi', desc:'G/L Cleared' },
+      { id:'FAGLCOFITRACE', x:390, y:150, w:190, h:64, group:'ac', desc:'FI ↔ CO Integration Trace', keys:'BELNR · BUKRS · GJAHR' },
+      { id:'COBK', x:790, y:30, w:170, h:70, group:'co', desc:'CO Document Header', keys:'BELNR · KOKRS · GJAHR' },
+      { id:'COEP', x:790, y:150, w:170, h:70, group:'co', desc:'CO Object Line Items', keys:'BELNR · KOKRS · GJAHR · OBJNR' },
+      { id:'COSP', x:740, y:300, w:110, h:54, group:'co', desc:'Cost Totals — External' },
+      { id:'COSS', x:860, y:300, w:110, h:54, group:'co', desc:'Cost Totals — Internal' }
+    ],
+    edges: [
+      { f:'BKPF', t:'BSEG' },
+      { f:'BSEG', t:'BSID' }, { f:'BSEG', t:'BSAD' },
+      { f:'BSEG', t:'BSIK' }, { f:'BSEG', t:'BSAK' },
+      { f:'BSEG', t:'BSIS' }, { f:'BSEG', t:'BSAS' },
+      { f:'COBK', t:'COEP' },
+      { f:'COEP', t:'COSP' }, { f:'COEP', t:'COSS' },
+      { f:'BKPF', t:'FAGLCOFITRACE' }, { f:'COBK', t:'FAGLCOFITRACE' },
+      { f:'BKPF', t:'COBK', type:'integration', label:'Real-time · BELNR' }
+    ]
+  },
+  s4: {
+    nodes: [
+      { id:'BKPF', x:40, y:40, w:170, h:66, group:'fi', desc:'Doc Header (still physical)', keys:'BELNR · BUKRS · GJAHR' },
+      { id:'BSEG', x:40, y:160, w:170, h:66, group:'fi', desc:'Compatibility View', view:true, keys:'→ ACDOCA' },
+      { id:'BS_VIEWS', x:40, y:280, w:170, h:66, group:'fi', desc:'BSID/BSAD/BSIK/BSAK/BSIS/BSAS', view:true, keys:'Compatibility Views' },
+      { id:'ACDOCA', x:350, y:140, w:280, h:140, group:'ac', desc:'Universal Journal — Single Source of Truth', big:true, keys:'BUKRS · BELNR · GJAHR · DOCLN · RACCT · KOSTL · PRCTR' },
+      { id:'ACDOCP', x:790, y:40, w:170, h:66, group:'ac', desc:'Plan Data', keys:'Separate table' },
+      { id:'COEP', x:790, y:160, w:170, h:66, group:'co', desc:'Compatibility View', view:true, keys:'→ ACDOCA' },
+      { id:'COSP_COSS', x:790, y:280, w:170, h:66, group:'co', desc:'COSP / COSS', view:true, keys:'Compatibility Views' }
+    ],
+    edges: [
+      { f:'BKPF', t:'ACDOCA' },
+      { f:'BSEG', t:'ACDOCA' },
+      { f:'BS_VIEWS', t:'ACDOCA' },
+      { f:'COEP', t:'ACDOCA' },
+      { f:'COSP_COSS', t:'ACDOCA' },
+      { f:'ACDOCP', t:'ACDOCA', type:'integration', label:'Plan vs Actual' }
+    ]
+  }
+};
+
+/* ── Simulation steps ── */
+const SIM_STEPS = [
+  {
+    n:1, cls:'step-fi', title:'Enter Vendor Invoice', sub:'Transaction FB60',
+    note:'The user enters vendor, amount, expense G/L account, and a Cost Center. No document exists yet.',
+    cards:[
+      { type:'kv', title:'Input Data', items:[
+        ['Company Code','1000'], ['Vendor','100234 — Acme Supplies'],
+        ['Invoice Date','15.03.2024'], ['Posting Date','15.03.2024'],
+        ['Amount','12,500.00 USD'], ['G/L Account','400000 — Office Supplies'],
+        ['Cost Center','1000 — Marketing'], ['Document Type','KR — Vendor Invoice']
+      ]}
+    ]
+  },
+  {
+    n:2, cls:'step-fi', title:'FI Document Created', sub:'BKPF (header) + BSEG (line items)',
+    note:'SAP writes one BKPF header row and two BSEG line-item rows. The vendor sub-ledger and expense account are updated.',
+    cards:[
+      { type:'table', cls:'fi', table:'BKPF', subtitle:'Header', cols:['BELNR','BUKRS','GJAHR','BLART','BUDAT','WAERS'],
+        rows:[['5100000001','1000','2024','KR','15.03.2024','USD']] },
+      { type:'table', cls:'fi', table:'BSEG', subtitle:'Line Items', cols:['BUZEI','HKONT','SHKZG','DMBTR','KOSTL','PRCTR'],
+        rows:[
+          ['001','400000','S (Debit)','12,500.00','1000','PC-MKT'],
+          ['002','160000','H (Credit)','12,500.00','','' ]
+        ]}
+    ]
+  },
+  {
+    n:3, cls:'step-co', title:'CO Document Created', sub:'COBK (header) + COEP (line items) — Real-Time Integration',
+    note:'Because a Cost Center was entered, SAP automatically creates a CO document. The FI document number is referenced in CO.',
+    cards:[
+      { type:'table', cls:'co', table:'COBK', subtitle:'CO Header', cols:['BELNR','KOKRS','GJAHR','VRGNG','BLTXT'],
+        rows:[['900000001','A000','2024','KOA','Vendor Invoice 5100000001']] },
+      { type:'table', cls:'co', table:'COEP', subtitle:'CO Line Items', cols:['BELNR','KOKRS','OBJNR','KSTAR','WKGBTR','WTGBTR'],
+        rows:[['900000001','A000','KS1000','400000','12,500.00','12,500.00']] },
+      { type:'table', cls:'ac', table:'FAGLCOFITRACE', subtitle:'Trace', cols:['BELNR','BUKRS','KOKRS','STATUS'],
+        rows:[['5100000001','1000','A000','Posted']] }
+    ]
+  },
+  {
+    n:4, cls:'step-co', title:'Cost Totals Updated', sub:'COSP (external postings)',
+    note:'The CO totals table COSP is updated for the cost center and cost element. This is what most CO reports read.',
+    cards:[
+      { type:'table', cls:'co', table:'COSP', subtitle:'External Cost Totals', cols:['OBJNR','KOKRS','GJAHR','KSTAR','WKG003','WTG003'],
+        rows:[['KS1000','A000','2024','400000','12,500.00','12,500.00']] }
+    ]
+  },
+  {
+    n:5, cls:'step-ac', title:'Universal Journal Updated (S/4HANA)', sub:'ACDOCA — Single Source of Truth',
+    note:'In S/4HANA, all of the above is physically stored in ACDOCA. The compatibility views (BSEG, COEP, COSP) read from this one table.',
+    cards:[
+      { type:'table', cls:'ac', table:'ACDOCA', subtitle:'Actual Line Items', cols:['RLDNR','RBUKRS','BELNR','DOCLN','RACCT','KOSTL','PRCTR','HSL','DRCRK'],
+        rows:[
+          ['0L','1000','5100000001','000001','400000','1000','PC-MKT','12,500.00','S'],
+          ['0L','1000','5100000001','000002','160000','','','12,500.00','H']
+        ]}
+    ]
+  },
+  {
+    n:6, cls:'step-done', title:'Document Posted — End of Flow', sub:'Vendor balance updated · Cost center charged',
+    note:'The invoice is now fully posted. The vendor open item appears in BSIK, and the cost center reflects the expense in CO reports.',
+    cards:[
+      { type:'summary', items:[
+        ['FI Document','5100000001'], ['CO Document','900000001'],
+        ['Vendor Open Item','BSIK updated'], ['Cost Center','1000 charged'],
+        ['Controlling Area','A000'], ['Amount','12,500.00 USD']
+      ]}
+    ]
+  }
+];
+
+/* ── Key fields ── */
+const KEY_FIELDS = [
+  { f:'BELNR', d:'Document Number', fi:'BKPF, BSEG, BSID/BSAD, BSIK/BSAK, BSIS/BSAS', co:'COBK, COEP', md:'—', cls:'fld-fi' },
+  { f:'BUKRS', d:'Company Code', fi:'BKPF, BSEG, BSID/BSAD, BSIK/BSAK, BSIS/BSAS', co:'—', md:'T001', cls:'fld-fi' },
+  { f:'GJAHR', d:'Fiscal Year', fi:'BKPF, BSEG, BSID/BSAD, BSIK/BSAK, BSIS/BSAS', co:'COBK, COEP, COSP, COSS', md:'—', cls:'fld-fi' },
+  { f:'BUZEI', d:'Line Item Number', fi:'BSEG, BSID/BSAD, BSIK/BSAK, BSIS/BSAS', co:'—', md:'—', cls:'fld-fi' },
+  { f:'KOKRS', d:'Controlling Area', fi:'—', co:'COBK, COEP, COSP, COSS', md:'CSKS, CEPC, TKA01', cls:'fld-co' },
+  { f:'OBJNR', d:'Object Number', fi:'—', co:'COEP, COSP, COSS', md:'ONR00 (general)', cls:'fld-co' },
+  { f:'KOSTL', d:'Cost Center', fi:'BSEG (via CO assignment)', co:'COEP', md:'CSKS', cls:'fld-co' },
+  { f:'PRCTR', d:'Profit Center', fi:'BSEG', co:'COEP', md:'CEPC', cls:'fld-co' },
+  { f:'HKONT', d:'G/L Account Number', fi:'BSEG, BSIS, BSAS', co:'—', md:'SKA1 / SKB1', cls:'fld-fi' },
+  { f:'KSTAR', d:'Cost Element', fi:'—', co:'COEP, COSP, COSS', md:'CSKA / CSKB', cls:'fld-co' },
+  { f:'AWTYP', d:'Reference Transaction', fi:'BKPF', co:'COBK', md:'—', cls:'fld-md' },
+  { f:'AWKEY', d:'Reference Key', fi:'BKPF', co:'COBK', md:'—', cls:'fld-md' },
+  { f:'RACCT', d:'Account Number (ACDOCA)', fi:'—', co:'—', md:'ACDOCA', cls:'fld-co' },
+  { f:'DOCLN', d:'Line Item (ACDOCA)', fi:'—', co:'—', md:'ACDOCA', cls:'fld-co' }
+];
+
+/* ── Org node details ── */
+const ORG_INFO = {
+  client: { t:'Client (Mandant)', d:'The highest organizational level in an SAP system. Represents a self-contained commercial unit with its own data, master records, and tables. All other organizational units are defined within a client.', c:['Mandant','MANDT'] },
+  bukrs: { t:'Company Code (BUKRS)', d:'Represents an independent legal entity for which a complete, self-contained set of accounts is maintained. It is the central organizational unit of Financial Accounting (FI). Balance sheets and P&L statements are created at this level.', c:['BUKRS','T001','Company Code'] },
+  kokrs: { t:'Controlling Area (KOKRS)', d:'The central organizational unit of Controlling (CO). It represents the management accounting boundary within which costs and revenues are analyzed. Many company codes can be assigned to one controlling area.', c:['KOKRS','TKA01','Controlling Area'] },
+  werks: { t:'Plant (WERKS)', d:'An operating unit or branch within a company code. Used in Materials Management, Production Planning, and for certain FI postings. Plants are assigned to company codes.', c:['WERKS','T001W'] },
+  gsber: { t:'Business Area (GSBER)', d:'An organizational unit used for internal reporting across company codes. It represents a separate business segment or division. Business areas are defined at client level.', c:['GSBER','TGSB'] },
+  prctr: { t:'Profit Center (PRCTR)', d:'An organizational unit in Controlling used for internal profitability reporting. Profit centers can be assigned to company codes and are used to analyze profit and loss by product line, region, or function.', c:['PRCTR','CEPC','Profit Center'] },
+  prctr2: { t:'Profit Center (PRCTR)', d:'An organizational unit in Controlling used for internal profitability reporting. Profit centers can be assigned to company codes and are used to analyze profit and loss by product line, region, or function.', c:['PRCTR','CEPC','Profit Center'] },
+  kostl: { t:'Cost Center (KOSTL)', d:'An organizational unit within a controlling area that represents a defined location where costs are incurred. Cost centers are used to collect and allocate costs for internal management reporting.', c:['KOSTL','CSKS','Cost Center'] },
+  aufnr: { t:'Internal Order (AUFNR)', d:'A temporary or permanent CO object used to collect costs for a specific purpose, such as a marketing campaign, a research project, or an event. Internal orders are settled to cost centers or other objects.', c:['AUFNR','AUFK','Internal Order'] }
+};
+
+/* ═══════════════════════════════════════════════════════════
+   2. TAB NAVIGATION
+   ═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('#tbl-exp .tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('#tbl-exp .tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('#tbl-exp .panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    if (tab.dataset.panel === 'graph') setTimeout(() => drawGraphEdges(currentMode), 50);
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   3. ENTERPRISE STRUCTURE
+   ═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('#tbl-exp .onode').forEach(node => {
+  node.addEventListener('click', () => {
+    document.querySelectorAll('#tbl-exp .onode').forEach(n => n.classList.remove('sel'));
+    node.classList.add('sel');
+    const info = ORG_INFO[node.dataset.org];
+    if (!info) return;
+    const det = document.getElementById('orgDetail');
+    det.classList.remove('empty');
+    det.innerHTML = `
+      <h4>${info.t}</h4>
+      <p>${info.d}</p>
+      <div class="chips">${info.c.map(c => `<span class="chip">${c}</span>`).join('')}</div>
+    `;
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   4. TABLE MAP GRAPH
+   ═══════════════════════════════════════════════════════════ */
+let currentMode = 'ecc';
+let selectedNode = null;
+const CANVAS_W = 1000;
+
+function boundaryPoint(node, tx, ty) {
+  const cx = node.x + node.w / 2, cy = node.y + node.h / 2;
+  const dx = tx - cx, dy = ty - cy;
+  if (dx === 0 && dy === 0) return { x: cx, y: cy };
+  const hw = node.w / 2 + 3, hh = node.h / 2 + 3;
+  const tX = dx !== 0 ? hw / Math.abs(dx) : Infinity;
+  const tY = dy !== 0 ? hh / Math.abs(dy) : Infinity;
+  const t = Math.min(tX, tY);
+  return { x: cx + dx * t, y: cy + dy * t };
+}
+
+function buildGraph(mode) {
+  const cfg = GRAPH[mode];
+  const canvas = document.getElementById('graphCanvas');
+  canvas.className = mode === 's4' ? 's4' : '';
+  canvas.innerHTML = '';
+  canvas.style.width = CANVAS_W + 'px';
+  canvas.style.height = (mode === 's4' ? 520 : 580) + 'px';
+  canvas.onclick = (e) => { if (e.target === canvas) resetGraph(); };
+
+  // SVG layer
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'graph-svg');
+  svg.setAttribute('width', CANVAS_W);
+  svg.setAttribute('height', mode === 's4' ? 520 : 580);
+  svg.id = 'graphSvg';
+  canvas.appendChild(svg);
+
+  // Nodes
+  cfg.nodes.forEach(n => {
+    const div = document.createElement('div');
+    div.className = `graph-node ${n.group}${n.view ? ' view' : ''}${n.big ? ' big' : ''}`;
+    div.style.left = n.x + 'px';
+    div.style.top = n.y + 'px';
+    div.style.width = n.w + 'px';
+    div.style.height = n.h + 'px';
+    div.dataset.id = n.id;
+    div.innerHTML = `
+      <div class="gn-name">${n.id}</div>
+      <div class="gn-desc">${n.desc}</div>
+      ${n.keys ? `<div class="gn-keys">${n.keys}</div>` : ''}
+    `;
+    div.addEventListener('click', (e) => { e.stopPropagation(); selectNode(n.id); });
+    canvas.appendChild(div);
+  });
+
+  drawGraphEdges(mode);
+}
+
+function drawGraphEdges(mode) {
+  const cfg = GRAPH[mode];
+  const svg = document.getElementById('graphSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  defs.innerHTML = `
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-active" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/>
+    </marker>
+  `;
+  svg.appendChild(defs);
+
+  cfg.edges.forEach(e => {
+    const na = cfg.nodes.find(n => n.id === e.f);
+    const nb = cfg.nodes.find(n => n.id === e.t);
+    if (!na || !nb) return;
+
+    const ca = { x: na.x + na.w / 2, y: na.y + na.h / 2 };
+    const cb = { x: nb.x + nb.w / 2, y: nb.y + nb.h / 2 };
+    const p1 = boundaryPoint(na, cb.x, cb.y);
+    const p2 = boundaryPoint(nb, ca.x, ca.y);
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', p1.x); line.setAttribute('y1', p1.y);
+    line.setAttribute('x2', p2.x); line.setAttribute('y2', p2.y);
+    line.setAttribute('class', 'graph-edge' + (e.type === 'integration' ? ' integration' : ''));
+    line.setAttribute('marker-end', 'url(#arrow)');
+    line.dataset.from = e.f;
+    line.dataset.to = e.t;
+    svg.appendChild(line);
+
+    if (e.label) {
+      const midX = (p1.x + p2.x) / 2;
+      const midY = (p1.y + p2.y) / 2;
+      const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      txt.setAttribute('x', midX); txt.setAttribute('y', midY - 5);
+      txt.setAttribute('class', 'edge-label');
+      txt.dataset.from = e.f;
+      txt.dataset.to = e.t;
+      txt.textContent = e.label;
+      svg.appendChild(txt);
+    }
+  });
+}
+
+function selectNode(id) {
+  selectedNode = id;
+  const cfg = GRAPH[currentMode];
+  const connected = new Set([id]);
+  cfg.edges.forEach(e => {
+    if (e.f === id) connected.add(e.t);
+    if (e.t === id) connected.add(e.f);
+  });
+
+  document.querySelectorAll('#tbl-exp .graph-node').forEach(n => {
+    const nid = n.dataset.id;
+    n.classList.toggle('selected', nid === id);
+    n.classList.toggle('highlighted', connected.has(nid) && nid !== id);
+    n.classList.toggle('dimmed', !connected.has(nid));
+  });
+
+  document.querySelectorAll('#tbl-exp .graph-edge').forEach(edge => {
+    const active = edge.dataset.from === id || edge.dataset.to === id;
+    edge.classList.toggle('active', active);
+    edge.classList.toggle('dimmed', !active);
+    if (active) edge.setAttribute('marker-end', 'url(#arrow-active)');
+    else edge.setAttribute('marker-end', 'url(#arrow)');
+  });
+  document.querySelectorAll('#tbl-exp .edge-label').forEach(lbl => {
+    const active = lbl.dataset.from === id || lbl.dataset.to === id;
+    lbl.classList.toggle('active', active);
+  });
+
+  showGraphDetail(id);
+}
+
+function resetGraph() {
+  selectedNode = null;
+  document.querySelectorAll('#tbl-exp .graph-node').forEach(n => {
+    n.classList.remove('selected', 'highlighted', 'dimmed');
+  });
+  document.querySelectorAll('#tbl-exp .graph-edge').forEach(edge => {
+    edge.classList.remove('active', 'dimmed');
+    edge.setAttribute('marker-end', 'url(#arrow)');
+  });
+  document.querySelectorAll('#tbl-exp .edge-label').forEach(l => l.classList.remove('active'));
+  const det = document.getElementById('graphDetail');
+  det.className = 'graph-detail empty';
+  det.textContent = '👆 Select a table node to see its fields and related tables.';
+}
+
+function showGraphDetail(id) {
+  const t = TABLES[id];
+  const det = document.getElementById('graphDetail');
+  det.classList.remove('empty');
+  if (!t) {
+    det.innerHTML = `<h4>${id}</h4><p class="gd-desc">Composite node — see individual tables in the Table Explorer.</p>`;
+    return;
+  }
+  det.innerHTML = `
+    <h4>${id}</h4>
+    <div class="gd-desc">${t.desc}</div>
+    <div class="gd-cols">
+      <div class="gd-block">
+        <h5>Purpose</h5>
+        <p style="font-size:.8rem;color:#475569;">${t.purpose}</p>
+      </div>
+      <div class="gd-block">
+        <h5>Key Fields</h5>
+        <div class="ec-keys">${t.keys.map(k => `<span>${k}</span>`).join('')}</div>
+        <h5 style="margin-top:.6rem;">Related Tables</h5>
+        <div>${t.related.map(r => `<span class="rel-chip" onclick="selectNode('${r}')">${r}</span>`).join('')}</div>
+      </div>
+    </div>
+  `;
+}
+
+/* Mode toggle */
+document.querySelectorAll('#tbl-exp .mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#tbl-exp .mode-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentMode = btn.dataset.mode;
+    selectedNode = null;
+    buildGraph(currentMode);
+    resetGraph();
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   5. SIMULATION
+   ═══════════════════════════════════════════════════════════ */
+let simIndex = -1;
+let simPlaying = false;
+let simTimer = null;
+
+function renderSimStep(step, index) {
+  const container = document.getElementById('simContainer');
+  const existing = document.getElementById('simStep' + index);
+  if (existing) return;
+
+  const div = document.createElement('div');
+  div.className = `sim-step ${step.cls}`;
+  div.id = 'simStep' + index;
+
+  let cardsHtml = '';
+  step.cards.forEach(card => {
+    if (card.type === 'kv') {
+      cardsHtml += `
+        <div class="sim-tcard" style="border-color:#e2e8f0;">
+          <div class="stc-head" style="background:#f1f5f9;color:#334155;">${card.title}</div>
+          <div style="padding:.7rem;">
+            <div class="kv-grid">
+              ${card.items.map(([k, v]) => `<div class="kv-item"><label>${k}</label><span>${v}</span></div>`).join('')}
+            </div>
+          </div>
+        </div>`;
+    } else if (card.type === 'table') {
+      cardsHtml += `
+        <div class="sim-tcard ${card.cls}">
+          <div class="stc-head">${card.table}<span>${card.subtitle}</span></div>
+          <table>
+            <thead><tr>${card.cols.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+            <tbody>${card.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+          </table>
+        </div>`;
+    } else if (card.type === 'summary') {
+      cardsHtml += `
+        <div style="width:100%;">
+          <div class="sim-summary">
+            ${card.items.map(([k, v]) => `<div class="sum-item"><div class="sv">${v}</div><div class="sl">${k}</div></div>`).join('')}
+          </div>
+        </div>`;
+    }
+  });
+
+  div.innerHTML = `
+    <div class="sim-head">
+      <span class="sim-num">${step.n}</span>
+      <div>
+        <div class="sim-title">${step.title}</div>
+        <div class="sim-sub">${step.sub}</div>
+      </div>
+    </div>
+    <div class="sim-note">${step.note}</div>
+    <div class="sim-grid">${cardsHtml}</div>
+  `;
+  container.appendChild(div);
+  requestAnimationFrame(() => div.classList.add('show'));
+}
+
+function updateProgress() {
+  const prog = document.getElementById('simProgress');
+  prog.innerHTML = SIM_STEPS.map((_, i) => {
+    let cls = 'sim-dot';
+    if (i < simIndex) cls += ' done';
+    if (i === simIndex) cls += ' active';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+}
+
+function simNext() {
+  if (simIndex >= SIM_STEPS.length - 1) return;
+  simIndex++;
+  renderSimStep(SIM_STEPS[simIndex], simIndex);
+  updateProgress();
+  if (simIndex === SIM_STEPS.length - 1) {
+    document.getElementById('simPlay').disabled = true;
+    document.getElementById('simNext').disabled = true;
+  }
+}
+
+function simReset() {
+  clearTimeout(simTimer);
+  simPlaying = false;
+  simIndex = -1;
+  document.getElementById('simContainer').innerHTML = '';
+  document.getElementById('simProgress').innerHTML = '';
+  document.getElementById('simPlay').disabled = false;
+  document.getElementById('simNext').disabled = false;
+  document.getElementById('simPlay').innerHTML = '▶ Play All';
+}
+
+function simPlayAll() {
+  if (simPlaying) return;
+  if (simIndex >= SIM_STEPS.length - 1) simReset();
+  simPlaying = true;
+  document.getElementById('simPlay').innerHTML = '⏸ Playing…';
+  const tick = () => {
+    if (!simPlaying) return;
+    if (simIndex >= SIM_STEPS.length - 1) {
+      simPlaying = false;
+      document.getElementById('simPlay').innerHTML = '✓ Complete';
+      return;
+    }
+    simNext();
+    simTimer = setTimeout(tick, 1400);
+  };
+  tick();
+}
+
+document.getElementById('simPlay').addEventListener('click', () => {
+  if (simPlaying) {
+    simPlaying = false;
+    clearTimeout(simTimer);
+    document.getElementById('simPlay').innerHTML = '▶ Resume';
+  } else {
+    simPlayAll();
+  }
+});
+document.getElementById('simNext').addEventListener('click', () => {
+  if (simPlaying) { simPlaying = false; clearTimeout(simTimer); document.getElementById('simPlay').innerHTML = '▶ Resume'; }
+  simNext();
+});
+document.getElementById('simReset').addEventListener('click', simReset);
+
+/* ═══════════════════════════════════════════════════════════
+   6. TABLE EXPLORER
+   ═══════════════════════════════════════════════════════════ */
+let expFilter = 'all';
+let expQuery = '';
+
+function modClass(m) {
+  if (m === 'FI') return 'mod-fi';
+  if (m === 'CO') return 'mod-co';
+  if (m === 'S/4') return 'mod-ac';
+  return 'mod-md';
+}
+
+function renderExplorer() {
+  const grid = document.getElementById('expGrid');
+  const q = expQuery.toLowerCase().trim();
+
+  const entries = Object.entries(TABLES).filter(([name, t]) => {
+    if (expFilter !== 'all') {
+      if (expFilter === 'Master' && t.module !== 'Master') return false;
+      if (expFilter === 'S/4' && t.module !== 'S/4') return false;
+      if (expFilter === 'FI' && t.module !== 'FI') return false;
+      if (expFilter === 'CO' && t.module !== 'CO') return false;
+    }
+    if (!q) return true;
+    const hay = (name + ' ' + t.desc + ' ' + t.purpose + ' ' + t.fields.join(' ') + ' ' + t.keys.join(' ')).toLowerCase();
+    return hay.includes(q);
+  });
+
+  if (entries.length === 0) {
+    grid.innerHTML = '<div class="no-results">No tables match your search. Try a different term.</div>';
+    return;
+  }
+
+  grid.innerHTML = entries.map(([name, t]) => `
+    <div class="exp-card ${modClass(t.module)}" data-table="${name}">
+      <div class="ec-top">
+        <div class="ec-name">${name}</div>
+        <div class="ec-mod">${t.module}</div>
+      </div>
+      <div class="ec-desc">${t.desc}</div>
+      <div class="ec-keys">${t.keys.slice(0, 4).map(k => `<span>${k}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.exp-card').forEach(card => {
+    card.addEventListener('click', () => showExpDetail(card.dataset.table));
+  });
+}
+
+function showExpDetail(name) {
+  const t = TABLES[name];
+  if (!t) return;
+  const det = document.getElementById('expDetail');
+  det.classList.remove('empty');
+  det.innerHTML = `
+    <h4>${name}</h4>
+    <div class="gd-desc">${t.desc} &nbsp;·&nbsp; <span style="font-weight:600;color:#334155;">Module: ${t.module}</span></div>
+    <div class="gd-cols">
+      <div class="gd-block">
+        <h5>Purpose</h5>
+        <p style="font-size:.8rem;color:#475569;">${t.purpose}</p>
+        <h5 style="margin-top:.7rem;">Related Tables</h5>
+        <div>${t.related.map(r => `<span class="rel-chip" onclick="jumpToTable('${r}')">${r}</span>`).join('')}</div>
+      </div>
+      <div class="gd-block">
+        <h5>Fields</h5>
+        <ul>${t.fields.map(f => `<li>${f}</li>`).join('')}</ul>
+      </div>
+    </div>
+  `;
+}
+
+function jumpToTable(name) {
+  // Switch to graph tab and select
+  document.querySelectorAll('#tbl-exp .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#tbl-exp .panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('#tbl-exp .tab[data-panel="graph"]').classList.add('active');
+  document.getElementById('panel-graph').classList.add('active');
+  setTimeout(() => {
+    if (document.querySelector(`#tbl-exp .graph-node[data-id="${name}"]`)) {
+      selectNode(name);
+    }
+  }, 80);
+}
+
+document.getElementById('expSearch').addEventListener('input', (e) => {
+  expQuery = e.target.value;
+  renderExplorer();
+});
+document.querySelectorAll('#tbl-exp .filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#tbl-exp .filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    expFilter = chip.dataset.filter;
+    renderExplorer();
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   7. KEY FIELDS TABLE
+   ═══════════════════════════════════════════════════════════ */
+function renderKeyFields() {
+  const body = document.getElementById('kfBody');
+  body.innerHTML = KEY_FIELDS.map(r => `
+    <tr>
+      <td class="mono ${r.cls}">
+        <span id="fld-${r.f}">${r.f}</span>
+        <button class="copy-btn" data-field="${r.f}" title="Copy field name">📋</button>
+      </td>
+      <td>${r.d}</td>
+      <td class="mono" style="font-size:.72rem;color:#475569;">${r.fi}</td>
+      <td class="mono" style="font-size:.72rem;color:#475569;">${r.co}</td>
+      <td class="mono" style="font-size:.72rem;color:#475569;">${r.md}</td>
+    </tr>
+  `).join('');
+
+  body.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const field = btn.dataset.field;
+      navigator.clipboard.writeText(field).then(() => {
+        btn.textContent = '✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = '📋'; btn.classList.remove('copied'); }, 1200);
+      }).catch(() => {});
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   8. INIT
+   ═══════════════════════════════════════════════════════════ */
+buildGraph('ecc');
+renderExplorer();
+renderKeyFields();
+updateProgress();
+</script>
+</body>
+</html>
