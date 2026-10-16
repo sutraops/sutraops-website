@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAP FI/CO — Complete End-to-End Explorer | SutraOps Solutions</title>
+<meta name="description" content="Complete SAP FI and CO explorer covering GL, AP, AR, AA, Cost Centers, Cost Elements, Internal Orders, Product Costing, Production Orders, Profit Center and CO-PA.">
+<link rel="canonical" href="https://sutraops.in/insights/sap-fico-complete.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=15">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   SAP FI/CO Complete Explorer — SCOPED (#fico)
+   ═══════════════════════════════════════════════════════════ */
+#fico{
+  --fi:#1d4ed8; --fi-l:#dbeafe; --fi-b:#3b82f6;
+  --co:#047857; --co-l:#d1fae5; --co-b:#10b981;
+  --cc:#0891b2; --cc-l:#cffafe; --cc-b:#06b6d4;
+  --pc:#7c3aed; --pc-l:#ede9fe; --pc-b:#8b5cf6;
+  --pp:#b45309; --pp-l:#fef3c7; --pp-b:#f59e0b;
+  --pa:#be185d; --pa-l:#fce7f3; --pa-b:#ec4899;
+  --pca:#4338ca; --pca-l:#e0e7ff; --pca-b:#6366f1;
+  --ac:#6d28d9; --ac-l:#ede9fe; --ac-b:#8b5cf6;
+  --md:#b45309; --md-l:#fef3c7; --md-b:#f59e0b;
+  --tx:#0f172a; --txm:#64748b; --bd:#cbd5e1;
+  --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
+  --shl:0 10px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  color:var(--tx);line-height:1.55;text-align:left;
+}
+#fico *,#fico *::before,#fico *::after{margin:0;padding:0;box-sizing:border-box}
+#fico code,#fico .mono{font-family:'Consolas','Courier New',monospace}
+
+/* Page shell */
+.fico-page{width:min(1320px,calc(100% - 40px));margin:0 auto;padding:42px 0 64px}
+.fico-breadcrumb{font-size:13px;margin:0 0 22px;color:#66758a}
+.fico-breadcrumb a{color:#f58220;text-decoration:none}
+.fico-breadcrumb a:hover{text-decoration:underline}
+.fico-hero{background:linear-gradient(135deg,#071f3d 0%,#123b68 100%);color:#fff;border-radius:18px;padding:clamp(26px,5vw,48px);margin-bottom:26px}
+.fico-hero .eyebrow{color:#ff9a42;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;font-size:12px;margin:0 0 10px}
+.fico-hero h1{color:#fff;font-size:clamp(28px,4vw,42px);line-height:1.15;margin:0 0 14px}
+.fico-hero p{color:#e4edf8;font-size:17px;max-width:880px;margin:0}
+
+/* Tabs */
+#fico .tabs{display:flex;gap:.4rem;flex-wrap:wrap;background:#fff;padding:.4rem;border-radius:14px;box-shadow:var(--sh);border:1px solid #e2e8f0;margin-bottom:1.2rem}
+#fico .tab{flex:1;min-width:150px;border:none;background:transparent;padding:.6rem .8rem;border-radius:10px;font-size:.82rem;font-weight:600;color:var(--txm);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:.4rem;font-family:inherit}
+#fico .tab:hover{background:#f1f5f9;color:var(--tx)}
+#fico .tab.active{background:linear-gradient(135deg,#1d4ed8,#047857);color:#fff;box-shadow:0 4px 10px -3px rgba(29,78,216,.5)}
+#fico .tab .ico{font-size:1rem}
+
+/* Panels */
+#fico .panel{display:none;animation:fade .3s ease}
+#fico .panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+#fico .card{display:block!important;padding:1.5rem!important;background:#fff!important;border-radius:12px!important;border:1px solid #e2e8f0!important;box-shadow:0 1px 3px rgba(0,0,0,.08)!important;margin-bottom:1.2rem!important;width:100%!important}
+#fico .card h2{display:flex!important;align-items:center!important;gap:.5rem!important;margin:0 0 .2rem 0!important;font-size:1.2rem!important;font-weight:700!important;color:#0f172a!important;width:100%!important}
+#fico .card h2 .num{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:28px!important;height:28px!important;border-radius:8px!important;font-size:.8rem!important;font-weight:700!important;color:#fff!important;flex-shrink:0!important}
+#fico .num.fi{background:#1d4ed8!important}
+#fico .num.co{background:#047857!important}
+#fico .num.cc{background:#0891b2!important}
+#fico .num.pc{background:#7c3aed!important}
+#fico .num.pp{background:#b45309!important}
+#fico .num.pa{background:#be185d!important}
+#fico .num.pca{background:#4338ca!important}
+#fico .num.ac{background:#6d28d9!important}
+#fico .card .desc{display:block!important;width:100%!important;color:#64748b!important;font-size:.85rem!important;margin:0 0 1.2rem 0!important}
+
+/* Enterprise tree */
+#fico .org-wrap{display:flex!important;justify-content:center!important;width:100%!important;overflow-x:auto!important;padding:1rem 0 .5rem!important}
+#fico .org{display:inline-block!important;min-width:920px!important;margin:0 auto!important;text-align:center!important}
+#fico .org ul{display:flex!important;justify-content:center!important;padding:22px 0 0!important;margin:0!important;list-style:none!important;position:relative!important;background:transparent!important}
+#fico .org>ul{padding-top:0!important}
+#fico .org ul::before{content:''!important;position:absolute!important;top:0!important;left:50%!important;transform:translateX(-50%)!important;width:2px!important;height:22px!important;background:#94a3b8!important;display:block!important}
+#fico .org>ul::before{display:none!important}
+#fico .org li{position:relative!important;padding:22px 6px 0!important;display:flex!important;flex-direction:column!important;align-items:center!important;list-style:none!important;margin:0!important;background:transparent!important}
+#fico .org>ul>li{padding:0!important}
+#fico .org li::before{content:''!important;position:absolute!important;top:0!important;left:50%!important;transform:translateX(-50%)!important;width:2px!important;height:22px!important;background:#94a3b8!important;display:block!important}
+#fico .org li::after{content:''!important;position:absolute!important;top:0!important;left:0!important;width:100%!important;height:2px!important;background:#94a3b8!important;display:block!important}
+#fico .org li:first-child::after{left:50%!important;width:50%!important}
+#fico .org li:last-child::after{left:0!important;width:50%!important}
+#fico .org li:only-child::after{display:none!important}
+#fico .org>ul>li::before,#fico .org>ul>li::after{display:none!important}
+
+#fico .onode{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;border-radius:10px!important;padding:.55rem 1rem!important;font-size:.8rem!important;font-weight:600!important;text-align:center!important;white-space:normal!important;box-shadow:0 1px 3px rgba(0,0,0,.08)!important;transition:all .18s!important;position:relative!important;z-index:1!important;cursor:pointer!important;border:2px solid transparent!important}
+#fico .onode:hover{transform:translateY(-2px)!important;box-shadow:0 10px 25px -5px rgba(0,0,0,.1)!important}
+#fico .onode.sel{box-shadow:0 0 0 3px rgba(29,78,216,.35)!important;transform:translateY(-2px)!important}
+#fico .onode .code{display:block!important;font-size:.66rem!important;font-weight:400!important;opacity:.75!important;margin-top:1px!important;letter-spacing:.4px!important}
+#fico .onode.client{background:linear-gradient(135deg,#1e293b,#334155)!important;color:#fff!important;font-size:.92rem!important;padding:.8rem 1.4rem!important}
+#fico .onode.fi-node{background:linear-gradient(135deg,#eff6ff,#dbeafe)!important;border-color:#3b82f6!important;color:#1d4ed8!important}
+#fico .onode.co-node{background:linear-gradient(135deg,#ecfdf5,#d1fae5)!important;border-color:#10b981!important;color:#047857!important}
+#fico .onode.leaf{background:#fff!important;border-color:#cbd5e1!important;color:#0f172a!important;font-size:.72rem!important;padding:.45rem .8rem!important}
+#fico .onode.leaf.fi-leaf{border-color:#93c5fd!important;background:#f8faff!important}
+#fico .onode.leaf.co-leaf{border-color:#6ee7b7!important;background:#f0fdf9!important}
+#fico .onode.leaf.cc-leaf{border-color:#67e8f9!important;background:#f0fdff!important}
+#fico .onode.leaf.pc-leaf{border-color:#c4b5fd!important;background:#fbfaff!important}
+#fico .onode.leaf.pp-leaf{border-color:#fcd34d!important;background:#fffdf5!important}
+#fico .onode.leaf.pa-leaf{border-color:#f9a8d4!important;background:#fef5fa!important}
+#fico .onode .badge{display:inline-block!important;font-size:.55rem!important;font-weight:700!important;padding:1px 5px!important;border-radius:99px!important;margin-left:4px!important;letter-spacing:.3px!important}
+#fico .badge.fi{background:#dbeafe!important;color:#1d4ed8!important}
+#fico .badge.co{background:#d1fae5!important;color:#047857!important}
+#fico .badge.cc{background:#cffafe!important;color:#0891b2!important}
+#fico .badge.pc{background:#ede9fe!important;color:#7c3aed!important}
+#fico .badge.pp{background:#fef3c7!important;color:#b45309!important}
+#fico .badge.pa{background:#fce7f3!important;color:#be185d!important}
+
+#fico .org-detail{display:block!important;width:100%!important;margin-top:1.2rem!important;background:#f8fafc!important;border:1px solid #e2e8f0!important;border-radius:10px!important;padding:1rem 1.2rem!important;min-height:80px!important}
+#fico .org-detail.empty{display:flex!important;align-items:center!important;justify-content:center!important;color:#64748b!important;font-size:.85rem!important;font-style:italic!important}
+#fico .org-detail h4{font-size:.95rem!important;font-weight:700!important;margin:0 0 .3rem 0!important}
+#fico .org-detail p{font-size:.82rem!important;color:#64748b!important;margin:0 0 .5rem 0!important}
+#fico .org-detail .chips{display:flex!important;gap:.4rem!important;flex-wrap:wrap!important;margin-top:.4rem!important}
+#fico .chip{font-size:.68rem!important;font-family:'Consolas',monospace!important;background:#e2e8f0!important;border-radius:6px!important;padding:2px 8px!important;color:#334155!important;font-weight:600!important}
+
+/* Graph */
+#fico .graph-toolbar{display:flex!important;justify-content:space-between!important;align-items:center!important;flex-wrap:wrap!important;gap:.8rem!important;margin-bottom:1rem!important}
+#fico .mode-toggle{display:flex!important;background:#f1f5f9!important;border-radius:10px!important;padding:3px!important;border:1px solid #e2e8f0!important;flex-wrap:wrap!important}
+#fico .mode-btn{border:none!important;background:transparent!important;padding:.45rem 1rem!important;border-radius:8px!important;font-size:.78rem!important;font-weight:600!important;color:#64748b!important;cursor:pointer!important;font-family:inherit!important}
+#fico .mode-btn.active{background:#fff!important;color:#0f172a!important;box-shadow:0 1px 3px rgba(0,0,0,.08)!important}
+#fico .graph-hint{font-size:.75rem!important;color:#64748b!important}
+#fico .graph-wrap{overflow-x:auto!important;border:1px solid #e2e8f0!important;border-radius:12px!important;background:linear-gradient(180deg,#fbfdff,#f8fafc)!important;padding:.5rem!important}
+#fico #graphCanvas{position:relative!important;width:1180px!important;height:640px!important}
+#fico .graph-svg{position:absolute!important;top:0!important;left:0!important;pointer-events:none!important}
+#fico .graph-edge{stroke:#94a3b8!important;stroke-width:1.6!important;fill:none!important}
+#fico .graph-edge.integration{stroke:#8b5cf6!important;stroke-width:2!important;stroke-dasharray:6 4!important}
+#fico .graph-edge.active{stroke:#1d4ed8!important;stroke-width:2.8!important;filter:drop-shadow(0 0 4px rgba(29,78,216,.35))!important}
+#fico .graph-edge.dimmed{opacity:.12!important}
+#fico .edge-label{font-size:9px!important;font-family:'Consolas',monospace!important;fill:#64748b!important;text-anchor:middle!important;pointer-events:none!important}
+#fico .edge-label.active{fill:#1d4ed8!important;font-weight:700!important}
+
+#fico .graph-node{position:absolute!important;border-radius:10px!important;padding:.4rem .55rem!important;text-align:center!important;box-shadow:0 1px 3px rgba(0,0,0,.08)!important;transition:all .2s!important;cursor:pointer!important;z-index:2!important;border:2px solid #cbd5e1!important;background:#fff!important;display:flex!important;flex-direction:column!important;justify-content:center!important;overflow:hidden!important}
+#fico .graph-node:hover{transform:translateY(-2px) scale(1.03)!important;box-shadow:0 10px 25px -5px rgba(0,0,0,.1)!important;z-index:5!important}
+#fico .graph-node.fi{border-color:#3b82f6!important;background:linear-gradient(135deg,#f8faff,#fff)!important}
+#fico .graph-node.fi .gn-name{color:#1d4ed8!important}
+#fico .graph-node.co{border-color:#10b981!important;background:linear-gradient(135deg,#f0fdf9,#fff)!important}
+#fico .graph-node.co .gn-name{color:#047857!important}
+#fico .graph-node.cc{border-color:#06b6d4!important;background:linear-gradient(135deg,#f0fdff,#fff)!important}
+#fico .graph-node.cc .gn-name{color:#0891b2!important}
+#fico .graph-node.pc{border-color:#8b5cf6!important;background:linear-gradient(135deg,#fbfaff,#fff)!important}
+#fico .graph-node.pc .gn-name{color:#7c3aed!important}
+#fico .graph-node.pp{border-color:#f59e0b!important;background:linear-gradient(135deg,#fffdf5,#fff)!important}
+#fico .graph-node.pp .gn-name{color:#b45309!important}
+#fico .graph-node.pa{border-color:#ec4899!important;background:linear-gradient(135deg,#fef5fa,#fff)!important}
+#fico .graph-node.pa .gn-name{color:#be185d!important}
+#fico .graph-node.pca{border-color:#6366f1!important;background:linear-gradient(135deg,#f5f5ff,#fff)!important}
+#fico .graph-node.pca .gn-name{color:#4338ca!important}
+#fico .graph-node.ac{border-color:#8b5cf6!important;background:linear-gradient(135deg,#f5f3ff,#fff)!important}
+#fico .graph-node.ac .gn-name{color:#6d28d9!important}
+#fico .graph-node.md{border-color:#f59e0b!important;background:linear-gradient(135deg,#fffbeb,#fff)!important}
+#fico .graph-node.md .gn-name{color:#b45309!important}
+#fico .graph-node.view{border-style:dashed!important}
+#fico .graph-node.big{padding:.75rem .9rem!important}
+#fico .graph-node.big .gn-name{font-size:.95rem!important}
+#fico .gn-name{font-family:'Consolas',monospace!important;font-weight:700!important;font-size:.78rem!important}
+#fico .gn-desc{font-size:.58rem!important;color:#64748b!important;margin-top:1px!important;line-height:1.2!important}
+#fico .gn-keys{font-size:.5rem!important;font-family:'Consolas',monospace!important;color:#94a3b8!important;margin-top:2px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#fico .graph-node.selected{border-color:#1d4ed8!important;box-shadow:0 0 0 3px rgba(29,78,216,.3),0 10px 25px -5px rgba(0,0,0,.1)!important;transform:translateY(-2px) scale(1.04)!important;z-index:6!important}
+#fico .graph-node.highlighted{border-color:#f59e0b!important;box-shadow:0 0 0 2px rgba(245,158,11,.3)!important}
+#fico .graph-node.dimmed{opacity:.22!important}
+
+#fico .graph-detail{margin-top:1rem!important;background:#f8fafc!important;border:1px solid #e2e8f0!important;border-radius:10px!important;padding:1rem 1.2rem!important;min-height:80px!important}
+#fico .graph-detail.empty{display:flex!important;align-items:center!important;justify-content:center!important;color:#64748b!important;font-size:.85rem!important;font-style:italic!important}
+#fico .graph-detail h4{font-size:1rem!important;font-weight:700!important;font-family:'Consolas',monospace!important;margin:0 0 .2rem 0!important}
+#fico .graph-detail .gd-desc{font-size:.82rem!important;color:#64748b!important;margin:0 0 .6rem 0!important}
+#fico .graph-detail .gd-cols{display:grid!important;grid-template-columns:1fr 1fr!important;gap:1rem!important}
+@media(max-width:640px){#fico .graph-detail .gd-cols{grid-template-columns:1fr!important}}
+#fico .gd-block h5{font-size:.72rem!important;text-transform:uppercase!important;letter-spacing:.5px!important;color:#64748b!important;margin:0 0 .3rem 0!important}
+#fico .gd-block ul{list-style:none!important;font-size:.78rem!important}
+#fico .gd-block li{font-family:'Consolas',monospace!important;padding:1px 0!important;color:#334155!important}
+#fico .gd-block li::before{content:'▸ '!important;color:#94a3b8!important}
+#fico .rel-chip{display:inline-block!important;font-family:'Consolas',monospace!important;font-size:.72rem!important;background:#dbeafe!important;color:#1d4ed8!important;border-radius:6px!important;padding:2px 8px!important;margin:2px 3px 2px 0!important;cursor:pointer!important;font-weight:600!important}
+#fico .rel-chip:hover{background:#1d4ed8!important;color:#fff!important}
+
+/* Simulation */
+#fico .sim-controls{display:flex!important;gap:.6rem!important;flex-wrap:wrap!important;align-items:center!important;margin-bottom:1.2rem!important}
+#fico .btn{border:none!important;border-radius:10px!important;padding:.6rem 1.2rem!important;font-size:.82rem!important;font-weight:600!important;cursor:pointer!important;font-family:inherit!important;display:inline-flex!important;align-items:center!important;gap:.4rem!important}
+#fico .btn-primary{background:linear-gradient(135deg,#1d4ed8,#047857)!important;color:#fff!important;box-shadow:0 4px 12px -4px rgba(29,78,216,.5)!important}
+#fico .btn-primary:hover{transform:translateY(-1px)!important}
+#fico .btn-primary:disabled{opacity:.4!important;cursor:not-allowed!important;transform:none!important}
+#fico .btn-ghost{background:#f1f5f9!important;color:#334155!important;border:1px solid #e2e8f0!important}
+#fico .btn-ghost:hover{background:#e2e8f0!important}
+#fico .sim-progress{display:flex!important;gap:.3rem!important;margin-left:auto!important}
+#fico .sim-dot{width:10px!important;height:10px!important;border-radius:50%!important;background:#e2e8f0!important;transition:all .3s!important}
+#fico .sim-dot.done{background:#10b981!important}
+#fico .sim-dot.active{background:#1d4ed8!important;box-shadow:0 0 0 4px rgba(29,78,216,.18)!important}
+#fico .sim-step{background:#fff!important;border:1px solid #e2e8f0!important;border-radius:12px!important;padding:1.1rem 1.3rem!important;margin-bottom:.9rem!important;opacity:0!important;transform:translateY(12px)!important;transition:all .4s cubic-bezier(.16,1,.3,1)!important;border-left:4px solid #cbd5e1!important}
+#fico .sim-step.show{opacity:1!important;transform:none!important}
+#fico .sim-step.step-fi{border-left-color:#3b82f6!important}
+#fico .sim-step.step-co{border-left-color:#10b981!important}
+#fico .sim-step.step-cc{border-left-color:#06b6d4!important}
+#fico .sim-step.step-pc{border-left-color:#8b5cf6!important}
+#fico .sim-step.step-pp{border-left-color:#f59e0b!important}
+#fico .sim-step.step-pa{border-left-color:#ec4899!important}
+#fico .sim-step.step-ac{border-left-color:#6d28d9!important}
+#fico .sim-step.step-done{border-left-color:#047857!important;background:linear-gradient(135deg,#f0fdf9,#fff)!important}
+#fico .sim-head{display:flex!important;align-items:center!important;gap:.6rem!important;margin-bottom:.2rem!important}
+#fico .sim-num{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:26px!important;height:26px!important;border-radius:8px!important;font-size:.75rem!important;font-weight:700!important;color:#fff!important;background:#64748b!important;flex-shrink:0!important}
+#fico .step-fi .sim-num{background:#1d4ed8!important}
+#fico .step-co .sim-num{background:#047857!important}
+#fico .step-cc .sim-num{background:#0891b2!important}
+#fico .step-pc .sim-num{background:#7c3aed!important}
+#fico .step-pp .sim-num{background:#b45309!important}
+#fico .step-pa .sim-num{background:#be185d!important}
+#fico .step-ac .sim-num{background:#6d28d9!important}
+#fico .step-done .sim-num{background:#047857!important}
+#fico .sim-title{font-size:.95rem!important;font-weight:700!important}
+#fico .sim-sub{font-size:.75rem!important;color:#64748b!important;font-family:'Consolas',monospace!important}
+#fico .sim-note{font-size:.8rem!important;color:#64748b!important;margin:.5rem 0 .8rem 0!important}
+#fico .sim-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))!important;gap:.8rem!important}
+#fico .sim-tcard{border:1px solid #e2e8f0!important;border-radius:10px!important;overflow:hidden!important;background:#fff!important}
+#fico .sim-tcard.fi{border-color:#bfdbfe!important}
+#fico .sim-tcard.co{border-color:#a7f3d0!important}
+#fico .sim-tcard.cc{border-color:#a5f3fc!important}
+#fico .sim-tcard.pc{border-color:#ddd6fe!important}
+#fico .sim-tcard.pp{border-color:#fde68a!important}
+#fico .sim-tcard.pa{border-color:#fbcfe8!important}
+#fico .sim-tcard.ac{border-color:#ddd6fe!important}
+#fico .stc-head{padding:.4rem .7rem!important;font-size:.72rem!important;font-weight:700!important;font-family:'Consolas',monospace!important;display:flex!important;justify-content:space-between!important;align-items:center!important;background:#f8fafc!important;border-bottom:1px solid #e2e8f0!important}
+#fico .sim-tcard.fi .stc-head{background:#dbeafe!important;color:#1d4ed8!important}
+#fico .sim-tcard.co .stc-head{background:#d1fae5!important;color:#047857!important}
+#fico .sim-tcard.cc .stc-head{background:#cffafe!important;color:#0891b2!important}
+#fico .sim-tcard.pc .stc-head{background:#ede9fe!important;color:#7c3aed!important}
+#fico .sim-tcard.pp .stc-head{background:#fef3c7!important;color:#b45309!important}
+#fico .sim-tcard.pa .stc-head{background:#fce7f3!important;color:#be185d!important}
+#fico .sim-tcard.ac .stc-head{background:#ede9fe!important;color:#6d28d9!important}
+#fico .stc-head span{font-weight:400!important;font-size:.62rem!important;opacity:.75!important;font-family:'Segoe UI',sans-serif!important}
+#fico .sim-tcard table{width:100%!important;border-collapse:collapse!important;font-size:.68rem!important;font-family:'Consolas',monospace!important}
+#fico .sim-tcard th{text-align:left!important;padding:.3rem .5rem!important;background:#f8fafc!important;color:#64748b!important;font-weight:600!important;border-bottom:1px solid #f1f5f9!important;font-size:.6rem!important;text-transform:uppercase!important;letter-spacing:.3px!important}
+#fico .sim-tcard td{padding:.35rem .5rem!important;border-bottom:1px solid #f8fafc!important;color:#334155!important}
+#fico .sim-tcard tr:last-child td{border-bottom:none!important}
+#fico .kv-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))!important;gap:.5rem!important}
+#fico .kv-item{background:#f8fafc!important;border:1px solid #e2e8f0!important;border-radius:8px!important;padding:.5rem .7rem!important}
+#fico .kv-item label{display:block!important;font-size:.62rem!important;text-transform:uppercase!important;letter-spacing:.4px!important;color:#64748b!important;font-weight:600!important}
+#fico .kv-item span{font-size:.8rem!important;font-family:'Consolas',monospace!important;font-weight:600!important;color:#1e293b!important}
+#fico .sim-summary{display:flex!important;gap:1rem!important;flex-wrap:wrap!important;margin-top:.6rem!important}
+#fico .sum-item{flex:1!important;min-width:140px!important;background:#f8fafc!important;border:1px solid #e2e8f0!important;border-radius:8px!important;padding:.6rem .8rem!important;text-align:center!important}
+#fico .sum-item .sv{font-size:1.05rem!important;font-weight:700!important;font-family:'Consolas',monospace!important;color:#047857!important}
+#fico .sum-item .sl{font-size:.65rem!important;color:#64748b!important;text-transform:uppercase!important;letter-spacing:.4px!important}
+
+/* Explorer */
+#fico .exp-toolbar{display:flex!important;gap:.6rem!important;flex-wrap:wrap!important;margin-bottom:1rem!important;align-items:center!important}
+#fico .exp-search{flex:1!important;min-width:220px!important;position:relative!important}
+#fico .exp-search input{width:100%!important;padding:.6rem .9rem .6rem 2.2rem!important;border:1px solid #e2e8f0!important;border-radius:10px!important;font-size:.85rem!important;font-family:inherit!important;outline:none!important;background:#f8fafc!important;color:#0f172a!important}
+#fico .exp-search input:focus{border-color:#3b82f6!important;background:#fff!important;box-shadow:0 0 0 3px rgba(59,130,246,.12)!important}
+#fico .exp-search .sico{position:absolute!important;left:.75rem!important;top:50%!important;transform:translateY(-50%)!important;color:#94a3b8!important;pointer-events:none!important}
+#fico .filter-chip{border:1px solid #e2e8f0!important;background:#fff!important;border-radius:20px!important;padding:.4rem .9rem!important;font-size:.72rem!important;font-weight:600!important;color:#64748b!important;cursor:pointer!important;font-family:inherit!important}
+#fico .filter-chip:hover{background:#f1f5f9!important}
+#fico .filter-chip.active{background:#1e293b!important;color:#fff!important;border-color:#1e293b!important}
+#fico .exp-grid{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(270px,1fr))!important;gap:.8rem!important}
+#fico .exp-card{background:#fff!important;border:1px solid #e2e8f0!important;border-radius:10px!important;padding:.9rem 1rem!important;cursor:pointer!important;border-left:4px solid #cbd5e1!important;transition:all .18s!important}
+#fico .exp-card:hover{transform:translateY(-2px)!important;box-shadow:0 10px 25px -5px rgba(0,0,0,.1)!important}
+#fico .exp-card.mod-fi{border-left-color:#3b82f6!important}
+#fico .exp-card.mod-co{border-left-color:#10b981!important}
+#fico .exp-card.mod-cc{border-left-color:#06b6d4!important}
+#fico .exp-card.mod-pc{border-left-color:#8b5cf6!important}
+#fico .exp-card.mod-pp{border-left-color:#f59e0b!important}
+#fico .exp-card.mod-pa{border-left-color:#ec4899!important}
+#fico .exp-card.mod-pca{border-left-color:#6366f1!important}
+#fico .exp-card.mod-ac{border-left-color:#6d28d9!important}
+#fico .exp-card.mod-md{border-left-color:#f59e0b!important}
+#fico .exp-card .ec-top{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:.5rem!important}
+#fico .exp-card .ec-name{font-family:'Consolas',monospace!important;font-weight:700!important;font-size:.85rem!important;color:#1e293b!important}
+#fico .exp-card .ec-mod{font-size:.55rem!important;font-weight:700!important;padding:2px 7px!important;border-radius:99px!important;letter-spacing:.3px!important;flex-shrink:0!important}
+#fico .mod-fi .ec-mod{background:#dbeafe!important;color:#1d4ed8!important}
+#fico .mod-co .ec-mod{background:#d1fae5!important;color:#047857!important}
+#fico .mod-cc .ec-mod{background:#cffafe!important;color:#0891b2!important}
+#fico .mod-pc .ec-mod{background:#ede9fe!important;color:#7c3aed!important}
+#fico .mod-pp .ec-mod{background:#fef3c7!important;color:#b45309!important}
+#fico .mod-pa .ec-mod{background:#fce7f3!important;color:#be185d!important}
+#fico .mod-pca .ec-mod{background:#e0e7ff!important;color:#4338ca!important}
+#fico .mod-ac .ec-mod{background:#ede9fe!important;color:#6d28d9!important}
+#fico .mod-md .ec-mod{background:#fef3c7!important;color:#b45309!important}
+#fico .exp-card .ec-desc{font-size:.75rem!important;color:#64748b!important;margin-top:.25rem!important;line-height:1.4!important}
+#fico .exp-card .ec-keys{margin-top:.5rem!important;display:flex!important;gap:.25rem!important;flex-wrap:wrap!important}
+#fico .exp-card .ec-keys span{font-size:.58rem!important;font-family:'Consolas',monospace!important;background:#f1f5f9!important;border:1px solid #e2e8f0!important;border-radius:4px!important;padding:1px 5px!important;color:#64748b!important}
+#fico .no-results{text-align:center!important;padding:2rem!important;color:#64748b!important;font-size:.85rem!important;font-style:italic!important;grid-column:1/-1!important}
+
+/* Key fields */
+#fico .kf-wrap{overflow-x:auto!important;border-radius:10px!important;border:1px solid #e2e8f0!important}
+#fico table.kf{width:100%!important;border-collapse:collapse!important;font-size:.8rem!important;min-width:820px!important}
+#fico table.kf thead th{text-align:left!important;padding:.65rem .8rem!important;font-weight:700!important;font-size:.68rem!important;text-transform:uppercase!important;letter-spacing:.5px!important;color:#fff!important;background:#1e293b!important}
+#fico table.kf tbody td{padding:.55rem .8rem!important;border-bottom:1px solid #f1f5f9!important;vertical-align:top!important;font-size:.78rem!important}
+#fico table.kf tbody tr:hover{background:#f8fafc!important}
+#fico table.kf tbody tr:last-child td{border-bottom:none!important}
+#fico table.kf .mono{font-family:'Consolas',monospace!important;font-weight:700!important;font-size:.78rem!important}
+#fico .fld-fi{color:#1d4ed8!important}
+#fico .fld-co{color:#047857!important}
+#fico .fld-cc{color:#0891b2!important}
+#fico .fld-pc{color:#7c3aed!important}
+#fico .fld-pp{color:#b45309!important}
+#fico .fld-pa{color:#be185d!important}
+#fico .fld-pca{color:#4338ca!important}
+#fico .copy-btn{border:none!important;background:transparent!important;cursor:pointer!important;font-size:.7rem!important;color:#94a3b8!important;padding:0 2px!important;vertical-align:middle!important}
+#fico .copy-btn:hover{color:#1d4ed8!important}
+#fico .copied{color:#047857!important}
+
+/* Legend */
+#fico .legend{display:flex!important;flex-wrap:wrap!important;width:100%!important;margin-top:1rem!important;padding-top:.9rem!important;border-top:1px solid #f1f5f9!important;gap:1.1rem!important}
+#fico .legend-item{display:flex!important;align-items:center!important;gap:.4rem!important;font-size:.75rem!important;color:#64748b!important}
+#fico .legend-dot{width:13px!important;height:13px!important;border-radius:4px!important;flex-shrink:0!important}
+#fico .ld-fi{background:#dbeafe!important;border:2px solid #3b82f6!important}
+#fico .ld-co{background:#d1fae5!important;border:2px solid #10b981!important}
+#fico .ld-cc{background:#cffafe!important;border:2px solid #06b6d4!important}
+#fico .ld-pc{background:#ede9fe!important;border:2px solid #8b5cf6!important}
+#fico .ld-pp{background:#fef3c7!important;border:2px solid #f59e0b!important}
+#fico .ld-pa{background:#fce7f3!important;border:2px solid #ec4899!important}
+#fico .ld-pca{background:#e0e7ff!important;border:2px solid #6366f1!important}
+#fico .ld-ac{background:#ede9fe!important;border:2px solid #8b5cf6!important}
+#fico .ld-md{background:#fef3c7!important;border:2px solid #f59e0b!important}
+
+/* Back button */
+.fico-back{display:inline-block!important;background:#f58220!important;color:#fff!important;border-radius:8px!important;padding:12px 17px!important;font-weight:800!important;text-decoration:none!important;margin-top:18px!important}
+.fico-back:hover{filter:brightness(1.05)!important}
+
+@media(max-width:800px){
+  .fico-page{width:calc(100% - 30px)!important;padding-top:28px!important}
+  .fico-hero{border-radius:14px!important}
+}
+@media(max-width:700px){
+  #fico .tab{font-size:.7rem!important;min-width:auto!important;padding:.5rem!important}
+  #fico .tab .ico{display:none!important}
+  #fico .card{padding:1rem!important}
+}
+</style>
+</head>
+<body>
+
+<div class="top-line"></div>
+<header class="site-header">
+  <div class="header-wrap">
+    <a class="brand" href="../index.html" aria-label="SutraOps Solutions Home">
+      <img class="brand-mark" src="../assets/so-icon.png" alt="SutraOps SO logo mark">
+      <span class="brand-text">
+        <span class="brand-name"><b>Sutra</b><i>Ops</i></span>
+        <span class="brand-sub">SOLUTIONS</span>
+        <span class="brand-tag">Smart Travel. Smart Finance. Smart Operations.</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../index.html">HOME</a>
+      <a href="../about.html">ABOUT US</a>
+      <a href="../services.html">SERVICES</a>
+      <a href="../services.html#industries">INDUSTRIES</a>
+      <a class="active" href="learning-hub.html">INSIGHTS</a>
+      <a href="../contact.html">CONTACT</a>
+    </nav>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="fico-page">
+
+  <p class="fico-breadcrumb">
+    <a href="../index.html">Home</a> ›
+    <a href="learning-hub.html">Learning Hub</a> ›
+    <a href="sap-fico.html">SAP FICO Learning</a> ›
+    Complete FI &amp; CO Explorer
+  </p>
+
+  <section class="fico-hero">
+    <p class="eyebrow">SAP FICO · COMPLETE REFERENCE</p>
+    <h1>SAP FI &amp; CO — Complete End-to-End Explorer</h1>
+    <p>Enterprise structure · FI tables · CO submodules (CO-CC, CO-PC, CO-PP, CO-PA, PCA) · Document flow · Key field reference</p>
+  </section>
+
+  <div id="fico">
+
+    <nav class="tabs">
+      <button class="tab active" data-panel="org"><span class="ico">🏢</span> Enterprise Structure</button>
+      <button class="tab" data-panel="graph"><span class="ico">🗺️</span> Table Map</button>
+      <button class="tab" data-panel="flow"><span class="ico">⚡</span> End-to-End Flow</button>
+      <button class="tab" data-panel="comod"><span class="ico">🧩</span> CO Submodules</button>
+      <button class="tab" data-panel="exp"><span class="ico">🔍</span> Table Explorer</button>
+      <button class="tab" data-panel="kf"><span class="ico">🔑</span> Key Fields</button>
+    </nav>
+
+    <!-- PANEL 1: ENTERPRISE STRUCTURE -->
+    <div class="panel active" id="panel-org">
+      <div class="card">
+        <h2><span class="num fi">1</span> Enterprise Structure</h2>
+        <p class="desc">Click any node to see its definition, key fields, and relationships. FI and CO enterprise structures run in parallel and are linked through the Company Code ↔ Controlling Area assignment.</p>
+
+        <div class="org-wrap">
+          <div class="org">
+            <ul>
+              <li>
+                <div class="onode client" data-org="client">Client<span class="code">Mandant</span></div>
+                <ul>
+                  <li>
+                    <div class="onode fi-node" data-org="bukrs">Company Code<span class="code">BUKRS · FI</span><span class="badge fi">FI</span></div>
+                    <ul>
+                      <li><div class="onode leaf fi-leaf" data-org="werks">Plant<span class="code">WERKS</span></div></li>
+                      <li><div class="onode leaf fi-leaf" data-org="gsber">Business Area<span class="code">GSBER</span></div></li>
+                      <li><div class="onode leaf fi-leaf" data-org="fkber">Functional Area<span class="code">FKBER</span></div></li>
+                      <li><div class="onode leaf fi-leaf" data-org="segment">Segment<span class="code">SEGMENT</span></div></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="onode co-node" data-org="kokrs">Controlling Area<span class="code">KOKRS · CO</span><span class="badge co">CO</span></div>
+                    <ul>
+                      <li><div class="onode leaf cc-leaf" data-org="kostl">Cost Center<span class="code">KOSTL</span><span class="badge cc">CO-CC</span></div></li>
+                      <li><div class="onode leaf cc-leaf" data-org="kstar">Cost Element<span class="code">KSTAR</span><span class="badge cc">CO-CC</span></div></li>
+                      <li><div class="onode leaf cc-leaf" data-org="lstnr">Activity Type<span class="code">LSTAR</span><span class="badge cc">CO-CC</span></div></li>
+                      <li><div class="onode leaf cc-leaf" data-org="aufnr">Internal Order<span class="code">AUFNR</span><span class="badge cc">CO-CC</span></div></li>
+                      <li><div class="onode leaf pc-leaf" data-org="prctr">Profit Center<span class="code">PRCTR</span><span class="badge pc">PCA</span></div></li>
+                      <li><div class="onode leaf pc-leaf" data-org="hier">Profit Center Hierarchy<span class="code">PHINR</span><span class="badge pc">PCA</span></div></li>
+                      <li><div class="onode leaf pp-leaf" data-org="matnr">Material / Product<span class="code">MATNR</span><span class="badge pp">CO-PC</span></div></li>
+                      <li><div class="onode leaf pp-leaf" data-org="aufnr_pp">Production Order<span class="code">AUFNR · PP</span><span class="badge pp">CO-PP</span></div></li>
+                      <li><div class="onode leaf pa-leaf" data-org="ce4">CO-PA Characteristics<span class="code">CE4xxxx</span><span class="badge pa">CO-PA</span></div></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="org-detail empty" id="orgDetail">👆 Click a node above to explore its definition and key fields.</div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot ld-fi"></span> FI — Financial Accounting</div>
+          <div class="legend-item"><span class="legend-dot ld-co"></span> CO — Controlling</div>
+          <div class="legend-item"><span class="legend-dot ld-cc"></span> CO-CC — Cost Centers / Cost Elements</div>
+          <div class="legend-item"><span class="legend-dot ld-pc"></span> PCA — Profit Center Accounting</div>
+          <div class="legend-item"><span class="legend-dot ld-pp"></span> CO-PC / CO-PP — Product Costing &amp; Production</div>
+          <div class="legend-item"><span class="legend-dot ld-pa"></span> CO-PA — Profitability Analysis</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: TABLE MAP -->
+    <div class="panel" id="panel-graph">
+      <div class="card">
+        <h2><span class="num co">2</span> Table Map — Interactive Graph</h2>
+        <p class="desc">Click any node to highlight connections. Switch between ECC, S/4HANA, and CO Submodules views.</p>
+
+        <div class="graph-toolbar">
+          <div class="mode-toggle">
+            <button class="mode-btn active" data-mode="ecc">SAP ECC — FI/CO</button>
+            <button class="mode-btn" data-mode="s4">SAP S/4HANA</button>
+            <button class="mode-btn" data-mode="co">CO Submodules</button>
+          </div>
+          <div class="graph-hint">💡 Click a node · Click empty space to reset</div>
+        </div>
+
+        <div class="graph-wrap">
+          <div id="graphCanvas"></div>
+        </div>
+
+        <div class="graph-detail empty" id="graphDetail">👆 Select a table node to see its fields and related tables.</div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot ld-fi"></span> FI</div>
+          <div class="legend-item"><span class="legend-dot ld-co"></span> CO core</div>
+          <div class="legend-item"><span class="legend-dot ld-cc"></span> CO-CC</div>
+          <div class="legend-item"><span class="legend-dot ld-pc"></span> PCA / CO-PC</div>
+          <div class="legend-item"><span class="legend-dot ld-pp"></span> CO-PP</div>
+          <div class="legend-item"><span class="legend-dot ld-pa"></span> CO-PA</div>
+          <div class="legend-item"><span class="legend-dot ld-ac"></span> Universal Journal</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: END-TO-END FLOW -->
+    <div class="panel" id="panel-flow">
+      <div class="card">
+        <h2><span class="num pp">3</span> End-to-End Flow — FI → CO → PCA → CO-PA</h2>
+        <p class="desc">A single vendor invoice and a production order both traverse FI, CO, PCA, and CO-PA. Press <strong>Play</strong> or step through manually.</p>
+
+        <div class="sim-controls">
+          <button class="btn btn-primary" id="simPlay">▶ Play All</button>
+          <button class="btn btn-ghost" id="simNext">Next Step ▸</button>
+          <button class="btn btn-ghost" id="simReset">↺ Reset</button>
+          <div class="sim-progress" id="simProgress"></div>
+        </div>
+
+        <div id="simContainer"></div>
+      </div>
+    </div>
+
+    <!-- PANEL 4: CO SUBMODULES -->
+    <div class="panel" id="panel-comod">
+      <div class="card">
+        <h2><span class="num cc">4</span> CO Submodule Explorer</h2>
+        <p class="desc">Deep-dive into each Controlling submodule — Cost Center Accounting, Cost Element Accounting, Internal Orders, Product Costing, Production Orders (CO-PP), Profit Center Accounting, and CO-PA.</p>
+
+        <div class="exp-toolbar">
+          <div class="exp-search">
+            <span class="sico">🔍</span>
+            <input type="text" id="coSearch" placeholder="Search transactions, tables, or concepts…">
+          </div>
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="CO-CC">CO-CC</button>
+          <button class="filter-chip" data-filter="CO-PC">CO-PC</button>
+          <button class="filter-chip" data-filter="CO-PP">CO-PP</button>
+          <button class="filter-chip" data-filter="CO-PA">CO-PA</button>
+          <button class="filter-chip" data-filter="PCA">PCA</button>
+        </div>
+
+        <div class="exp-grid" id="coGrid"></div>
+
+        <div class="graph-detail empty" id="coDetail" style="margin-top:1rem;">👆 Click a submodule card to see detailed concepts, transactions, and tables.</div>
+      </div>
+    </div>
+
+    <!-- PANEL 5: TABLE EXPLORER -->
+    <div class="panel" id="panel-exp">
+      <div class="card">
+        <h2><span class="num ac">5</span> Table Explorer</h2>
+        <p class="desc">Search and filter all FI, CO, and S/4HANA tables. Click a card for full details.</p>
+
+        <div class="exp-toolbar">
+          <div class="exp-search">
+            <span class="sico">🔍</span>
+            <input type="text" id="expSearch" placeholder="Search by table name, description, or field…">
+          </div>
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="FI">FI</button>
+          <button class="filter-chip" data-filter="CO">CO core</button>
+          <button class="filter-chip" data-filter="CO-CC">CO-CC</button>
+          <button class="filter-chip" data-filter="CO-PC">CO-PC</button>
+          <button class="filter-chip" data-filter="CO-PP">CO-PP</button>
+          <button class="filter-chip" data-filter="CO-PA">CO-PA</button>
+          <button class="filter-chip" data-filter="PCA">PCA</button>
+          <button class="filter-chip" data-filter="S/4">S/4HANA</button>
+          <button class="filter-chip" data-filter="Master">Master</button>
+        </div>
+
+        <div class="exp-grid" id="expGrid"></div>
+
+        <div class="graph-detail empty" id="expDetail" style="margin-top:1rem;">👆 Click a table card to see full details.</div>
+      </div>
+    </div>
+
+    <!-- PANEL 6: KEY FIELDS -->
+    <div class="panel" id="panel-kf">
+      <div class="card">
+        <h2><span class="num md">6</span> Key Field Reference</h2>
+        <p class="desc">The essential join fields across FI and CO. Click any field name to copy it.</p>
+
+        <div class="kf-wrap">
+          <table class="kf">
+            <thead>
+              <tr>
+                <th>Field</th><th>Description</th><th>FI Tables</th><th>CO Tables</th><th>Master Data</th>
+              </tr>
+            </thead>
+            <tbody id="kfBody"></tbody>
+          </table>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot ld-fi"></span> FI</div>
+          <div class="legend-item"><span class="legend-dot ld-co"></span> CO core</div>
+          <div class="legend-item"><span class="legend-dot ld-cc"></span> CO-CC</div>
+          <div class="legend-item"><span class="legend-dot ld-pc"></span> PCA / CO-PC</div>
+          <div class="legend-item"><span class="legend-dot ld-pp"></span> CO-PP</div>
+          <div class="legend-item"><span class="legend-dot ld-pa"></span> CO-PA</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <a class="fico-back" href="sap-fico.html">← Back to SAP FICO Learning</a>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <div class="footer-col footer-brand">
+      <img src="../assets/so-icon.png" alt="SutraOps Solutions logo">
+      <p class="foot-name"><b>Sutra</b><i>Ops</i> <span>SOLUTIONS</span></p>
+      <p class="foot-tag">Smart Travel. Smart Finance. Smart Operations.</p>
+      <div class="foot-social">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="https://wa.me/919288223003" aria-label="WhatsApp">✆</a>
+        <a href="mailto:info.sutraops@gmail.com" aria-label="Email">✉</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About Us</a>
+      <a href="../services.html">Services</a>
+      <a href="learning-hub.html">Learning Hub</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Our Services</h4>
+      <a href="../services.html#sap">SAP Consulting</a>
+      <a href="../services.html#finance">Accounting &amp; Finance</a>
+      <a href="../services.html#automation">Intelligent Automation</a>
+      <a href="../services.html#travel">Travel Services</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get In Touch</h4>
+      <p class="foot-contact"><span>📱</span> +91 92882 23003</p>
+      <p class="foot-contact"><span>☎️</span> +91 4045766397</p>
+      <p class="foot-contact"><span>✉️</span> info.sutraops@gmail.com</p>
+      <p class="foot-contact"><span>📍</span> India</p>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 SutraOps Solutions. All rights reserved.</p></div>
+</footer>
+<a class="wa-float" href="https://wa.me/919288223003" aria-label="Chat on WhatsApp">✆</a>
+
+<script src="../script.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   1. DATA
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Tables ── */
+const TABLES = {
+  // ── FI ──
+  BKPF: { module:'FI', desc:'Accounting Document Header', purpose:'One row per FI document with header-level info: document type, posting date, currency, reference.', keys:['BELNR','BUKRS','GJAHR'], fields:['BELNR','BUKRS','GJAHR','BLART','BLDAT','BUDAT','MONAT','WAERS','XBLNR','AWTYP','AWKEY'], related:['BSEG','ACDOCA'] },
+  BSEG: { module:'FI', desc:'Accounting Document Line Items', purpose:'Debit/credit line items of an FI document, optionally with cost objects (KOSTL, PRCTR, AUFNR).', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['BELNR','BUKRS','GJAHR','BUZEI','HKONT','SHKZG','DMBTR','WRBTR','KOSTL','PRCTR','AUFNR','MWSKZ'], related:['BKPF','BSID','BSIK','ACDOCA'] },
+  BSID: { module:'FI', desc:'Customer Open Items', purpose:'Open customer line items derived from BSEG.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['KUNNR','BELNR','BUKRS','GJAHR','DMBTR'], related:['BSEG','BSAD','BKPF'] },
+  BSAD: { module:'FI', desc:'Customer Cleared Items', purpose:'Cleared customer line items.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['KUNNR','BELNR','AUGDT','AUGBL'], related:['BSEG','BSID'] },
+  BSIK: { module:'FI', desc:'Vendor Open Items', purpose:'Open vendor line items — core for AP reporting and payment runs.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['LIFNR','BELNR','DMBTR','ZFBDT','ZTERM'], related:['BSEG','BSAK','BKPF'] },
+  BSAK: { module:'FI', desc:'Vendor Cleared Items', purpose:'Cleared vendor line items.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['LIFNR','BELNR','AUGDT','AUGBL'], related:['BSEG','BSIK'] },
+  BSIS: { module:'FI', desc:'G/L Open Items', purpose:'Open GL line items for open-item-managed accounts.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['HKONT','BELNR','DMBTR'], related:['BSEG','BSAS'] },
+  BSAS: { module:'FI', desc:'G/L Cleared Items', purpose:'Cleared GL line items.', keys:['BELNR','BUKRS','GJAHR','BUZEI'], fields:['HKONT','BELNR','AUGDT'], related:['BSEG','BSIS'] },
+  ANLA: { module:'FI', desc:'Asset Master — Main', purpose:'Asset master record — asset class, capitalization date, cost center.', keys:['BUKRS','ANLN1','ANLN2'], fields:['ANLN1','ANLN2','ANLKL','AKTIV','KOSTL','DEAKT'], related:['ANLB','ANLC','ANEP'] },
+  ANLB: { module:'FI', desc:'Asset Depreciation Terms', purpose:'Depreciation terms per asset — method, useful life, rate.', keys:['BUKRS','ANLN1','ANLN2','AFABE'], fields:['AFASL','NDJAR','NDPER','APROP'], related:['ANLA','ANLC'] },
+  ANLC: { module:'FI', desc:'Asset Value Fields', purpose:'Asset values — APC, accumulated depreciation, net book value.', keys:['BUKRS','ANLN1','ANLN2','GJAHR'], fields:['KANSW','KNAFA','NAFAP','ANSWL'], related:['ANLA','ANLB','ANEP'] },
+  ANEP: { module:'FI', desc:'Asset Line Items', purpose:'Asset transaction line items (acquisition, retirement, transfer, depreciation).', keys:['BUKRS','ANLN1','ANLN2','GJAHR'], fields:['BZDAT','BWASL','ANBTR','NAFAV'], related:['ANLA','ANLC'] },
+
+  // ── CO core ──
+  COBK: { module:'CO', desc:'CO Document Header', purpose:'Header of a CO document. Linked to FI via the originating FI document number.', keys:['BELNR','KOKRS','GJAHR'], fields:['BELNR','KOKRS','GJAHR','VRGNG','BLTXT','STFLG'], related:['COEP','ACDOCA'] },
+  COEP: { module:'CO', desc:'CO Object: Line Items (by Period)', purpose:'Detailed CO postings per cost object — Cost Center, Order, Project, Profit Center.', keys:['BELNR','KOKRS','GJAHR','OBJNR'], fields:['BELNR','KOKRS','GJAHR','OBJNR','KSTAR','WKGxxx','WTGxxx','PERIO'], related:['COBK','COSP','COSS','ACDOCA'] },
+  COSP: { module:'CO', desc:'Cost Totals — External Postings', purpose:'Cost totals per CO object for external postings (originating from FI).', keys:['OBJNR','KOKRS','GJAHR'], fields:['OBJNR','KOKRS','GJAHR','KSTAR','WKG001–016'], related:['COEP','COSS'] },
+  COSS: { module:'CO', desc:'Cost Totals — Internal Postings', purpose:'Cost totals per CO object for internal postings (allocations, assessments, distributions).', keys:['OBJNR','KOKRS','GJAHR'], fields:['OBJNR','KOKRS','GJAHR','KSTAR','WKG001–016'], related:['COEP','COSP'] },
+  COVP: { module:'CO', desc:'CO Line Items — Enhanced', purpose:'Enhanced line-item view for CO (cost center, order, WBS) — used by many reports.', keys:['KOKRS','BELNR','BUZEI','PERIO'], fields:['KOKRS','BELNR','BUZEI','OBJNR','KSTAR','WTGBTR','PERIO','BUKRS'], related:['COEP','ACDOCA'] },
+  COKA: { module:'CO', desc:'Cost Elements — Master (Time-Independent)', purpose:'Cost element master — cost element category and basic attributes.', keys:['KOKRS','KSTAR'], fields:['KOKRS','KSTAR','KATYP','MGEFL','KSTAR_OLD'], related:['CSKA','CSKB'] },
+  COKP: { module:'CO', desc:'Cost Elements — Planning', purpose:'Cost element planning data (deprecated in S/4HANA).', keys:['KOKRS','KSTAR'], fields:['KOKRS','KSTAR'], related:['COKA','CSKA'] },
+
+  // ── CO-CC ──
+  CSKS: { module:'CO-CC', desc:'Cost Center Master Data', purpose:'Cost center master — controlling area, category, responsible person, validity.', keys:['KOSTL','KOKRS','DATBI'], fields:['KOSTL','KOKRS','DATBI','DATAB','KOSAR','VERAK','ABTEI','BUKRS'], related:['CSKT','CSLA','COEP'] },
+  CSKT: { module:'CO-CC', desc:'Cost Center Texts', purpose:'Language-dependent name and description of cost centers.', keys:['KOSTL','KOKRS','DATBI','SPRAS'], fields:['KOSTL','KOKRS','SPRAS','KTEXT','LTEXT'], related:['CSKS'] },
+  CSKA: { module:'CO-CC', desc:'Cost Element Master — Chart of Accounts', purpose:'Cost element master at chart-of-accounts level.', keys:['KTOPL','KSTAR'], fields:['KTOPL','KSTAR','KATYP'], related:['CSKB','COKA'] },
+  CSKB: { module:'CO-CC', desc:'Cost Element Master — Controlling Area', purpose:'Cost element master at controlling area level — category, unit.', keys:['KOKRS','KSTAR','DATBI'], fields:['KOKRS','KSTAR','DATBI','KATYP','MGEFL'], related:['CSKA','COKA'] },
+  CSLA: { module:'CO-CC', desc:'Activity Type Master', purpose:'Activity types (machine hours, labour hours) used for internal activity allocation.', keys:['KOKRS','LSTAR','DATBI'], fields:['LSTAR','KOKRS','DATBI','LEINH','KSTAR','LATYP'], related:['CSKS','CSLT'] },
+  AUFK: { module:'CO-CC', desc:'Order Master Data', purpose:'Internal orders, production orders, and CO orders — order type, status, assignment.', keys:['AUFNR'], fields:['AUFNR','AUART','BUKRS','KOKRS','OBJNR','PHAS1'], related:['COEP','COSP','COSS'] },
+  AUFTR: { module:'CO-CC', desc:'Internal Order Master (extended)', purpose:'Extended attributes for internal orders.', keys:['AUFNR'], fields:['AUFNR','AUART','KTEXT','VERAK'], related:['AUFK'] },
+
+  // ── CO-PC ──
+  KEKO: { module:'CO-PC', desc:'Product Costing Header', purpose:'Header of a cost estimate — cost estimate number, material, plant, costing variant, status.', keys:['KALNR','KALAID','KALADAT'], fields:['KALNR','KALAID','KALADAT','KALVAR','BWVAK','LOSGR','STLST'], related:['KEPH','CKHS','CKIS'] },
+  KEPH: { module:'CO-PC', desc:'Product Costing Header (actual)', purpose:'Header of an actual cost estimate for a production order — order, material, quantity.', keys:['KALNR','KALAID','KALADAT','PERIO'], fields:['KALNR','KALAID','AUFNR','MATNR','WERKS','MENGE'], related:['KEKO','COEP'] },
+  CKHS: { module:'CO-PC', desc:'Costing Header — Cost Component Structure', purpose:'Cost component structure of a costing run — total value per cost component.', keys:['KALNR','KALAID'], fields:['KALNR','KALAID','ELEHK','ELEMT','WERTN'], related:['CKIS','KEKO'] },
+  CKIS: { module:'CO-PC', desc:'Costing Items — Cost Component Split', purpose:'Individual line items of a cost estimate by cost component.', keys:['KALNR','KALAID','POSNR'], fields:['KALNR','KALAID','POSNR','ELEMT','WERTN','MENGE'], related:['CKHS'] },
+  CKHT: { module:'CO-PC', desc:'Costing Item Texts', purpose:'Text descriptions of costing items.', keys:['KALNR','KALAID','POSNR','SPRAS'], fields:['KALNR','POSNR','SPRAS','KTEXT'], related:['CKIS'] },
+
+  // ── CO-PP ──
+  AFKO: { module:'CO-PP', desc:'Order Header Data — PP Orders', purpose:'Production order header — order type, plant, material, quantity, scheduling dates.', keys:['AUFNR'], fields:['AUFNR','AUART','WERKS','MATNR','GAMNG','GMEIN','GLTRP','GSTRP','PLNBEZ'], related:['AFPO','AFVC','AUFK','RESB'] },
+  AFPO: { module:'CO-PP', desc:'Order Item — PP Orders', purpose:'Order item details for production order — material, quantity, delivery date.', keys:['AUFNR','POSNR'], fields:['AUFNR','POSNR','MATNR','PSMNG','MEINS','WERKS'], related:['AFKO','RESB'] },
+  AFVC: { module:'CO-PP', desc:'Operation within an Order', purpose:'Operations (routing steps) of a production order — work center, activity type, standard values.', keys:['AUFPL','APLZL'], fields:['AUFPL','APLZL','VORNR','ARBID','STEUS','LTXA1'], related:['AFVV','AFKO','CRHD'] },
+  AFVV: { module:'CO-PP', desc:'Quantities / Dates in Operation', purpose:'Quantities and dates for each operation (setup time, machine time, labour time).', keys:['AUFPL','APLZL'], fields:['AUFPL','APLZL','VGW01','VGW02','VGW03','VGE01'], related:['AFVC','AFKO'] },
+  AFRU: { module:'CO-PP', desc:'Confirmations', purpose:'Confirmations posted for production orders — yield, scrap, rework, activity confirmation.', keys:['RUECK','RMZHL'], fields:['RUECK','RMZHL','AUFNR','VORNR','LMNGA','XMNGA','ISMNW','IABL'], related:['AFKO','AFVC','COEP'] },
+  RESB: { module:'CO-PP', desc:'Reservation / Dependent Requirements', purpose:'Material reservations for a production order — components required, quantities, movement types.', keys:['RSNUM','RSPOS'], fields:['RSNUM','RSPOS','AUFNR','MATNR','BDMNG','ENMNG','BWART','WERKS'], related:['AFKO','AFPO','RKPF'] },
+  RKPF: { module:'CO-PP', desc:'Document Header — Reservation / Goods Movement', purpose:'Header for reservation and goods movement documents.', keys:['RSNUM'], fields:['RSNUM','BWART','BUKRS','WERKS','AUFNR'], related:['RESB','AFKO'] },
+  AUFM: { module:'CO-PP', desc:'Goods Movements for Order', purpose:'All goods movements (issue, receipt, scrap) posted against a production order.', keys:['MBLNR','MJAHR','ZEILE'], fields:['MBLNR','MJAHR','ZEILE','AUFNR','BWART','MATNR','MENGE','WERKS'], related:['AFKO','MSEG'] },
+
+  // ── CO-PA ──
+  CE1XXXX: { module:'CO-PA', desc:'CO-PA Line Items (Actual)', purpose:'Line-item table for CO-PA actual data. Stored per operating concern — CE1<OPC>.', keys:['MANDT','KNDNR','ARTNR','PRODH','BUKRS','KOKRS'], fields:['KNDNR','ARTNR','PRODH','BUKRS','KOKRS','VKORG','WERKS','KSTAR','WERT','PERIO'], related:['CE2XXXX','CE3XXXX','CE4XXXX'] },
+  CE2XXXX: { module:'CO-PA', desc:'CO-PA Plan Line Items', purpose:'Plan line items for CO-PA. Stored per operating concern — CE2<OPC>.', keys:['MANDT','PERIO','KNDNR'], fields:['KNDNR','ARTNR','PRODH','WERT','PERIO','PLISZ'], related:['CE1XXXX','CE4XXXX'] },
+  CE3XXXX: { module:'CO-PA', desc:'CO-PA Segment-Level Data', purpose:'Segment-level aggregation of CO-PA actual data.', keys:['MANDT','KNDNR','ARTNR'], fields:['KNDNR','ARTNR','PRODH','WERT','PERIO'], related:['CE1XXXX'] },
+  CE4XXXX: { module:'CO-PA', desc:'CO-PA Characteristics / Value Fields', purpose:'Operating concern configuration — characteristics and value fields for CO-PA.', keys:['MANDT','FELDNAME'], fields:['FELDNAME','FELDTYP','ROLLNAME','DOMNAME'], related:['CE1XXXX','CE2XXXX'] },
+  KEKO_PA: { module:'CO-PA', desc:'CO-PA Costing Keys (alias)', purpose:'Costing sheet keys used for CO-PA valuation.', keys:['KALSM','KALAID'], fields:['KALSM','KALAID'], related:['CE1XXXX'] },
+
+  // ── PCA ──
+  CEPC: { module:'PCA', desc:'Profit Center Master Data', purpose:'Profit center master — controlling area, company code, responsible person, validity.', keys:['PRCTR','KOKRS','DATBI'], fields:['PRCTR','KOKRS','DATBI','DATAB','BUKRS','ABTEI','VERAK','KOSAR'], related:['CEPT','GLSH','ACDOCA'] },
+  CEPT: { module:'PCA', desc:'Profit Center Texts', purpose:'Language-dependent name and description of profit centers.', keys:['PRCTR','KOKRS','DATBI','SPRAS'], fields:['PRCTR','KOKRS','SPRAS','KTEXT','LTEXT'], related:['CEPC'] },
+  GLSH: { module:'PCA', desc:'Profit Center Hierarchy', purpose:'Hierarchy of profit centers for reporting.', keys:['KOKRS','HRRNG'], fields:['HRRNG','PRCTR','PRCTR_HIER'], related:['CEPC','SETHEADER'] },
+
+  // ── Master Data ──
+  SKA1: { module:'Master', desc:'G/L Account Master — Chart of Accounts', purpose:'Chart-of-accounts-level G/L master — account number, description, account type.', keys:['KTOPL','SAKNR'], fields:['KTOPL','SAKNR','TXT20','BILKT','KTOKS'], related:['SKB1','BSEG'] },
+  SKB1: { module:'Master', desc:'G/L Account Master — Company Code', purpose:'Company-code-level G/L master — open-item management, currency, field status.', keys:['BUKRS','SAKNR'], fields:['BUKRS','SAKNR','XOPVW','XKRES','WAERS','FSTAG'], related:['SKA1','BSEG'] },
+  KNA1: { module:'Master', desc:'Customer Master — General Data', purpose:'General customer master — name, address, country.', keys:['KUNNR'], fields:['KUNNR','NAME1','LAND1','ORT01','KTOKD'], related:['BSID','BSAD'] },
+  LFA1: { module:'Master', desc:'Vendor Master — General Data', purpose:'General vendor master — name, address, country.', keys:['LIFNR'], fields:['LIFNR','NAME1','LAND1','ORT01','KTOKK'], related:['BSIK','BSAK'] },
+  MARA: { module:'Master', desc:'Material Master — General Data', purpose:'General material master — material type, base unit, division.', keys:['MATNR'], fields:['MATNR','MTART','MEINS','MATKL','MBRSH'], related:['MARC','MBEW','AFKO'] },
+  MARC: { module:'Master', desc:'Material Master — Plant Data', purpose:'Plant-level material data — MRP type, procurement type, production scheduler.', keys:['MATNR','WERKS'], fields:['MATNR','WERKS','DISMM','BESKZ','SOBSL','DZEIT'], related:['MARA','MBEW','AFKO'] },
+  MBEW: { module:'Master', desc:'Material Valuation', purpose:'Material valuation — standard price, moving average price, valuation class.', keys:['MATNR','BWKEY','BWTAR'], fields:['MATNR','BWKEY','VPRSV','STPRS','VERPR','BKLAS','LBKUM','SALK3'], related:['MARA','MARC','CKIS'] },
+
+  // ── S/4 ──
+  ACDOCA: { module:'S/4', desc:'Universal Journal — Line Items', purpose:'Single source of truth for all actual financial postings in S/4HANA. Combines FI + CO + AA + ML + CO-PA line items.', keys:['RCLNT','RLDNR','RBUKRS','BELNR','GJAHR','DOCLN'], fields:['RCLNT','RLDNR','RBUKRS','BELNR','GJAHR','DOCLN','RACCT','KOSTL','PRCTR','OBJNR','KOKRS','HSL','DRCRK','AWTYP','MATNR','WERKS','AUFNR','PAOBJNR','KSTAR'], related:['BKPF','BSEG','COEP','ACDOCP'] },
+  ACDOCP: { module:'S/4', desc:'Universal Journal — Plan Data', purpose:'Stores planning data in S/4HANA — separated from actuals.', keys:['RCLNT','RLDNR','RBUKRS','BELNR','GJAHR'], fields:['RBUKRS','RACCT','KOSTL','PRCTR','HSL','PLDAT'], related:['ACDOCA'] },
+  ACDOCT: { module:'S/4', desc:'Universal Journal — Totals', purpose:'Aggregated totals from ACDOCA for faster reporting.', keys:['RCLNT','RLDNR','RBUKRS','RACCT'], fields:['RBUKRS','RACCT','KOKRS','HSL','TSL','KSL'], related:['ACDOCA'] },
+  MLIT: { module:'S/4', desc:'Material Ledger — Item', purpose:'Material ledger line items — actual cost of goods manufactured/sold.', keys:['KALNR','BELNR','BUZEI'], fields:['KALNR','BELNR','BUZEI','MATNR','WERKS','MENGE','WERT'], related:['ACDOCA','MBEW'] }
+};
+
+/* ── Graph configs ── */
+const GRAPH = {
+  ecc: {
+    nodes: [
+      { id:'BKPF', x:30, y:30, w:170, h:64, group:'fi', desc:'Accounting Doc Header', keys:'BELNR · BUKRS · GJAHR' },
+      { id:'BSEG', x:30, y:130, w:170, h:64, group:'fi', desc:'FI Line Items', keys:'BELNR · BUZEI' },
+      { id:'BSID', x:10, y:240, w:90, h:50, group:'fi', desc:'Customer Open' },
+      { id:'BSIK', x:110, y:240, w:90, h:50, group:'fi', desc:'Vendor Open' },
+      { id:'ANLA', x:10, y:310, w:90, h:50, group:'fi', desc:'Asset Master' },
+      { id:'ANLC', x:110, y:310, w:90, h:50, group:'fi', desc:'Asset Values' },
+      { id:'COBK', x:280, y:30, w:160, h:64, group:'co', desc:'CO Doc Header', keys:'BELNR · KOKRS · GJAHR' },
+      { id:'COEP', x:280, y:130, w:160, h:64, group:'co', desc:'CO Line Items', keys:'OBJNR · KSTAR' },
+      { id:'COSP', x:260, y:240, w:80, h:50, group:'co', desc:'External Totals' },
+      { id:'COSS', x:350, y:240, w:80, h:50, group:'co', desc:'Internal Totals' },
+      { id:'CSKS', x:500, y:30, w:150, h:64, group:'cc', desc:'Cost Center Master', keys:'KOSTL' },
+      { id:'CSKA', x:500, y:130, w:150, h:64, group:'cc', desc:'Cost Element Master', keys:'KSTAR' },
+      { id:'AUFK', x:500, y:240, w:150, h:64, group:'cc', desc:'Order Master', keys:'AUFNR' },
+      { id:'CEPC', x:700, y:30, w:150, h:64, group:'pc', desc:'Profit Center Master', keys:'PRCTR' },
+      { id:'KEKO', x:700, y:130, w:150, h:64, group:'pc', desc:'Cost Estimate Header', keys:'KALNR' },
+      { id:'CKIS', x:700, y:240, w:150, h:64, group:'pc', desc:'Cost Component Split', keys:'KALNR · ELEMT' },
+      { id:'AFKO', x:900, y:30, w:150, h:64, group:'pp', desc:'Production Order Header', keys:'AUFNR' },
+      { id:'AFVC', x:900, y:130, w:150, h:64, group:'pp', desc:'Operations', keys:'AUFPL · APLZL' },
+      { id:'RESB', x:900, y:240, w:150, h:64, group:'pp', desc:'Reservations', keys:'RSNUM · RSPOS' },
+      { id:'AFRU', x:900, y:340, w:150, h:64, group:'pp', desc:'Confirmations', keys:'RUECK · RMZHL' },
+      { id:'CE1XXXX', x:1050, y:30, w:110, h:64, group:'pa', desc:'CO-PA Actual', keys:'KNDNR · ARTNR' },
+      { id:'CE4XXXX', x:1050, y:130, w:110, h:64, group:'pa', desc:'CO-PA Config', keys:'FELDNAME' },
+      { id:'MAR', x:280, y:340, w:160, h:60, group:'md', desc:'Material Master', keys:'MATNR' },
+      { id:'MBEW', x:500, y:340, w:150, h:60, group:'md', desc:'Material Valuation', keys:'MATNR · BWKEY' }
+    ],
+    edges: [
+      { f:'BKPF', t:'BSEG' },
+      { f:'BSEG', t:'BSID' }, { f:'BSEG', t:'BSIK' },
+      { f:'ANLA', t:'ANLC' },
+      { f:'COBK', t:'COEP' },
+      { f:'COEP', t:'COSP' }, { f:'COEP', t:'COSS' },
+      { f:'BKPF', t:'COBK', type:'integration', label:'Real-time' },
+      { f:'CSKS', t:'COEP', type:'integration', label:'Cost Center' },
+      { f:'CSKA', t:'COEP', type:'integration', label:'Cost Element' },
+      { f:'AUFK', t:'COEP', type:'integration', label:'Order' },
+      { f:'CEPC', t:'COEP', type:'integration', label:'Profit Center' },
+      { f:'KEKO', t:'CKIS' },
+      { f:'CKIS', t:'MBEW', type:'integration', label:'Valuation' },
+      { f:'AFKO', t:'AFVC' },
+      { f:'AFKO', t:'RESB' },
+      { f:'AFKO', t:'AFRU' },
+      { f:'AFKO', t:'COEP', type:'integration', label:'Order debits' },
+      { f:'AFKO', t:'MAR' },
+      { f:'MAR', t:'MBEW' },
+      { f:'CE1XXXX', t:'CE4XXXX' },
+      { f:'COEP', t:'CE1XXXX', type:'integration', label:'CO-PA' }
+    ]
+  },
+  s4: {
+    nodes: [
+      { id:'BKPF', x:40, y:40, w:170, h:66, group:'fi', desc:'Doc Header (physical)', keys:'BELNR · BUKRS · GJAHR' },
+      { id:'BSEG', x:40, y:160, w:170, h:66, group:'fi', desc:'Compatibility View', view:true, keys:'→ ACDOCA' },
+      { id:'BS_VIEWS', x:40, y:280, w:170, h:66, group:'fi', desc:'BSID / BSIK / BSIS …', view:true, keys:'Compatibility Views' },
+      { id:'AN_VIEWS', x:40, y:400, w:170, h:66, group:'fi', desc:'ANLA / ANLC / ANEP', view:true, keys:'Compatibility Views' },
+      { id:'ACDOCA', x:350, y:170, w:330, h:180, group:'ac', desc:'Universal Journal — Single Source of Truth', big:true, keys:'RACCT · KOSTL · PRCTR · OBJNR · KSTAR · MATNR · PAOBJNR' },
+      { id:'ACDOCP', x:800, y:40, w:170, h:66, group:'ac', desc:'Plan Data', keys:'Separate table' },
+      { id:'COEP', x:800, y:170, w:170, h:66, group:'co', desc:'Compatibility View', view:true, keys:'→ ACDOCA' },
+      { id:'COSP_COSS', x:800, y:280, w:170, h:66, group:'co', desc:'COSP / COSS', view:true, keys:'Compatibility Views' },
+      { id:'MLIT', x:800, y:400, w:170, h:66, group:'ac', desc:'Material Ledger Item', keys:'KALNR · BELNR' },
+      { id:'CE1XXXX', x:1040, y:170, w:120, h:66, group:'pa', desc:'CO-PA Line Items', view:true, keys:'→ ACDOCA' }
+    ],
+    edges: [
+      { f:'BKPF', t:'ACDOCA' },
+      { f:'BSEG', t:'ACDOCA' },
+      { f:'BS_VIEWS', t:'ACDOCA' },
+      { f:'AN_VIEWS', t:'ACDOCA' },
+      { f:'COEP', t:'ACDOCA' },
+      { f:'COSP_COSS', t:'ACDOCA' },
+      { f:'CE1XXXX', t:'ACDOCA' },
+      { f:'ACDOCP', t:'ACDOCA', type:'integration', label:'Plan vs Actual' },
+      { f:'MLIT', t:'ACDOCA', type:'integration', label:'ML postings' }
+    ]
+  },
+  co: {
+    nodes: [
+      { id:'CO-CC', x:30, y:30, w:280, h:140, group:'cc', desc:'Cost Center Accounting', big:true, keys:'CSKS · CSKT · CSLA · AUFK · COEP' },
+      { id:'CO-CEL', x:30, y:210, w:280, h:120, group:'cc', desc:'Cost Element Accounting', big:true, keys:'CSKA · CSKB · COKA' },
+      { id:'CO-PC', x:360, y:30, w:280, h:140, group:'pc', desc:'Product Cost Controlling', big:true, keys:'KEKO · KEPH · CKHS · CKIS' },
+      { id:'CO-PP', x:360, y:210, w:280, h:140, group:'pp', desc:'Cost Object Controlling — Production', big:true, keys:'AFKO · AFPO · AFVC · AFRU · RESB' },
+      { id:'CO-PA', x:690, y:30, w:280, h:140, group:'pa', desc:'Profitability Analysis', big:true, keys:'CE1xxxx · CE4xxxx · KEPH' },
+      { id:'PCA', x:690, y:210, w:280, h:140, group:'pca', desc:'Profit Center Accounting', big:true, keys:'CEPC · CEPT · GLSH' },
+      { id:'FI', x:360, y:400, w:280, h:100, group:'fi', desc:'Financial Accounting', big:true, keys:'BKPF · BSEG · GL' },
+      { id:'ML', x:690, y:400, w:280, h:100, group:'ac', desc:'Material Ledger', big:true, keys:'MLIT · MBEW · CKML*' }
+    ],
+    edges: [
+      { f:'FI', t:'CO-CC', type:'integration', label:'Primary postings' },
+      { f:'FI', t:'CO-CEL', type:'integration', label:'Cost element' },
+      { f:'CO-CEL', t:'CO-CC' },
+      { f:'CO-CC', t:'CO-PC', type:'integration', label:'Activity prices' },
+      { f:'CO-PC', t:'CO-PP', type:'integration', label:'Std cost estimate' },
+      { f:'CO-PP', t:'CO-PA', type:'integration', label:'Variance settlement' },
+      { f:'CO-CC', t:'PCA', type:'integration', label:'Profit center' },
+      { f:'CO-PP', t:'PCA', type:'integration', label:'Profit center' },
+      { f:'CO-PP', t:'ML', type:'integration', label:'Actual costing' },
+      { f:'ML', t:'FI', type:'integration', label:'Price diff' },
+      { f:'CO-PA', t:'PCA', type:'integration', label:'Reconciliation' }
+    ]
+  }
+};
+
+/* ── Simulation steps ── */
+const SIM_STEPS = [
+  { n:1, cls:'step-fi', title:'Vendor Invoice Posted (FI)', sub:'FB60 → BKPF + BSEG',
+    note:'A vendor invoice for raw material is posted. Two FI line items are created — a debit to an expense/stock account and a credit to the vendor.',
+    cards:[
+      { type:'table', cls:'fi', table:'BKPF', subtitle:'Header',
+        cols:['BELNR','BUKRS','GJAHR','BLART','WAERS'],
+        rows:[['5100000001','1000','2024','KR','USD']] },
+      { type:'table', cls:'fi', table:'BSEG', subtitle:'Line Items',
+        cols:['BUZEI','HKONT','SHKZG','DMBTR','KOSTL','PRCTR'],
+        rows:[['001','400000','S','10,000.00','1000','PC-MKT'],['002','160000','H','10,000.00','','']] }
+    ]
+  },
+  { n:2, cls:'step-co', title:'CO Document Created', sub:'COBK + COEP — Real-Time Integration',
+    note:'Because a Cost Center and Profit Center were entered on the FI line item, CO and PCA documents are created automatically.',
+    cards:[
+      { type:'table', cls:'co', table:'COBK', subtitle:'CO Header',
+        cols:['BELNR','KOKRS','GJAHR','VRGNG'],
+        rows:[['900000001','A000','2024','KOA']] },
+      { type:'table', cls:'co', table:'COEP', subtitle:'CO Line Items',
+        cols:['BELNR','OBJNR','KSTAR','WKGBTR'],
+        rows:[['900000001','KS1000','400000','10,000.00']] }
+    ]
+  },
+  { n:3, cls:'step-cc', title:'Cost Center & Cost Element Charged', sub:'CO-CC',
+    note:'The cost center KS1000 absorbs the cost under cost element 400000. Cost center reports and cost element reports are updated.',
+    cards:[
+      { type:'table', cls:'cc', table:'CSKS', subtitle:'Cost Center Master',
+        cols:['KOSTL','KOKRS','KOSAR','VERAK'],
+        rows:[['1000','A000','F','Marketing Manager']] },
+      { type:'table', cls:'cc', table:'CSKA', subtitle:'Cost Element Master',
+        cols:['KTOPL','KSTAR','KATYP'],
+        rows:[['INT','400000','01 (Primary)']] },
+      { type:'table', cls:'cc', table:'COSP', subtitle:'Cost Totals',
+        cols:['OBJNR','KSTAR','WKG003'],
+        rows:[['KS1000','400000','10,000.00']] }
+    ]
+  },
+  { n:4, cls:'step-pc', title:'Profit Center & Cost Estimate', sub:'PCA + CO-PC',
+    note:'The Profit Center receives the cost through the 3KEH/PCA substitution. Separately, a standard cost estimate for the finished good is calculated.',
+    cards:[
+      { type:'table', cls:'pc', table:'CEPC', subtitle:'Profit Center Master',
+        cols:['PRCTR','KOKRS','BUKRS','VERAK'],
+        rows:[['PC-MKT','A000','1000','Marketing Head']] },
+      { type:'table', cls:'pc', table:'KEKO', subtitle:'Cost Estimate Header',
+        cols:['KALNR','KALAID','KALVAR','BWVAK'],
+        rows:[['50000123','20240115','PPC1','FERT']] },
+      { type:'table', cls:'pc', table:'CKIS', subtitle:'Cost Component Split',
+        cols:['KALNR','ELEMT','WERTN','MENGE'],
+        rows:[['50000123','1000 — Material','42.00','1'],['50000123','2000 — Labour','18.00','1'],['50000123','3000 — Overhead','10.00','1']] }
+    ]
+  },
+  { n:5, cls:'step-pp', title:'Production Order Executes', sub:'CO-PP → AFKO · AFVC · RESB · AFRU',
+    note:'A production order is released, materials are issued, operations are confirmed, and the finished product is received into stock. Costs are collected on the order.',
+    cards:[
+      { type:'table', cls:'pp', table:'AFKO', subtitle:'Order Header',
+        cols:['AUFNR','AUART','WERKS','MATNR','GAMNG'],
+        rows:[['1000234','PP01','1000','FG-WIDGET','1,000']] },
+      { type:'table', cls:'pp', table:'AFVC', subtitle:'Operations',
+        cols:['AUFPL','APLZL','VORNR','ARBID'],
+        rows:[['10000','1','0010','MC01'],['10000','2','0020','MC02']] },
+      { type:'table', cls:'pp', table:'AFRU', subtitle:'Confirmations',
+        cols:['RUECK','AUFNR','VORNR','LMNGA','ISMNW'],
+        rows:[['20001','1000234','0010','1,000','8.5'],['20002','1000234','0020','1,000','5.2']] }
+    ]
+  },
+  { n:6, cls:'step-pa', title:'CO-PA Line Items Updated', sub:'CE1xxxx + CE4xxxx',
+    note:'Every revenue and cost-of-sales posting creates a CO-PA line item, tagged with characteristics (customer, product, region) and value fields (revenue, discount, COGS).',
+    cards:[
+      { type:'table', cls:'pa', table:'CE1XXXX', subtitle:'CO-PA Actual Line Items',
+        cols:['KNDNR','ARTNR','PRODH','BUKRS','WERT'],
+        rows:[['C-10234','FG-WIDGET','PRD-01','1000','50,000.00'],['C-10234','FG-WIDGET','PRD-01','1000','-30,000.00']] },
+      { type:'table', cls:'pa', table:'CE4XXXX', subtitle:'Characteristics / Value Fields',
+        cols:['FELDNAME','FELDTYP','ROLLNAME'],
+        rows:[['KNDNR','Characteristic','KUNNR'],['ARTNR','Characteristic','MATNR'],['VKORG','Characteristic','VKORG'],['WERT','Value','WERT']] }
+    ]
+  },
+  { n:7, cls:'step-ac', title:'Universal Journal Updated (S/4HANA)', sub:'ACDOCA — All in one row set',
+    note:'In S/4HANA, all the above is physically stored in ACDOCA. FI, CO, AA, ML, and CO-PA line items coexist in one table with cost objects and characteristics as fields.',
+    cards:[
+      { type:'table', cls:'ac', table:'ACDOCA', subtitle:'Actual Line Items',
+        cols:['RBUKRS','BELNR','DOCLN','RACCT','KOSTL','PRCTR','MATNR','KSTAR','HSL'],
+        rows:[
+          ['1000','5100000001','001','400000','1000','PC-MKT','','400000','10,000.00'],
+          ['1000','5100000001','002','160000','','','','','10,000.00'],
+          ['1000','5100000002','001','400000','1000','PC-MKT','FG-WIDGET','400000','-30,000.00']
+        ]}
+    ]
+  },
+  { n:8, cls:'step-done', title:'Period Close — End of Flow', sub:'Settlement · Assessment · Reporting',
+    note:'Production order variance is settled to CO-PA and FI. Cost centers are assessed to receivers. Profit center and CO-PA reports are reconciled to FI.',
+    cards:[
+      { type:'summary', items:[
+        ['FI Document','5100000001'], ['CO Document','900000001'],
+        ['Cost Center','1000 charged'], ['Profit Center','PC-MKT updated'],
+        ['Production Order','1000234 settled'], ['CO-PA','CE1 updated'],
+        ['Universal Journal','ACDOCA complete'], ['Close','Reconciled']
+      ]}
+    ]
+  }
+];
+
+/* ── CO Submodules ── */
+const CO_SUBMODULES = {
+  'CO-CCA — Cost Center Accounting': {
+    module:'CO-CC',
+    desc:'Collects and allocates overhead costs by cost center.',
+    purpose:'Cost Center Accounting captures overhead costs in the cost centers where they are incurred, then allocates them to receivers (other cost centers, orders, products) via assessments, distributions, and activity allocations.',
+    concepts:['Cost Center Master','Activity Types','Statistical Key Figures','Assessment Cycles','Distribution Cycles','Activity Allocation','Plan vs Actual','Variance Analysis'],
+    tcodes:['KS01','KS02','KS03','KS13','KA01','KA02','KA03','KL01','KL02','KSII','KSU1–KSU8','KB11N','KB21N','KOB1','S_ALR_87013611'],
+    tables:['CSKS','CSKT','CSLA','CSLT','COEP','COSP','COSS','COVP','CSSL','COKL'],
+    related:['CO-CEL','PCA','CO-PC']
+  },
+  'CO-CEL — Cost Element Accounting': {
+    module:'CO-CC',
+    desc:'Defines how FI accounts flow into CO as cost elements.',
+    purpose:'Every primary cost element corresponds to a P&L account in FI. Cost element accounting maintains the link between FI and CO, and defines cost element categories (primary, secondary, revenue).',
+    concepts:['Primary Cost Elements','Secondary Cost Elements','Revenue Elements','Cost Element Categories','Automatic Account Assignment','Cost Element Groups'],
+    tcodes:['KA01','KA02','KA03','KA06','KAH1','KAH2','KAH3','KS13'],
+    tables:['CSKA','CSKB','CSKU','COKA','COKP','COKL'],
+    related:['CO-CCA','FI-GL']
+  },
+  'CO-OPA — Internal Orders': {
+    module:'CO-CC',
+    desc:'Collects costs for short-term events or projects.',
+    purpose:'Internal orders collect costs for a specific purpose (marketing campaign, R&D project, event). Costs accumulate on the order and are settled to cost centers, GL accounts, or assets at period end.',
+    concepts:['Order Types','Order Status','Settlement Rules','Budget vs Actual','Availability Control','Commitment Management','Order Hierarchy'],
+    tcodes:['KO01','KO02','KO03','KO88','KO8G','KOB1','KOB2','KOB4','KO22'],
+    tables:['AUFK','AUFTR','AUFKH','COEP','COSP','COSS','COVP'],
+    related:['CO-CCA','FI-GL']
+  },
+  'CO-ABC — Activity-Based Costing': {
+    module:'CO-CC',
+    desc:'Allocates costs based on activities rather than volumes.',
+    purpose:'Activity-Based Costing assigns overhead to cost objects based on the activities they consume — a more accurate alternative to traditional cost center allocation for complex environments.',
+    concepts:['Business Processes','Activity Types','Process Templates','Senders / Receivers','Cost Driver Rates'],
+    tcodes:['CP01','CP02','CP03','CPH1','KSS1','KSS2','KSS4'],
+    tables:['CBPR','CBPT','COEP','COSP'],
+    related:['CO-CCA']
+  },
+  'CO-PC-PCP — Product Cost Planning': {
+    module:'CO-PC',
+    desc:'Standard and actual cost estimates for materials and services.',
+    purpose:'Product Cost Planning calculates the expected cost of a product using BOMs, routings, activity prices, and overhead rates. The result is the standard cost used for inventory valuation and variance analysis.',
+    concepts:['Costing Variant','Costing Sheet','Cost Component Structure','BOM Explosion','Routing','Overhead Application','Marking and Release','Standard Cost Update'],
+    tcodes:['CK11N','CK40N','CK24','CK13N','CK14N','CKMM','CKME','CKMI','KKF6N','CKECP'],
+    tables:['KEKO','KEPH','CKHS','CKIS','CKHT','KALM','MBEW','MLIT'],
+    related:['CO-PP','ML','CO-PA']
+  },
+  'CO-PP — Cost Object Controlling (Production)': {
+    module:'CO-PP',
+    desc:'Collects actual costs on production and process orders.',
+    purpose:'Cost Object Controlling captures actual costs on production and process orders (material, labour, overhead, activity), computes Work in Process (WIP), and settles variances to CO-PA, FI, and inventory.',
+    concepts:['Production Orders','Process Orders','Order Settlement','WIP Calculation','Variance Analysis','Target Costing','Actual Costing','Scrap and Rework'],
+    tcodes:['CO01','CO02','CO03','COR1','COR2','COR3','CO11N','CO15','CO27','MB31','MB1A','KO88','KO8G','KKAO','KKS1','KKS2','KKAX'],
+    tables:['AFKO','AFPO','AFVC','AFVV','AFRU','RESB','RKPF','AUFM','COEP','COSP','COSS','MLIT'],
+    related:['CO-PC','ML','CO-PA']
+  },
+  'CO-PA — Profitability Analysis': {
+    module:'CO-PA',
+    desc:'Analyzes profitability by market segment.',
+    purpose:'CO-PA analyzes margin by customer, product, region, and other characteristics. Costing-based CO-PA uses cost component splits; Account-based CO-PA uses GL accounts. In S/4HANA, both are stored in ACDOCA.',
+    concepts:['Operating Concern','Characteristics','Value Fields','Costing-based CO-PA','Account-based CO-PA','Top-Down Distribution','Assessment','Reconciliation to FI'],
+    tcodes:['KEA0','KE21N','KE23N','KE24','KE30','KE31','KE32','KEQ3','KEDR','KEDRCOPA','KES1','KES2'],
+    tables:['CE1XXXX','CE2XXXX','CE3XXXX','CE4XXXX','CE1XXXX_ACCT'],
+    related:['CO-PC','PCA','FI-GL']
+  },
+  'EC-PCA — Profit Center Accounting': {
+    module:'PCA',
+    desc:'Analyzes internal profitability by profit center.',
+    purpose:'Profit Center Accounting produces an internal P&L and balance sheet by profit center. Every FI posting with a profit center is reflected in the profit center ledger, enabling segment-level management reporting.',
+    concepts:['Profit Center Master','Profit Center Hierarchy','3KEH Substitution','Internal P&L','Internal Balance Sheet','Transfer Pricing','PCA Reconciliation'],
+    tcodes:['KE51','KE52','KE53','3KEH','KE5Z','KE5T','KE5X','9KE0','1KEG'],
+    tables:['CEPC','CEPT','GLSH','GLPCT','GLPCA','ACDOCA'],
+    related:['CO-CCA','CO-PA']
+  }
+};
+
+/* ── Key fields ── */
+const KEY_FIELDS = [
+  { f:'BELNR', d:'Document Number', fi:'BKPF, BSEG, BSID/BSAD, BSIK/BSAK', co:'COBK, COEP, COVP', md:'—', cls:'fld-fi' },
+  { f:'BUKRS', d:'Company Code', fi:'BKPF, BSEG, all BS*', co:'—', md:'T001', cls:'fld-fi' },
+  { f:'GJAHR', d:'Fiscal Year', fi:'BKPF, BSEG, all BS*', co:'COBK, COEP, COSP, COSS', md:'—', cls:'fld-fi' },
+  { f:'BUZEI', d:'Line Item Number', fi:'BSEG, all BS*', co:'—', md:'—', cls:'fld-fi' },
+  { f:'HKONT', d:'G/L Account', fi:'BSEG, BSIS, BSAS', co:'—', md:'SKA1 / SKB1', cls:'fld-fi' },
+  { f:'KUNNR', d:'Customer', fi:'BSID, BSAD, BSEG', co:'—', md:'KNA1', cls:'fld-fi' },
+  { f:'LIFNR', d:'Vendor', fi:'BSIK, BSAK, BSEG', co:'—', md:'LFA1', cls:'fld-fi' },
+  { f:'ANLN1', d:'Asset Number', fi:'ANLA, ANLB, ANLC, ANEP', co:'—', md:'ANLA', cls:'fld-fi' },
+  { f:'KOKRS', d:'Controlling Area', fi:'—', co:'COBK, COEP, COSP, COSS', md:'CSKS, CEPC, TKA01', cls:'fld-co' },
+  { f:'OBJNR', d:'Object Number', fi:'—', co:'COEP, COSP, COSS, COVP', md:'ONR00', cls:'fld-co' },
+  { f:'KSTAR', d:'Cost Element', fi:'BSEG (via CO)', co:'COEP, COSP, COSS, COVP', md:'CSKA, CSKB, COKA', cls:'fld-cc' },
+  { f:'KOSTL', d:'Cost Center', fi:'BSEG, ANLA', co:'COEP, COVP', md:'CSKS, CSKT', cls:'fld-cc' },
+  { f:'LSTAR', d:'Activity Type', fi:'—', co:'COEP, COVP', md:'CSLA, CSLT', cls:'fld-cc' },
+  { f:'AUFNR', d:'Order Number', fi:'BSEG', co:'AUFK, AFKO, COEP', md:'AUFK', cls:'fld-pp' },
+  { f:'PRCTR', d:'Profit Center', fi:'BSEG, ACDOCA', co:'COEP', md:'CEPC, CEPT', cls:'fld-pc' },
+  { f:'PHINR', d:'Profit Center Hierarchy', fi:'—', co:'—', md:'GLSH', cls:'fld-pc' },
+  { f:'MATNR', d:'Material Number', fi:'—', co:'—', md:'MARA, MARC, MBEW', cls:'fld-pc' },
+  { f:'WERKS', d:'Plant', fi:'—', co:'—', md:'T001W', cls:'fld-pc' },
+  { f:'KALNR', d:'Cost Estimate Number', fi:'—', co:'KEKO, KEPH, CKHS', md:'—', cls:'fld-pc' },
+  { f:'KALAID', d:'Costing Run ID', fi:'—', co:'KEKO, CKHS, CKIS', md:'—', cls:'fld-pc' },
+  { f:'ELEMT', d:'Cost Component', fi:'—', co:'CKHS, CKIS', md:'—', cls:'fld-pc' },
+  { f:'RSNUM', d:'Reservation Number', fi:'—', co:'RESB', md:'RKPF', cls:'fld-pp' },
+  { f:'AUFPL', d:'Routing Number', fi:'—', co:'AFVC, AFVV', md:'PLKO', cls:'fld-pp' },
+  { f:'APLZL', d:'Operation Counter', fi:'—', co:'AFVC, AFVV', md:'PLPO', cls:'fld-pp' },
+  { f:'RUECK', d:'Confirmation Number', fi:'—', co:'AFRU', md:'—', cls:'fld-pp' },
+  { f:'PAOBJNR', d:'CO-PA Object Number', fi:'—', co:'ACDOCA, CE1XXXX', md:'—', cls:'fld-pa' },
+  { f:'ARTNR', d:'CO-PA Product', fi:'—', co:'CE1XXXX, CE2XXXX, CE3XXXX', md:'MARA', cls:'fld-pa' },
+  { f:'PRODH', d:'CO-PA Product Hierarchy', fi:'—', co:'CE1XXXX, CE2XXXX', md:'—', cls:'fld-pa' },
+  { f:'KNDNR', d:'CO-PA Customer', fi:'—', co:'CE1XXXX, CE2XXXX', md:'KNA1', cls:'fld-pa' },
+  { f:'RCLNT', d:'Client (ACDOCA)', fi:'—', co:'ACDOCA', md:'—', cls:'fld-co' },
+  { f:'RLDNR', d:'Ledger (ACDOCA)', fi:'—', co:'ACDOCA', md:'—', cls:'fld-co' },
+  { f:'RACCT', d:'Account (ACDOCA)', fi:'—', co:'ACDOCA', md:'—', cls:'fld-co' },
+  { f:'DOCLN', d:'Line Item (ACDOCA)', fi:'—', co:'ACDOCA', md:'—', cls:'fld-co' }
+];
+
+/* ── Org info ── */
+const ORG_INFO = {
+  client: { t:'Client (Mandant)', d:'Top-level organizational unit in SAP. Represents a self-contained commercial unit with its own master data and tables.', c:['Mandant','MANDT'] },
+  bukrs: { t:'Company Code (BUKRS)', d:'An independent legal entity for which a complete, self-contained set of accounts is maintained. Central unit of FI. Balance sheet and P&L are produced at this level.', c:['BUKRS','T001','Company Code'] },
+  kokrs: { t:'Controlling Area (KOKRS)', d:'Central organizational unit of CO. Defines the management accounting boundary. Multiple company codes can be assigned to one controlling area.', c:['KOKRS','TKA01','Controlling Area'] },
+  werks: { t:'Plant (WERKS)', d:'An operating unit or branch within a company code. Used in MM, PP, and for certain FI/CO postings. Assigned to a company code.', c:['WERKS','T001W'] },
+  gsber: { t:'Business Area (GSBER)', d:'Cross-company-code unit used for internal segment reporting. Defined at client level.', c:['GSBER','TGSB'] },
+  fkber: { t:'Functional Area (FKBER)', d:'Classifies expenses by function (production, sales, R&D) for cost-of-sales accounting.', c:['FKBER','TFKB'] },
+  segment: { t:'Segment (SEGMENT)', d:'Reporting segment for IFRS 8 / Ind AS 108 disclosures. Often mapped from profit center.', c:['SEGMENT','FAGL_SEGM'] },
+  kostl: { t:'Cost Center (KOSTL)', d:'Organizational unit in CO where overhead costs are incurred. Used to collect and allocate costs for internal management reporting.', c:['KOSTL','CSKS','Cost Center'] },
+  kstar: { t:'Cost Element (KSTAR)', d:'Represents an FI P&L account in CO. Primary cost elements link to GL accounts; secondary cost elements are CO-only (assessments, allocations).', c:['KSTAR','CSKA','CSKB','Cost Element'] },
+  lstnr: { t:'Activity Type (LSTAR)', d:'Unit of output produced by a cost center (machine hour, labour hour). Used for internal activity allocation to receivers.', c:['LSTAR','CSLA','Activity Type'] },
+  aufnr: { t:'Internal Order (AUFNR)', d:'Temporary or permanent CO object collecting costs for a specific purpose (campaign, project, event). Settled at period end.', c:['AUFNR','AUFK','Internal Order'] },
+  prctr: { t:'Profit Center (PRCTR)', d:'Organizational unit in CO used for internal profitability reporting. Generates an internal P&L and balance sheet.', c:['PRCTR','CEPC','Profit Center'] },
+  hier: { t:'Profit Center Hierarchy (PHINR)', d:'Hierarchical grouping of profit centers for reporting. Used in profitability analysis and segment reporting.', c:['PHINR','GLSH'] },
+  matnr: { t:'Material / Product (MATNR)', d:'Master record for a manufactured or purchased item. Central to Product Costing, Material Ledger, and CO-PA.', c:['MATNR','MARA','Material Master'] },
+  aufnr_pp: { t:'Production Order (AUFNR · PP)', d:'Cost object that collects actual costs of manufacturing a product. Central to CO-PP / Cost Object Controlling.', c:['AUFNR','AFKO','Production Order'] },
+  ce4: { t:'CO-PA Characteristics (CE4xxxx)', d:'Configuration table defining the characteristics and value fields of an operating concern. Stored per operating concern.', c:['CE4xxxx','Operating Concern','CO-PA Config'] }
+};
+
+/* ═══════════════════════════════════════════════════════════
+   2. TAB NAVIGATION
+   ═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('#fico .tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('#fico .tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('#fico .panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    if (tab.dataset.panel === 'graph') setTimeout(() => drawGraphEdges(currentMode), 50);
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   3. ENTERPRISE STRUCTURE
+   ═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('#fico .onode').forEach(node => {
+  node.addEventListener('click', () => {
+    document.querySelectorAll('#fico .onode').forEach(n => n.classList.remove('sel'));
+    node.classList.add('sel');
+    const info = ORG_INFO[node.dataset.org];
+    if (!info) return;
+    const det = document.getElementById('orgDetail');
+    det.classList.remove('empty');
+    det.innerHTML = `
+      <h4>${info.t}</h4>
+      <p>${info.d}</p>
+      <div class="chips">${info.c.map(c => `<span class="chip">${c}</span>`).join('')}</div>
+    `;
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   4. GRAPH
+   ═══════════════════════════════════════════════════════════ */
+let currentMode = 'ecc';
+let selectedNode = null;
+
+function boundaryPoint(node, tx, ty) {
+  const cx = node.x + node.w / 2, cy = node.y + node.h / 2;
+  const dx = tx - cx, dy = ty - cy;
+  if (dx === 0 && dy === 0) return { x: cx, y: cy };
+  const hw = node.w / 2 + 3, hh = node.h / 2 + 3;
+  const tX = dx !== 0 ? hw / Math.abs(dx) : Infinity;
+  const tY = dy !== 0 ? hh / Math.abs(dy) : Infinity;
+  const t = Math.min(tX, tY);
+  return { x: cx + dx * t, y: cy + dy * t };
+}
+
+function buildGraph(mode) {
+  const cfg = GRAPH[mode];
+  const canvas = document.getElementById('graphCanvas');
+  canvas.innerHTML = '';
+  canvas.style.width = '1180px';
+  canvas.style.height = '640px';
+  canvas.onclick = (e) => { if (e.target === canvas) resetGraph(); };
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'graph-svg');
+  svg.setAttribute('width', 1180);
+  svg.setAttribute('height', 640);
+  svg.id = 'graphSvg';
+  canvas.appendChild(svg);
+
+  cfg.nodes.forEach(n => {
+    const div = document.createElement('div');
+    div.className = `graph-node ${n.group}${n.view ? ' view' : ''}${n.big ? ' big' : ''}`;
+    div.style.left = n.x + 'px';
+    div.style.top = n.y + 'px';
+    div.style.width = n.w + 'px';
+    div.style.height = n.h + 'px';
+    div.dataset.id = n.id;
+    div.innerHTML = `
+      <div class="gn-name">${n.id}</div>
+      <div class="gn-desc">${n.desc}</div>
+      ${n.keys ? `<div class="gn-keys">${n.keys}</div>` : ''}
+    `;
+    div.addEventListener('click', (e) => { e.stopPropagation(); selectNode(n.id); });
+    canvas.appendChild(div);
+  });
+
+  drawGraphEdges(mode);
+}
+
+function drawGraphEdges(mode) {
+  const cfg = GRAPH[mode];
+  const svg = document.getElementById('graphSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  defs.innerHTML = `
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-active" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/>
+    </marker>
+  `;
+  svg.appendChild(defs);
+
+  cfg.edges.forEach(e => {
+    const na = cfg.nodes.find(n => n.id === e.f);
+    const nb = cfg.nodes.find(n => n.id === e.t);
+    if (!na || !nb) return;
+
+    const ca = { x: na.x + na.w / 2, y: na.y + na.h / 2 };
+    const cb = { x: nb.x + nb.w / 2, y: nb.y + nb.h / 2 };
+    const p1 = boundaryPoint(na, cb.x, cb.y);
+    const p2 = boundaryPoint(nb, ca.x, ca.y);
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', p1.x); line.setAttribute('y1', p1.y);
+    line.setAttribute('x2', p2.x); line.setAttribute('y2', p2.y);
+    line.setAttribute('class', 'graph-edge' + (e.type === 'integration' ? ' integration' : ''));
+    line.setAttribute('marker-end', 'url(#arrow)');
+    line.dataset.from = e.f;
+    line.dataset.to = e.t;
+    svg.appendChild(line);
+
+    if (e.label) {
+      const midX = (p1.x + p2.x) / 2;
+      const midY = (p1.y + p2.y) / 2;
+      const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      txt.setAttribute('x', midX); txt.setAttribute('y', midY - 5);
+      txt.setAttribute('class', 'edge-label');
+      txt.dataset.from = e.f;
+      txt.dataset.to = e.t;
+      txt.textContent = e.label;
+      svg.appendChild(txt);
+    }
+  });
+}
+
+function selectNode(id) {
+  selectedNode = id;
+  const cfg = GRAPH[currentMode];
+  const connected = new Set([id]);
+  cfg.edges.forEach(e => {
+    if (e.f === id) connected.add(e.t);
+    if (e.t === id) connected.add(e.f);
+  });
+
+  document.querySelectorAll('#fico .graph-node').forEach(n => {
+    const nid = n.dataset.id;
+    n.classList.toggle('selected', nid === id);
+    n.classList.toggle('highlighted', connected.has(nid) && nid !== id);
+    n.classList.toggle('dimmed', !connected.has(nid));
+  });
+
+  document.querySelectorAll('#fico .graph-edge').forEach(edge => {
+    const active = edge.dataset.from === id || edge.dataset.to === id;
+    edge.classList.toggle('active', active);
+    edge.classList.toggle('dimmed', !active);
+    if (active) edge.setAttribute('marker-end', 'url(#arrow-active)');
+    else edge.setAttribute('marker-end', 'url(#arrow)');
+  });
+  document.querySelectorAll('#fico .edge-label').forEach(lbl => {
+    const active = lbl.dataset.from === id || lbl.dataset.to === id;
+    lbl.classList.toggle('active', active);
+  });
+
+  showGraphDetail(id);
+}
+
+function resetGraph() {
+  selectedNode = null;
+  document.querySelectorAll('#fico .graph-node').forEach(n => n.classList.remove('selected','highlighted','dimmed'));
+  document.querySelectorAll('#fico .graph-edge').forEach(edge => {
+    edge.classList.remove('active','dimmed');
+    edge.setAttribute('marker-end', 'url(#arrow)');
+  });
+  document.querySelectorAll('#fico .edge-label').forEach(l => l.classList.remove('active'));
+  const det = document.getElementById('graphDetail');
+  det.className = 'graph-detail empty';
+  det.textContent = '👆 Select a table node to see its fields and related tables.';
+}
+
+function showGraphDetail(id) {
+  const t = TABLES[id];
+  const det = document.getElementById('graphDetail');
+  det.classList.remove('empty');
+  if (!t) {
+    det.innerHTML = `<h4>${id}</h4><p class="gd-desc">Composite node — see individual tables in the Table Explorer.</p>`;
+    return;
+  }
+  det.innerHTML = `
+    <h4>${id}</h4>
+    <div class="gd-desc">${t.desc} &nbsp;·&nbsp; <span style="font-weight:600;color:#334155;">Module: ${t.module}</span></div>
+    <div class="gd-cols">
+      <div class="gd-block">
+        <h5>Purpose</h5>
+        <p style="font-size:.8rem;color:#475569;">${t.purpose}</p>
+      </div>
+      <div class="gd-block">
+        <h5>Key Fields</h5>
+        <div class="ec-keys">${t.keys.map(k => `<span>${k}</span>`).join('')}</div>
+        <h5 style="margin-top:.6rem;">Related Tables</h5>
+        <div>${t.related.map(r => `<span class="rel-chip" onclick="selectNode('${r}')">${r}</span>`).join('')}</div>
+      </div>
+    </div>
+  `;
+}
+
+document.querySelectorAll('#fico .mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#fico .mode-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentMode = btn.dataset.mode;
+    selectedNode = null;
+    buildGraph(currentMode);
+    resetGraph();
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   5. SIMULATION
+   ═══════════════════════════════════════════════════════════ */
+let simIndex = -1;
+let simPlaying = false;
+let simTimer = null;
+
+function renderSimStep(step, index) {
+  const container = document.getElementById('simContainer');
+  if (document.getElementById('simStep' + index)) return;
+
+  const div = document.createElement('div');
+  div.className = `sim-step ${step.cls}`;
+  div.id = 'simStep' + index;
+
+  let cardsHtml = '';
+  step.cards.forEach(card => {
+    if (card.type === 'kv') {
+      cardsHtml += `
+        <div class="sim-tcard">
+          <div class="stc-head" style="background:#f1f5f9;color:#334155;">${card.title}</div>
+          <div style="padding:.7rem;">
+            <div class="kv-grid">
+              ${card.items.map(([k, v]) => `<div class="kv-item"><label>${k}</label><span>${v}</span></div>`).join('')}
+            </div>
+          </div>
+        </div>`;
+    } else if (card.type === 'table') {
+      cardsHtml += `
+        <div class="sim-tcard ${card.cls}">
+          <div class="stc-head">${card.table}<span>${card.subtitle}</span></div>
+          <table>
+            <thead><tr>${card.cols.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+            <tbody>${card.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+          </table>
+        </div>`;
+    } else if (card.type === 'summary') {
+      cardsHtml += `
+        <div style="width:100%;">
+          <div class="sim-summary">
+            ${card.items.map(([k, v]) => `<div class="sum-item"><div class="sv">${v}</div><div class="sl">${k}</div></div>`).join('')}
+          </div>
+        </div>`;
+    }
+  });
+
+  div.innerHTML = `
+    <div class="sim-head">
+      <span class="sim-num">${step.n}</span>
+      <div>
+        <div class="sim-title">${step.title}</div>
+        <div class="sim-sub">${step.sub}</div>
+      </div>
+    </div>
+    <div class="sim-note">${step.note}</div>
+    <div class="sim-grid">${cardsHtml}</div>
+  `;
+  container.appendChild(div);
+  requestAnimationFrame(() => div.classList.add('show'));
+}
+
+function updateProgress() {
+  const prog = document.getElementById('simProgress');
+  prog.innerHTML = SIM_STEPS.map((_, i) => {
+    let cls = 'sim-dot';
+    if (i < simIndex) cls += ' done';
+    if (i === simIndex) cls += ' active';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+}
+
+function simNext() {
+  if (simIndex >= SIM_STEPS.length - 1) return;
+  simIndex++;
+  renderSimStep(SIM_STEPS[simIndex], simIndex);
+  updateProgress();
+  if (simIndex === SIM_STEPS.length - 1) {
+    document.getElementById('simPlay').disabled = true;
+    document.getElementById('simNext').disabled = true;
+  }
+}
+
+function simReset() {
+  clearTimeout(simTimer);
+  simPlaying = false;
+  simIndex = -1;
+  document.getElementById('simContainer').innerHTML = '';
+  document.getElementById('simProgress').innerHTML = '';
+  document.getElementById('simPlay').disabled = false;
+  document.getElementById('simNext').disabled = false;
+  document.getElementById('simPlay').innerHTML = '▶ Play All';
+}
+
+function simPlayAll() {
+  if (simPlaying) return;
+  if (simIndex >= SIM_STEPS.length - 1) simReset();
+  simPlaying = true;
+  document.getElementById('simPlay').innerHTML = '⏸ Playing…';
+  const tick = () => {
+    if (!simPlaying) return;
+    if (simIndex >= SIM_STEPS.length - 1) {
+      simPlaying = false;
+      document.getElementById('simPlay').innerHTML = '✓ Complete';
+      return;
+    }
+    simNext();
+    simTimer = setTimeout(tick, 1700);
+  };
+  tick();
+}
+
+document.getElementById('simPlay').addEventListener('click', () => {
+  if (simPlaying) {
+    simPlaying = false; clearTimeout(simTimer);
+    document.getElementById('simPlay').innerHTML = '▶ Resume';
+  } else { simPlayAll(); }
+});
+document.getElementById('simNext').addEventListener('click', () => {
+  if (simPlaying) { simPlaying = false; clearTimeout(simTimer); document.getElementById('simPlay').innerHTML = '▶ Resume'; }
+  simNext();
+});
+document.getElementById('simReset').addEventListener('click', simReset);
+
+/* ═══════════════════════════════════════════════════════════
+   6. CO SUBMODULE EXPLORER
+   ═══════════════════════════════════════════════════════════ */
+let coFilter = 'all';
+let coQuery = '';
+
+function coModClass(m) {
+  if (m === 'CO-CC') return 'mod-cc';
+  if (m === 'CO-PC') return 'mod-pc';
+  if (m === 'CO-PP') return 'mod-pp';
+  if (m === 'CO-PA') return 'mod-pa';
+  if (m === 'PCA') return 'mod-pca';
+  return 'mod-co';
+}
+
+function renderCO() {
+  const grid = document.getElementById('coGrid');
+  const q = coQuery.toLowerCase().trim();
+
+  const entries = Object.entries(CO_SUBMODULES).filter(([name, s]) => {
+    if (coFilter !== 'all' && s.module !== coFilter) return false;
+    if (!q) return true;
+    const hay = (name + ' ' + s.desc + ' ' + s.purpose + ' ' + s.concepts.join(' ') + ' ' + s.tcodes.join(' ') + ' ' + s.tables.join(' ')).toLowerCase();
+    return hay.includes(q);
+  });
+
+  if (entries.length === 0) {
+    grid.innerHTML = '<div class="no-results">No submodules match your search. Try a different term.</div>';
+    return;
+  }
+
+  grid.innerHTML = entries.map(([name, s]) => `
+    <div class="exp-card ${coModClass(s.module)}" data-co="${name}">
+      <div class="ec-top">
+        <div class="ec-name">${name.split(' — ')[0]}</div>
+        <div class="ec-mod">${s.module}</div>
+      </div>
+      <div class="ec-desc">${s.desc}</div>
+      <div class="ec-keys">${s.concepts.slice(0, 3).map(k => `<span>${k}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.exp-card').forEach(card => {
+    card.addEventListener('click', () => showCODetail(card.dataset.co));
+  });
+}
+
+function showCODetail(name) {
+  const s = CO_SUBMODULES[name];
+  if (!s) return;
+  const det = document.getElementById('coDetail');
+  det.classList.remove('empty');
+  det.innerHTML = `
+    <h4>${name}</h4>
+    <div class="gd-desc">${s.desc}</div>
+    <div class="gd-cols">
+      <div class="gd-block">
+        <h5>Purpose</h5>
+        <p style="font-size:.8rem;color:#475569;">${s.purpose}</p>
+        <h5 style="margin-top:.7rem;">Key Concepts</h5>
+        <div class="ec-keys">${s.concepts.map(c => `<span>${c}</span>`).join('')}</div>
+        <h5 style="margin-top:.7rem;">Related Submodules</h5>
+        <div>${s.related.map(r => `<span class="rel-chip">${r}</span>`).join('')}</div>
+      </div>
+      <div class="gd-block">
+        <h5>Key Transactions</h5>
+        <ul>${s.tcodes.map(t => `<li>${t}</li>`).join('')}</ul>
+        <h5 style="margin-top:.7rem;">Key Tables</h5>
+        <ul>${s.tables.map(t => `<li>${t}</li>`).join('')}</ul>
+      </div>
+    </div>
+  `;
+}
+
+document.getElementById('coSearch').addEventListener('input', (e) => { coQuery = e.target.value; renderCO(); });
+document.querySelectorAll('#panel-comod .filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#panel-comod .filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    coFilter = chip.dataset.filter;
+    renderCO();
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   7. TABLE EXPLORER
+   ═══════════════════════════════════════════════════════════ */
+let expFilter = 'all';
+let expQuery = '';
+
+function expModClass(m) {
+  if (m === 'FI') return 'mod-fi';
+  if (m === 'CO') return 'mod-co';
+  if (m === 'CO-CC') return 'mod-cc';
+  if (m === 'CO-PC') return 'mod-pc';
+  if (m === 'CO-PP') return 'mod-pp';
+  if (m === 'CO-PA') return 'mod-pa';
+  if (m === 'PCA') return 'mod-pca';
+  if (m === 'S/4') return 'mod-ac';
+  return 'mod-md';
+}
+
+function renderExplorer() {
+  const grid = document.getElementById('expGrid');
+  const q = expQuery.toLowerCase().trim();
+
+  const entries = Object.entries(TABLES).filter(([name, t]) => {
+    if (expFilter !== 'all' && t.module !== expFilter) return false;
+    if (!q) return true;
+    const hay = (name + ' ' + t.desc + ' ' + t.purpose + ' ' + t.fields.join(' ') + ' ' + t.keys.join(' ')).toLowerCase();
+    return hay.includes(q);
+  });
+
+  if (entries.length === 0) {
+    grid.innerHTML = '<div class="no-results">No tables match your search. Try a different term.</div>';
+    return;
+  }
+
+  grid.innerHTML = entries.map(([name, t]) => `
+    <div class="exp-card ${expModClass(t.module)}" data-table="${name}">
+      <div class="ec-top">
+        <div class="ec-name">${name}</div>
+        <div class="ec-mod">${t.module}</div>
+      </div>
+      <div class="ec-desc">${t.desc}</div>
+      <div class="ec-keys">${t.keys.slice(0, 4).map(k => `<span>${k}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.exp-card').forEach(card => {
+    card.addEventListener('click', () => showExpDetail(card.dataset.table));
+  });
+}
+
+function showExpDetail(name) {
+  const t = TABLES[name];
+  if (!t) return;
+  const det = document.getElementById('expDetail');
+  det.classList.remove('empty');
+  det.innerHTML = `
+    <h4>${name}</h4>
+    <div class="gd-desc">${t.desc} &nbsp;·&nbsp; <span style="font-weight:600;color:#334155;">Module: ${t.module}</span></div>
+    <div class="gd-cols">
+      <div class="gd-block">
+        <h5>Purpose</h5>
+        <p style="font-size:.8rem;color:#475569;">${t.purpose}</p>
+        <h5 style="margin-top:.7rem;">Related Tables</h5>
+        <div>${t.related.map(r => `<span class="rel-chip" onclick="jumpToTable('${r}')">${r}</span>`).join('')}</div>
+      </div>
+      <div class="gd-block">
+        <h5>Fields</h5>
+        <ul>${t.fields.map(f => `<li>${f}</li>`).join('')}</ul>
+      </div>
+    </div>
+  `;
+}
+
+function jumpToTable(name) {
+  document.querySelectorAll('#fico .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#fico .panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('#fico .tab[data-panel="graph"]').classList.add('active');
+  document.getElementById('panel-graph').classList.add('active');
+  setTimeout(() => {
+    if (document.querySelector(`#fico .graph-node[data-id="${name}"]`)) selectNode(name);
+  }, 80);
+}
+
+document.getElementById('expSearch').addEventListener('input', (e) => { expQuery = e.target.value; renderExplorer(); });
+document.querySelectorAll('#panel-exp .filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#panel-exp .filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    expFilter = chip.dataset.filter;
+    renderExplorer();
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   8. KEY FIELDS
+   ═══════════════════════════════════════════════════════════ */
+function renderKeyFields() {
+  const body = document.getElementById('kfBody');
+  body.innerHTML = KEY_FIELDS.map(r => `
+    <tr>
+      <td class="mono ${r.cls}">
+        <span>${r.f}</span>
+        <button class="copy-btn" data-field="${r.f}" title="Copy field name">📋</button>
+      </td>
+      <td>${r.d}</td>
+      <td class="mono" style="font-size:.72rem;color:#475569;">${r.fi}</td>
+      <td class="mono" style="font-size:.72rem;color:#475569;">${r.co}</td>
+      <td class="mono" style="font-size:.72rem;color:#475569;">${r.md}</td>
+    </tr>
+  `).join('');
+
+  body.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(btn.dataset.field).then(() => {
+        btn.textContent = '✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = '📋'; btn.classList.remove('copied'); }, 1200);
+      }).catch(() => {});
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   9. INIT
+   ═══════════════════════════════════════════════════════════ */
+buildGraph('ecc');
+renderCO();
+renderExplorer();
+renderKeyFields();
+updateProgress();
+</script>
+</body>
+</html>
