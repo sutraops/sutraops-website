@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounting &amp; Finance — End-to-End Explorer | SutraOps Solutions</title>
+<meta name="description" content="Interactive Accounting &amp; Finance explorer — accounting equation, journal flow, end-to-end transaction, standards comparison and key concept reference.">
+<link rel="canonical" href="https://sutraops.in/insights/accounting-finance-explorer.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=15">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   Accounting & Finance Explorer — SCOPED styles (#acc-exp)
+   ═══════════════════════════════════════════════════════════ */
+#acc-exp{
+  --as:#1d4ed8; --as-l:#dbeafe; --as-b:#3b82f6;      /* Assets */
+  --li:#dc2626; --li-l:#fee2e2; --li-b:#ef4444;      /* Liabilities */
+  --eq:#7c3aed; --eq-l:#ede9fe; --eq-b:#8b5cf6;      /* Equity */
+  --re:#047857; --re-l:#d1fae5; --re-b:#10b981;      /* Revenue */
+  --ex:#b45309; --ex-l:#fef3c7; --ex-b:#f59e0b;      /* Expenses */
+  --st:#0e7490; --st-l:#cffafe; --st-b:#06b6d4;      /* Standards */
+  --cl:#4338ca; --cl-l:#e0e7ff; --cl-b:#6366f1;      /* Controls */
+  --tx:#0f172a; --txm:#64748b; --bd:#cbd5e1; --bg:#f1f5f9;
+  --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
+  --shl:0 10px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  color:var(--tx);
+  line-height:1.55;
+  text-align:left;
+}
+#acc-exp *,#acc-exp *::before,#acc-exp *::after{margin:0;padding:0;box-sizing:border-box}
+#acc-exp code,#acc-exp .mono{font-family:'Consolas','Courier New',monospace}
+
+/* ── Page shell ── */
+.acc-page{width:min(1280px,calc(100% - 40px));margin:0 auto;padding:42px 0 64px}
+.acc-breadcrumb{font-size:13px;margin:0 0 22px;color:#66758a}
+.acc-breadcrumb a{color:#f58220;text-decoration:none}
+.acc-breadcrumb a:hover{text-decoration:underline}
+.acc-hero{background:linear-gradient(135deg,#071f3d 0%,#123b68 100%);color:#fff;border-radius:18px;padding:clamp(26px,5vw,48px);margin-bottom:26px}
+.acc-hero .eyebrow{color:#ff9a42;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;font-size:12px;margin:0 0 10px}
+.acc-hero h1{color:#fff;font-size:clamp(28px,4vw,42px);line-height:1.15;margin:0 0 14px}
+.acc-hero p{color:#e4edf8;font-size:17px;max-width:820px;margin:0}
+
+/* ── Tabs ── */
+#acc-exp .tabs{display:flex;gap:.4rem;flex-wrap:wrap;background:#fff;padding:.4rem;border-radius:14px;box-shadow:var(--sh);border:1px solid #e2e8f0;margin-bottom:1.2rem}
+#acc-exp .tab{flex:1;min-width:130px;border:none;background:transparent;padding:.6rem .8rem;border-radius:10px;font-size:.82rem;font-weight:600;color:var(--txm);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:.4rem;font-family:inherit}
+#acc-exp .tab:hover{background:#f1f5f9;color:var(--tx)}
+#acc-exp .tab.active{background:linear-gradient(135deg,#1d4ed8,#047857);color:#fff;box-shadow:0 4px 10px -3px rgba(29,78,216,.5)}
+#acc-exp .tab .ico{font-size:1rem}
+
+/* ── Panels ── */
+#acc-exp .panel{display:none;animation:accFade .3s ease}
+#acc-exp .panel.active{display:block}
+@keyframes accFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+#acc-exp .card{
+  display:block !important;
+  padding:1.5rem !important;
+  background:#fff !important;
+  border-radius:12px !important;
+  border:1px solid #e2e8f0 !important;
+  box-shadow:0 1px 3px rgba(0,0,0,.08) !important;
+  margin-bottom:1.2rem !important;
+  width:100% !important;
+}
+#acc-exp .card h2{
+  display:flex !important;align-items:center !important;gap:.5rem !important;
+  margin:0 0 .2rem 0 !important;font-size:1.2rem !important;font-weight:700 !important;
+  color:#0f172a !important;width:100% !important;line-height:1.3 !important;
+}
+#acc-exp .card .desc{display:block !important;width:100% !important;color:#64748b !important;font-size:.85rem !important;margin:0 0 1.2rem 0 !important}
+#acc-exp .card h2 .num{
+  display:inline-flex !important;align-items:center !important;justify-content:center !important;
+  width:28px !important;height:28px !important;border-radius:8px !important;font-size:.8rem !important;
+  font-weight:700 !important;color:#fff !important;flex-shrink:0 !important;
+}
+#acc-exp .num.as{background:#1d4ed8 !important}
+#acc-exp .num.li{background:#dc2626 !important}
+#acc-exp .num.eq{background:#7c3aed !important}
+#acc-exp .num.re{background:#047857 !important}
+#acc-exp .num.ex{background:#b45309 !important}
+#acc-exp .num.st{background:#0e7490 !important}
+#acc-exp .num.cl{background:#4338ca !important}
+
+/* ── Equation tree ── */
+#acc-exp .eq-wrap{display:flex !important;justify-content:center !important;width:100% !important;overflow-x:auto !important;padding:1rem 0 .5rem !important}
+#acc-exp .eq-tree{display:inline-block !important;min-width:900px !important;margin:0 auto !important;text-align:center !important}
+#acc-exp .eq-tree ul{display:flex !important;justify-content:center !important;padding:22px 0 0 !important;margin:0 !important;list-style:none !important;position:relative !important;background:transparent !important}
+#acc-exp .eq-tree>ul{padding-top:0 !important}
+#acc-exp .eq-tree ul::before{content:'' !important;position:absolute !important;top:0 !important;left:50% !important;transform:translateX(-50%) !important;width:2px !important;height:22px !important;background:#94a3b8 !important;display:block !important}
+#acc-exp .eq-tree>ul::before{display:none !important}
+#acc-exp .eq-tree li{position:relative !important;padding:22px 6px 0 !important;display:flex !important;flex-direction:column !important;align-items:center !important;list-style:none !important;margin:0 !important;background:transparent !important}
+#acc-exp .eq-tree>ul>li{padding:0 !important}
+#acc-exp .eq-tree li::before{content:'' !important;position:absolute !important;top:0 !important;left:50% !important;transform:translateX(-50%) !important;width:2px !important;height:22px !important;background:#94a3b8 !important;display:block !important}
+#acc-exp .eq-tree li::after{content:'' !important;position:absolute !important;top:0 !important;left:0 !important;width:100% !important;height:2px !important;background:#94a3b8 !important;display:block !important}
+#acc-exp .eq-tree li:first-child::after{left:50% !important;width:50% !important}
+#acc-exp .eq-tree li:last-child::after{left:0 !important;width:50% !important}
+#acc-exp .eq-tree li:only-child::after{display:none !important}
+#acc-exp .eq-tree>ul>li::before,
+#acc-exp .eq-tree>ul>li::after{display:none !important}
+
+#acc-exp .enode{
+  display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;
+  border-radius:10px !important;padding:.55rem 1rem !important;font-size:.8rem !important;font-weight:600 !important;
+  text-align:center !important;white-space:normal !important;box-shadow:0 1px 3px rgba(0,0,0,.08) !important;
+  transition:all .18s !important;position:relative !important;z-index:1 !important;cursor:pointer !important;border:2px solid transparent !important;
+}
+#acc-exp .enode:hover{transform:translateY(-2px) !important;box-shadow:0 10px 25px -5px rgba(0,0,0,.1) !important}
+#acc-exp .enode.sel{box-shadow:0 0 0 3px rgba(29,78,216,.35) !important;transform:translateY(-2px) !important}
+#acc-exp .enode .code{display:block !important;font-size:.66rem !important;font-weight:400 !important;opacity:.75 !important;margin-top:1px !important;letter-spacing:.4px !important}
+#acc-exp .enode.root{background:linear-gradient(135deg,#1e293b,#334155) !important;color:#fff !important;font-size:.95rem !important;padding:.85rem 1.5rem !important}
+#acc-exp .enode.as-node{background:linear-gradient(135deg,#eff6ff,#dbeafe) !important;border-color:#3b82f6 !important;color:#1d4ed8 !important}
+#acc-exp .enode.li-node{background:linear-gradient(135deg,#fef2f2,#fee2e2) !important;border-color:#ef4444 !important;color:#dc2626 !important}
+#acc-exp .enode.eq-node{background:linear-gradient(135deg,#f5f3ff,#ede9fe) !important;border-color:#8b5cf6 !important;color:#7c3aed !important}
+#acc-exp .enode.re-node{background:linear-gradient(135deg,#ecfdf5,#d1fae5) !important;border-color:#10b981 !important;color:#047857 !important}
+#acc-exp .enode.ex-node{background:linear-gradient(135deg,#fffbeb,#fef3c7) !important;border-color:#f59e0b !important;color:#b45309 !important}
+#acc-exp .enode.leaf{background:#fff !important;border-color:#cbd5e1 !important;color:#0f172a !important;font-size:.74rem !important;padding:.45rem .8rem !important}
+#acc-exp .enode.leaf.as-leaf{border-color:#93c5fd !important;background:#f8faff !important}
+#acc-exp .enode.leaf.li-leaf{border-color:#fca5a5 !important;background:#fef8f8 !important}
+#acc-exp .enode.leaf.eq-leaf{border-color:#c4b5fd !important;background:#fbfaff !important}
+#acc-exp .enode.leaf.re-leaf{border-color:#6ee7b7 !important;background:#f0fdf9 !important}
+#acc-exp .enode.leaf.ex-leaf{border-color:#fcd34d !important;background:#fffdf5 !important}
+
+#acc-exp .eq-detail{display:block !important;width:100% !important;margin-top:1.2rem !important;background:#f8fafc !important;border:1px solid #e2e8f0 !important;border-radius:10px !important;padding:1rem 1.2rem !important;min-height:80px !important}
+#acc-exp .eq-detail.empty{display:flex !important;align-items:center !important;justify-content:center !important;color:#64748b !important;font-size:.85rem !important;font-style:italic !important}
+#acc-exp .eq-detail h4{font-size:.95rem !important;font-weight:700 !important;margin:0 0 .3rem 0 !important}
+#acc-exp .eq-detail p{font-size:.82rem !important;color:#64748b !important;margin:0 0 .5rem 0 !important}
+#acc-exp .eq-detail .chips{display:flex !important;gap:.4rem !important;flex-wrap:wrap !important;margin-top:.4rem !important}
+#acc-exp .chip{font-size:.68rem !important;font-family:'Consolas',monospace !important;background:#e2e8f0 !important;border-radius:6px !important;padding:2px 8px !important;color:#334155 !important;font-weight:600 !important}
+
+/* ── Journal flow graph ── */
+#acc-exp .flow-wrap{overflow-x:auto !important;border:1px solid #e2e8f0 !important;border-radius:12px !important;background:linear-gradient(180deg,#fbfdff,#f8fafc) !important;padding:.5rem !important}
+#acc-exp #flowCanvas{position:relative !important;width:1000px !important;height:560px !important}
+#acc-exp .flow-node{
+  position:absolute !important;border-radius:10px !important;padding:.5rem .7rem !important;text-align:center !important;
+  box-shadow:0 1px 3px rgba(0,0,0,.08) !important;transition:all .2s !important;cursor:pointer !important;
+  z-index:2 !important;border:2px solid #cbd5e1 !important;background:#fff !important;
+  display:flex !important;flex-direction:column !important;justify-content:center !important;overflow:hidden !important;
+}
+#acc-exp .flow-node:hover{transform:translateY(-2px) scale(1.03) !important;box-shadow:0 10px 25px -5px rgba(0,0,0,.1) !important;z-index:5 !important}
+#acc-exp .flow-node.as{border-color:#3b82f6 !important;background:linear-gradient(135deg,#f8faff,#fff) !important}
+#acc-exp .flow-node.as .fn-name{color:#1d4ed8 !important}
+#acc-exp .flow-node.li{border-color:#ef4444 !important;background:linear-gradient(135deg,#fef8f8,#fff) !important}
+#acc-exp .flow-node.li .fn-name{color:#dc2626 !important}
+#acc-exp .flow-node.eq{border-color:#8b5cf6 !important;background:linear-gradient(135deg,#fbfaff,#fff) !important}
+#acc-exp .flow-node.eq .fn-name{color:#7c3aed !important}
+#acc-exp .flow-node.re{border-color:#10b981 !important;background:linear-gradient(135deg,#f0fdf9,#fff) !important}
+#acc-exp .flow-node.re .fn-name{color:#047857 !important}
+#acc-exp .flow-node.ex{border-color:#f59e0b !important;background:linear-gradient(135deg,#fffdf5,#fff) !important}
+#acc-exp .flow-node.ex .fn-name{color:#b45309 !important}
+#acc-exp .flow-node.st{border-color:#06b6d4 !important;background:linear-gradient(135deg,#f0fdff,#fff) !important}
+#acc-exp .flow-node.st .fn-name{color:#0e7490 !important}
+#acc-exp .flow-node.cl{border-color:#6366f1 !important;background:linear-gradient(135deg,#f5f5ff,#fff) !important}
+#acc-exp .flow-node.cl .fn-name{color:#4338ca !important}
+#acc-exp .flow-node.big{padding:.9rem 1rem !important}
+#acc-exp .flow-node.big .fn-name{font-size:1rem !important}
+#acc-exp .fn-name{font-family:'Consolas',monospace !important;font-weight:700 !important;font-size:.82rem !important;letter-spacing:.3px !important}
+#acc-exp .fn-desc{font-size:.62rem !important;color:#64748b !important;margin-top:1px !important;line-height:1.25 !important}
+#acc-exp .fn-keys{font-size:.55rem !important;font-family:'Consolas',monospace !important;color:#94a3b8 !important;margin-top:2px !important;white-space:nowrap !important;overflow:hidden !important;text-overflow:ellipsis !important}
+#acc-exp .flow-node.selected{border-color:#1d4ed8 !important;box-shadow:0 0 0 3px rgba(29,78,216,.3),0 10px 25px -5px rgba(0,0,0,.1) !important;transform:translateY(-2px) scale(1.04) !important;z-index:6 !important}
+#acc-exp .flow-node.highlighted{border-color:#f59e0b !important;box-shadow:0 0 0 2px rgba(245,158,11,.3) !important}
+#acc-exp .flow-node.dimmed{opacity:.22 !important}
+#acc-exp .flow-svg{position:absolute !important;top:0 !important;left:0 !important;pointer-events:none !important}
+#acc-exp .flow-edge{stroke:#94a3b8 !important;stroke-width:1.6 !important;fill:none !important;transition:all .2s !important}
+#acc-exp .flow-edge.double{stroke:#8b5cf6 !important;stroke-width:2 !important;stroke-dasharray:6 4 !important}
+#acc-exp .flow-edge.active{stroke:#1d4ed8 !important;stroke-width:2.8 !important;filter:drop-shadow(0 0 4px rgba(29,78,216,.35)) !important}
+#acc-exp .flow-edge.dimmed{opacity:.12 !important}
+#acc-exp .flow-label{font-size:9px !important;font-family:'Consolas',monospace !important;fill:#64748b !important;text-anchor:middle !important;pointer-events:none !important}
+#acc-exp .flow-label.active{fill:#1d4ed8 !important;font-weight:700 !important}
+#acc-exp .flow-detail{margin-top:1rem !important;background:#f8fafc !important;border:1px solid #e2e8f0 !important;border-radius:10px !important;padding:1rem 1.2rem !important;min-height:80px !important}
+#acc-exp .flow-detail.empty{display:flex !important;align-items:center !important;justify-content:center !important;color:#64748b !important;font-size:.85rem !important;font-style:italic !important}
+#acc-exp .flow-detail h4{font-size:1rem !important;font-weight:700 !important;font-family:'Consolas',monospace !important;margin:0 0 .2rem 0 !important}
+#acc-exp .flow-detail .gd-desc{font-size:.82rem !important;color:#64748b !important;margin:0 0 .6rem 0 !important}
+#acc-exp .flow-detail .gd-cols{display:grid !important;grid-template-columns:1fr 1fr !important;gap:1rem !important}
+@media(max-width:640px){#acc-exp .flow-detail .gd-cols{grid-template-columns:1fr !important}}
+#acc-exp .gd-block h5{font-size:.72rem !important;text-transform:uppercase !important;letter-spacing:.5px !important;color:#64748b !important;margin:0 0 .3rem 0 !important}
+#acc-exp .gd-block ul{list-style:none !important;font-size:.78rem !important}
+#acc-exp .gd-block li{font-family:'Consolas',monospace !important;padding:1px 0 !important;color:#334155 !important}
+#acc-exp .gd-block li::before{content:'▸ ' !important;color:#94a3b8 !important}
+#acc-exp .rel-chip{display:inline-block !important;font-family:'Consolas',monospace !important;font-size:.72rem !important;background:#dbeafe !important;color:#1d4ed8 !important;border-radius:6px !important;padding:2px 8px !important;margin:2px 3px 2px 0 !important;cursor:pointer !important;font-weight:600 !important}
+#acc-exp .rel-chip:hover{background:#1d4ed8 !important;color:#fff !important}
+
+/* ── Simulation ── */
+#acc-exp .sim-controls{display:flex !important;gap:.6rem !important;flex-wrap:wrap !important;align-items:center !important;margin-bottom:1.2rem !important}
+#acc-exp .btn{border:none !important;border-radius:10px !important;padding:.6rem 1.2rem !important;font-size:.82rem !important;font-weight:600 !important;cursor:pointer !important;font-family:inherit !important;transition:all .18s !important;display:inline-flex !important;align-items:center !important;gap:.4rem !important}
+#acc-exp .btn-primary{background:linear-gradient(135deg,#1d4ed8,#047857) !important;color:#fff !important;box-shadow:0 4px 12px -4px rgba(29,78,216,.5) !important}
+#acc-exp .btn-primary:hover{transform:translateY(-1px) !important}
+#acc-exp .btn-primary:disabled{opacity:.4 !important;cursor:not-allowed !important;transform:none !important}
+#acc-exp .btn-ghost{background:#f1f5f9 !important;color:#334155 !important;border:1px solid #e2e8f0 !important}
+#acc-exp .btn-ghost:hover{background:#e2e8f0 !important}
+#acc-exp .sim-progress{display:flex !important;gap:.3rem !important;margin-left:auto !important}
+#acc-exp .sim-dot{width:10px !important;height:10px !important;border-radius:50% !important;background:#e2e8f0 !important;transition:all .3s !important}
+#acc-exp .sim-dot.done{background:#10b981 !important}
+#acc-exp .sim-dot.active{background:#1d4ed8 !important;box-shadow:0 0 0 4px rgba(29,78,216,.18) !important}
+#acc-exp .sim-step{background:#fff !important;border:1px solid #e2e8f0 !important;border-radius:12px !important;padding:1.1rem 1.3rem !important;margin-bottom:.9rem !important;opacity:0 !important;transform:translateY(12px) !important;transition:all .4s cubic-bezier(.16,1,.3,1) !important;border-left:4px solid #cbd5e1 !important}
+#acc-exp .sim-step.show{opacity:1 !important;transform:none !important}
+#acc-exp .sim-step.step-as{border-left-color:#3b82f6 !important}
+#acc-exp .sim-step.step-li{border-left-color:#ef4444 !important}
+#acc-exp .sim-step.step-eq{border-left-color:#8b5cf6 !important}
+#acc-exp .sim-step.step-re{border-left-color:#10b981 !important}
+#acc-exp .sim-step.step-ex{border-left-color:#f59e0b !important}
+#acc-exp .sim-step.step-cl{border-left-color:#6366f1 !important}
+#acc-exp .sim-step.step-done{border-left-color:#047857 !important;background:linear-gradient(135deg,#f0fdf9,#fff) !important}
+#acc-exp .sim-head{display:flex !important;align-items:center !important;gap:.6rem !important;margin-bottom:.2rem !important}
+#acc-exp .sim-num{display:inline-flex !important;align-items:center !important;justify-content:center !important;width:26px !important;height:26px !important;border-radius:8px !important;font-size:.75rem !important;font-weight:700 !important;color:#fff !important;background:#64748b !important;flex-shrink:0 !important}
+#acc-exp .step-as .sim-num{background:#1d4ed8 !important}
+#acc-exp .step-li .sim-num{background:#dc2626 !important}
+#acc-exp .step-eq .sim-num{background:#7c3aed !important}
+#acc-exp .step-re .sim-num{background:#047857 !important}
+#acc-exp .step-ex .sim-num{background:#b45309 !important}
+#acc-exp .step-cl .sim-num{background:#4338ca !important}
+#acc-exp .step-done .sim-num{background:#047857 !important}
+#acc-exp .sim-title{font-size:.95rem !important;font-weight:700 !important}
+#acc-exp .sim-sub{font-size:.75rem !important;color:#64748b !important;font-family:'Consolas',monospace !important}
+#acc-exp .sim-note{font-size:.8rem !important;color:#64748b !important;margin:.5rem 0 .8rem 0 !important}
+#acc-exp .sim-grid{display:grid !important;grid-template-columns:repeat(auto-fit,minmax(280px,1fr)) !important;gap:.8rem !important}
+#acc-exp .sim-tcard{border:1px solid #e2e8f0 !important;border-radius:10px !important;overflow:hidden !important;background:#fff !important}
+#acc-exp .sim-tcard.as{border-color:#bfdbfe !important}
+#acc-exp .sim-tcard.li{border-color:#fecaca !important}
+#acc-exp .sim-tcard.eq{border-color:#ddd6fe !important}
+#acc-exp .sim-tcard.re{border-color:#a7f3d0 !important}
+#acc-exp .sim-tcard.ex{border-color:#fde68a !important}
+#acc-exp .sim-tcard.cl{border-color:#c7d2fe !important}
+#acc-exp .stc-head{padding:.4rem .7rem !important;font-size:.72rem !important;font-weight:700 !important;font-family:'Consolas',monospace !important;display:flex !important;justify-content:space-between !important;align-items:center !important;background:#f8fafc !important;border-bottom:1px solid #e2e8f0 !important}
+#acc-exp .sim-tcard.as .stc-head{background:#dbeafe !important;color:#1d4ed8 !important}
+#acc-exp .sim-tcard.li .stc-head{background:#fee2e2 !important;color:#dc2626 !important}
+#acc-exp .sim-tcard.eq .stc-head{background:#ede9fe !important;color:#7c3aed !important}
+#acc-exp .sim-tcard.re .stc-head{background:#d1fae5 !important;color:#047857 !important}
+#acc-exp .sim-tcard.ex .stc-head{background:#fef3c7 !important;color:#b45309 !important}
+#acc-exp .sim-tcard.cl .stc-head{background:#e0e7ff !important;color:#4338ca !important}
+#acc-exp .stc-head span{font-weight:400 !important;font-size:.62rem !important;opacity:.8 !important;font-family:'Segoe UI',sans-serif !important}
+#acc-exp .sim-tcard table{width:100% !important;border-collapse:collapse !important;font-size:.68rem !important;font-family:'Consolas',monospace !important}
+#acc-exp .sim-tcard th{text-align:left !important;padding:.3rem .5rem !important;background:#f8fafc !important;color:#64748b !important;font-weight:600 !important;border-bottom:1px solid #f1f5f9 !important;font-size:.6rem !important;text-transform:uppercase !important;letter-spacing:.3px !important}
+#acc-exp .sim-tcard td{padding:.35rem .5rem !important;border-bottom:1px solid #f8fafc !important;color:#334155 !important}
+#acc-exp .sim-tcard tr:last-child td{border-bottom:none !important}
+#acc-exp .kv-grid{display:grid !important;grid-template-columns:repeat(auto-fit,minmax(180px,1fr)) !important;gap:.5rem !important}
+#acc-exp .kv-item{background:#f8fafc !important;border:1px solid #e2e8f0 !important;border-radius:8px !important;padding:.5rem .7rem !important}
+#acc-exp .kv-item label{display:block !important;font-size:.62rem !important;text-transform:uppercase !important;letter-spacing:.4px !important;color:#64748b !important;font-weight:600 !important}
+#acc-exp .kv-item span{font-size:.8rem !important;font-family:'Consolas',monospace !important;font-weight:600 !important;color:#1e293b !important}
+#acc-exp .sim-summary{display:flex !important;gap:1rem !important;flex-wrap:wrap !important;margin-top:.6rem !important}
+#acc-exp .sum-item{flex:1 !important;min-width:140px !important;background:#f8fafc !important;border:1px solid #e2e8f0 !important;border-radius:8px !important;padding:.6rem .8rem !important;text-align:center !important}
+#acc-exp .sum-item .sv{font-size:1.05rem !important;font-weight:700 !important;font-family:'Consolas',monospace !important;color:#047857 !important}
+#acc-exp .sum-item .sl{font-size:.65rem !important;color:#64748b !important;text-transform:uppercase !important;letter-spacing:.4px !important}
+
+/* ── Standards explorer ── */
+#acc-exp .exp-toolbar{display:flex !important;gap:.6rem !important;flex-wrap:wrap !important;margin-bottom:1rem !important;align-items:center !important}
+#acc-exp .exp-search{flex:1 !important;min-width:200px !important;position:relative !important}
+#acc-exp .exp-search input{width:100% !important;padding:.6rem .9rem .6rem 2.2rem !important;border:1px solid #e2e8f0 !important;border-radius:10px !important;font-size:.85rem !important;font-family:inherit !important;outline:none !important;background:#f8fafc !important;color:#0f172a !important}
+#acc-exp .exp-search input:focus{border-color:#3b82f6 !important;background:#fff !important;box-shadow:0 0 0 3px rgba(59,130,246,.12) !important}
+#acc-exp .exp-search .sico{position:absolute !important;left:.75rem !important;top:50% !important;transform:translateY(-50%) !important;color:#94a3b8 !important;pointer-events:none !important}
+#acc-exp .filter-chip{border:1px solid #e2e8f0 !important;background:#fff !important;border-radius:20px !important;padding:.4rem .9rem !important;font-size:.75rem !important;font-weight:600 !important;color:#64748b !important;cursor:pointer !important;font-family:inherit !important}
+#acc-exp .filter-chip:hover{background:#f1f5f9 !important}
+#acc-exp .filter-chip.active{background:#1e293b !important;color:#fff !important;border-color:#1e293b !important}
+#acc-exp .exp-grid{display:grid !important;grid-template-columns:repeat(auto-fill,minmax(280px,1fr)) !important;gap:.8rem !important}
+#acc-exp .exp-card{background:#fff !important;border:1px solid #e2e8f0 !important;border-radius:10px !important;padding:.9rem 1rem !important;cursor:pointer !important;transition:all .18s !important;border-left:4px solid #cbd5e1 !important}
+#acc-exp .exp-card:hover{transform:translateY(-2px) !important;box-shadow:0 10px 25px -5px rgba(0,0,0,.1) !important}
+#acc-exp .exp-card.mod-as{border-left-color:#3b82f6 !important}
+#acc-exp .exp-card.mod-li{border-left-color:#ef4444 !important}
+#acc-exp .exp-card.mod-eq{border-left-color:#8b5cf6 !important}
+#acc-exp .exp-card.mod-re{border-left-color:#10b981 !important}
+#acc-exp .exp-card.mod-ex{border-left-color:#f59e0b !important}
+#acc-exp .exp-card.mod-st{border-left-color:#06b6d4 !important}
+#acc-exp .exp-card.mod-cl{border-left-color:#6366f1 !important}
+#acc-exp .exp-card .ec-top{display:flex !important;justify-content:space-between !important;align-items:flex-start !important;gap:.5rem !important}
+#acc-exp .exp-card .ec-name{font-family:'Consolas',monospace !important;font-weight:700 !important;font-size:.85rem !important;color:#1e293b !important}
+#acc-exp .exp-card .ec-mod{font-size:.55rem !important;font-weight:700 !important;padding:2px 7px !important;border-radius:99px !important;letter-spacing:.3px !important;flex-shrink:0 !important}
+#acc-exp .mod-as .ec-mod{background:#dbeafe !important;color:#1d4ed8 !important}
+#acc-exp .mod-li .ec-mod{background:#fee2e2 !important;color:#dc2626 !important}
+#acc-exp .mod-eq .ec-mod{background:#ede9fe !important;color:#7c3aed !important}
+#acc-exp .mod-re .ec-mod{background:#d1fae5 !important;color:#047857 !important}
+#acc-exp .mod-ex .ec-mod{background:#fef3c7 !important;color:#b45309 !important}
+#acc-exp .mod-st .ec-mod{background:#cffafe !important;color:#0e7490 !important}
+#acc-exp .mod-cl .ec-mod{background:#e0e7ff !important;color:#4338ca !important}
+#acc-exp .exp-card .ec-desc{font-size:.75rem !important;color:#64748b !important;margin-top:.25rem !important;line-height:1.4 !important}
+#acc-exp .exp-card .ec-keys{margin-top:.5rem !important;display:flex !important;gap:.25rem !important;flex-wrap:wrap !important}
+#acc-exp .exp-card .ec-keys span{font-size:.58rem !important;font-family:'Consolas',monospace !important;background:#f1f5f9 !important;border:1px solid #e2e8f0 !important;border-radius:4px !important;padding:1px 5px !important;color:#64748b !important}
+#acc-exp .no-results{text-align:center !important;padding:2rem !important;color:#64748b !important;font-size:.85rem !important;font-style:italic !important;grid-column:1/-1 !important}
+
+/* ── Key concepts table ── */
+#acc-exp .kf-wrap{overflow-x:auto !important;border-radius:10px !important;border:1px solid #e2e8f0 !important}
+#acc-exp table.kf{width:100% !important;border-collapse:collapse !important;font-size:.8rem !important;min-width:750px !important}
+#acc-exp table.kf thead th{text-align:left !important;padding:.65rem .8rem !important;font-weight:700 !important;font-size:.68rem !important;text-transform:uppercase !important;letter-spacing:.5px !important;color:#fff !important;background:#1e293b !important}
+#acc-exp table.kf tbody td{padding:.55rem .8rem !important;border-bottom:1px solid #f1f5f9 !important;vertical-align:top !important;font-size:.78rem !important}
+#acc-exp table.kf tbody tr:hover{background:#f8fafc !important}
+#acc-exp table.kf tbody tr:last-child td{border-bottom:none !important}
+#acc-exp table.kf .mono{font-family:'Consolas',monospace !important;font-weight:700 !important;font-size:.78rem !important}
+#acc-exp .fld-as{color:#1d4ed8 !important}
+#acc-exp .fld-li{color:#dc2626 !important}
+#acc-exp .fld-eq{color:#7c3aed !important}
+#acc-exp .fld-re{color:#047857 !important}
+#acc-exp .fld-ex{color:#b45309 !important}
+
+/* ── Legend ── */
+#acc-exp .legend{display:flex !important;flex-wrap:wrap !important;width:100% !important;margin-top:1rem !important;padding-top:.9rem !important;border-top:1px solid #f1f5f9 !important;gap:1.2rem !important}
+#acc-exp .legend-item{display:flex !important;align-items:center !important;gap:.4rem !important;font-size:.75rem !important;color:#64748b !important}
+#acc-exp .legend-dot{width:13px !important;height:13px !important;border-radius:4px !important;flex-shrink:0 !important}
+#acc-exp .ld-as{background:#dbeafe !important;border:2px solid #3b82f6 !important}
+#acc-exp .ld-li{background:#fee2e2 !important;border:2px solid #ef4444 !important}
+#acc-exp .ld-eq{background:#ede9fe !important;border:2px solid #8b5cf6 !important}
+#acc-exp .ld-re{background:#d1fae5 !important;border:2px solid #10b981 !important}
+#acc-exp .ld-ex{background:#fef3c7 !important;border:2px solid #f59e0b !important}
+#acc-exp .ld-st{background:#cffafe !important;border:2px solid #06b6d4 !important}
+#acc-exp .ld-cl{background:#e0e7ff !important;border:2px solid #6366f1 !important}
+
+/* ── Back button ── */
+.acc-back{display:inline-block !important;background:#f58220 !important;color:#fff !important;border-radius:8px !important;padding:12px 17px !important;font-weight:800 !important;text-decoration:none !important;margin-top:18px !important}
+.acc-back:hover{filter:brightness(1.05) !important}
+
+@media(max-width:800px){
+  .acc-page{width:calc(100% - 30px) !important;padding-top:28px !important}
+  .acc-hero{border-radius:14px !important}
+}
+@media(max-width:700px){
+  #acc-exp .tab{font-size:.72rem !important;min-width:auto !important;padding:.5rem !important}
+  #acc-exp .tab .ico{display:none !important}
+  #acc-exp .card{padding:1rem !important}
+}
+</style>
+</head>
+<body>
+
+<div class="top-line"></div>
+<header class="site-header">
+  <div class="header-wrap">
+    <a class="brand" href="../index.html" aria-label="SutraOps Solutions Home">
+      <img class="brand-mark" src="../assets/so-icon.png" alt="SutraOps SO logo mark">
+      <span class="brand-text">
+        <span class="brand-name"><b>Sutra</b><i>Ops</i></span>
+        <span class="brand-sub">SOLUTIONS</span>
+        <span class="brand-tag">Smart Travel. Smart Finance. Smart Operations.</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../index.html">HOME</a>
+      <a href="../about.html">ABOUT US</a>
+      <a href="../services.html">SERVICES</a>
+      <a href="../services.html#industries">INDUSTRIES</a>
+      <a class="active" href="learning-hub.html">INSIGHTS</a>
+      <a href="../contact.html">CONTACT</a>
+    </nav>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="acc-page">
+
+  <p class="acc-breadcrumb">
+    <a href="../index.html">Home</a> ›
+    <a href="learning-hub.html">Learning Hub</a> ›
+    <a href="accounting-finance.html">Accounting &amp; Finance Learning</a> ›
+    End-to-End Explorer
+  </p>
+
+  <section class="acc-hero">
+    <p class="eyebrow">ACCOUNTING &amp; FINANCE · REFERENCE TOOL</p>
+    <h1>Accounting &amp; Finance — End-to-End Explorer</h1>
+    <p>Accounting equation · Journal flow · Transaction lifecycle · Standards comparison · Key concept reference</p>
+  </section>
+
+  <div id="acc-exp">
+
+    <!-- ═══════════════ TABS ═══════════════ -->
+    <nav class="tabs">
+      <button class="tab active" data-panel="eq"><span class="ico">📊</span> Accounting Equation</button>
+      <button class="tab" data-panel="flow"><span class="ico">🔄</span> Journal Flow</button>
+      <button class="tab" data-panel="sim"><span class="ico">⚡</span> Transaction Lifecycle</button>
+      <button class="tab" data-panel="std"><span class="ico">📚</span> Standards Explorer</button>
+      <button class="tab" data-panel="kf"><span class="ico">🔑</span> Key Concepts</button>
+    </nav>
+
+    <!-- ═══════════════ PANEL 1: EQUATION ═══════════════ -->
+    <div class="panel active" id="panel-eq">
+      <div class="card">
+        <h2><span class="num eq">1</span> Accounting Equation &amp; Financial Statements</h2>
+        <p class="desc">Click any node to see its definition, normal balance side, and the statements it affects.</p>
+
+        <div class="eq-wrap">
+          <div class="eq-tree">
+            <ul>
+              <li>
+                <div class="enode root" data-eq="equation">Accounting Equation<span class="code">Assets = Liabilities + Equity</span></div>
+                <ul>
+                  <li>
+                    <div class="enode as-node" data-eq="assets">Assets<span class="code">Normal: Debit</span></div>
+                    <ul>
+                      <li><div class="enode leaf as-leaf" data-eq="current_assets">Current Assets<span class="code">Cash · AR · Inventory</span></div></li>
+                      <li><div class="enode leaf as-leaf" data-eq="noncurrent_assets">Non-Current Assets<span class="code">PP&amp;E · Intangibles</span></div></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="enode li-node" data-eq="liabilities">Liabilities<span class="code">Normal: Credit</span></div>
+                    <ul>
+                      <li><div class="enode leaf li-leaf" data-eq="current_liab">Current Liabilities<span class="code">AP · Accruals · ST Debt</span></div></li>
+                      <li><div class="enode leaf li-leaf" data-eq="noncurrent_liab">Non-Current Liabilities<span class="code">LT Debt · Deferred Tax</span></div></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="enode eq-node" data-eq="equity">Equity<span class="code">Normal: Credit</span></div>
+                    <ul>
+                      <li><div class="enode leaf eq-leaf" data-eq="share_capital">Share Capital<span class="code">Common · Preferred</span></div></li>
+                      <li><div class="enode leaf eq-leaf" data-eq="retained">Retained Earnings<span class="code">Cumulative P&amp;L</span></div></li>
+                      <li><div class="enode leaf eq-leaf" data-eq="reserves">Other Reserves<span class="code">OCI · Revaluation</span></div></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <div class="enode root" data-eq="pl">Income Statement<span class="code">Revenue − Expenses = Net Income</span></div>
+                <ul>
+                  <li><div class="enode re-node" data-eq="revenue">Revenue<span class="code">Normal: Credit</span></div></li>
+                  <li><div class="enode ex-node" data-eq="cogs">Cost of Goods Sold<span class="code">Normal: Debit</span></div></li>
+                  <li><div class="enode ex-node" data-eq="opex">Operating Expenses<span class="code">Normal: Debit</span></div></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="eq-detail empty" id="eqDetail">👆 Click a node above to explore its definition and normal balance.</div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot ld-as"></span> Assets</div>
+          <div class="legend-item"><span class="legend-dot ld-li"></span> Liabilities</div>
+          <div class="legend-item"><span class="legend-dot ld-eq"></span> Equity</div>
+          <div class="legend-item"><span class="legend-dot ld-re"></span> Revenue</div>
+          <div class="legend-item"><span class="legend-dot ld-ex"></span> Expenses</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ PANEL 2: FLOW ═══════════════ -->
+    <div class="panel" id="panel-flow">
+      <div class="card">
+        <h2><span class="num as">2</span> Journal Flow — Source to Financial Statements</h2>
+        <p class="desc">Click any node to see what feeds it, what it feeds, and the key controls applied at each stage.</p>
+
+        <div class="flow-wrap">
+          <div id="flowCanvas"></div>
+        </div>
+
+        <div class="flow-detail empty" id="flowDetail">👆 Select a node to see its purpose, inputs, outputs, and controls.</div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot ld-as"></span> Asset-side flow</div>
+          <div class="legend-item"><span class="legend-dot ld-li"></span> Liability-side flow</div>
+          <div class="legend-item"><span class="legend-dot ld-re"></span> Revenue flow</div>
+          <div class="legend-item"><span class="legend-dot ld-ex"></span> Expense flow</div>
+          <div class="legend-item"><span class="legend-dot ld-st"></span> Reporting output</div>
+          <div class="legend-item"><span class="legend-dot ld-cl"></span> Controls</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ PANEL 3: SIM ═══════════════ -->
+    <div class="panel" id="panel-sim">
+      <div class="card">
+        <h2><span class="num re">3</span> Transaction Lifecycle — Sale on Credit</h2>
+        <p class="desc">Follow a single business transaction from order to financial statement impact. Press <strong>Play</strong> or step through manually.</p>
+
+        <div class="sim-controls">
+          <button class="btn btn-primary" id="simPlay">▶ Play All</button>
+          <button class="btn btn-ghost" id="simNext">Next Step ▸</button>
+          <button class="btn btn-ghost" id="simReset">↺ Reset</button>
+          <div class="sim-progress" id="simProgress"></div>
+        </div>
+
+        <div id="simContainer"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ PANEL 4: STANDARDS ═══════════════ -->
+    <div class="panel" id="panel-std">
+      <div class="card">
+        <h2><span class="num st">4</span> Standards Explorer — US GAAP · IFRS · Ind AS</h2>
+        <p class="desc">Search and filter by topic. Click a card for a side-by-side comparison of the three frameworks.</p>
+
+        <div class="exp-toolbar">
+          <div class="exp-search">
+            <span class="sico">🔍</span>
+            <input type="text" id="stdSearch" placeholder="Search by topic, standard code, or keyword…">
+          </div>
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="Revenue">Revenue</button>
+          <button class="filter-chip" data-filter="Assets">Assets</button>
+          <button class="filter-chip" data-filter="Liabilities">Liabilities</button>
+          <button class="filter-chip" data-filter="Financial Instruments">Fin. Instruments</button>
+          <button class="filter-chip" data-filter="Consolidation">Consolidation</button>
+          <button class="filter-chip" data-filter="Tax">Tax</button>
+        </div>
+
+        <div class="exp-grid" id="stdGrid"></div>
+
+        <div class="flow-detail empty" id="stdDetail" style="margin-top:1rem;">👆 Click a standard card to see the GAAP / IFRS / Ind AS comparison.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ PANEL 5: KEY CONCEPTS ═══════════════ -->
+    <div class="panel" id="panel-kf">
+      <div class="card">
+        <h2><span class="num cl">5</span> Key Concept Reference</h2>
+        <p class="desc">Essential accounting principles, close activities, and control types. Click a concept to copy it.</p>
+
+        <div class="kf-wrap">
+          <table class="kf">
+            <thead>
+              <tr>
+                <th>Concept</th><th>Definition</th><th>Where Applied</th><th>Impact / Rule</th>
+              </tr>
+            </thead>
+            <tbody id="kfBody"></tbody>
+          </table>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot ld-as"></span> Asset impact</div>
+          <div class="legend-item"><span class="legend-dot ld-li"></span> Liability impact</div>
+          <div class="legend-item"><span class="legend-dot ld-eq"></span> Equity impact</div>
+          <div class="legend-item"><span class="legend-dot ld-re"></span> Revenue / income impact</div>
+          <div class="legend-item"><span class="legend-dot ld-ex"></span> Expense impact</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <a class="acc-back" href="accounting-finance.html">← Back to Accounting &amp; Finance Learning</a>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <div class="footer-col footer-brand">
+      <img src="../assets/so-icon.png" alt="SutraOps Solutions logo">
+      <p class="foot-name"><b>Sutra</b><i>Ops</i> <span>SOLUTIONS</span></p>
+      <p class="foot-tag">Smart Travel. Smart Finance. Smart Operations.</p>
+      <div class="foot-social">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="https://wa.me/919288223003" aria-label="WhatsApp">✆</a>
+        <a href="mailto:info.sutraops@gmail.com" aria-label="Email">✉</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About Us</a>
+      <a href="../services.html">Services</a>
+      <a href="learning-hub.html">Learning Hub</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Our Services</h4>
+      <a href="../services.html#sap">SAP Consulting</a>
+      <a href="../services.html#finance">Accounting &amp; Finance</a>
+      <a href="../services.html#automation">Intelligent Automation</a>
+      <a href="../services.html#travel">Travel Services</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get In Touch</h4>
+      <p class="foot-contact"><span>📱</span> +91 92882 23003</p>
+      <p class="foot-contact"><span>☎️</span> +91 4045766397</p>
+      <p class="foot-contact"><span>✉️</span> info.sutraops@gmail.com</p>
+      <p class="foot-contact"><span>📍</span> India</p>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 SutraOps Solutions. All rights reserved.</p></div>
+</footer>
+<a class="wa-float" href="https://wa.me/919288223003" aria-label="Chat on WhatsApp">✆</a>
+
+<script src="../script.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   1. DATA
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Accounting equation info ── */
+const EQ_INFO = {
+  equation: { t:'Accounting Equation', d:'The fundamental identity of double-entry accounting: Assets = Liabilities + Equity. Every transaction preserves this balance because debits must always equal credits.', c:['Assets = Liabilities + Equity','A = L + E','Double-entry'] },
+  assets: { t:'Assets', d:'Resources controlled by the entity as a result of past events, from which future economic benefits are expected. Normal balance is a debit — increases are debits, decreases are credits.', c:['Normal: Debit','Balance Sheet','ASC 350 / IAS 38'] },
+  current_assets: { t:'Current Assets', d:'Assets expected to be realised, consumed, or converted to cash within one operating cycle (typically 12 months). Includes Cash, Accounts Receivable, Inventory, and Prepaid Expenses.', c:['Cash','Accounts Receivable','Inventory','Prepaid Expenses'] },
+  noncurrent_assets: { t:'Non-Current Assets', d:'Long-term assets not expected to be converted to cash within one operating cycle. Includes Property Plant & Equipment, Intangible Assets, and Long-term Investments.', c:['PP&E','Intangibles','Investments','Right-of-use assets'] },
+  liabilities: { t:'Liabilities', d:'Present obligations arising from past events, the settlement of which is expected to result in an outflow of resources. Normal balance is a credit — increases are credits.', c:['Normal: Credit','Balance Sheet'] },
+  current_liab: { t:'Current Liabilities', d:'Obligations expected to be settled within one operating cycle. Includes Accounts Payable, Accrued Expenses, Short-term Debt, and current portion of long-term debt.', c:['Accounts Payable','Accrued Expenses','ST Debt','Deferred Revenue (current)'] },
+  noncurrent_liab: { t:'Non-Current Liabilities', d:'Obligations not due within one operating cycle. Includes Long-term Debt, Lease Liabilities (non-current), and Deferred Tax Liabilities.', c:['Long-term Debt','Lease Liabilities','Deferred Tax'] },
+  equity: { t:'Equity', d:'Residual interest in the assets of the entity after deducting liabilities. Represents the owners\' claim. Normal balance is a credit.', c:['Normal: Credit','Balance Sheet','Shareholders\' funds'] },
+  share_capital: { t:'Share Capital', d:'Amounts contributed by shareholders in exchange for shares. Includes Common Stock, Preferred Stock, and Additional Paid-in Capital.', c:['Common Stock','Preferred Stock','APIC'] },
+  retained: { t:'Retained Earnings', d:'Cumulative net income retained in the business after dividend distributions. Bridges the Income Statement to the Balance Sheet.', c:['Cumulative P&L','Less dividends','Roll-forward'] },
+  reserves: { t:'Other Reserves', d:'Accumulated Other Comprehensive Income (AOCI) and revaluation surplus. Includes unrealised gains/losses on investments, foreign currency translation, and cash flow hedges.', c:['OCI','Revaluation surplus','FX translation'] },
+  pl: { t:'Income Statement', d:'Reports the entity\'s financial performance over a period: Revenue − Expenses = Net Income. Net income flows into Retained Earnings on the Balance Sheet.', c:['Revenue − Expenses','Period of time','P&L statement'] },
+  revenue: { t:'Revenue', d:'Inflows from ordinary activities arising from the delivery of goods or services. Recognised when control transfers to the customer. Normal balance is a credit.', c:['Normal: Credit','ASC 606 / IFRS 15','Ind AS 115'] },
+  cogs: { t:'Cost of Goods Sold', d:'Direct costs attributable to the production or purchase of goods sold during the period. Includes materials, direct labour, and overhead. Normal balance is a debit.', c:['Normal: Debit','Matches revenue','Inventory release'] },
+  opex: { t:'Operating Expenses', d:'Costs incurred in running the business that are not directly tied to production — selling, general & administrative (SG&A), R&D, marketing, and depreciation of operating assets.', c:['SG&A','R&D','Depreciation','Normal: Debit'] }
+};
+
+/* ── Journal flow graph ── */
+const FLOW = {
+  nodes: [
+    { id:'SOURCE', x:40, y:40, w:180, h:66, group:'cl', desc:'Source Documents', keys:'PO · Invoice · Receipt' },
+    { id:'JOURNAL', x:40, y:150, w:180, h:66, group:'cl', desc:'Journal Entry', keys:'Dr = Cr' },
+    { id:'GL', x:40, y:260, w:180, h:66, group:'st', desc:'General Ledger', keys:'Posted entries' },
+    { id:'TB', x:40, y:370, w:180, h:66, group:'st', desc:'Trial Balance', keys:'Σ Dr = Σ Cr' },
+    { id:'BS', x:350, y:40, w:200, h:80, group:'as', desc:'Balance Sheet', big:true, keys:'Assets · Liabilities · Equity' },
+    { id:'IS', x:350, y:160, w:200, h:80, group:'re', desc:'Income Statement', big:true, keys:'Revenue − Expenses' },
+    { id:'CF', x:350, y:280, w:200, h:80, group:'st', desc:'Cash Flow Statement', big:true, keys:'Operating · Investing · Financing' },
+    { id:'CLOSE', x:350, y:400, w:200, h:66, group:'cl', desc:'Month-End Close', keys:'Accruals · Reconciliations' },
+    { id:'AP', x:790, y:40, w:170, h:70, group:'li', desc:'Accounts Payable Cycle', keys:'PO → GR → Invoice → Pay' },
+    { id:'AR', x:790, y:160, w:170, h:70, group:'as', desc:'Accounts Receivable Cycle', keys:'Order → Invoice → Receipt' },
+    { id:'FA', x:790, y:280, w:170, h:70, group:'ex', desc:'Fixed Asset Cycle', keys:'Acquire → Depreciate → Dispose' },
+    { id:'SOX', x:790, y:400, w:170, h:70, group:'cl', desc:'SOX Controls', keys:'Segregation · Evidence' }
+  ],
+  edges: [
+    { f:'SOURCE', t:'JOURNAL' },
+    { f:'JOURNAL', t:'GL' },
+    { f:'GL', t:'TB' },
+    { f:'TB', t:'BS' },
+    { f:'TB', t:'IS' },
+    { f:'TB', t:'CF' },
+    { f:'AP', t:'JOURNAL', type:'double', label:'Purchases' },
+    { f:'AR', t:'JOURNAL', type:'double', label:'Sales' },
+    { f:'FA', t:'JOURNAL', type:'double', label:'Depreciation' },
+    { f:'CLOSE', t:'JOURNAL', type:'double', label:'Adjustments' },
+    { f:'SOX', t:'GL', type:'double', label:'Control testing' },
+    { f:'IS', t:'BS', type:'double', label:'Net income → RE' }
+  ]
+};
+
+/* ── Simulation: sale on credit ── */
+const SIM_STEPS = [
+  {
+    n:1, cls:'step-cl', title:'Customer Order Received', sub:'Sales Order · No accounting entry yet',
+    note:'A customer places an order for 1,000 units at $50 each. At this stage, no accounting entry is made — the order is a commercial commitment, not a transaction.',
+    cards:[
+      { type:'kv', title:'Order Data', items:[
+        ['Customer','C-10234 — Acme Retail'], ['Product','Widget-X'],
+        ['Quantity','1,000 units'], ['Unit Price','$50.00'],
+        ['Total Order Value','$50,000.00'], ['Payment Terms','Net 30'],
+        ['Order Date','05.04.2024'], ['Sales Order','SO-4001234']
+      ]}
+    ]
+  },
+  {
+    n:2, cls:'step-as', title:'Invoice Issued — Revenue Recognised', sub:'Dr Accounts Receivable / Cr Revenue',
+    note:'Control of goods transfers to the customer; revenue is recognised under ASC 606 / IFRS 15 / Ind AS 115. A receivable is recorded because payment is due in 30 days.',
+    cards:[
+      { type:'table', cls:'as', table:'Journal Entry — Invoice', subtitle:'JV-2024-04-0501',
+        cols:['Line','Account','Dr','Cr'],
+        rows:[
+          ['1','1200 — Accounts Receivable','50,000.00',''],
+          ['2','4000 — Sales Revenue','','50,000.00'],
+          ['','Total','50,000.00','50,000.00']
+        ]},
+      { type:'table', cls:'re', table:'Income Statement Impact', subtitle:'Period: April 2024',
+        cols:['Line','Amount'],
+        rows:[['Revenue','+50,000.00'],['Gross Profit','+50,000.00 (before COGS)']]}
+    ]
+  },
+  {
+    n:3, cls:'step-ex', title:'Cost of Goods Sold Recorded', sub:'Dr COGS / Cr Inventory',
+    note:'Under the matching principle, the cost of the goods sold is recognised in the same period as the revenue. Inventory is reduced at cost ($30/unit × 1,000 = $30,000).',
+    cards:[
+      { type:'table', cls:'ex', table:'Journal Entry — COGS', subtitle:'JV-2024-04-0502',
+        cols:['Line','Account','Dr','Cr'],
+        rows:[
+          ['1','5000 — Cost of Goods Sold','30,000.00',''],
+          ['2','1300 — Inventory','','30,000.00'],
+          ['','Total','30,000.00','30,000.00']
+        ]},
+      { type:'table', cls:'ex', table:'Income Statement Impact', subtitle:'Period: April 2024',
+        cols:['Line','Amount'],
+        rows:[['Revenue','+50,000.00'],['COGS','−30,000.00'],['Gross Profit','+20,000.00']]}
+    ]
+  },
+  {
+    n:4, cls:'step-as', title:'Customer Payment Received', sub:'Dr Cash / Cr Accounts Receivable',
+    note:'Thirty days later, the customer pays in full. Cash increases and the receivable is cleared. No revenue is recognised here — revenue was already recorded at invoice.',
+    cards:[
+      { type:'table', cls:'as', table:'Journal Entry — Receipt', subtitle:'JV-2024-05-0503',
+        cols:['Line','Account','Dr','Cr'],
+        rows:[
+          ['1','1000 — Cash','50,000.00',''],
+          ['2','1200 — Accounts Receivable','','50,000.00'],
+          ['','Total','50,000.00','50,000.00']
+        ]},
+      { type:'table', cls:'as', table:'Balance Sheet Impact', subtitle:'As of 31.05.2024',
+        cols:['Line','Change'],
+        rows:[['Cash','+50,000.00'],['Accounts Receivable','−50,000.00'],['Net Assets','No change']]}
+    ]
+  },
+  {
+    n:5, cls:'step-cl', title:'Month-End Adjustments', sub:'Accruals · Provisions · Reconciliations',
+    note:'Before the books close, several adjusting entries are made: bad debt provision, deferred revenue release (if any), FX revaluation, and account reconciliations.',
+    cards:[
+      { type:'table', cls:'cl', table:'Adjusting Entries — April 2024', subtitle:'Selected',
+        cols:['Entry','Account','Dr','Cr'],
+        rows:[
+          ['Bad debt provision','6400 — Bad Debt Expense','500.00',''],
+          ['','1290 — Allowance for Doubtful Accounts','','500.00'],
+          ['Depreciation','6200 — Depreciation Expense','2,000.00',''],
+          ['','1590 — Accumulated Depreciation','','2,000.00'],
+          ['Accrued salary','6100 — Salary Expense','8,000.00',''],
+          ['','2100 — Accrued Liabilities','','8,000.00']
+        ]}
+    ]
+  },
+  {
+    n:6, cls:'step-done', title:'Financial Statements — End of Cycle', sub:'Trial Balance → BS · IS · CF',
+    note:'After all adjustments, the trial balance is produced. Net income flows to Retained Earnings, and the balance sheet stays in balance (A = L + E).',
+    cards:[
+      { type:'table', cls:'re', table:'Income Statement — April 2024', subtitle:'Extract',
+        cols:['Line','Amount'],
+        rows:[
+          ['Revenue','50,000.00'],
+          ['COGS','(30,000.00)'],
+          ['Operating Expenses','(10,500.00)'],
+          ['Net Income','9,500.00']
+        ]},
+      { type:'table', cls:'as', table:'Balance Sheet — 30.04.2024', subtitle:'Extract',
+        cols:['Line','Amount'],
+        rows:[
+          ['Cash','120,000.00'],
+          ['Accounts Receivable','50,000.00'],
+          ['Inventory','170,000.00'],
+          ['Total Assets','340,000.00'],
+          ['Liabilities','130,500.00'],
+          ['Equity (incl. RE +9,500)','209,500.00']
+        ]},
+      { type:'summary', items:[
+        ['Revenue','50,000.00'], ['Gross Profit','20,000.00'],
+        ['Net Income','9,500.00'], ['AR Days','30'],
+        ['A = L + E','✓ Balanced'], ['Close Status','Posted']
+      ]}
+    ]
+  }
+];
+
+/* ── Standards data ── */
+const STANDARDS = {
+  'Revenue — ASC 606 / IFRS 15 / Ind AS 115': { module:'Revenue', desc:'Five-step model for revenue recognition from contracts with customers.', purpose:'Establishes a single, principles-based framework for recognising revenue across industries. Replaces legacy industry-specific guidance.', tags:['Revenue','ASC 606','IFRS 15','Ind AS 115'], keys:['Identify contract','Identify performance obligations','Determine transaction price','Allocate price','Recognise revenue'], diff:'US GAAP and IFRS are largely converged; Ind AS 115 mirrors IFRS 15 with limited carve-outs for certain Indian arrangements.' },
+  'Leases — ASC 842 / IFRS 16 / Ind AS 116': { module:'Liabilities', desc:'Lessee recognition of right-of-use assets and lease liabilities.', purpose:'Brings most operating leases onto the balance sheet for lessees. Eliminates the off-balance-sheet treatment for lessees under legacy US GAAP and IAS 17.', tags:['Leases','ASC 842','IFRS 16','Ind AS 116'], keys:['Lease term','Discount rate','ROU asset','Lease liability','Short-term exemption'], diff:'US GAAP retains dual lessee model (operating vs finance); IFRS and Ind AS use a single lessee model. Lessor accounting differs in scope.' },
+  'Financial Instruments — ASC 326 / IFRS 9 / Ind AS 109': { module:'Financial Instruments', desc:'Classification, measurement, impairment, and hedge accounting.', purpose:'Prescribes how financial assets and liabilities are classified and measured, and introduces expected credit loss (ECL) impairment.', tags:['Financial Instruments','ASC 326','IFRS 9','Ind AS 109'], keys:['Amortised cost','FVOCI','FVTPL','ECL model','Hedge accounting'], diff:'US GAAP uses CECL for credit losses; IFRS and Ind AS use a three-stage ECL model. Hedge accounting rules differ in eligibility and documentation.' },
+  'Inventory — ASC 330 / IAS 2 / Ind AS 2': { module:'Assets', desc:'Measurement of inventory at the lower of cost and net realisable value.', purpose:'Ensures inventory is not carried above the amount expected to be recovered from its sale. Cost includes purchase, conversion, and other attributable costs.', tags:['Inventory','ASC 330','IAS 2','Ind AS 2'], keys:['Lower of cost or NRV','FIFO / weighted average','Absorption costing','Write-down'], diff:'US GAAP permits LIFO; IFRS and Ind AS prohibit it. US GAAP measures at lower of cost or market; IFRS / Ind AS use lower of cost or NRV.' },
+  'Property, Plant & Equipment — ASC 360 / IAS 16 / Ind AS 16': { module:'Assets', desc:'Recognition, measurement, depreciation, and impairment of PP&E.', purpose:'Establishes principles for initial recognition at cost, subsequent measurement (cost or revaluation), depreciation, and impairment testing.', tags:['PP&E','ASC 360','IAS 16','Ind AS 16'], keys:['Cost model','Revaluation model','Useful life','Residual value','Component depreciation'], diff:'IFRS and Ind AS permit revaluation model; US GAAP does not. Component depreciation is required under IFRS / Ind AS but less common under US GAAP.' },
+  'Intangible Assets — ASC 350 / IAS 38 / Ind AS 38': { module:'Assets', desc:'Recognition and measurement of intangible assets and goodwill.', purpose:'Distinguishes research (expensed) from development (capitalised when criteria met). Goodwill is tested annually for impairment under both frameworks.', tags:['Intangibles','Goodwill','ASC 350','IAS 38','Ind AS 38'], keys:['Research vs development','Finite vs indefinite life','Amortisation','Impairment testing'], diff:'IFRS permits revaluation of intangibles in limited cases; US GAAP prohibits it. Goodwill impairment testing mechanics differ (qualitative assessment step).' },
+  'Income Taxes — ASC 740 / IAS 12 / Ind AS 12': { module:'Tax', desc:'Accounting for current and deferred income taxes.', purpose:'Requires recognition of deferred tax assets and liabilities for temporary differences between book and tax bases, using enacted tax rates.', tags:['Income Tax','Deferred Tax','ASC 740','IAS 12','Ind AS 12'], keys:['Temporary differences','Deferred tax asset/liability','Valuation allowance','Uncertain tax positions'], diff:'US GAAP uses a more prescriptive valuation allowance model; IFRS / Ind AS apply a probability-based recoverability test. Uncertain tax position guidance differs.' },
+  'Foreign Currency — ASC 830 / IAS 21 / Ind AS 21': { module:'Assets', desc:'Translation of foreign currency transactions and financial statements.', purpose:'Prescribes how to translate foreign currency transactions into the functional currency and how to translate foreign operations into the presentation currency.', tags:['FX','ASC 830','IAS 21','Ind AS 21'], keys:['Functional currency','Spot rate','Closing rate','CTA in OCI'], diff:'US GAAP and IFRS are substantially converged. Presentation of translation gains/losses in OCI is consistent.' },
+  'Business Combinations — ASC 805 / IFRS 3 / Ind AS 103': { module:'Consolidation', desc:'Accounting for acquisitions using the acquisition method.', purpose:'Requires identification of the acquirer, acquisition date, recognition and measurement of identifiable assets and liabilities at fair value, and recognition of goodwill.', tags:['Business Combination','Goodwill','ASC 805','IFRS 3','Ind AS 103'], keys:['Acquisition method','Fair value','NCI measurement','Bargain purchase'], diff:'US GAAP and IFRS are largely converged; Ind AS 103 has limited differences in common control transactions.' },
+  'Consolidation — ASC 810 / IFRS 10 / Ind AS 110': { module:'Consolidation', desc:'Principles for presenting consolidated financial statements.', purpose:'Requires a parent to consolidate entities it controls. Control is defined as power over the investee, exposure to variable returns, and ability to affect returns.', tags:['Consolidation','Control','ASC 810','IFRS 10','Ind AS 110'], keys:['Control model','NCI','Eliminations','Uniform policies'], diff:'IFRS 10 uses a single control model; US GAAP has both voting interest and VIE models. Ind AS 110 mirrors IFRS 10.' },
+  'Fair Value Measurement — ASC 820 / IFRS 13 / Ind AS 113': { module:'Assets', desc:'Framework for measuring fair value and disclosing fair value hierarchy.', purpose:'Defines fair value as the price received to sell an asset or paid to transfer a liability in an orderly transaction between market participants.', tags:['Fair Value','ASC 820','IFRS 13','Ind AS 113'], keys:['Level 1 / 2 / 3','Market participant view','Highest and best use','Valuation techniques'], diff:'US GAAP, IFRS, and Ind AS are substantially converged on fair value measurement and disclosure.' },
+  'Impairment — ASC 360 / IAS 36 / Ind AS 36': { module:'Assets', desc:'Impairment of long-lived assets and goodwill.', purpose:'Requires assets to be carried at no more than their recoverable amount. Recoverable amount is the higher of fair value less costs to sell and value in use.', tags:['Impairment','ASC 360','IAS 36','Ind AS 36'], keys:['Recoverable amount','Value in use','CGU','Reversal (IFRS only)'], diff:'IFRS / Ind AS permit reversal of impairment for non-goodwill assets; US GAAP prohibits reversal. Goodwill impairment is only downward under both.' },
+  'Provisions & Contingencies — ASC 450 / IAS 37 / Ind AS 37': { module:'Liabilities', desc:'Recognition and measurement of provisions, contingent liabilities, and contingent assets.', purpose:'Requires recognition of a provision when there is a present obligation from a past event, probable outflow, and reliable estimate.', tags:['Provisions','Contingencies','ASC 450','IAS 37','Ind AS 37'], keys:['Present obligation','Probable outflow','Best estimate','Discounting'], diff:'IFRS / Ind AS require discounting of long-term provisions and use "more likely than not" for restructuring; US GAAP thresholds differ in some areas.' },
+  'Employee Benefits — ASC 715 / IAS 19 / Ind AS 19': { module:'Liabilities', desc:'Accounting for short-term, post-employment, and other long-term employee benefits.', purpose:'Requires recognition of defined benefit obligations using actuarial assumptions, with service cost in P&L and remeasurements in OCI.', tags:['Employee Benefits','Pensions','ASC 715','IAS 19','Ind AS 19'], keys:['DBO','Actuarial gains/losses','Service cost','Discount rate','Past service cost'], diff:'IFRS and Ind AS require immediate recognition of past service cost and remeasurements in OCI; US GAAP permits amortisation of certain items (corridor approach).' },
+  'Share-Based Payment — ASC 718 / IFRS 2 / Ind AS 102': { module:'Equity', desc:'Accounting for share-based payment transactions.', purpose:'Requires recognition of the fair value of equity instruments granted or liabilities incurred as expense over the vesting period.', tags:['Share-Based Payment','ESOP','ASC 718','IFRS 2','Ind AS 102'], keys:['Grant date fair value','Vesting conditions','Expense recognition','Modification accounting'], diff:'US GAAP and IFRS are largely converged; certain graded vesting and tax accounting mechanics differ.' }
+};
+
+/* ── Key concepts ── */
+const KEY_CONCEPTS = [
+  { c:'Accrual Basis', d:'Revenue and expenses are recognised when earned or incurred, not when cash changes hands.', w:'Income statement', i:'Revenue recognised at delivery, not at cash receipt.', cls:'fld-re' },
+  { c:'Matching Principle', d:'Expenses are recognised in the same period as the revenues they help generate.', w:'Income statement', i:'COGS recorded with the related sale.', cls:'fld-ex' },
+  { c:'Going Concern', d:'Financial statements assume the entity will continue operating for the foreseeable future.', w:'Basis of preparation', i:'Affects valuation and disclosure of assets.', cls:'fld-eq' },
+  { c:'Materiality', d:'Information is material if omitting or misstating it could influence users\' decisions.', w:'Disclosure', i:'Sets audit and close thresholds.', cls:'fld-eq' },
+  { c:'Substance over Form', d:'Accounting reflects the economic substance of a transaction, not just its legal form.', w:'All standards', i:'Leases on balance sheet even if legally operating.', cls:'fld-li' },
+  { c:'Prudence / Conservatism', d:'Do not overstate assets or income; recognise losses when probable.', w:'Measurement', i:'Lower of cost or NRV for inventory.', cls:'fld-as' },
+  { c:'Consistency', d:'Apply the same accounting policies across periods unless a change is justified and disclosed.', w:'Policy selection', i:'Depreciation method used consistently.', cls:'fld-eq' },
+  { c:'Comparability', d:'Financial statements should be comparable across periods and across entities.', w:'Presentation', i:'Uniform classification of items.', cls:'fld-eq' },
+  { c:'Debit / Credit Rule', d:'Every transaction has equal debits and credits. Assets and expenses are debit-balance; liabilities, equity, and revenue are credit-balance.', w:'Journal entry', i:'Dr AR / Cr Revenue for a sale.', cls:'fld-as' },
+  { c:'Revenue Recognition', d:'Recognise revenue when control of goods or services transfers to the customer.', w:'ASC 606 / IFRS 15', i:'Five-step model applied to contracts.', cls:'fld-re' },
+  { c:'Preventive Control', d:'A control designed to stop an error or fraud before it occurs.', w:'Internal controls', i:'Segregation of duties; system edit checks.', cls:'fld-li' },
+  { c:'Detective Control', d:'A control designed to identify an error or fraud after it has occurred.', w:'Internal controls', i:'Bank reconciliations; variance analysis.', cls:'fld-li' },
+  { c:'Corrective Control', d:'A control designed to correct an error once detected.', w:'Internal controls', i:'Journal corrections; remediation plans.', cls:'fld-li' },
+  { c:'Segregation of Duties', d:'No single person should control all aspects of a transaction from initiation to recording to reconciliation.', w:'SOX / ICFR', i:'AP entry and payment approval must be separate.', cls:'fld-li' },
+  { c:'Month-End Close', d:'A structured sequence of cut-off, accrual, reconciliation, and review activities to close the books for a period.', w:'Close calendar', i:'Day 1: cut-off; Day 3: accruals; Day 5: reporting.', cls:'fld-ex' },
+  { c:'Reconciliation', d:'Comparison of two independent records to confirm accuracy and completeness.', w:'Close / controls', i:'Subledger to GL; bank to cash.', cls:'fld-as' },
+  { c:'Subledger', d:'A supporting ledger for a specific area (AP, AR, FA) that feeds into the General Ledger.', w:'Accounting systems', i:'AP subledger balance agrees with GL control account.', cls:'fld-as' },
+  { c:'Trial Balance', d:'A listing of all ledger account balances at a point in time, used to verify that debits equal credits.', w:'Close', i:'Pre-close and post-close trial balances.', cls:'fld-eq' },
+  { c:'Flux Analysis', d:'Variance analysis comparing current-period balances to prior-period or budget, with explanations for significant movements.', w:'Management reporting', i:'Investigate movements > threshold %.', cls:'fld-ex' },
+  { c:'ICFR', d:'Internal Control over Financial Reporting — the framework for ensuring reliable financial reporting.', w:'SOX 404', i:'Documented, tested, and reported annually.', cls:'fld-li' }
+];
+
+/* ═══════════════════════════════════════════════════════════
+   2. TAB NAVIGATION
+   ═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('#acc-exp .tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('#acc-exp .tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('#acc-exp .panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    if (tab.dataset.panel === 'flow') setTimeout(() => drawFlowEdges(), 50);
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   3. EQUATION TREE
+   ═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('#acc-exp .enode').forEach(node => {
+  node.addEventListener('click', () => {
+    document.querySelectorAll('#acc-exp .enode').forEach(n => n.classList.remove('sel'));
+    node.classList.add('sel');
+    const info = EQ_INFO[node.dataset.eq];
+    if (!info) return;
+    const det = document.getElementById('eqDetail');
+    det.classList.remove('empty');
+    det.innerHTML = `
+      <h4>${info.t}</h4>
+      <p>${info.d}</p>
+      <div class="chips">${info.c.map(c => `<span class="chip">${c}</span>`).join('')}</div>
+    `;
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   4. FLOW GRAPH
+   ═══════════════════════════════════════════════════════════ */
+let flowSelected = null;
+
+function boundaryPoint(node, tx, ty) {
+  const cx = node.x + node.w / 2, cy = node.y + node.h / 2;
+  const dx = tx - cx, dy = ty - cy;
+  if (dx === 0 && dy === 0) return { x: cx, y: cy };
+  const hw = node.w / 2 + 3, hh = node.h / 2 + 3;
+  const tX = dx !== 0 ? hw / Math.abs(dx) : Infinity;
+  const tY = dy !== 0 ? hh / Math.abs(dy) : Infinity;
+  const t = Math.min(tX, tY);
+  return { x: cx + dx * t, y: cy + dy * t };
+}
+
+function buildFlowGraph() {
+  const canvas = document.getElementById('flowCanvas');
+  canvas.innerHTML = '';
+  canvas.onclick = (e) => { if (e.target === canvas) resetFlow(); };
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'flow-svg');
+  svg.setAttribute('width', 1000);
+  svg.setAttribute('height', 560);
+  svg.id = 'flowSvg';
+  canvas.appendChild(svg);
+
+  FLOW.nodes.forEach(n => {
+    const div = document.createElement('div');
+    div.className = `flow-node ${n.group}${n.big ? ' big' : ''}`;
+    div.style.left = n.x + 'px';
+    div.style.top = n.y + 'px';
+    div.style.width = n.w + 'px';
+    div.style.height = n.h + 'px';
+    div.dataset.id = n.id;
+    div.innerHTML = `
+      <div class="fn-name">${n.id}</div>
+      <div class="fn-desc">${n.desc}</div>
+      ${n.keys ? `<div class="fn-keys">${n.keys}</div>` : ''}
+    `;
+    div.addEventListener('click', (e) => { e.stopPropagation(); selectFlowNode(n.id); });
+    canvas.appendChild(div);
+  });
+
+  drawFlowEdges();
+}
+
+function drawFlowEdges() {
+  const svg = document.getElementById('flowSvg');
+  if (!svg) return;
+  svg.innerHTML = '';
+
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  defs.innerHTML = `
+    <marker id="farrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="farrow-active" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/>
+    </marker>
+  `;
+  svg.appendChild(defs);
+
+  FLOW.edges.forEach(e => {
+    const na = FLOW.nodes.find(n => n.id === e.f);
+    const nb = FLOW.nodes.find(n => n.id === e.t);
+    if (!na || !nb) return;
+
+    const ca = { x: na.x + na.w / 2, y: na.y + na.h / 2 };
+    const cb = { x: nb.x + nb.w / 2, y: nb.y + nb.h / 2 };
+    const p1 = boundaryPoint(na, cb.x, cb.y);
+    const p2 = boundaryPoint(nb, ca.x, ca.y);
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', p1.x); line.setAttribute('y1', p1.y);
+    line.setAttribute('x2', p2.x); line.setAttribute('y2', p2.y);
+    line.setAttribute('class', 'flow-edge' + (e.type === 'double' ? ' double' : ''));
+    line.setAttribute('marker-end', 'url(#farrow)');
+    line.dataset.from = e.f;
+    line.dataset.to = e.t;
+    svg.appendChild(line);
+
+    if (e.label) {
+      const midX = (p1.x + p2.x) / 2;
+      const midY = (p1.y + p2.y) / 2;
+      const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      txt.setAttribute('x', midX); txt.setAttribute('y', midY - 5);
+      txt.setAttribute('class', 'flow-label');
+      txt.dataset.from = e.f;
+      txt.dataset.to = e.t;
+      txt.textContent = e.label;
+      svg.appendChild(txt);
+    }
+  });
+}
+
+function selectFlowNode(id) {
+  flowSelected = id;
+  const connected = new Set([id]);
+  FLOW.edges.forEach(e => {
+    if (e.f === id) connected.add(e.t);
+    if (e.t === id) connected.add(e.f);
+  });
+
+  document.querySelectorAll('#acc-exp .flow-node').forEach(n => {
+    const nid = n.dataset.id;
+    n.classList.toggle('selected', nid === id);
+    n.classList.toggle('highlighted', connected.has(nid) && nid !== id);
+    n.classList.toggle('dimmed', !connected.has(nid));
+  });
+
+  document.querySelectorAll('#acc-exp .flow-edge').forEach(edge => {
+    const active = edge.dataset.from === id || edge.dataset.to === id;
+    edge.classList.toggle('active', active);
+    edge.classList.toggle('dimmed', !active);
+    if (active) edge.setAttribute('marker-end', 'url(#farrow-active)');
+    else edge.setAttribute('marker-end', 'url(#farrow)');
+  });
+  document.querySelectorAll('#acc-exp .flow-label').forEach(lbl => {
+    const active = lbl.dataset.from === id || lbl.dataset.to === id;
+    lbl.classList.toggle('active', active);
+  });
+
+  showFlowDetail(id);
+}
+
+function resetFlow() {
+  flowSelected = null;
+  document.querySelectorAll('#acc-exp .flow-node').forEach(n => {
+    n.classList.remove('selected', 'highlighted', 'dimmed');
+  });
+  document.querySelectorAll('#acc-exp .flow-edge').forEach(edge => {
+    edge.classList.remove('active', 'dimmed');
+    edge.setAttribute('marker-end', 'url(#farrow)');
+  });
+  document.querySelectorAll('#acc-exp .flow-label').forEach(l => l.classList.remove('active'));
+  const det = document.getElementById('flowDetail');
+  det.className = 'flow-detail empty';
+  det.textContent = '👆 Select a node to see its purpose, inputs, outputs, and controls.';
+}
+
+function showFlowDetail(id) {
+  const n = FLOW.nodes.find(x => x.id === id);
+  if (!n) return;
+  const det = document.getElementById('flowDetail');
+  det.classList.remove('empty');
+  det.innerHTML = `
+    <h4>${id}</h4>
+    <div class="gd-desc">${n.desc}</div>
+    <div class="gd-cols">
+      <div class="gd-block">
+        <h5>Purpose</h5>
+        <p style="font-size:.8rem;color:#475569;">${n.desc} — this stage captures, validates, or reports the accounting impact of business events.</p>
+        <h5 style="margin-top:.7rem;">Key Indicators</h5>
+        <div class="ec-keys">${(n.keys || '').split('·').map(k => `<span>${k.trim()}</span>`).join('')}</div>
+      </div>
+      <div class="gd-block">
+        <h5>Related Stages</h5>
+        <div>${FLOW.edges.filter(e => e.f === id || e.t === id).map(e => {
+          const other = e.f === id ? e.t : e.f;
+          return `<span class="rel-chip" onclick="selectFlowNode('${other}')">${other}</span>`;
+        }).join('')}</div>
+      </div>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5. SIMULATION
+   ═══════════════════════════════════════════════════════════ */
+let simIndex = -1;
+let simPlaying = false;
+let simTimer = null;
+
+function renderSimStep(step, index) {
+  const container = document.getElementById('simContainer');
+  if (document.getElementById('simStep' + index)) return;
+
+  const div = document.createElement('div');
+  div.className = `sim-step ${step.cls}`;
+  div.id = 'simStep' + index;
+
+  let cardsHtml = '';
+  step.cards.forEach(card => {
+    if (card.type === 'kv') {
+      cardsHtml += `
+        <div class="sim-tcard">
+          <div class="stc-head" style="background:#f1f5f9;color:#334155;">${card.title}</div>
+          <div style="padding:.7rem;">
+            <div class="kv-grid">
+              ${card.items.map(([k, v]) => `<div class="kv-item"><label>${k}</label><span>${v}</span></div>`).join('')}
+            </div>
+          </div>
+        </div>`;
+    } else if (card.type === 'table') {
+      cardsHtml += `
+        <div class="sim-tcard ${card.cls}">
+          <div class="stc-head">${card.table}<span>${card.subtitle}</span></div>
+          <table>
+            <thead><tr>${card.cols.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+            <tbody>${card.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+          </table>
+        </div>`;
+    } else if (card.type === 'summary') {
+      cardsHtml += `
+        <div style="width:100%;">
+          <div class="sim-summary">
+            ${card.items.map(([k, v]) => `<div class="sum-item"><div class="sv">${v}</div><div class="sl">${k}</div></div>`).join('')}
+          </div>
+        </div>`;
+    }
+  });
+
+  div.innerHTML = `
+    <div class="sim-head">
+      <span class="sim-num">${step.n}</span>
+      <div>
+        <div class="sim-title">${step.title}</div>
+        <div class="sim-sub">${step.sub}</div>
+      </div>
+    </div>
+    <div class="sim-note">${step.note}</div>
+    <div class="sim-grid">${cardsHtml}</div>
+  `;
+  container.appendChild(div);
+  requestAnimationFrame(() => div.classList.add('show'));
+}
+
+function updateProgress() {
+  const prog = document.getElementById('simProgress');
+  prog.innerHTML = SIM_STEPS.map((_, i) => {
+    let cls = 'sim-dot';
+    if (i < simIndex) cls += ' done';
+    if (i === simIndex) cls += ' active';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+}
+
+function simNext() {
+  if (simIndex >= SIM_STEPS.length - 1) return;
+  simIndex++;
+  renderSimStep(SIM_STEPS[simIndex], simIndex);
+  updateProgress();
+  if (simIndex === SIM_STEPS.length - 1) {
+    document.getElementById('simPlay').disabled = true;
+    document.getElementById('simNext').disabled = true;
+  }
+}
+
+function simReset() {
+  clearTimeout(simTimer);
+  simPlaying = false;
+  simIndex = -1;
+  document.getElementById('simContainer').innerHTML = '';
+  document.getElementById('simProgress').innerHTML = '';
+  document.getElementById('simPlay').disabled = false;
+  document.getElementById('simNext').disabled = false;
+  document.getElementById('simPlay').innerHTML = '▶ Play All';
+}
+
+function simPlayAll() {
+  if (simPlaying) return;
+  if (simIndex >= SIM_STEPS.length - 1) simReset();
+  simPlaying = true;
+  document.getElementById('simPlay').innerHTML = '⏸ Playing…';
+  const tick = () => {
+    if (!simPlaying) return;
+    if (simIndex >= SIM_STEPS.length - 1) {
+      simPlaying = false;
+      document.getElementById('simPlay').innerHTML = '✓ Complete';
+      return;
+    }
+    simNext();
+    simTimer = setTimeout(tick, 1500);
+  };
+  tick();
+}
+
+document.getElementById('simPlay').addEventListener('click', () => {
+  if (simPlaying) {
+    simPlaying = false;
+    clearTimeout(simTimer);
+    document.getElementById('simPlay').innerHTML = '▶ Resume';
+  } else {
+    simPlayAll();
+  }
+});
+document.getElementById('simNext').addEventListener('click', () => {
+  if (simPlaying) { simPlaying = false; clearTimeout(simTimer); document.getElementById('simPlay').innerHTML = '▶ Resume'; }
+  simNext();
+});
+document.getElementById('simReset').addEventListener('click', simReset);
+
+/* ═══════════════════════════════════════════════════════════
+   6. STANDARDS EXPLORER
+   ═══════════════════════════════════════════════════════════ */
+let stdFilter = 'all';
+let stdQuery = '';
+
+function modClassStd(m) {
+  if (m === 'Revenue') return 'mod-re';
+  if (m === 'Assets') return 'mod-as';
+  if (m === 'Liabilities') return 'mod-li';
+  if (m === 'Equity') return 'mod-eq';
+  if (m === 'Financial Instruments') return 'mod-st';
+  if (m === 'Consolidation') return 'mod-cl';
+  if (m === 'Tax') return 'mod-ex';
+  return 'mod-st';
+}
+
+function renderStandards() {
+  const grid = document.getElementById('stdGrid');
+  const q = stdQuery.toLowerCase().trim();
+
+  const entries = Object.entries(STANDARDS).filter(([name, s]) => {
+    if (stdFilter !== 'all' && s.module !== stdFilter) return false;
+    if (!q) return true;
+    const hay = (name + ' ' + s.desc + ' ' + s.purpose + ' ' + s.tags.join(' ') + ' ' + s.keys.join(' ')).toLowerCase();
+    return hay.includes(q);
+  });
+
+  if (entries.length === 0) {
+    grid.innerHTML = '<div class="no-results">No standards match your search. Try a different term.</div>';
+    return;
+  }
+
+  grid.innerHTML = entries.map(([name, s]) => `
+    <div class="exp-card ${modClassStd(s.module)}" data-std="${name}">
+      <div class="ec-top">
+        <div class="ec-name">${name.split(' — ')[0]}</div>
+        <div class="ec-mod">${s.module}</div>
+      </div>
+      <div class="ec-desc">${s.desc}</div>
+      <div class="ec-keys">${s.tags.slice(0, 3).map(k => `<span>${k}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.exp-card').forEach(card => {
+    card.addEventListener('click', () => showStdDetail(card.dataset.std));
+  });
+}
+
+function showStdDetail(name) {
+  const s = STANDARDS[name];
+  if (!s) return;
+  const det = document.getElementById('stdDetail');
+  det.classList.remove('empty');
+  det.innerHTML = `
+    <h4>${name}</h4>
+    <div class="gd-desc">${s.desc} &nbsp;·&nbsp; <span style="font-weight:600;color:#334155;">Topic: ${s.module}</span></div>
+    <div class="gd-cols">
+      <div class="gd-block">
+        <h5>Purpose</h5>
+        <p style="font-size:.8rem;color:#475569;">${s.purpose}</p>
+        <h5 style="margin-top:.7rem;">Key Concepts</h5>
+        <div class="ec-keys">${s.keys.map(k => `<span>${k}</span>`).join('')}</div>
+      </div>
+      <div class="gd-block">
+        <h5>GAAP vs IFRS vs Ind AS — Key Differences</h5>
+        <p style="font-size:.8rem;color:#475569;">${s.diff}</p>
+      </div>
+    </div>
+  `;
+}
+
+document.getElementById('stdSearch').addEventListener('input', (e) => {
+  stdQuery = e.target.value;
+  renderStandards();
+});
+document.querySelectorAll('#acc-exp .filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#acc-exp .filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    stdFilter = chip.dataset.filter;
+    renderStandards();
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   7. KEY CONCEPTS TABLE
+   ═══════════════════════════════════════════════════════════ */
+function renderKeyConcepts() {
+  const body = document.getElementById('kfBody');
+  body.innerHTML = KEY_CONCEPTS.map((r, idx) => `
+    <tr>
+      <td class="mono ${r.cls}">
+        <span id="concept-${idx}">${r.c}</span>
+        <button class="copy-btn" data-concept="${r.c}" title="Copy concept">📋</button>
+      </td>
+      <td>${r.d}</td>
+      <td style="font-family:'Consolas',monospace;font-size:.72rem;color:#475569;">${r.w}</td>
+      <td style="font-family:'Consolas',monospace;font-size:.72rem;color:#475569;">${r.i}</td>
+    </tr>
+  `).join('');
+
+  body.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(btn.dataset.concept).then(() => {
+        btn.textContent = '✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = '📋'; btn.classList.remove('copied'); }, 1200);
+      }).catch(() => {});
+    });
+  });
+}
+
+/* ── Copy button styling ── */
+const style = document.createElement('style');
+style.textContent = `
+  #acc-exp .copy-btn{border:none !important;background:transparent !important;cursor:pointer !important;font-size:.7rem !important;color:#94a3b8 !important;padding:0 2px !important;vertical-align:middle !important;}
+  #acc-exp .copy-btn:hover{color:#1d4ed8 !important;}
+  #acc-exp .copied{color:#047857 !important;}
+`;
+document.head.appendChild(style);
+
+/* ═══════════════════════════════════════════════════════════
+   8. INIT
+   ═══════════════════════════════════════════════════════════ */
+buildFlowGraph();
+renderStandards();
+renderKeyConcepts();
+updateProgress();
+</script>
+</body>
+</html>
