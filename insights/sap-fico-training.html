@@ -4,27 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SAP FICO — Complete Training Material | SutraOps Solutions</title>
-<meta name="description" content="In-depth SAP FICO training covering enterprise structure, GL, AP, AR, AA, Controlling, Product Costing, S/4HANA integration and period-end close with real examples.">
+<meta name="description" content="Complete SAP FICO training — Overview, Enterprise Structure, GL, AP/AR/AA, Bank Accounting, In-House Banking, Controlling, Product Costing, Material Ledger, S/4HANA and close.">
 <link rel="canonical" href="https://sutraops.in/insights/sap-fico-training.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css?v=15">
 <style>
-/* ═══════════════════════════════════════════════════════════
-   SAP FICO Training — SCOPED (#ftr)
-   ═══════════════════════════════════════════════════════════ */
 #ftr{
   --fi:#1d4ed8; --fi-l:#dbeafe;
   --co:#047857; --co-l:#d1fae5;
-  --as:#0891b2; --as-l:#cffafe;
-  --pc:#7c3aed; --pc-l:#ede9fe;
+  --bl:#0e7490; --bl-l:#cffafe;
+  --ihb:#be185d; --ihb-l:#fce7f3;
+  --ml:#7c3aed; --ml-l:#ede9fe;
   --pp:#b45309; --pp-l:#fef3c7;
-  --in:#be185d; --in-l:#fce7f3;
+  --pa:#0891b2; --pa-l:#cffafe;
   --cl:#4338ca; --cl-l:#e0e7ff;
-  --tx:#0f172a; --txm:#64748b; --bd:#cbd5e1;
+  --tx:#0f172a; --txm:#64748b;
   --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
-  --shl:0 10px 25px -5px rgba(0,0,0,.1);
   font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
   color:var(--tx);line-height:1.6;text-align:left;
 }
@@ -38,103 +35,99 @@
 .ftr-hero{background:linear-gradient(135deg,#071f3d 0%,#123b68 100%);color:#fff;border-radius:18px;padding:clamp(26px,5vw,48px);margin-bottom:24px}
 .ftr-hero .eyebrow{color:#ff9a42;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;font-size:12px;margin:0 0 10px}
 .ftr-hero h1{color:#fff;font-size:clamp(28px,4vw,42px);line-height:1.15;margin:0 0 14px}
-.ftr-hero p{color:#e4edf8;font-size:17px;max-width:820px;margin:0}
+.ftr-hero p{color:#e4edf8;font-size:17px;max-width:860px;margin:0}
 
-/* Tabs */
-#ftr .tabs{display:flex;gap:.4rem;flex-wrap:wrap;background:#fff;padding:.4rem;border-radius:14px;box-shadow:var(--sh);border:1px solid #e2e8f0;margin-bottom:1.4rem}
-#ftr .tab{flex:1;min-width:140px;border:none;background:transparent;padding:.65rem .8rem;border-radius:10px;font-size:.8rem;font-weight:600;color:var(--txm);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:.4rem;font-family:inherit}
+#ftr .tabs{display:flex;gap:.35rem;flex-wrap:wrap;background:#fff;padding:.4rem;border-radius:14px;box-shadow:var(--sh);border:1px solid #e2e8f0;margin-bottom:1.4rem}
+#ftr .tab{flex:1;min-width:135px;border:none;background:transparent;padding:.6rem .7rem;border-radius:10px;font-size:.76rem;font-weight:600;color:var(--txm);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:.35rem;font-family:inherit;text-align:center}
 #ftr .tab:hover{background:#f1f5f9;color:var(--tx)}
 #ftr .tab.active{background:linear-gradient(135deg,#1d4ed8,#047857);color:#fff;box-shadow:0 4px 10px -3px rgba(29,78,216,.5)}
-#ftr .tab .ico{font-size:1rem}
-#ftr .tab .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.25);font-size:.65rem;font-weight:700}
+#ftr .tab .n{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:rgba(255,255,255,.25);font-size:.62rem;font-weight:700}
 #ftr .tab:not(.active) .n{background:#e2e8f0;color:#64748b}
 
 #ftr .panel{display:none;animation:ftrFade .3s ease}
 #ftr .panel.active{display:block}
 @keyframes ftrFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* Cards / sections */
-#ftr .card{display:block!important;padding:1.6rem 1.8rem!important;background:#fff!important;border-radius:14px!important;border:1px solid #e2e8f0!important;box-shadow:0 1px 3px rgba(0,0,0,.08)!important;margin-bottom:1.2rem!important}
-#ftr .card h2{font-size:1.35rem!important;font-weight:700!important;color:#071f3d!important;margin:0 0 .3rem 0!important;display:flex!important;align-items:center!important;gap:.55rem!important}
-#ftr .card h2 .num{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:32px!important;height:32px!important;border-radius:9px!important;font-size:.85rem!important;font-weight:800!important;color:#fff!important;background:#1d4ed8!important;flex-shrink:0!important}
-#ftr .card .sub{color:var(--txm);font-size:.9rem;margin:0 0 1.2rem 0}
+#ftr .card{display:block!important;padding:1.5rem 1.7rem!important;background:#fff!important;border-radius:14px!important;border:1px solid #e2e8f0!important;box-shadow:0 1px 3px rgba(0,0,0,.08)!important;margin-bottom:1.2rem!important}
+#ftr .card h2{font-size:1.3rem!important;font-weight:700!important;color:#071f3d!important;margin:0 0 .3rem 0!important;display:flex!important;align-items:center!important;gap:.55rem!important}
+#ftr .card h2 .num{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:34px!important;height:34px!important;padding:0 8px!important;border-radius:9px!important;font-size:.8rem!important;font-weight:800!important;color:#fff!important;background:#1d4ed8!important;flex-shrink:0!important}
+#ftr .card .sub{color:var(--txm);font-size:.88rem;margin:0 0 1.1rem 0}
 
-#ftr .sec{display:block;margin:1.6rem 0 0 0;padding:0}
-#ftr .sec:first-of-type{margin-top:1rem}
-#ftr .sec h3{font-size:1.02rem;font-weight:700;color:#071f3d;margin:0 0 .6rem 0;display:flex;align-items:center;gap:.5rem;padding-bottom:.4rem;border-bottom:2px solid #f1f5f9}
+#ftr .sec{display:block;margin:1.5rem 0 0 0;padding:0}
+#ftr .sec:first-of-type{margin-top:.9rem}
+#ftr .sec h3{font-size:1rem;font-weight:700;color:#071f3d;margin:0 0 .6rem 0;display:flex;align-items:center;gap:.5rem;padding-bottom:.4rem;border-bottom:2px solid #f1f5f9}
 #ftr .sec h3 .dot{width:8px;height:8px;border-radius:50%;background:#f58220;flex-shrink:0}
-#ftr .sec p{color:#334155;font-size:.9rem;margin:0 0 .8rem 0}
+#ftr .sec p{color:#334155;font-size:.88rem;margin:0 0 .75rem 0}
 #ftr .sec ul,#ftr .sec ol{padding-left:1.3rem;margin:.5rem 0 .8rem 0}
-#ftr .sec li{color:#334155;font-size:.88rem;margin-bottom:.35rem;line-height:1.55}
+#ftr .sec li{color:#334155;font-size:.86rem;margin-bottom:.35rem;line-height:1.55}
 #ftr .sec strong{color:#0f172a}
 
-/* Meaning box */
 #ftr .meaning{background:linear-gradient(135deg,#f0f7ff,#f8fafc);border-left:4px solid #3b82f6;border-radius:8px;padding:1rem 1.2rem;margin:.8rem 0}
-#ftr .meaning .label{font-size:.7rem;font-weight:800;color:#1d4ed8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.25rem}
-#ftr .meaning p{font-size:.9rem;color:#334155;margin:0}
+#ftr .meaning .label{font-size:.68rem;font-weight:800;color:#1d4ed8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.25rem}
+#ftr .meaning p{font-size:.88rem;color:#334155;margin:0 0 .5rem 0}
+#ftr .meaning p:last-child{margin:0}
 
-/* Example box */
 #ftr .example{background:#fffbeb;border-left:4px solid #f59e0b;border-radius:8px;padding:1rem 1.2rem;margin:.8rem 0}
-#ftr .example .label{font-size:.7rem;font-weight:800;color:#b45309;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.35rem}
-#ftr .example p{font-size:.88rem;color:#334155;margin:0 0 .5rem 0}
+#ftr .example .label{font-size:.68rem;font-weight:800;color:#b45309;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.35rem}
+#ftr .example p{font-size:.86rem;color:#334155;margin:0 0 .5rem 0}
 #ftr .example p:last-child{margin:0}
 
-/* Note box */
 #ftr .note{background:#f0fdf4;border-left:4px solid #10b981;border-radius:8px;padding:1rem 1.2rem;margin:.8rem 0}
-#ftr .note .label{font-size:.7rem;font-weight:800;color:#047857;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.25rem}
-#ftr .note p{font-size:.88rem;color:#334155;margin:0}
+#ftr .note .label{font-size:.68rem;font-weight:800;color:#047857;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.25rem}
+#ftr .note p{font-size:.86rem;color:#334155;margin:0 0 .4rem 0}
+#ftr .note p:last-child{margin:0}
 
-/* Warning box */
-#ftr .warn{background:#fef2f2;border-left:4px solid #ef4444;border-radius:8px;padding:1rem 1.2rem;margin:.8rem 0}
-#ftr .warn .label{font-size:.7rem;font-weight:800;color:#dc2626;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.25rem}
-#ftr .warn p{font-size:.88rem;color:#334155;margin:0}
-
-/* Journal entry table */
-#ftr table.je{width:100%;border-collapse:collapse;font-size:.8rem;font-family:'Consolas',monospace;margin:.8rem 0;border-radius:10px;overflow:hidden;border:1px solid #e2e8f0}
-#ftr table.je thead th{background:#1e293b;color:#fff;text-align:left;padding:.55rem .8rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.4px;font-weight:700}
-#ftr table.je tbody td{padding:.5rem .8rem;border-bottom:1px solid #f1f5f9;color:#334155}
+#ftr table.je{width:100%;border-collapse:collapse;font-size:.78rem;font-family:'Consolas',monospace;margin:.8rem 0;border-radius:10px;overflow:hidden;border:1px solid #e2e8f0}
+#ftr table.je thead th{background:#1e293b;color:#fff;text-align:left;padding:.5rem .75rem;font-size:.68rem;text-transform:uppercase;letter-spacing:.4px;font-weight:700}
+#ftr table.je tbody td{padding:.45rem .75rem;border-bottom:1px solid #f1f5f9;color:#334155}
 #ftr table.je tbody tr:last-child td{border-bottom:none;background:#f8fafc;font-weight:700;color:#0f172a}
-#ftr table.je tbody tr:hover td{background:#f8fafc}
 #ftr table.je td.dr{color:#1d4ed8;font-weight:700;text-align:right}
 #ftr table.je td.cr{color:#047857;font-weight:700;text-align:right}
 #ftr table.je td.acct{color:#0f172a;font-weight:600}
 
-/* Config table */
-#ftr table.cfg{width:100%;border-collapse:collapse;font-size:.83rem;margin:.8rem 0;border-radius:10px;overflow:hidden;border:1px solid #e2e8f0}
-#ftr table.cfg thead th{background:#0f172a;color:#fff;text-align:left;padding:.55rem .8rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.4px;font-weight:700}
-#ftr table.cfg tbody td{padding:.55rem .8rem;border-bottom:1px solid #f1f5f9;color:#334155}
+#ftr table.cfg{width:100%;border-collapse:collapse;font-size:.82rem;margin:.8rem 0;border-radius:10px;overflow:hidden;border:1px solid #e2e8f0}
+#ftr table.cfg thead th{background:#0f172a;color:#fff;text-align:left;padding:.5rem .75rem;font-size:.68rem;text-transform:uppercase;letter-spacing:.4px;font-weight:700}
+#ftr table.cfg tbody td{padding:.5rem .75rem;border-bottom:1px solid #f1f5f9;color:#334155}
 #ftr table.cfg tbody tr:last-child td{border-bottom:none}
-#ftr table.cfg tbody tr:hover td{background:#f8fafc}
-#ftr table.cfg .mono{font-family:'Consolas',monospace;font-weight:700;color:#1d4ed8;font-size:.8rem}
+#ftr table.cfg .mono{font-family:'Consolas',monospace;font-weight:700;color:#1d4ed8;font-size:.78rem}
 
-/* Error grid */
-#ftr .err-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.8rem 0}
+#ftr .err-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.8rem 0}
 @media(max-width:640px){#ftr .err-grid{grid-template-columns:1fr}}
-#ftr .err{background:#fef2f2;border:1px solid #fecaca;border-radius:9px;padding:.8rem .95rem}
-#ftr .err .t{font-size:.78rem;font-weight:700;color:#991b1b;margin:0 0 .3rem 0}
-#ftr .err .d{font-size:.78rem;color:#475569;margin:0 0 .35rem 0}
-#ftr .err .f{font-size:.75rem;color:#047857;margin:0;font-weight:600}
+#ftr .err{background:#fef2f2;border:1px solid #fecaca;border-radius:9px;padding:.75rem .9rem}
+#ftr .err .t{font-size:.76rem;font-weight:700;color:#991b1b;margin:0 0 .3rem 0}
+#ftr .err .d{font-size:.76rem;color:#475569;margin:0 0 .35rem 0}
+#ftr .err .f{font-size:.74rem;color:#047857;margin:0;font-weight:600}
 #ftr .err .f::before{content:'✓ Fix: ';color:#047857;font-weight:800}
 
-/* Q&A */
 #ftr .qa{margin:.8rem 0}
-#ftr .qa-item{border:1px solid #e2e8f0;border-radius:10px;margin-bottom:.6rem;overflow:hidden;background:#fff}
-#ftr .qa-q{display:block;padding:.75rem 1rem;background:#f8fafc;font-weight:700;color:#0f172a;font-size:.87rem;cursor:pointer;position:relative;padding-right:2rem}
-#ftr .qa-q::after{content:'+';position:absolute;right:1rem;top:50%;transform:translateY(-50%);font-size:1.2rem;color:#94a3b8;font-weight:400;transition:transform .2s}
+#ftr .qa-item{border:1px solid #e2e8f0;border-radius:10px;margin-bottom:.55rem;overflow:hidden;background:#fff}
+#ftr .qa-q{display:block;padding:.7rem 1rem;background:#f8fafc;font-weight:700;color:#0f172a;font-size:.85rem;cursor:pointer;position:relative;padding-right:2rem}
+#ftr .qa-q::after{content:'+';position:absolute;right:1rem;top:50%;transform:translateY(-50%);font-size:1.2rem;color:#94a3b8;font-weight:400}
 #ftr .qa-item.open .qa-q::after{content:'−';color:#1d4ed8}
-#ftr .qa-a{display:none;padding:.85rem 1rem;font-size:.85rem;color:#334155;border-top:1px solid #f1f5f9;line-height:1.6}
+#ftr .qa-a{display:none;padding:.85rem 1rem;font-size:.84rem;color:#334155;border-top:1px solid #f1f5f9;line-height:1.6}
 #ftr .qa-item.open .qa-a{display:block}
+#ftr .qa-a ul{padding-left:1.2rem;margin:.4rem 0}
+#ftr .qa-a li{font-size:.83rem;margin-bottom:.25rem}
 
-/* Concept grid */
-#ftr .concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin:.8rem 0}
-#ftr .concept{background:linear-gradient(135deg,#f8faff,#f1f5f9);border:1px solid #e2e8f0;border-radius:10px;padding:.85rem 1rem}
-#ftr .concept .ct{font-size:.8rem;font-weight:800;color:#1d4ed8;margin:0 0 .3rem 0}
-#ftr .concept .cd{font-size:.78rem;color:#475569;margin:0;line-height:1.5}
+#ftr .concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:.7rem;margin:.8rem 0}
+#ftr .concept{background:linear-gradient(135deg,#f8faff,#f1f5f9);border:1px solid #e2e8f0;border-radius:10px;padding:.8rem .95rem}
+#ftr .concept .ct{font-size:.78rem;font-weight:800;color:#1d4ed8;margin:0 0 .3rem 0}
+#ftr .concept .cd{font-size:.76rem;color:#475569;margin:0;line-height:1.5}
 
-/* T-code pill */
-#ftr .tcode{display:inline-block;font-family:'Consolas',monospace;font-size:.72rem;background:#1e293b;color:#fff;border-radius:6px;padding:2px 8px;margin:2px 3px 2px 0;font-weight:600}
+#ftr .tcode{display:inline-block;font-family:'Consolas',monospace;font-size:.7rem;background:#1e293b;color:#fff;border-radius:6px;padding:2px 7px;margin:2px 3px 2px 0;font-weight:600}
 
-/* Back button */
+#ftr .flow-map{display:flex;flex-direction:column;gap:.65rem;margin:1rem 0}
+#ftr .flow-row{display:grid;grid-template-columns:160px 1fr;gap:.8rem;align-items:stretch}
+@media(max-width:640px){#ftr .flow-row{grid-template-columns:1fr}}
+#ftr .flow-label{background:linear-gradient(135deg,#1e293b,#334155);color:#fff;border-radius:10px;padding:.7rem .85rem;font-weight:700;font-size:.8rem;display:flex;align-items:center;justify-content:center;text-align:center}
+#ftr .flow-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem}
+#ftr .flow-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.55rem .7rem;font-size:.75rem;color:#334155;text-align:center;font-weight:600}
+#ftr .flow-item.hi{background:#dbeafe;border-color:#3b82f6;color:#1d4ed8}
+#ftr .flow-item.bl{background:#cffafe;border-color:#06b6d4;color:#0e7490}
+#ftr .flow-item.ihb{background:#fce7f3;border-color:#ec4899;color:#be185d}
+#ftr .flow-item.ml{background:#ede9fe;border-color:#8b5cf6;color:#7c3aed}
+#ftr .flow-item.co{background:#d1fae5;border-color:#10b981;color:#047857}
+
 .ftr-back{display:inline-block!important;background:#f58220!important;color:#fff!important;border-radius:8px!important;padding:12px 17px!important;font-weight:800!important;text-decoration:none!important;margin-top:18px!important}
 .ftr-back:hover{filter:brightness(1.05)!important}
 
@@ -144,8 +137,8 @@
   #ftr .card{padding:1.1rem!important}
 }
 @media(max-width:700px){
-  #ftr .tab{font-size:.7rem!important;min-width:auto!important;padding:.55rem!important}
-  #ftr .tab .ico{display:none!important}
+  #ftr .tab{font-size:.68rem!important;min-width:auto!important;padding:.5rem!important}
+  #ftr .tab .n{display:none!important}
 }
 </style>
 </head>
@@ -185,69 +178,187 @@
   </p>
 
   <section class="ftr-hero">
-    <p class="eyebrow">SAP FICO · TRAINING MATERIAL</p>
+    <p class="eyebrow">SAP FICO · COMPLETE TRAINING</p>
     <h1>SAP FICO — Complete Training Material</h1>
-    <p>Deep-dive training across all 8 roadmap topics — meaning, real-world examples, journal entries, configuration, common errors, and interview preparation.</p>
+    <p>End-to-end training across FI, CO, Bank Accounting, In-House Banking, and Material Ledger — with meanings, worked examples, journal entries, configuration, common errors, and interview preparation.</p>
   </section>
 
   <div id="ftr">
 
     <nav class="tabs">
-      <button class="tab active" data-panel="t1"><span class="n">1</span> Enterprise Structure</button>
+      <button class="tab active" data-panel="t0"><span class="n">0</span> Overview</button>
+      <button class="tab" data-panel="t1"><span class="n">1</span> Enterprise Structure</button>
       <button class="tab" data-panel="t2"><span class="n">2</span> GL &amp; Core FI</button>
       <button class="tab" data-panel="t3"><span class="n">3</span> AP · AR · AA</button>
-      <button class="tab" data-panel="t4"><span class="n">4</span> Controlling (CO)</button>
-      <button class="tab" data-panel="t5"><span class="n">5</span> Product Costing</button>
-      <button class="tab" data-panel="t6"><span class="n">6</span> Integration &amp; S/4</button>
-      <button class="tab" data-panel="t7"><span class="n">7</span> Close &amp; Troubleshoot</button>
-      <button class="tab" data-panel="t8"><span class="n">8</span> Interview Prep</button>
+      <button class="tab" data-panel="t4"><span class="n">4</span> Bank Accounting (BL)</button>
+      <button class="tab" data-panel="t5"><span class="n">5</span> In-House Banking</button>
+      <button class="tab" data-panel="t6"><span class="n">6</span> Controlling (CO)</button>
+      <button class="tab" data-panel="t7"><span class="n">7</span> Product Costing</button>
+      <button class="tab" data-panel="t8"><span class="n">8</span> Material Ledger</button>
+      <button class="tab" data-panel="t9"><span class="n">9</span> Integration &amp; S/4</button>
+      <button class="tab" data-panel="t10"><span class="n">10</span> Close &amp; Troubleshoot</button>
+      <button class="tab" data-panel="t11"><span class="n">11</span> Interview Prep</button>
     </nav>
 
+    <!-- ═══════════════ TAB 0: OVERVIEW ═══════════════ -->
+    <div class="panel active" id="panel-t0">
+      <div class="card">
+        <h2><span class="num">0</span> The Whole Picture — How SAP FICO Fits Together</h2>
+        <p class="sub">Before diving into any single topic, understand how every piece of FICO connects. This is the mental map that every SAP FICO consultant carries.</p>
+
+        <div class="sec">
+          <h3><span class="dot"></span> The Big Picture</h3>
+          <div class="meaning">
+            <div class="label">One-sentence summary</div>
+            <p>SAP FICO records every financial event of a business — where money came from, where it went, what it cost, what it earned — and turns that into statutory reports (FI) and management insight (CO).</p>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Module Map — How Everything Connects</h3>
+          <div class="flow-map">
+            <div class="flow-row">
+              <div class="flow-label">FI · Financial Accounting<br><span style="font-size:.65rem;font-weight:400;opacity:.8;">Statutory · Legal entity view</span></div>
+              <div class="flow-items">
+                <div class="flow-item hi">GL</div>
+                <div class="flow-item hi">AP</div>
+                <div class="flow-item hi">AR</div>
+                <div class="flow-item hi">AA</div>
+                <div class="flow-item bl">BL — Bank</div>
+                <div class="flow-item ihb">IHB — In-House Bank</div>
+              </div>
+            </div>
+            <div class="flow-row">
+              <div class="flow-label">CO · Controlling<br><span style="font-size:.65rem;font-weight:400;opacity:.8;">Management · Cost object view</span></div>
+              <div class="flow-items">
+                <div class="flow-item co">CO-CC</div>
+                <div class="flow-item co">CO-PC</div>
+                <div class="flow-item co">CO-PP</div>
+                <div class="flow-item co">CO-PA</div>
+                <div class="flow-item co">PCA</div>
+                <div class="flow-item ml">ML — Material Ledger</div>
+              </div>
+            </div>
+            <div class="flow-row">
+              <div class="flow-label">Logistics Modules<br><span style="font-size:.65rem;font-weight:400;opacity:.8;">Source of many FI/CO postings</span></div>
+              <div class="flow-items">
+                <div class="flow-item">MM</div>
+                <div class="flow-item">SD</div>
+                <div class="flow-item">PP</div>
+                <div class="flow-item">PM</div>
+                <div class="flow-item">QM</div>
+                <div class="flow-item">WM / EWM</div>
+              </div>
+            </div>
+            <div class="flow-row">
+              <div class="flow-label">Outputs<br><span style="font-size:.65rem;font-weight:400;opacity:.8;">What stakeholders see</span></div>
+              <div class="flow-items">
+                <div class="flow-item">Balance Sheet</div>
+                <div class="flow-item">P&amp;L</div>
+                <div class="flow-item">Cash Flow</div>
+                <div class="flow-item">Cost Reports</div>
+                <div class="flow-item">Profitability</div>
+                <div class="flow-item">Segment</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> The Complete Transaction Journey</h3>
+          <p>Follow a single business transaction — a customer order — through every module:</p>
+          <table class="cfg">
+            <thead><tr><th>Stage</th><th>Module</th><th>What Happens</th><th>FI / CO Impact</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>SD</td><td>Customer places order</td><td>No posting yet</td></tr>
+              <tr><td>2</td><td>MM / PP</td><td>Materials procured / produced</td><td>GR/IR, ML postings, production order debits</td></tr>
+              <tr><td>3</td><td>SD</td><td>Goods issued to customer</td><td>Dr COGS / Cr Inventory (via ML)</td></tr>
+              <tr><td>4</td><td>SD</td><td>Billing document created</td><td>Dr Customer / Cr Revenue / Cr GST</td></tr>
+              <tr><td>5</td><td>CO-PA</td><td>Profitability segment updated</td><td>CE1xxxx line items</td></tr>
+              <tr><td>6</td><td>BL</td><td>Bank statement — payment received</td><td>Dr Bank / Cr Customer</td></tr>
+              <tr><td>7</td><td>IHB</td><td>Intercompany netting (if group)</td><td>Dr IHC / Cr Customer</td></tr>
+              <tr><td>8</td><td>CO-CC</td><td>Cost center assessment</td><td>Secondary allocation</td></tr>
+              <tr><td>9</td><td>ML</td><td>Actual costing run</td><td>Price differences to inventory / COGS</td></tr>
+              <tr><td>10</td><td>FI Close</td><td>Month-end adjustments</td><td>Accruals, FX, depreciation</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> The Two Lenses</h3>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">FI Lens — Legal Entity</div><div class="cd">"Did we make a profit? How much tax do we owe? What's our balance sheet?" — used by auditors, tax authorities, shareholders, regulators.</div></div>
+            <div class="concept"><div class="ct">CO Lens — Cost Object</div><div class="cd">"Which product is most profitable? Which department overspent? Should we make or buy?" — used by managers, controllers, CFO.</div></div>
+            <div class="concept"><div class="ct">Reconciliation</div><div class="cd">FI and CO must always reconcile. In S/4HANA, this is automatic because everything is stored in ACDOCA.</div></div>
+            <div class="concept"><div class="ct">Integration</div><div class="cd">Every logistics event (goods movement, billing) creates an FI posting. Every FI posting with a cost object creates a CO posting.</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Recommended Learning Order</h3>
+          <ol>
+            <li><strong>Enterprise Structure</strong> — where data lives</li>
+            <li><strong>GL &amp; Core FI</strong> — how postings work</li>
+            <li><strong>AP, AR, AA</strong> — the three core subledgers</li>
+            <li><strong>Bank Accounting</strong> — money in / money out</li>
+            <li><strong>In-House Banking</strong> — group-level treasury (only relevant in large groups)</li>
+            <li><strong>Controlling</strong> — cost &amp; profitability management</li>
+            <li><strong>Product Costing &amp; CO-PC</strong> — cost of goods manufactured</li>
+            <li><strong>Material Ledger</strong> — actual costing &amp; price differences</li>
+            <li><strong>Integration &amp; S/4HANA</strong> — how it all hangs together</li>
+            <li><strong>Close &amp; Troubleshooting</strong> — the monthly cycle</li>
+            <li><strong>Interview Prep</strong> — scenarios and case studies</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
     <!-- ═══════════════ TAB 1: ENTERPRISE STRUCTURE ═══════════════ -->
-    <div class="panel active" id="panel-t1">
+    <div class="panel" id="panel-t1">
       <div class="card">
         <h2><span class="num">1</span> SAP &amp; Enterprise Structure</h2>
-        <p class="sub">Understanding the organizational units that define how data, documents, and reports are structured in SAP.</p>
+        <p class="sub">The organizational units that define how data, documents, and reports are structured.</p>
 
         <div class="sec">
           <h3><span class="dot"></span> Meaning</h3>
           <div class="meaning">
             <div class="label">What is it?</div>
-            <p>Enterprise structure defines the legal, organizational, and management boundaries within which business transactions are recorded. It answers: <em>Which legal entity? Which facility? Which department? Which management unit?</em> Every accounting document you post in SAP carries a piece of this structure — Company Code, Plant, Cost Center, Profit Center. Getting the structure right at the start prevents massive rework later.</p>
+            <p>Enterprise structure defines the legal, organizational, and management boundaries within which business transactions are recorded. Every document you post carries a piece of this structure — Company Code, Plant, Cost Center, Profit Center.</p>
           </div>
         </div>
 
         <div class="sec">
           <h3><span class="dot"></span> Key Organizational Units</h3>
           <div class="concept-grid">
-            <div class="concept"><div class="ct">Client (Mandant)</div><div class="cd">Top-level container. Self-contained commercial unit with its own master data. Represents one production or test system.</div></div>
-            <div class="concept"><div class="ct">Company Code (BUKRS)</div><div class="cd">Independent legal entity with a complete set of accounts. Balance sheet and P&amp;L are produced at this level.</div></div>
-            <div class="concept"><div class="ct">Controlling Area (KOKRS)</div><div class="cd">Management accounting boundary. Costs and revenues are analysed here. Multiple company codes can share one controlling area.</div></div>
-            <div class="concept"><div class="ct">Business Area (GSBER)</div><div class="cd">Cross-company-code segment for internal reporting. Used for segment disclosures.</div></div>
-            <div class="concept"><div class="ct">Functional Area (FKBER)</div><div class="cd">Classifies expenses by function — production, sales, admin, R&amp;D. Required for cost-of-sales accounting.</div></div>
-            <div class="concept"><div class="ct">Plant (WERKS)</div><div class="cd">Operating facility within a company code. Central to MM, PP, and product costing.</div></div>
-            <div class="concept"><div class="ct">Cost Center (KOSTL)</div><div class="cd">Where overhead costs are incurred. Used to collect and allocate costs for internal management.</div></div>
-            <div class="concept"><div class="ct">Profit Center (PRCTR)</div><div class="cd">Internal profitability unit. Produces an internal P&amp;L and balance sheet by product line, region, or business.</div></div>
-            <div class="concept"><div class="ct">Segment (SEGMENT)</div><div class="cd">Reporting segment for IFRS 8 / Ind AS 108. Typically mapped from profit center.</div></div>
-            <div class="concept"><div class="ct">Storage Location (LGORT)</div><div class="cd">Sub-unit of a plant where materials are physically stored. Drives inventory postings.</div></div>
-            <div class="concept"><div class="ct">Purchasing Organization (EKORG)</div><div class="cd">Negotiates procurement terms. Can be assigned to one or many company codes.</div></div>
-            <div class="concept"><div class="ct">Sales Organization (VKORG)</div><div class="cd">Legal unit responsible for selling. Assigned to a company code for revenue postings.</div></div>
+            <div class="concept"><div class="ct">Client (Mandant)</div><div class="cd">Top-level container. Self-contained commercial unit with its own master data.</div></div>
+            <div class="concept"><div class="ct">Company Code (BUKRS)</div><div class="cd">Independent legal entity. Balance sheet and P&amp;L produced here.</div></div>
+            <div class="concept"><div class="ct">Controlling Area (KOKRS)</div><div class="cd">Management accounting boundary. Multiple company codes can share one.</div></div>
+            <div class="concept"><div class="ct">Business Area (GSBER)</div><div class="cd">Cross-company-code segment for internal reporting.</div></div>
+            <div class="concept"><div class="ct">Functional Area (FKBER)</div><div class="cd">Classifies expenses by function — production, sales, admin, R&amp;D.</div></div>
+            <div class="concept"><div class="ct">Plant (WERKS)</div><div class="cd">Operating facility within a company code. Central to MM, PP, ML.</div></div>
+            <div class="concept"><div class="ct">Cost Center (KOSTL)</div><div class="cd">Where overhead costs are incurred. Departmental reporting.</div></div>
+            <div class="concept"><div class="ct">Profit Center (PRCTR)</div><div class="cd">Internal profitability unit. Produces internal P&amp;L and balance sheet.</div></div>
+            <div class="concept"><div class="ct">Segment (SEGMENT)</div><div class="cd">Reporting segment for IFRS 8 / Ind AS 108.</div></div>
+            <div class="concept"><div class="ct">House Bank (BANKL)</div><div class="cd">Bank relationship for a company code — used in Bank Accounting (BL).</div></div>
+            <div class="concept"><div class="ct">IHC Company Code</div><div class="cd">Dedicated company code for In-House Cash Centre.</div></div>
+            <div class="concept"><div class="ct">Valuation Area (BWKEY)</div><div class="cd">Organizational unit for material valuation — usually a plant. Central to ML.</div></div>
           </div>
         </div>
 
         <div class="sec">
           <h3><span class="dot"></span> Real-World Example</h3>
           <div class="example">
-            <div class="label">Scenario</div>
-            <p><strong>Company:</strong> ABC Manufacturing Ltd., India.</p>
-            <p><strong>Setup:</strong></p>
+            <div class="label">Scenario — ABC Group</div>
+            <p><strong>Company:</strong> ABC Manufacturing Group, with operations in India, Singapore, Germany.</p>
             <ul>
-              <li>Client <code>100</code> — "ABC Production"</li>
-              <li>Company Code <code>IN01</code> — ABC Manufacturing India Pvt Ltd</li>
-              <li>Controlling Area <code>IN01</code> — shared by IN01 and its subsidiary SG01 (Singapore)</li>
-              <li>Plants: <code>PL01</code> (Pune), <code>PL02</code> (Chennai)</li>
-              <li>Cost Centers: <code>CC-PROD</code>, <code>CC-QA</code>, <code>CC-MKT</code>, <code>CC-FIN</code></li>
-              <li>Profit Centers: <code>PC-IND</code> (Industrial), <code>PC-CON</code> (Consumer)</li>
+              <li>Client <code>100</code></li>
+              <li>Company Codes: <code>IN01</code> (India), <code>SG01</code> (Singapore), <code>DE01</code> (Germany)</li>
+              <li>Controlling Area <code>ABCG</code> — shared across IN01, SG01, DE01</li>
+              <li>Plants: <code>PL01</code> (Pune), <code>PL02</code> (Chennai), <code>PL03</code> (Singapore)</li>
+              <li>Cost Centers: <code>CC-PROD</code>, <code>CC-QA</code>, <code>CC-MKT</code>, <code>CC-FIN</code>, <code>CC-IT</code></li>
+              <li>Profit Centers: <code>PC-IND</code>, <code>PC-CON</code>, <code>PC-EXPORT</code></li>
+              <li>House Banks: <code>HDFC</code>, <code>ICICI</code> (India); <code>DBS</code> (Singapore)</li>
+              <li>IHC Company Code: <code>IHC0</code> — group treasury centre</li>
             </ul>
           </div>
         </div>
@@ -257,12 +368,13 @@
           <table class="cfg">
             <thead><tr><th>Config</th><th>Transaction</th><th>Purpose</th></tr></thead>
             <tbody>
-              <tr><td>Create Company Code</td><td class="mono">OX02</td><td>Define the legal entity with country, currency, chart of accounts</td></tr>
-              <tr><td>Assign Company Code to Controlling Area</td><td class="mono">OX19</td><td>Link FI and CO enterprise structures</td></tr>
-              <tr><td>Define Cost Center</td><td class="mono">KS01</td><td>Create cost center master with validity dates and category</td></tr>
-              <tr><td>Define Profit Center</td><td class="mono">KE51</td><td>Create profit center and assign to company code</td></tr>
-              <tr><td>Maintain 3KEH</td><td class="mono">3KEH</td><td>Automatic profit center substitution by GL account</td></tr>
-              <tr><td>Define Plant</td><td class="mono">OX10</td><td>Create plant and assign to company code</td></tr>
+              <tr><td>Create Company Code</td><td class="mono">OX02</td><td>Legal entity</td></tr>
+              <tr><td>Assign Company Code to Controlling Area</td><td class="mono">OX19</td><td>Link FI &amp; CO</td></tr>
+              <tr><td>Create Cost Center</td><td class="mono">KS01</td><td>Overhead collector</td></tr>
+              <tr><td>Create Profit Center</td><td class="mono">KE51</td><td>Internal profitability</td></tr>
+              <tr><td>Maintain 3KEH</td><td class="mono">3KEH</td><td>Auto profit center substitution</td></tr>
+              <tr><td>Create Plant</td><td class="mono">OX10</td><td>Facility within company code</td></tr>
+              <tr><td>Maintain House Bank</td><td class="mono">FI12</td><td>Bank relationship for BL</td></tr>
             </tbody>
           </table>
         </div>
@@ -270,44 +382,18 @@
         <div class="sec">
           <h3><span class="dot"></span> Common Errors &amp; Fixes</h3>
           <div class="err-grid">
-            <div class="err">
-              <div class="t">"Company code not defined"</div>
-              <div class="d">Posting a document without a valid company code.</div>
-              <div class="f">Check OX02; ensure the company code is in the user's default or is entered on the document.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Controlling area not assigned to company code"</div>
-              <div class="d">FI posting with a cost object fails because the company code has no controlling area.</div>
-              <div class="f">Maintain OX19 to assign the company code to a controlling area.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Cost center does not exist on date"</div>
-              <div class="d">Cost center has expired or is not yet valid.</div>
-              <div class="f">Extend validity with KS02 or check the posting date against the master record.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Profit center not defined for company code"</div>
-              <div class="d">Profit center belongs to a different company code.</div>
-              <div class="f">Use KE51 to assign the profit center to the correct company code.</div>
-            </div>
+            <div class="err"><div class="t">"Company code not defined"</div><div class="d">Posting without a valid company code.</div><div class="f">Check OX02 and user defaults.</div></div>
+            <div class="err"><div class="t">"Controlling area not assigned"</div><div class="d">FI posting with cost object fails.</div><div class="f">Assign via OX19.</div></div>
+            <div class="err"><div class="t">"Cost center does not exist on date"</div><div class="d">Expired or future validity.</div><div class="f">Extend with KS02.</div></div>
+            <div class="err"><div class="t">"Profit center not in company code"</div><div class="d">Wrong company code assignment.</div><div class="f">Reassign via KE51.</div></div>
           </div>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> Interview Preparation</h3>
+          <h3><span class="dot"></span> Interview Prep</h3>
           <div class="qa">
-            <div class="qa-item">
-              <div class="qa-q">Q1: Can one controlling area be assigned to multiple company codes?</div>
-              <div class="qa-a">Yes. A controlling area can be assigned to multiple company codes provided they share the same chart of accounts, fiscal year variant, and currency (or the controlling area currency differs but translation is configured). This is common in companies with multiple legal entities managed centrally.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q2: What is the difference between a Business Area and a Profit Center?</div>
-              <div class="qa-a">A Business Area (GSBER) is a cross-company-code unit used primarily for external segment reporting under older standards. A Profit Center (PRCTR) is a controlling object used for internal management reporting — it produces an internal P&amp;L and balance sheet and is often mapped to a Segment for external disclosures. Profit centers are more flexible and are the modern standard.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q3: What happens if you change the chart of accounts after go-live?</div>
-              <div class="qa-a">Changing the chart of accounts after go-live is extremely disruptive — it requires re-mapping every GL account and re-posting historical balances. In practice, most companies add a new chart of accounts (parallel ledger) rather than modify the existing one. This is why getting the chart of accounts right at design time is critical.</div>
-            </div>
+            <div class="qa-item"><div class="qa-q">Q1: Can one controlling area be assigned to multiple company codes?</div><div class="qa-a">Yes — provided they share the same chart of accounts, fiscal year variant, and currency (or have currency translation configured). Common in companies with multiple legal entities managed centrally.</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: Business Area vs Profit Center?</div><div class="qa-a">Business Area (GSBER) is a legacy cross-company-code unit. Profit Center (PRCTR) is the modern equivalent — it produces a full internal P&amp;L and balance sheet and is used for segment reporting.</div></div>
           </div>
         </div>
       </div>
@@ -323,31 +409,32 @@
           <h3><span class="dot"></span> Meaning</h3>
           <div class="meaning">
             <div class="label">What is it?</div>
-            <p>The General Ledger (GL) is the central repository of all financial transactions. Every posting in AP, AR, AA, or CO ultimately flows into the GL. A GL account is defined at two levels: the <strong>Chart of Accounts</strong> level (SKA1 — account number, description, account type) and the <strong>Company Code</strong> level (SKB1 — currency, open-item management, field status group).</p>
+            <p>The General Ledger (GL) is the central repository of all financial transactions. Every posting in AP, AR, AA, BL, IHB, or CO flows through the GL. GL accounts are defined at two levels: <strong>Chart of Accounts</strong> (SKA1) and <strong>Company Code</strong> (SKB1).</p>
           </div>
         </div>
 
         <div class="sec">
           <h3><span class="dot"></span> Core Concepts</h3>
           <div class="concept-grid">
-            <div class="concept"><div class="ct">GL Account Master</div><div class="cd">SKA1 (chart of accounts) + SKB1 (company code). Determines whether the account is a P&amp;L or balance sheet account.</div></div>
-            <div class="concept"><div class="ct">Document Type</div><div class="cd">Two-character code (SA, KR, DR, etc.) that controls number range, posting keys, and reversal behaviour.</div></div>
-            <div class="concept"><div class="ct">Posting Key</div><div class="cd">Two-digit code (40=debit GL, 50=credit GL, 31=credit vendor, 21=debit vendor) that determines the account type and field layout.</div></div>
-            <div class="concept"><div class="ct">Number Range</div><div class="cd">Determines the document number sequence per document type and company code. Internal vs external ranges.</div></div>
-            <div class="concept"><div class="ct">Field Status Group</div><div class="cd">Controls which fields are required, optional, or suppressed per GL account during entry.</div></div>
-            <div class="concept"><div class="ct">Posting Period</div><div class="cd">Determines the open periods for a company code — normal periods (1–12) and special periods (13–16) for adjustments.</div></div>
-            <div class="concept"><div class="ct">Parallel Ledgers</div><div class="cd">Leading ledger (usually 0L) and non-leading ledgers for IFRS, local GAAP, tax, etc. All postings flow to the leading ledger.</div></div>
-            <div class="concept"><div class="ct">Parked Documents</div><div class="cd">Documents saved but not posted. Used for approval workflows. Do not affect balances.</div></div>
+            <div class="concept"><div class="ct">GL Account Master</div><div class="cd">SKA1 + SKB1. Determines P&amp;L or balance sheet classification, currency, field status.</div></div>
+            <div class="concept"><div class="ct">Document Type</div><div class="cd">Two-char code (SA, KR, DR) controlling number range, posting keys, reversal.</div></div>
+            <div class="concept"><div class="ct">Posting Key</div><div class="cd">40=debit GL, 50=credit GL, 31=credit vendor, 21=debit vendor, 01=debit customer.</div></div>
+            <div class="concept"><div class="ct">Number Range</div><div class="cd">Determines document number sequence per document type and company code.</div></div>
+            <div class="concept"><div class="ct">Field Status Group</div><div class="cd">Controls required/optional/suppressed fields per GL account.</div></div>
+            <div class="concept"><div class="ct">Posting Period</div><div class="cd">Open periods — normal (1–12) and special (13–16) for adjustments.</div></div>
+            <div class="concept"><div class="ct">Parallel Ledgers</div><div class="cd">Leading ledger (0L) + non-leading (IFRS, tax, local GAAP).</div></div>
+            <div class="concept"><div class="ct">Parked Documents</div><div class="cd">Saved but not posted. Do not affect balances. Used for approval workflows.</div></div>
+            <div class="concept"><div class="ct">Substitutions &amp; Validations</div><div class="cd">Rules that auto-fill or validate fields at posting time (OBBH / OB28).</div></div>
+            <div class="concept"><div class="ct">Document Splitting</div><div class="cd">New GL feature — every document balanced by profit center / segment.</div></div>
           </div>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> Real-World Example — Posting a Journal Entry</h3>
+          <h3><span class="dot"></span> Example — Journal Entry</h3>
           <div class="example">
             <div class="label">Scenario</div>
             <p>ABC Ltd. pays office rent of ₹50,000 for April 2024 by bank transfer.</p>
           </div>
-
           <table class="je">
             <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
             <tbody>
@@ -356,13 +443,7 @@
               <tr><td colspan="3">Total</td><td class="dr">50,000</td><td class="cr">50,000</td></tr>
             </tbody>
           </table>
-
-          <p><strong>Transaction:</strong> <span class="tcode">FB50</span> (GL account posting) or <span class="tcode">F-02</span> (general posting).</p>
-
-          <div class="note">
-            <div class="label">Why this works</div>
-            <p>The equation holds: one account debited, another credited, same amount. The rent expense reduces profit (P&amp;L), and the bank balance reduces (balance sheet).</p>
-          </div>
+          <p><strong>Transaction:</strong> <span class="tcode">F-02</span> (general posting).</p>
         </div>
 
         <div class="sec">
@@ -370,13 +451,14 @@
           <table class="cfg">
             <thead><tr><th>Config</th><th>Transaction</th><th>Purpose</th></tr></thead>
             <tbody>
-              <tr><td>Define Chart of Accounts</td><td class="mono">OB13</td><td>Set the framework for all GL accounts</td></tr>
-              <tr><td>Define Account Group</td><td class="mono">OBD4</td><td>Controls field status and number range for GL accounts</td></tr>
-              <tr><td>Create GL Account</td><td class="mono">FS00</td><td>Centrally create GL account (SKA1 + SKB1 at once)</td></tr>
-              <tr><td>Define Document Type</td><td class="mono">OBA7</td><td>Set number range and posting keys per document type</td></tr>
-              <tr><td>Define Number Ranges</td><td class="mono">FBN1</td><td>Assign number ranges to document types</td></tr>
-              <tr><td>Define Field Status Group</td><td class="mono">OBC4</td><td>Control required/optional/suppressed fields per GL account</td></tr>
-              <tr><td>Open / Close Posting Periods</td><td class="mono">OB52</td><td>Control which periods are open for posting</td></tr>
+              <tr><td>Define Chart of Accounts</td><td class="mono">OB13</td><td>Framework for all GL accounts</td></tr>
+              <tr><td>Create GL Account</td><td class="mono">FS00</td><td>Central creation (SKA1 + SKB1)</td></tr>
+              <tr><td>Define Document Type</td><td class="mono">OBA7</td><td>Number range + posting keys</td></tr>
+              <tr><td>Define Number Ranges</td><td class="mono">FBN1</td><td>Assign to document types</td></tr>
+              <tr><td>Define Field Status Group</td><td class="mono">OBC4</td><td>Field-level control per GL account</td></tr>
+              <tr><td>Open/Close Periods</td><td class="mono">OB52</td><td>Control posting periods</td></tr>
+              <tr><td>Substitution Rules</td><td class="mono">OBBH</td><td>Auto-fill fields at posting</td></tr>
+              <tr><td>Validation Rules</td><td class="mono">OB28</td><td>Block postings that violate rules</td></tr>
             </tbody>
           </table>
         </div>
@@ -384,286 +466,351 @@
         <div class="sec">
           <h3><span class="dot"></span> Common Errors &amp; Fixes</h3>
           <div class="err-grid">
-            <div class="err">
-              <div class="t">"Posting period 04 2024 is not open"</div>
-              <div class="d">Trying to post into a closed period.</div>
-              <div class="f">Open the period using OB52 — check both the account type and the period range.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Account 400100 is not defined in company code IN01"</div>
-              <div class="d">GL account exists at chart-of-accounts level but not at company-code level.</div>
-              <div class="f">Use FS00 to create the company-code segment of the account (SKB1).</div>
-            </div>
-            <div class="err">
-              <div class="t">"Document number range is exhausted"</div>
-              <div class="d">The internal number range for that document type is full.</div>
-              <div class="f">Extend the number range in FBN1 — always use internal ranges for automatic numbering.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Reconciliation account is missing"</div>
-              <div class="d">Posting to a vendor/customer without a reconciliation GL account.</div>
-              <div class="f">Assign a reconciliation account in the customer/vendor master (LFB1 / KNB1).</div>
-            </div>
+            <div class="err"><div class="t">"Posting period closed"</div><div class="d">Period not open in OB52.</div><div class="f">Open period or use special period 13–16 for adjustments.</div></div>
+            <div class="err"><div class="t">"Account not defined in company code"</div><div class="d">GL master missing at company-code level.</div><div class="f">Create SKB1 segment via FS00.</div></div>
+            <div class="err"><div class="t">"Number range exhausted"</div><div class="d">Internal number range full.</div><div class="f">Extend in FBN1.</div></div>
+            <div class="err"><div class="t">"Reconciliation account missing"</div><div class="d">Vendor/customer without recon account.</div><div class="f">Assign in LFB1 / KNB1.</div></div>
           </div>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> Interview Preparation</h3>
+          <h3><span class="dot"></span> Interview Prep</h3>
           <div class="qa">
-            <div class="qa-item">
-              <div class="qa-q">Q1: What is the difference between a posting key and a document type?</div>
-              <div class="qa-a">A <strong>document type</strong> classifies the entire business transaction (e.g., KR for vendor invoice, SA for GL document) and controls the number range, allowed account types, and reversal behaviour. A <strong>posting key</strong> applies to a single line item and tells SAP whether it is a debit or credit and what account type it is (GL, vendor, customer, asset). One document can have multiple posting keys but only one document type.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q2: How does SAP ensure debits equal credits?</div>
-              <div class="qa-a">SAP enforces the double-entry rule at document save time. If total debits do not equal total credits, the system rejects the document with the error "Document is not balanced." This applies to every posting, regardless of module — FI, CO, AA all respect the same rule.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q3: What is a field status group and why is it important?</div>
-              <div class="qa-a">A field status group (maintained via OBC4 and assigned in SKB1) controls which fields are required, optional, or suppressed when posting to a specific GL account. For example, a bank account may require the assignment field, while a P&amp;L account may require a cost center. Getting field status groups right is critical to enforcing data quality at entry.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q4: How do you reverse a document?</div>
-              <div class="qa-a">Use <span class="tcode">FB08</span> for a single document or <span class="tcode">F.80</span> for mass reversal. You can choose reversal reason (which determines whether the reversal posts in the same period or the next), reversal date, and reversal posting period. Negative posting (if enabled) reverses the original debit/credit signs without creating a new document.</div>
-            </div>
+            <div class="qa-item"><div class="qa-q">Q1: Posting key vs document type?</div><div class="qa-a">Document type classifies the entire transaction and controls number range and allowed account types. Posting key applies to a single line and determines debit/credit and account type.</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: How does SAP ensure debits equal credits?</div><div class="qa-a">SAP enforces the double-entry rule at save. If totals differ, the document is rejected with "Document is not balanced."</div></div>
+            <div class="qa-item"><div class="qa-q">Q3: What is document splitting?</div><div class="qa-a">A New GL feature ensuring documents are balanced not only in total but also by dimensions like profit center or segment — enabling real-time segment reporting.</div></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ═══════════════ TAB 3: AP, AR, AA ═══════════════ -->
+    <!-- ═══════════════ TAB 3: AP · AR · AA ═══════════════ -->
     <div class="panel" id="panel-t3">
       <div class="card">
         <h2><span class="num">3</span> Accounts Payable, Receivable &amp; Asset Accounting</h2>
-        <p class="sub">The three subledgers that sit beside the GL — each with its own master data, transactions, and reconciliation process.</p>
+        <p class="sub">The three subledgers that sit beside the GL — each with its own master data, transactions, and reconciliation.</p>
 
         <div class="sec">
           <h3><span class="dot"></span> Meaning</h3>
           <div class="meaning">
             <div class="label">What is it?</div>
-            <p>AP, AR, and AA are <strong>subledgers</strong> — they maintain detailed records for specific account types and post summarised balances to the GL via <strong>reconciliation accounts</strong>. Each has its own master data, transaction codes, and reporting. At month end, the subledger balance must equal the GL reconciliation account balance — this is one of the most fundamental controls in any ERP.</p>
+            <p>AP, AR, and AA are <strong>subledgers</strong> — they maintain detailed records for specific account types and post summarised balances to the GL via <strong>reconciliation accounts</strong>. At month end, subledger balance must equal GL reconciliation account balance.</p>
           </div>
         </div>
 
         <div class="sec">
           <h3><span class="dot"></span> Accounts Payable (AP)</h3>
-          <p><strong>Purpose:</strong> Manage what the company owes to suppliers — invoices, credit memos, payment runs, and aging.</p>
           <p><strong>Master Data:</strong> LFA1 (general), LFB1 (company code), LFM1 (purchasing).</p>
 
           <div class="example">
             <div class="label">Example — Vendor Invoice with GR/IR</div>
-            <p>ABC Ltd. buys raw material worth ₹1,00,000 + 18% GST from Vendor V-2001. Goods were received last week (GR posted).</p>
+            <p>ABC Ltd. buys raw material worth ₹1,00,000 + 18% GST from Vendor V-2001. Goods received last week.</p>
           </div>
-
           <table class="je">
             <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
             <tbody>
               <tr><td>86</td><td class="acct">191100</td><td>GR/IR Clearing</td><td class="dr">1,00,000</td><td></td></tr>
               <tr><td>40</td><td class="acct">140100</td><td>GST Input Credit</td><td class="dr">18,000</td><td></td></tr>
               <tr><td>31</td><td class="acct">200100</td><td>Vendor V-2001</td><td></td><td class="cr">1,18,000</td></tr>
-              <tr><td colspan="3">Total</td><td class="dr">1,18,000</td><td class="cr">1,18,000</td></tr>
             </tbody>
           </table>
-
-          <p><strong>Key Transactions:</strong> <span class="tcode">FB60</span> (invoice), <span class="tcode">FB65</span> (credit memo), <span class="tcode">F110</span> (automatic payment run), <span class="tcode">FBL1N</span> (vendor line items), <span class="tcode">F.19</span> (GR/IR reclassification).</p>
+          <p><strong>Key T-codes:</strong> <span class="tcode">FB60</span><span class="tcode">F110</span><span class="tcode">FBL1N</span><span class="tcode">F.19</span></p>
         </div>
 
         <div class="sec">
           <h3><span class="dot"></span> Accounts Receivable (AR)</h3>
-          <p><strong>Purpose:</strong> Manage what customers owe to the company — invoices, credit memos, incoming payments, dunning.</p>
           <p><strong>Master Data:</strong> KNA1 (general), KNB1 (company code), KNVV (sales).</p>
 
           <div class="example">
             <div class="label">Example — Customer Invoice &amp; Payment</div>
-            <p>ABC Ltd. sells goods for ₹2,00,000 + 18% GST to Customer C-5001 on 30-day terms.</p>
+            <p>ABC Ltd. sells goods for ₹2,00,000 + 18% GST on 30-day terms.</p>
           </div>
-
           <table class="je">
             <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
             <tbody>
               <tr><td>01</td><td class="acct">120100</td><td>Customer C-5001</td><td class="dr">2,36,000</td><td></td></tr>
               <tr><td>50</td><td class="acct">400000</td><td>Sales Revenue</td><td></td><td class="cr">2,00,000</td></tr>
               <tr><td>50</td><td class="acct">210100</td><td>GST Output Payable</td><td></td><td class="cr">36,000</td></tr>
-              <tr><td colspan="3">Total</td><td class="dr">2,36,000</td><td class="cr">2,36,000</td></tr>
             </tbody>
           </table>
-
-          <p><strong>On receipt of payment (30 days later):</strong></p>
-
-          <table class="je">
-            <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
-            <tbody>
-              <tr><td>40</td><td class="acct">100200</td><td>Bank</td><td class="dr">2,36,000</td><td></td></tr>
-              <tr><td>15</td><td class="acct">120100</td><td>Customer C-5001</td><td></td><td class="cr">2,36,000</td></tr>
-            </tbody>
-          </table>
-
-          <p><strong>Key Transactions:</strong> <span class="tcode">FB70</span> (invoice), <span class="tcode">F-28</span> (incoming payment), <span class="tcode">F150</span> (dunning), <span class="tcode">FBL5N</span> (customer line items), <span class="tcode">FBL5N</span> with aging.</p>
+          <p><strong>On payment:</strong> Dr Bank ₹2,36,000 / Cr Customer ₹2,36,000.</p>
+          <p><strong>Key T-codes:</strong> <span class="tcode">FB70</span><span class="tcode">F-28</span><span class="tcode">F150</span><span class="tcode">FBL5N</span></p>
         </div>
 
         <div class="sec">
           <h3><span class="dot"></span> Asset Accounting (AA)</h3>
-          <p><strong>Purpose:</strong> Manage the lifecycle of fixed assets — acquisition, depreciation, transfer, retirement, and reporting.</p>
           <p><strong>Master Data:</strong> ANLA (asset master), ANLB (depreciation terms), ANLC (values), ANEP (line items).</p>
 
           <div class="example">
             <div class="label">Example — Asset Acquisition &amp; Depreciation</div>
-            <p>ABC Ltd. buys a delivery van for ₹8,00,000 + 18% GST on 01.04.2024. Useful life: 5 years. Depreciation method: straight line.</p>
+            <p>Delivery van purchased for ₹8,00,000 + 18% GST. Useful life: 5 years. Straight line.</p>
           </div>
-
           <table class="je">
             <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
             <tbody>
-              <tr><td>70</td><td class="acct">150100</td><td>Motor Vehicles (Asset)</td><td class="dr">8,00,000</td><td></td></tr>
+              <tr><td>70</td><td class="acct">150100</td><td>Motor Vehicles</td><td class="dr">8,00,000</td><td></td></tr>
               <tr><td>40</td><td class="acct">140100</td><td>GST Input Credit</td><td class="dr">1,44,000</td><td></td></tr>
               <tr><td>50</td><td class="acct">200100</td><td>Vendor</td><td></td><td class="cr">9,44,000</td></tr>
             </tbody>
           </table>
+          <p><strong>Monthly depreciation:</strong> Dr Depreciation Expense ₹13,333 / Cr Accumulated Depreciation ₹13,333.</p>
+          <p><strong>Key T-codes:</strong> <span class="tcode">AS01</span><span class="tcode">ABZON</span><span class="tcode">ABUMN</span><span class="tcode">AFAB</span><span class="tcode">AW01N</span></p>
+        </div>
 
-          <p><strong>Monthly depreciation (₹8,00,000 / 60 = ₹13,333):</strong></p>
+        <div class="sec">
+          <h3><span class="dot"></span> Configuration Highlights</h3>
+          <table class="cfg">
+            <thead><tr><th>Config</th><th>Transaction</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td>Vendor Account Groups</td><td class="mono">OBD3</td><td>Field status and number range</td></tr>
+              <tr><td>Customer Account Groups</td><td class="mono">OBD2</td><td>Field status and number range</td></tr>
+              <tr><td>Payment Terms</td><td class="mono">OBB8</td><td>Discount and baseline date</td></tr>
+              <tr><td>Automatic Payment Program</td><td class="mono">FBZP</td><td>F110 setup</td></tr>
+              <tr><td>Asset Classes</td><td class="mono">OAOA</td><td>Grouping for AA</td></tr>
+              <tr><td>Depreciation Keys</td><td class="mono">AFAMA</td><td>Method, life, rate</td></tr>
+              <tr><td>Account Determination (AA)</td><td class="mono">AO90</td><td>Map asset transactions to GL</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Common Errors &amp; Fixes</h3>
+          <div class="err-grid">
+            <div class="err"><div class="t">"Vendor blocked for posting"</div><div class="d">Blocked in LFB1.</div><div class="f">Unblock or investigate.</div></div>
+            <div class="err"><div class="t">"No payment method found"</div><div class="d">F110 can't determine payment method.</div><div class="f">Maintain in LFB1 and check FBZP.</div></div>
+            <div class="err"><div class="t">"GR/IR account not defined"</div><div class="d">Missing OBYC config.</div><div class="f">Maintain WRX in OBYC.</div></div>
+            <div class="err"><div class="t">"Depreciation already posted"</div><div class="d">AFAB run twice.</div><div class="f">Restart mode or reverse with AFABR.</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Interview Prep</h3>
+          <div class="qa">
+            <div class="qa-item"><div class="qa-q">Q1: What is a reconciliation account?</div><div class="qa-a">The GL account linked to a subledger (AP, AR, AA). You cannot post directly to it — all postings go through the subledger. Guarantees subledger = GL at any point.</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: What is GR/IR clearing?</div><div class="qa-a">A suspense account. GR debits inventory, credits GR/IR. Invoice debits GR/IR, credits vendor. If matched, zero balance. Residual is reclassified with F.19 at month end.</div></div>
+            <div class="qa-item"><div class="qa-q">Q3: How is depreciation calculated?</div><div class="qa-a">By asset class → depreciation key → method, life, rate → depreciation area. Posted via AFAB. Entry: Dr Expense / Cr Accumulated Depreciation.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ TAB 4: BANK ACCOUNTING ═══════════════ -->
+    <div class="panel" id="panel-t4">
+      <div class="card">
+        <h2><span class="num">4</span> Bank Accounting (BL)</h2>
+        <p class="sub">Managing cash, bank statements, reconciliations, and cash flow — the link between the bank and the GL.</p>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Meaning</h3>
+          <div class="meaning">
+            <div class="label">What is it?</div>
+            <p>Bank Accounting (BL) manages the company's relationships with banks: recording payments, receiving bank statements, matching them to GL entries, and forecasting cash. It answers: <em>"How much cash do we have? What's coming in? What's going out? Does the bank balance match our books?"</em></p>
+            <p>Bank Accounting consists of three connected sub-areas: <strong>Bank Master Data</strong>, <strong>Electronic Bank Statement (EBS)</strong>, and <strong>Cash Management / Liquidity Forecast</strong>.</p>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Core Concepts</h3>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">House Bank</div><div class="cd">A bank the company has a relationship with (HDFC, ICICI, DBS). Defined in FI12 for each company code.</div></div>
+            <div class="concept"><div class="ct">Bank Account ID</div><div class="cd">Specific account within a house bank (current account, OD account, etc.). The pair (house bank + account ID) = your bank account.</div></div>
+            <div class="concept"><div class="ct">Bank Directory</div><div class="cd">Master list of banks, bank keys, and routing numbers. Maintained via BA01 / FI01.</div></div>
+            <div class="concept"><div class="ct">Bank Statement</div><div class="cd">File received from bank (MT940 / MT942 / CAMT.053 / BAI2) listing all transactions in the account.</div></div>
+            <div class="concept"><div class="ct">EBS — Electronic Bank Statement</div><div class="cd">Automated processing of bank statement files. Transactions are matched to open items automatically.</div></div>
+            <div class="concept"><div class="ct">Lockbox</div><div class="cd">Bank-operated PO box for customer payments. Bank sends a lockbox file; SAP matches to customer invoices.</div></div>
+            <div class="concept"><div class="ct">Manual Bank Statement</div><div class="cd">Entered manually via FF67 for banks that don't send electronic files.</div></div>
+            <div class="concept"><div class="ct">Cash Position</div><div class="cd">Snapshot of cash at a point in time (end of day) — FF7A.</div></div>
+            <div class="concept"><div class="ct">Liquidity Forecast</div><div class="cd">Forward projection of cash inflows/outflows — FF7B.</div></div>
+            <div class="concept"><div class="ct">Bank Reconciliation</div><div class="cd">Monthly comparison of bank balance vs GL balance. Difference = unreconciled items.</div></div>
+            <div class="concept"><div class="ct">Payment Medium Workbench</div><div class="cd">Generates payment files (NACH, ACH, SWIFT) in bank-specific formats — DMEE.</div></div>
+            <div class="concept"><div class="ct">Bank Chain</div><div class="cd">Sequence of banks involved in an international payment (intermediary banks).</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Real-World Example — EBS Processing</h3>
+          <div class="example">
+            <div class="label">Scenario</div>
+            <p>ABC Ltd. receives a bank statement from HDFC for 30.04.2024. It contains 3 transactions:</p>
+            <ul>
+              <li>Customer payment received from C-5001: ₹2,36,000</li>
+              <li>Vendor payment to V-2001: ₹1,18,000</li>
+              <li>Bank charges: ₹500</li>
+            </ul>
+          </div>
+
+          <p><strong>Step 1 — Bank statement file received (MT940):</strong> Uploaded via <span class="tcode">FF.5</span> or automatically via SFTP.</p>
+          <p><strong>Step 2 — Processing the statement:</strong> <span class="tcode">FF67</span> or automatic post-processing via <span class="tcode">FEBAN</span>.</p>
+          <p><strong>Step 3 — Auto-matched postings:</strong></p>
 
           <table class="je">
             <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
             <tbody>
-              <tr><td>40</td><td class="acct">500100</td><td>Depreciation Expense</td><td class="dr">13,333</td><td></td></tr>
-              <tr><td>50</td><td class="acct">159100</td><td>Accumulated Depreciation</td><td></td><td class="cr">13,333</td></tr>
-            </tbody>
-          </table>
-
-          <p><strong>Key Transactions:</strong> <span class="tcode">AS01</span> (create asset), <span class="tcode">ABZON</span> (acquisition), <span class="tcode">ABUMN</span> (transfer), <span class="tcode">ABAON</span> (retirement), <span class="tcode">AFAB</span> (depreciation run), <span class="tcode">AW01N</span> (asset explorer).</p>
-        </div>
-
-        <div class="sec">
-          <h3><span class="dot"></span> Configuration Highlights</h3>
-          <table class="cfg">
-            <thead><tr><th>Config</th><th>Transaction</th><th>Purpose</th></tr></thead>
-            <tbody>
-              <tr><td>Vendor Account Groups</td><td class="mono">OBD3</td><td>Control field status and number range per vendor type</td></tr>
-              <tr><td>Customer Account Groups</td><td class="mono">OBD2</td><td>Control field status and number range per customer type</td></tr>
-              <tr><td>Payment Terms</td><td class="mono">OBB8</td><td>Define payment terms with baseline date and cash discount</td></tr>
-              <tr><td>Automatic Payment Program</td><td class="mono">FBZP</td><td>Configure F110 — company code, payment methods, bank selection</td></tr>
-              <tr><td>Asset Classes</td><td class="mono">OAOA</td><td>Group assets with similar characteristics</td></tr>
-              <tr><td>Depreciation Areas</td><td class="mono">OADB</td><td>Define book, tax, and cost accounting depreciation areas</td></tr>
-              <tr><td>Depreciation Keys</td><td class="mono">AFAMA</td><td>Define method, useful life, and rate per asset class</td></tr>
-              <tr><td>Account Determination (AA)</td><td class="mono">AO90</td><td>Map asset transactions to GL accounts</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="sec">
-          <h3><span class="dot"></span> Common Errors &amp; Fixes</h3>
-          <div class="err-grid">
-            <div class="err">
-              <div class="t">"Vendor is blocked for posting"</div>
-              <div class="d">Vendor master is blocked in LFB1 for the company code.</div>
-              <div class="f">Unblock in LFB1 or check if the block is intentional.</div>
-            </div>
-            <div class="err">
-              <div class="t">"No payment method found"</div>
-              <div class="d">F110 cannot determine a payment method for the vendor.</div>
-              <div class="f">Maintain payment methods in LFB1 (vendor master) and check FBZP configuration.</div>
-            </div>
-            <div class="err">
-              <div class="t">"GR/IR account not defined"</div>
-              <div class="d">Missing account determination for GR/IR clearing.</div>
-              <div class="f">Maintain OBYC — transaction key WRX (GR/IR clearing).</div>
-            </div>
-            <div class="err">
-              <div class="t">"Depreciation run already performed for period"</div>
-              <div class="d">AFAB cannot run twice for the same period without restart.</div>
-              <div class="f">Use AFAB in restart mode or reverse the previous run.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sec">
-          <h3><span class="dot"></span> Interview Preparation</h3>
-          <div class="qa">
-            <div class="qa-item">
-              <div class="qa-q">Q1: What is a reconciliation account and why is it needed?</div>
-              <div class="qa-a">A reconciliation account is the GL account to which a subledger (AP, AR, AA) posts its summarised balance. You cannot post directly to a reconciliation account — every posting must go through the subledger. This ensures that the subledger balance always equals the GL reconciliation account balance at any point in time. Examples: 200100 (Vendor Reconciliation), 120100 (Customer Reconciliation), 150100 (Asset Reconciliation).</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q2: What is the GR/IR clearing account and how is it used?</div>
-              <div class="qa-a">GR/IR (Goods Receipt / Invoice Receipt) clearing is a suspense account. When goods are received (GR), the system debits stock/inventory and credits GR/IR. When the invoice arrives (IR), it debits GR/IR and credits the vendor. If GR and IR match, the GR/IR balance is zero. If not, the residual stays as a "goods received not invoiced" or "invoice received not delivered" balance, which is reclassified at month end using F.19.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q3: How is asset depreciation calculated in SAP?</div>
-              <div class="qa-a">Depreciation is determined by: (1) Asset class (which determines the depreciation key), (2) Depreciation key (which defines the method, useful life, and rate), (3) Depreciation area (book, tax, cost accounting). The system calculates depreciation using the base value (usually APC — Acquisition and Production Costs) and posts it via AFAB. The entry is Dr Depreciation Expense / Cr Accumulated Depreciation.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════ TAB 4: CONTROLLING ═══════════════ -->
-    <div class="panel" id="panel-t4">
-      <div class="card">
-        <h2><span class="num">4</span> Controlling (CO)</h2>
-        <p class="sub">Cost and profitability management across cost centers, orders, and profit centers.</p>
-
-        <div class="sec">
-          <h3><span class="dot"></span> Meaning</h3>
-          <div class="meaning">
-            <div class="label">What is it?</div>
-            <p>Controlling (CO) is the management accounting module. It captures costs and revenues by <strong>cost object</strong> — cost centers, internal orders, production orders, profit centers — and answers questions like: <em>Where did the money go? Which department overspent? Which product is most profitable? Where can we cut costs?</em></p>
-            <p>CO is not a legal requirement like FI — it is a management tool. But it is where the deepest financial insight lives.</p>
-          </div>
-        </div>
-
-        <div class="sec">
-          <h3><span class="dot"></span> Core Concepts</h3>
-          <div class="concept-grid">
-            <div class="concept"><div class="ct">Cost Element</div><div class="cd">The CO equivalent of an FI P&amp;L account. Primary cost elements link to GL; secondary cost elements are CO-only.</div></div>
-            <div class="concept"><div class="ct">Cost Center</div><div class="cd">Where overhead costs are collected. Managed by a responsible person. Used for departmental reporting.</div></div>
-            <div class="concept"><div class="ct">Activity Type</div><div class="cd">Unit of output (machine hour, labour hour). Used for internal activity allocation between cost centers.</div></div>
-            <div class="concept"><div class="ct">Statistical Key Figure</div><div class="cd">A non-monetary measure (headcount, square meters, calls) used as an allocation base.</div></div>
-            <div class="concept"><div class="ct">Internal Order</div><div class="cd">A temporary cost collector for a specific purpose (marketing campaign, R&amp;D project). Settled at period end.</div></div>
-            <div class="concept"><div class="ct">Distribution</div><div class="cd">Allocates <strong>primary</strong> costs from sender to receiver using the original cost element. Preserves cost element detail.</div></div>
-            <div class="concept"><div class="ct">Assessment</div><div class="cd">Allocates costs from sender to receiver under a <strong>secondary</strong> cost element. Consolidates many costs into one.</div></div>
-            <div class="concept"><div class="ct">Settlement</div><div class="cd">Transfers costs collected on an order to a final receiver (cost center, GL account, asset, CO-PA).</div></div>
-          </div>
-        </div>
-
-        <div class="sec">
-          <h3><span class="dot"></span> Real-World Example — Cost Center Close</h3>
-          <div class="example">
-            <div class="label">Scenario</div>
-            <p>ABC Ltd. runs a monthly close. The IT cost center <code>CC-IT</code> has collected ₹5,00,000 of costs. These need to be assessed to other cost centers based on headcount (statistical key figure).</p>
-            <ul>
-              <li>CC-PROD: 200 employees (66.7%)</li>
-              <li>CC-MKT: 50 employees (16.7%)</li>
-              <li>CC-FIN: 50 employees (16.7%)</li>
-            </ul>
-          </div>
-
-          <p><strong>Assessment cycle KSII:</strong></p>
-
-          <table class="je">
-            <thead><tr><th>PK</th><th>Cost Center</th><th>Cost Element</th><th>Amount (₹)</th></tr></thead>
-            <tbody>
-              <tr><td>—</td><td class="acct">CC-IT (Sender)</td><td>Secondary CE 900001</td><td class="cr">−5,00,000</td></tr>
-              <tr><td>—</td><td class="acct">CC-PROD (Receiver)</td><td>Secondary CE 900001</td><td class="dr">+3,33,500</td></tr>
-              <tr><td>—</td><td class="acct">CC-MKT (Receiver)</td><td>Secondary CE 900001</td><td class="dr">+83,250</td></tr>
-              <tr><td>—</td><td class="acct">CC-FIN (Receiver)</td><td>Secondary CE 900001</td><td class="dr">+83,250</td></tr>
+              <tr><td>40</td><td class="acct">100200</td><td>Bank — HDFC Current</td><td class="dr">2,36,000</td><td></td></tr>
+              <tr><td>15</td><td class="acct">120100</td><td>Customer C-5001</td><td></td><td class="cr">2,36,000</td></tr>
+              <tr><td>—</td><td class="acct">200100</td><td>Vendor V-2001</td><td class="dr">1,18,000</td><td></td></tr>
+              <tr><td>—</td><td class="acct">100200</td><td>Bank — HDFC Current</td><td></td><td class="cr">1,18,000</td></tr>
+              <tr><td>40</td><td class="acct">500200</td><td>Bank Charges</td><td class="dr">500</td><td></td></tr>
+              <tr><td>50</td><td class="acct">100200</td><td>Bank — HDFC Current</td><td></td><td class="cr">500</td></tr>
             </tbody>
           </table>
 
           <div class="note">
-            <div class="label">Why assessment?</div>
-            <p>The sender's cost center is credited (costs move out), and receivers are debited (costs move in). Net effect on the controlling area is zero. The original cost element detail is consolidated into secondary CE 900001.</p>
+            <div class="label">Why EBS is powerful</div>
+            <p>Instead of manually entering hundreds of bank transactions, EBS uses <strong>interpretation algorithms</strong> to auto-match. Rule-based algorithms identify the transaction type from the bank code; search algorithms find the matching open item (e.g., by invoice number, amount, customer code).</p>
           </div>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> Distribution vs Assessment</h3>
+          <h3><span class="dot"></span> EBS Configuration — The Key Steps</h3>
           <table class="cfg">
-            <thead><tr><th>Aspect</th><th>Distribution</th><th>Assessment</th></tr></thead>
+            <thead><tr><th>Config</th><th>Transaction</th><th>Purpose</th></tr></thead>
             <tbody>
-              <tr><td>Cost Element</td><td>Uses original primary cost elements</td><td>Uses a secondary cost element</td></tr>
-              <tr><td>Detail preserved?</td><td>Yes — receiver sees original CE</td><td>No — consolidated under one CE</td></tr>
-              <tr><td>Typical use</td><td>When receivers need CE-level detail</td><td>When consolidated allocation is acceptable</td></tr>
-              <tr><td>Transaction</td><td class="mono">KSV1–KSV5</td><td class="mono">KSU1–KSU8</td></tr>
+              <tr><td>Create House Bank</td><td class="mono">FI12</td><td>Bank relationship per company code</td></tr>
+              <tr><td>Create Account ID</td><td class="mono">FI12</td><td>Specific bank account within house bank</td></tr>
+              <tr><td>Bank Statement Format</td><td class="mono">OT83</td><td>Define MT940, CAMT.053, etc.</td></tr>
+              <tr><td>Create Account Symbols</td><td class="mono">OT01 / OTB1</td><td>Map bank transactions to GL accounts</td></tr>
+              <tr><td>Assign GL Accounts to Account Symbols</td><td class="mono">OT02 / OTB1</td><td>Link posting keys and GL accounts</td></tr>
+              <tr><td>Create Transaction Types</td><td class="mono">OT03 / OTB2</td><td>Define business transactions (e.g., incoming transfer)</td></tr>
+              <tr><td>Assign Transaction Types to Account Symbols</td><td class="mono">OT04 / OTB3</td><td>Map business transactions to GL accounts</td></tr>
+              <tr><td>Define Posting Rules</td><td class="mono">OT05 / OTB4</td><td>Sequence of algorithms to match and post</td></tr>
+              <tr><td>Assign Posting Rules to Bank Accounts</td><td class="mono">OT06 / OTB5</td><td>Link rules to specific bank account</td></tr>
+              <tr><td>Bank Statement Upload</td><td class="mono">FF.5</td><td>Upload MT940 / CAMT files</td></tr>
+              <tr><td>Post-Processing</td><td class="mono">FEBAN</td><td>Manual handling of unmatched items</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Cash Management &amp; Liquidity Forecast</h3>
+          <p><strong>Cash Management (FF7A):</strong> Shows actual cash and bank balances at end of day, by bank account and currency. Provides a snapshot of liquidity.</p>
+          <p><strong>Liquidity Forecast (FF7B):</strong> Forward-looking projection combining:</p>
+          <ul>
+            <li>Open customer invoices (expected inflows)</li>
+            <li>Open vendor invoices (expected outflows)</li>
+            <li>Planned payments and receipts</li>
+            <li>One-time and periodic postings</li>
+          </ul>
+          <p>Both are configured via <strong>Cash Management groups</strong> (OT51) and <strong>planning levels</strong>.</p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Common Errors &amp; Fixes</h3>
+          <div class="err-grid">
+            <div class="err"><div class="t">"Account symbol not assigned to bank account"</div><div class="d">EBS cannot determine the GL account for a transaction type.</div><div class="f">Review OTB1 / OT01 configuration.</div></div>
+            <div class="err"><div class="t">"No posting rule found"</div><div class="d">Bank account has no posting rule assigned.</div><div class="f">Assign posting rule via OTB5 / OT06.</div></div>
+            <div class="err"><div class="t">"Bank statement file format invalid"</div><div class="d">MT940 variant mismatch.</div><div class="f">Check OT83 format definition matches bank's actual file.</div></div>
+            <div class="err"><div class="t">"Manual bank statement items pending"</div><div class="d">Auto-matching failed for some items.</div><div class="f">Process in FEBAN — assign manually or adjust algorithms.</div></div>
+            <div class="err"><div class="t">"Bank balance ≠ GL balance"</div><div class="d">Unreconciled items (outstanding cheques, deposits in transit).</div><div class="f">Run bank reconciliation report; investigate stale items with the bank.</div></div>
+            <div class="err"><div class="t">"Cash position does not match"</div><div class="d">Bank sub-accounts not mapped to cash management groups.</div><div class="f">Maintain mapping via OT51 / transaction FF7A config.</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Interview Prep</h3>
+          <div class="qa">
+            <div class="qa-item"><div class="qa-q">Q1: What is the difference between House Bank and Account ID?</div><div class="qa-a">A House Bank is the banking partner (e.g., HDFC Bank). An Account ID identifies a specific account within that bank (current account, OD account, ESCROW). Together they form the unique bank identifier in SAP: <code>BANKL + BNKACC</code>. You can have multiple account IDs under one house bank.</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: How does EBS auto-match a customer payment?</div><div class="qa-a">EBS uses a three-layer approach: (1) <strong>Interpretation algorithms</strong> identify the transaction type from the bank code and text fields. (2) <strong>Posting rules</strong> define which algorithms run and in what order. (3) <strong>Search algorithms</strong> look up the matching open item — by invoice number, amount, or customer code. If a match is found, the item is auto-cleared. If not, it goes to FEBAN for manual processing.</div></div>
+            <div class="qa-item"><div class="qa-q">Q3: What is the difference between Cash Position and Liquidity Forecast?</div><div class="qa-a">Cash Position (FF7A) is a <strong>snapshot</strong> of current bank balances — what you have now. Liquidity Forecast (FF7B) is a <strong>projection</strong> into the future — what you expect to receive and pay, based on open items and planned transactions. Cash Position looks backward and at today; Liquidity Forecast looks forward.</div></div>
+            <div class="qa-item"><div class="qa-q">Q4: What is lockbox and how is it different from EBS?</div><div class="qa-a">A lockbox is a physical PO box operated by the bank for customer payments. The bank collects the payments, processes them, and sends SAP a lockbox file (BAI2 format). SAP matches the payments to customer invoices using invoice numbers or MICR data. EBS is a broader concept — it processes the entire bank statement (all transactions). Lockbox is a specific tool for automating customer receipt matching at high volume.</div></div>
+            <div class="qa-item"><div class="qa-q">Q5: How do you reconcile the bank statement with the GL?</div><div class="qa-a">After EBS is fully processed, the GL bank account balance should equal the bank statement's closing balance. Any difference is due to: outstanding cheques, deposits in transit, bank errors, or unrecorded bank charges. Use the bank reconciliation report, review unreconciled items, and clear them once the underlying transaction is recorded.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ TAB 5: IN-HOUSE BANKING ═══════════════ -->
+    <div class="panel" id="panel-t5">
+      <div class="card">
+        <h2><span class="num">5</span> In-House Banking / In-House Cash (IHB / IHC)</h2>
+        <p class="sub">How large groups centralise cash, net intercompany payments, and manage internal liquidity — using an internal bank structure.</p>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Meaning</h3>
+          <div class="meaning">
+            <div class="label">What is it?</div>
+            <p>In-House Banking (also called <strong>In-House Cash / IHC</strong>) is a treasury tool that lets a group act as its own bank. Instead of every subsidiary maintaining multiple external bank accounts and making cross-border payments to each other, the group sets up an <strong>In-House Cash Centre</strong> that acts as an internal bank. All intercompany payments flow through the IHC. The IHC then consolidates and nets external payments, reducing bank fees, FX exposure, and cash trapped in subsidiaries.</p>
+            <p>IHC is a <strong>Treasury (TRM)</strong> submodule, but it posts directly to FI — so FICO consultants frequently work with it.</p>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Why Companies Use IHC</h3>
+          <ul>
+            <li><strong>Cash visibility:</strong> Treasury has real-time visibility of all subsidiary cash positions.</li>
+            <li><strong>Netting:</strong> Intercompany payables and receivables offset each other — only net payments are made.</li>
+            <li><strong>Reduced bank fees:</strong> Fewer external transactions = lower transaction fees.</li>
+            <li><strong>FX consolidation:</strong> FX is managed centrally, not in each subsidiary.</li>
+            <li><strong>Internal lending:</strong> Group can lend to subsidiaries at internal rates.</li>
+            <li><strong>Better cash pooling:</strong> Physical or notional pooling of balances.</li>
+          </ul>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Core Concepts</h3>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">In-House Cash Centre (IHCC)</div><div class="cd">A dedicated company code representing the internal bank. Acts as the counterparty for all intercompany transactions.</div></div>
+            <div class="concept"><div class="ct">IHC Account</div><div class="cd">An internal account held by each subsidiary with the IHC. Equivalent to a bank account, but internal to the group.</div></div>
+            <div class="concept"><div class="ct">Internal Customer</div><div class="cd">The subsidiary as a customer of the IHC. Created in IHC customer master.</div></div>
+            <div class="concept"><div class="ct">Internal Vendor</div><div class="cd">The IHC as a vendor to the subsidiary. Created as an IHC vendor.</div></div>
+            <div class="concept"><div class="ct">Payment Order</div><div class="cd">An instruction to the IHC to pay on behalf of a subsidiary. Central to IHC processing.</div></div>
+            <div class="concept"><div class="ct">Netting</div><div class="cd">Offsetting payables and receivables between subsidiaries. Only the net is settled.</div></div>
+            <div class="concept"><div class="ct">Physical Cash Pooling</div><div class="cd">Actual transfer of funds to a concentration account.</div></div>
+            <div class="concept"><div class="ct">Notional Pooling</div><div class="cd">Balances aggregated for interest calculation only — no physical transfer.</div></div>
+            <div class="concept"><div class="ct">Internal Loan</div><div class="cd">Loan from IHC to a subsidiary, with internal interest calculation.</div></div>
+            <div class="concept"><div class="ct">IHC FX</div><div class="cd">Currency conversion handled by IHC on behalf of subsidiaries.</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Real-World Example — Intercompany Netting</h3>
+          <div class="example">
+            <div class="label">Scenario — ABC Group</div>
+            <p>Three subsidiaries trade with each other:</p>
+            <ul>
+              <li><strong>ABC India (IN01)</strong> owes ABC Singapore (SG01) ₹50,00,000</li>
+              <li><strong>ABC Singapore (SG01)</strong> owes ABC Germany (DE01) €50,000 (₹45,00,000)</li>
+              <li><strong>ABC Germany (DE01)</strong> owes ABC India (IN01) €55,000 (₹49,50,000)</li>
+            </ul>
+            <p>Without IHC, ABC Group would make 3 external cross-border payments.</p>
+            <p><strong>With IHC:</strong> All three subsidiaries post their intercompany invoices to the IHC as if the IHC were their bank. The IHC computes net positions and settles only the net amounts.</p>
+          </div>
+
+          <table class="je">
+            <thead><tr><th>Subsidiary</th><th>Gross Payable</th><th>Gross Receivable</th><th>Net Position</th></tr></thead>
+            <tbody>
+              <tr><td>IN01</td><td>50,00,000</td><td>49,50,000</td><td class="dr">-50,000 (pay)</td></tr>
+              <tr><td>SG01</td><td>45,00,000</td><td>50,00,000</td><td class="cr">+5,00,000 (receive)</td></tr>
+              <tr><td>DE01</td><td>49,50,000</td><td>45,00,000</td><td class="dr">-4,50,000 (pay)</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Only 2 net payments are made instead of 3 gross payments — and all through the IHC rather than between subsidiaries.</strong></p>
+
+          <p><strong>Journal entries (simplified) — when ABC India pays its intercompany invoice:</strong></p>
+          <table class="je">
+            <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
+            <tbody>
+              <tr><td>40</td><td class="acct">210200</td><td>Intercompany Payable (SG01)</td><td class="dr">50,00,000</td><td></td></tr>
+              <tr><td>50</td><td class="acct">210500</td><td>Due to IHC</td><td></td><td class="cr">50,00,000</td></tr>
+            </tbody>
+          </table>
+
+          <p>IHC then settles the net payable with SG01 directly. SG01's books show the reverse.</p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> IHC vs Bank Accounting — What's Different</h3>
+          <table class="cfg">
+            <thead><tr><th>Aspect</th><th>Bank Accounting (BL)</th><th>In-House Cash (IHC)</th></tr></thead>
+            <tbody>
+              <tr><td>Counterparty</td><td>External bank</td><td>Internal bank (IHC Centre)</td></tr>
+              <tr><td>Purpose</td><td>Manage external payments and statements</td><td>Manage group internal payments and cash</td></tr>
+              <tr><td>Statement format</td><td>MT940 / CAMT.053 from bank</td><td>IHC generates internal statement</td></tr>
+              <tr><td>Payment flow</td><td>Company → Bank → Beneficiary</td><td>Subsidiary → IHC → Beneficiary (or netting)</td></tr>
+              <tr><td>FX</td><td>Handled by external bank</td><td>Handled by IHC at internal rates</td></tr>
+              <tr><td>Volume reduction</td><td>—</td><td>Netting reduces external transactions by 60–80%</td></tr>
+              <tr><td>Module</td><td>FI (Bank Accounting)</td><td>TRM (Treasury) + FI postings</td></tr>
             </tbody>
           </table>
         </div>
@@ -673,13 +820,13 @@
           <table class="cfg">
             <thead><tr><th>Config</th><th>Transaction</th><th>Purpose</th></tr></thead>
             <tbody>
-              <tr><td>Create Cost Element</td><td class="mono">KA01</td><td>Link an FI P&amp;L account to a primary cost element</td></tr>
-              <tr><td>Create Secondary Cost Element</td><td class="mono">KA06</td><td>Define CO-only cost elements (assessment, allocation)</td></tr>
-              <tr><td>Create Cost Center</td><td class="mono">KS01</td><td>Define cost center with responsible person and validity</td></tr>
-              <tr><td>Create Activity Type</td><td class="mono">KL01</td><td>Define activity type with unit and price indicator</td></tr>
-              <tr><td>Create Statistical Key Figure</td><td class="mono">KK01</td><td>Define non-monetary allocation base</td></tr>
-              <tr><td>Create Internal Order</td><td class="mono">KO01</td><td>Define order type and settlement rule</td></tr>
-              <tr><td>Assessment Cycle</td><td class="mono">KSU1–KSU8</td><td>Define sender, receiver, and allocation base</td></tr>
+              <tr><td>Create IHC Company Code</td><td class="mono">OX02</td><td>Dedicated company code for IHC</td></tr>
+              <tr><td>Create IHC Customer / Vendor</td><td class="mono">FD01 / FK01</td><td>IHC master record</td></tr>
+              <tr><td>Define IHC Accounts</td><td class="mono">IHCC_CREATE_ACCOUNT</td><td>Internal accounts per subsidiary</td></tr>
+              <tr><td>Assign Subsidiaries to IHC</td><td class="mono">SAP IMG: Financial Supply Chain</td><td>Define which company codes participate</td></tr>
+              <tr><td>IHC Posting Rules</td><td class="mono">IHC Customizing</td><td>Rules for auto-posting to IHC</td></tr>
+              <tr><td>Netting Configuration</td><td class="mono">Netting IMG</td><td>Define netting rules and cut-off</td></tr>
+              <tr><td>Payment Order Types</td><td class="mono">IHC Payment Config</td><td>Types of payment orders accepted</td></tr>
             </tbody>
           </table>
         </div>
@@ -687,76 +834,213 @@
         <div class="sec">
           <h3><span class="dot"></span> Common Errors &amp; Fixes</h3>
           <div class="err-grid">
-            <div class="err">
-              <div class="t">"Cost element not created for GL account"</div>
-              <div class="d">Trying to post a cost to a GL account with no matching cost element.</div>
-              <div class="f">Create the cost element using KA01 (primary) or KA06 (secondary).</div>
-            </div>
-            <div class="err">
-              <div class="t">"Sender and receiver are the same"</div>
-              <div class="d">Assessment cycle has sender = receiver.</div>
-              <div class="f">Review the cycle in KSU2 — receivers must be different from sender.</div>
-            </div>
-            <div class="err">
-              <div class="t">"No statistical key figure entered"</div>
-              <div class="d">Assessment uses SKF as base but no values are maintained.</div>
-              <div class="f">Maintain SKF values via KB31N before running the cycle.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Settlement rule not maintained"</div>
-              <div class="d">Trying to settle an order without a settlement rule.</div>
-              <div class="f">Maintain the settlement rule in KO02 before KO88.</div>
-            </div>
+            <div class="err"><div class="t">"IHC account not found for company code"</div><div class="d">Subsidiary has no IHC account.</div><div class="f">Create IHC account and assign to the subsidiary.</div></div>
+            <div class="err"><div class="t">"Payment order rejected"</div><div class="d">Missing or invalid payment order type.</div><div class="f">Check IHC payment configuration and order type.</div></div>
+            <div class="err"><div class="t">"Netting proposal empty"</div><div class="d">No intercompany invoices found within the netting period.</div><div class="f">Verify cut-off dates and invoice posting dates.</div></div>
+            <div class="err"><div class="t">"FX rate not found for IHC conversion"</div><div class="d">Missing exchange rate for IHC pair.</div><div class="f">Maintain rate in OB08 or IHC rate table.</div></div>
+            <div class="err"><div class="t">"IHC posting blocked — reconciliation account missing"</div><div class="d">IHC recon account not maintained.</div><div class="f">Assign IHC recon account to the IHC customer/vendor.</div></div>
           </div>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> Interview Preparation</h3>
+          <h3><span class="dot"></span> Interview Prep</h3>
           <div class="qa">
-            <div class="qa-item">
-              <div class="qa-q">Q1: What is the difference between primary and secondary cost elements?</div>
-              <div class="qa-a">Primary cost elements have a corresponding FI GL account — they represent costs flowing from FI into CO (e.g., salary expense, rent). Secondary cost elements exist only in CO and represent internal cost flows (assessments, distributions, activity allocations). They have no FI counterpart.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q2: When would you use distribution instead of assessment?</div>
-              <div class="qa-a">Use distribution when the receiver needs visibility into the original cost elements (e.g., when each cost element has a specific business meaning). Use assessment when the receiver only needs a consolidated view and the sender wants to preserve the anonymity of individual costs.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q3: What is a settlement rule and why is it needed?</div>
-              <div class="qa-a">A settlement rule defines where the costs collected on an internal order, production order, or project are transferred at period end. It specifies the receiver (cost center, GL account, asset, CO-PA segment) and the distribution rule (percentage, equivalence number, or amount). Without a settlement rule, KO88 will not run.</div>
-            </div>
+            <div class="qa-item"><div class="qa-q">Q1: What is the purpose of In-House Cash?</div><div class="qa-a">IHC centralises cash management across a group. It acts as an internal bank — subsidiaries hold internal accounts with the IHC instead of external bank accounts for intercompany flows. This enables netting, centralised FX, internal lending, and dramatic reduction in external bank transactions and fees.</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: How does netting work in IHC?</div><div class="qa-a">Subsidiaries post their intercompany payables and receivables to the IHC instead of directly to each other. At defined cut-off dates (daily, weekly, monthly), the IHC computes net positions per subsidiary. Only the net is settled externally. Example: if IN01 owes SG01 ₹50L and SG01 owes IN01 ₹49.5L, only ₹0.5L is settled instead of ₹99.5L.</div></div>
+            <div class="qa-item"><div class="qa-q">Q3: How is IHC different from regular bank accounting?</div><div class="qa-a">Bank Accounting deals with external banks — statements come from the bank (MT940), payments go to external beneficiaries. IHC deals with internal group transactions — statements are generated internally, payments flow between subsidiaries and the IHC. IHC is a Treasury module, not pure FI, but it produces FI postings.</div></div>
+            <div class="qa-item"><div class="qa-q">Q4: What are the prerequisites for implementing IHC?</div><div class="qa-a">(1) A dedicated company code for the IHC. (2) Customer and vendor master records for the IHC. (3) Internal accounts created for each participating subsidiary. (4) Clear intercompany reconciliation accounts. (5) Defined payment order types and posting rules. (6) Netting configuration if netting is used. (7) Agreement on internal FX rates and interest calculation.</div></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ═══════════════ TAB 5: PRODUCT COSTING ═══════════════ -->
-    <div class="panel" id="panel-t5">
+    <!-- ═══════════════ TAB 6: CONTROLLING (CO) ═══════════════ -->
+    <div class="panel" id="panel-t6">
       <div class="card">
-        <h2><span class="num">5</span> Product Costing &amp; Production Integration</h2>
-        <p class="sub">How SAP calculates the cost of manufacturing a product and tracks actual costs on production orders.</p>
+        <h2><span class="num">6</span> Controlling (CO) — The Full Landscape</h2>
+        <p class="sub">Complete CO coverage: Cost Center Accounting (CO-CC), Cost Element Accounting (CO-CEL), Internal Orders (CO-OPA), Activity-Based Costing (CO-ABC), Product Costing (CO-PC), Cost Object Controlling / Production (CO-PP), Profitability Analysis (CO-PA), and Profit Center Accounting (PCA).</p>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Meaning</h3>
+          <div class="meaning">
+            <div class="label">What is CO?</div>
+            <p>Controlling (CO) is the management accounting module. It captures costs and revenues by <strong>cost object</strong> — cost centers, internal orders, production orders, profit centers, profitability segments — and answers: <em>Where did the money go? Which department overspent? Which product is most profitable? Where can we cut costs?</em></p>
+            <p>CO is where the deepest financial insight lives.</p>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> The CO Submodule Map</h3>
+          <table class="cfg">
+            <thead><tr><th>Submodule</th><th>Purpose</th><th>Key Objects</th><th>Key Tables</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CO-CEL</strong> · Cost Element Accounting</td><td>Bridge between FI accounts and CO</td><td>Primary &amp; Secondary CEs</td><td>CSKA, CSKB, COKA</td></tr>
+              <tr><td><strong>CO-CCA</strong> · Cost Center Accounting</td><td>Overhead costs by department</td><td>Cost Centers, Activity Types, SKFs</td><td>CSKS, CSKT, CSLA, COEP</td></tr>
+              <tr><td><strong>CO-OPA</strong> · Overhead Orders</td><td>Costs for short-term events/projects</td><td>Internal Orders</td><td>AUFK, AUFTR, COEP</td></tr>
+              <tr><td><strong>CO-ABC</strong> · Activity-Based Costing</td><td>Activity-driven overhead allocation</td><td>Business Processes</td><td>CBPR, CBPT</td></tr>
+              <tr><td><strong>CO-PC</strong> · Product Cost Controlling</td><td>Standard cost of products</td><td>Cost Estimates</td><td>KEKO, KEPH, CKHS, CKIS</td></tr>
+              <tr><td><strong>CO-PP</strong> · Cost Object Controlling (Production)</td><td>Actual cost of production orders</td><td>Production Orders</td><td>AFKO, AFPO, AFVC, RESB, COEP</td></tr>
+              <tr><td><strong>CO-PA</strong> · Profitability Analysis</td><td>Margin by market segment</td><td>Operating Concern, Characteristics</td><td>CE1xxxx, CE4xxxx</td></tr>
+              <tr><td><strong>EC-PCA</strong> · Profit Center Accounting</td><td>Internal P&amp;L by profit center</td><td>Profit Centers</td><td>CEPC, GLPCT, ACDOCA</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> CO-CEL — Cost Element Accounting</h3>
+          <p><strong>Purpose:</strong> Every primary cost element corresponds to an FI P&amp;L account. Cost element accounting maintains this link and defines cost element categories.</p>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">Primary Cost Element (Category 01)</div><div class="cd">Has an FI GL counterpart. Represents costs flowing from FI into CO — salaries, rent, materials.</div></div>
+            <div class="concept"><div class="ct">Secondary Cost Element (Category 21/41/42/43)</div><div class="cd">CO-only. Represents internal cost flows — assessments (42), distributions (43), activity allocations (41).</div></div>
+            <div class="concept"><div class="ct">Revenue Element (Category 11)</div><div class="cd">Has an FI revenue account counterpart. Used in CO-PA.</div></div>
+          </div>
+          <p><strong>T-codes:</strong> <span class="tcode">KA01</span><span class="tcode">KA02</span><span class="tcode">KA06</span></p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> CO-CCA — Cost Center Accounting</h3>
+          <p><strong>Purpose:</strong> Collects overhead costs by department or function, and allocates them to receivers.</p>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">Cost Center Master</div><div class="cd">CSKS — category, responsible person, hierarchy, validity dates.</div></div>
+            <div class="concept"><div class="ct">Activity Type</div><div class="cd">CSLA — unit of output (machine hour, labour hour). Used for internal activity allocation.</div></div>
+            <div class="concept"><div class="ct">Statistical Key Figure</div><div class="cd">Non-monetary measure (headcount, sqm) used as allocation base.</div></div>
+            <div class="concept"><div class="ct">Assessment</div><div class="cd">KSU1–KSU8. Allocates costs to receivers under a secondary cost element.</div></div>
+            <div class="concept"><div class="ct">Distribution</div><div class="cd">KSV1–KSV5. Allocates costs preserving original cost elements.</div></div>
+            <div class="concept"><div class="ct">Activity Allocation</div><div class="cd">KB11N / KB21N. Charges costs from sender to receiver based on activity quantity.</div></div>
+          </div>
+
+          <div class="example">
+            <div class="label">Example — IT Cost Center Assessment</div>
+            <p>CC-IT has ₹5,00,000 of costs. Allocated to CC-PROD (67%), CC-MKT (17%), CC-FIN (16%) via statistical key figure "headcount".</p>
+          </div>
+
+          <table class="je">
+            <thead><tr><th>Cost Center</th><th>Cost Element</th><th>Amount (₹)</th></tr></thead>
+            <tbody>
+              <tr><td class="acct">CC-IT (Sender)</td><td>Sec. CE 900001</td><td class="cr">−5,00,000</td></tr>
+              <tr><td class="acct">CC-PROD</td><td>Sec. CE 900001</td><td class="dr">+3,35,000</td></tr>
+              <tr><td class="acct">CC-MKT</td><td>Sec. CE 900001</td><td class="dr">+85,000</td></tr>
+              <tr><td class="acct">CC-FIN</td><td>Sec. CE 900001</td><td class="dr">+80,000</td></tr>
+            </tbody>
+          </table>
+          <p><strong>T-codes:</strong> <span class="tcode">KS01</span><span class="tcode">KL01</span><span class="tcode">KK01</span><span class="tcode">KSU5</span><span class="tcode">KSV5</span><span class="tcode">KB11N</span></p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> CO-OPA — Internal Orders</h3>
+          <p><strong>Purpose:</strong> Collect costs for a specific purpose (marketing campaign, R&amp;D project, event). Settled at period end.</p>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">Order Types</div><div class="cd">Define behaviour — budget profile, settlement profile, planning profile.</div></div>
+            <div class="concept"><div class="ct">Order Status</div><div class="cd">CRTD → REL → TECO → CLSD. Controls whether postings are allowed.</div></div>
+            <div class="concept"><div class="ct">Budget &amp; Availability Control</div><div class="cd">Prevents overspending. Tolerance limits trigger warnings or blocks.</div></div>
+            <div class="concept"><div class="ct">Commitment Management</div><div class="cd">Tracks future obligations (POs, requisitions) even before invoices arrive.</div></div>
+            <div class="concept"><div class="ct">Settlement Rule</div><div class="cd">Defines where costs go at period end.</div></div>
+          </div>
+          <p><strong>T-codes:</strong> <span class="tcode">KO01</span><span class="tcode">KO02</span><span class="tcode">KO88</span><span class="tcode">KO8G</span></p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> CO-PC — Product Cost Controlling</h3>
+          <p><strong>Purpose:</strong> Calculate the standard cost of manufactured products. Detailed walkthrough in Tab 7.</p>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">BOM</div><div class="cd">Bill of Materials — components required to make one unit.</div></div>
+            <div class="concept"><div class="ct">Routing</div><div class="cd">Sequence of operations (work centers) with standard times.</div></div>
+            <div class="concept"><div class="ct">Costing Variant</div><div class="cd">Determines valuation strategy, overhead rates, and cost component split.</div></div>
+            <div class="concept"><div class="ct">Cost Component Split</div><div class="cd">Breakdown of standard cost by material, labour, overhead.</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> CO-PP — Cost Object Controlling (Production)</h3>
+          <p><strong>Purpose:</strong> Collect actual manufacturing costs on production orders, calculate WIP and variance, settle to receivers.</p>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">Production Order</div><div class="cd">The cost object. Collects material, labour, and overhead costs.</div></div>
+            <div class="concept"><div class="ct">Goods Issue</div><div class="cd">Materials consumed — debits production order, credits inventory.</div></div>
+            <div class="concept"><div class="ct">Confirmation</div><div class="cd">Records labour and machine time — debits order, credits cost center.</div></div>
+            <div class="concept"><div class="ct">Goods Receipt</div><div class="cd">Finished goods received into stock — credits order at standard cost.</div></div>
+            <div class="concept"><div class="ct">WIP (KKAO)</div><div class="cd">Calculated for incomplete orders at period end.</div></div>
+            <div class="concept"><div class="ct">Variance (KKS1)</div><div class="cd">Calculated for completed orders — difference between actual and standard.</div></div>
+            <div class="concept"><div class="ct">Settlement (KO88)</div><div class="cd">Transfers variance to COGS or CO-PA.</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> CO-PA — Profitability Analysis</h3>
+          <p><strong>Purpose:</strong> Analyze margin by market segment — customer, product, region, channel.</p>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">Operating Concern</div><div class="cd">Top-level CO-PA organizational unit. Defines the characteristics and value fields.</div></div>
+            <div class="concept"><div class="ct">Characteristics</div><div class="cd">Dimensions — customer, product, region, channel. CE4xxxx config.</div></div>
+            <div class="concept"><div class="ct">Value Fields</div><div class="cd">Measures — revenue, discount, COGS, margin. CE4xxxx config.</div></div>
+            <div class="concept"><div class="ct">Costing-Based vs Account-Based</div><div class="cd">Costing-based uses value fields; account-based uses GL accounts. S/4HANA uses both, stored in ACDOCA.</div></div>
+          </div>
+          <p><strong>T-codes:</strong> <span class="tcode">KEA0</span><span class="tcode">KE21N</span><span class="tcode">KE24</span><span class="tcode">KE30</span><span class="tcode">KE31</span><span class="tcode">KEQ3</span></p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> EC-PCA — Profit Center Accounting</h3>
+          <p><strong>Purpose:</strong> Internal P&amp;L and balance sheet by profit center.</p>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">Profit Center Master</div><div class="cd">CEPC — company code assignment, responsible person, hierarchy.</div></div>
+            <div class="concept"><div class="ct">3KEH Substitution</div><div class="cd">Auto-derives profit center from cost center or GL account.</div></div>
+            <div class="concept"><div class="ct">Internal P&amp;L</div><div class="cd">Profit centers get a full P&amp;L view — revenue, cost, margin.</div></div>
+            <div class="concept"><div class="ct">Internal Balance Sheet</div><div class="cd">Profit centers also receive balance sheet items (AR, AP, inventory).</div></div>
+            <div class="concept"><div class="ct">Transfer Pricing</div><div class="cd">Internal prices when one profit center supplies another.</div></div>
+          </div>
+          <p><strong>T-codes:</strong> <span class="tcode">KE51</span><span class="tcode">KE52</span><span class="tcode">3KEH</span><span class="tcode">KE5Z</span></p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Common CO Errors &amp; Fixes</h3>
+          <div class="err-grid">
+            <div class="err"><div class="t">"Cost element not created for GL account"</div><div class="d">P&amp;L account not linked to a cost element.</div><div class="f">Create with KA01 (ECC) or auto-created in S/4HANA.</div></div>
+            <div class="err"><div class="t">"Sender = receiver in cycle"</div><div class="d">Assessment cycle has same sender and receiver.</div><div class="f">Fix in KSU2.</div></div>
+            <div class="err"><div class="t">"No SKF values maintained"</div><div class="d">Assessment based on SKF but no values exist.</div><div class="f">Maintain via KB31N.</div></div>
+            <div class="err"><div class="t">"Settlement rule missing"</div><div class="d">Order cannot be settled.</div><div class="f">Maintain in KO02 / CO02 before KO88.</div></div>
+            <div class="err"><div class="t">"WIP calculation not possible"</div><div class="d">Order not fully confirmed.</div><div class="f">Post all confirmations, re-run KKAO.</div></div>
+            <div class="err"><div class="t">"Operating concern not assigned"</div><div class="d">CO-PA posting fails.</div><div class="f">Assign controlling area to operating concern.</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Interview Prep</h3>
+          <div class="qa">
+            <div class="qa-item"><div class="qa-q">Q1: Primary vs secondary cost element?</div><div class="qa-a">Primary has an FI GL counterpart (salary expense, rent). Secondary exists only in CO and represents internal flows (assessment, distribution, activity allocation).</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: Distribution vs assessment?</div><div class="qa-a">Distribution preserves original cost elements (receiver sees the underlying cost). Assessment consolidates into one secondary cost element.</div></div>
+            <div class="qa-item"><div class="qa-q">Q3: Cost center vs profit center?</div><div class="qa-a">Cost center collects costs by department. Profit center produces an internal P&amp;L by product line, region, or business — it receives both costs and revenues.</div></div>
+            <div class="qa-item"><div class="qa-q">Q4: What is the difference between CO-PA and PCA?</div><div class="qa-a">CO-PA analyzes margin by market segment (customer, product, region) — external-facing view. PCA analyzes profit by internal organizational unit (division, region) — internal view. Both reconcile to FI.</div></div>
+            <div class="qa-item"><div class="qa-q">Q5: How does CO-PP tie to CO-PC?</div><div class="qa-a">CO-PC calculates the standard cost estimate before production. CO-PP collects actual costs during production and compares them to the standard to calculate variance. The standard cost from CO-PC is the benchmark used by CO-PP.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ TAB 7: PRODUCT COSTING ═══════════════ -->
+    <div class="panel" id="panel-t7">
+      <div class="card">
+        <h2><span class="num">7</span> Product Costing (CO-PC) — Detailed Walkthrough</h2>
+        <p class="sub">How SAP calculates the standard cost of a product and tracks actual costs on production orders.</p>
 
         <div class="sec">
           <h3><span class="dot"></span> Meaning</h3>
           <div class="meaning">
             <div class="label">What is it?</div>
-            <p>Product Costing answers the question: <em>"How much does it cost to make this product?"</em> It uses the Bill of Materials (BOM) and Routing to estimate costs before production, and then tracks actual costs during and after production to calculate variances. It is the bridge between FI (accounting), CO (costing), MM (materials), and PP (production).</p>
+            <p>Product Costing answers: <em>"How much does it cost to make this product?"</em> It uses the Bill of Materials (BOM) and Routing to estimate costs before production, then tracks actual costs during and after production to calculate variances. It is the bridge between FI, CO, MM, PP, and Material Ledger.</p>
           </div>
         </div>
 
         <div class="sec">
           <h3><span class="dot"></span> Core Concepts</h3>
           <div class="concept-grid">
-            <div class="concept"><div class="ct">BOM (Bill of Materials)</div><div class="cd">List of raw materials and components required to make one unit of the finished product.</div></div>
-            <div class="concept"><div class="ct">Routing</div><div class="cd">Sequence of operations (work centers) required to produce the product, with standard times.</div></div>
-            <div class="concept"><div class="ct">Cost Estimate</div><div class="cd">Calculated cost of the product using BOM, routing, activity prices, and overhead rates.</div></div>
-            <div class="concept"><div class="ct">Costing Variant</div><div class="cd">Configuration that determines how the cost estimate is calculated (valuation, overhead, etc.).</div></div>
-            <div class="concept"><div class="ct">Cost Component Split</div><div class="cd">Breakdown of the standard cost by component — material, labour, overhead, etc.</div></div>
-            <div class="concept"><div class="ct">Standard Cost</div><div class="cd">The expected cost of the product, marked and released for the fiscal year. Used for inventory valuation.</div></div>
-            <div class="concept"><div class="ct">Production Order</div><div class="cd">Cost object where actual manufacturing costs are collected (materials, labour, overhead).</div></div>
-            <div class="concept"><div class="ct">WIP (Work in Process)</div><div class="cd">Value of partially completed production at period end. Calculated at month end and posted to FI.</div></div>
-            <div class="concept"><div class="ct">Variance</div><div class="cd">Difference between actual costs and standard costs. Analysed by category (input, price, quantity, etc.).</div></div>
-            <div class="concept"><div class="ct">Settlement</div><div class="cd">Transfer of production order variances to CO-PA, FI, or inventory at period end.</div></div>
+            <div class="concept"><div class="ct">BOM</div><div class="cd">List of raw materials and components required for one unit.</div></div>
+            <div class="concept"><div class="ct">Routing</div><div class="cd">Operations (work centers) with standard times.</div></div>
+            <div class="concept"><div class="ct">Cost Estimate</div><div class="cd">Calculated cost from BOM, routing, activity prices, overhead rates.</div></div>
+            <div class="concept"><div class="ct">Costing Variant</div><div class="cd">Controls calculation logic — valuation, overhead, cost component split.</div></div>
+            <div class="concept"><div class="ct">Cost Component Split</div><div class="cd">Breakdown by material, labour, overhead, etc.</div></div>
+            <div class="concept"><div class="ct">Standard Cost</div><div class="cd">Expected cost, marked and released for the fiscal year. Used for inventory valuation.</div></div>
+            <div class="concept"><div class="ct">Production Order</div><div class="cd">Cost object collecting actual manufacturing costs.</div></div>
+            <div class="concept"><div class="ct">WIP</div><div class="cd">Value of partially completed production at period end.</div></div>
+            <div class="concept"><div class="ct">Variance</div><div class="cd">Actual vs standard — analysed by input price, quantity, resource usage.</div></div>
+            <div class="concept"><div class="ct">Settlement</div><div class="cd">Transfer variance to COGS, inventory, or CO-PA.</div></div>
           </div>
         </div>
 
@@ -764,17 +1048,11 @@
           <h3><span class="dot"></span> Real-World Example — Full Production Cycle</h3>
           <div class="example">
             <div class="label">Scenario</div>
-            <p>ABC Ltd. produces a <strong>Widget</strong> (FG-WIDGET). Standard cost estimate for 2024: <strong>₹500 per unit</strong>, broken down as:</p>
-            <ul>
-              <li>Material: ₹300</li>
-              <li>Labour: ₹120</li>
-              <li>Overhead: ₹80</li>
-            </ul>
-            <p>Production order for <strong>1,000 units</strong> released on 01.06.2024. Actual costs incurred: Material ₹3,10,000, Labour ₹1,15,000, Overhead ₹85,000.</p>
+            <p>ABC Ltd. produces <strong>FG-WIDGET</strong>. Standard cost estimate for 2024: <strong>₹500/unit</strong> (Material ₹300, Labour ₹120, Overhead ₹80).</p>
+            <p>Production order for <strong>1,000 units</strong>. Actual costs: Material ₹3,10,000, Labour ₹1,15,000, Overhead ₹85,000.</p>
           </div>
 
-          <p><strong>Step 1 — Cost estimate created (CK11N) and marked/released (CK24):</strong></p>
-
+          <p><strong>Step 1 — Cost estimate (CK11N) + Mark/Release (CK24):</strong></p>
           <table class="je">
             <thead><tr><th>Cost Component</th><th>Per Unit (₹)</th><th>For 1,000 Units (₹)</th></tr></thead>
             <tbody>
@@ -785,65 +1063,66 @@
             </tbody>
           </table>
 
-          <p><strong>Step 2 — Production order created and released (CO01 → CO02):</strong> Order 1000234 created with quantity 1,000.</p>
-
-          <p><strong>Step 3 — Goods issue of raw materials (MB1A):</strong></p>
-
+          <p><strong>Step 2 — Goods Issue of raw materials (MB1A):</strong></p>
           <table class="je">
-            <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
+            <thead><tr><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
             <tbody>
-              <tr><td>—</td><td class="acct">Production Order</td><td>Material consumed (actual)</td><td class="dr">3,10,000</td><td></td></tr>
-              <tr><td>—</td><td class="acct">140100</td><td>Raw Material Inventory</td><td></td><td class="cr">3,10,000</td></tr>
+              <tr><td class="acct">Production Order</td><td class="dr">3,10,000</td><td></td></tr>
+              <tr><td class="acct">Raw Material Inventory</td><td></td><td class="cr">3,10,000</td></tr>
             </tbody>
           </table>
 
-          <p><strong>Step 4 — Activity confirmation (CO11N):</strong></p>
-
+          <p><strong>Step 3 — Activity confirmation (CO11N):</strong></p>
           <table class="je">
-            <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
+            <thead><tr><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
             <tbody>
-              <tr><td>—</td><td class="acct">Production Order</td><td>Labour + Overhead</td><td class="dr">2,00,000</td><td></td></tr>
-              <tr><td>—</td><td class="acct">Cost Center</td><td>Activity allocation (credit)</td><td></td><td class="cr">2,00,000</td></tr>
+              <tr><td class="acct">Production Order</td><td class="dr">2,00,000</td><td></td></tr>
+              <tr><td class="acct">Cost Center (activity credit)</td><td></td><td class="cr">2,00,000</td></tr>
             </tbody>
           </table>
 
-          <p><strong>Step 5 — Goods receipt of finished goods (MB31):</strong></p>
-
+          <p><strong>Step 4 — Goods Receipt of FG (MB31):</strong></p>
           <table class="je">
-            <thead><tr><th>PK</th><th>Account</th><th>Description</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
+            <thead><tr><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
             <tbody>
-              <tr><td>—</td><td class="acct">FG Inventory</td><td>1,000 × ₹500 standard</td><td class="dr">5,00,000</td><td></td></tr>
-              <tr><td>—</td><td class="acct">Production Order</td><td>Goods receipt (credit)</td><td></td><td class="cr">5,00,000</td></tr>
+              <tr><td class="acct">FG Inventory (1,000 × ₹500)</td><td class="dr">5,00,000</td><td></td></tr>
+              <tr><td class="acct">Production Order</td><td></td><td class="cr">5,00,000</td></tr>
             </tbody>
           </table>
 
-          <p><strong>Step 6 — Order balance after all postings:</strong></p>
-
+          <p><strong>Step 5 — Order balance after all postings:</strong></p>
           <table class="je">
             <thead><tr><th>Entry</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
             <tbody>
               <tr><td>Material consumed</td><td class="dr">3,10,000</td><td></td></tr>
               <tr><td>Labour + Overhead</td><td class="dr">2,00,000</td><td></td></tr>
-              <tr><td>Goods receipt (1,000 × ₹500)</td><td></td><td class="cr">5,00,000</td></tr>
-              <tr><td><strong>Order Balance</strong></td><td><strong>5,10,000</strong></td><td><strong>5,00,000</strong></td></tr>
+              <tr><td>Goods receipt</td><td></td><td class="cr">5,00,000</td></tr>
+              <tr><td><strong>Balance</strong></td><td><strong>5,10,000</strong></td><td><strong>5,00,000</strong></td></tr>
               <tr><td><strong>Variance (Unfavourable)</strong></td><td colspan="2" style="text-align:right;color:#dc2626;font-weight:700;">₹10,000</td></tr>
             </tbody>
           </table>
 
-          <p><strong>Step 7 — WIP calculation (KKAO) and Variance calculation (KKS1):</strong></p>
+          <p><strong>Step 6 — WIP calculation (KKAO) and Variance (KKS1):</strong></p>
+          <p>For fully delivered orders, variance of ₹10,000 is decomposed into:</p>
+          <ul>
+            <li>Input price variance (material price difference)</li>
+            <li>Input quantity variance (more material used)</li>
+            <li>Resource usage variance (more machine/labour hours)</li>
+            <li>Remaining variance (overhead differences)</li>
+          </ul>
 
+          <p><strong>Step 7 — Settlement (KO88):</strong></p>
           <table class="je">
-            <thead><tr><th>Posting</th><th>Account</th><th>Debit (₹)</th><th>Credit (₹)</th></tr></thead>
+            <thead><tr><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
             <tbody>
-              <tr><td>WIP (if incomplete)</td><td class="acct">WIP Account</td><td class="dr">—</td><td></td></tr>
-              <tr><td>Variance settlement</td><td class="acct">Variance — COGS</td><td class="dr">10,000</td><td></td></tr>
-              <tr><td></td><td class="acct">Production Order</td><td></td><td class="cr">10,000</td></tr>
+              <tr><td class="acct">Variance — COGS</td><td class="dr">10,000</td><td></td></tr>
+              <tr><td class="acct">Production Order</td><td></td><td class="cr">10,000</td></tr>
             </tbody>
           </table>
 
           <div class="note">
             <div class="label">Outcome</div>
-            <p>The production order has been fully settled. Its balance is now zero. The unfavourable variance of ₹10,000 has been charged to P&amp;L (usually COGS). The 1,000 finished units sit in inventory at standard cost of ₹5,00,000.</p>
+            <p>Order balance is now zero. ₹10,000 unfavourable variance charged to P&amp;L (or CO-PA). 1,000 finished units sit in inventory at ₹5,00,000.</p>
           </div>
         </div>
 
@@ -854,7 +1133,7 @@
             <span class="tcode">CK24</span> Mark &amp; release
             <span class="tcode">CK40N</span> Mass costing run
             <span class="tcode">CO01</span> Create production order
-            <span class="tcode">CO02</span> Change / release order
+            <span class="tcode">CO02</span> Change/release order
             <span class="tcode">MB1A</span> Goods issue
             <span class="tcode">CO11N</span> Confirmation
             <span class="tcode">MB31</span> Goods receipt
@@ -867,67 +1146,200 @@
         <div class="sec">
           <h3><span class="dot"></span> Common Errors &amp; Fixes</h3>
           <div class="err-grid">
-            <div class="err">
-              <div class="t">"Cost estimate not found"</div>
-              <div class="d">No cost estimate exists for material in this plant and year.</div>
-              <div class="f">Run CK11N first, then mark/release with CK24.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Standard cost not released"</div>
-              <div class="d">Goods receipt values the material at zero.</div>
-              <div class="f">Release the cost estimate using CK24.</div>
-            </div>
-            <div class="err">
-              <div class="t">"WIP calculation not possible — order not fully confirmed"</div>
-              <div class="d">KKAO needs all confirmations to be posted.</div>
-              <div class="f">Complete all confirmations (CO11N) and re-run KKAO.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Settlement rule is missing"</div>
-              <div class="d">KO88 fails because the order has no settlement receiver.</div>
-              <div class="f">Maintain the settlement rule in CO02 before KO88.</div>
-            </div>
+            <div class="err"><div class="t">"Cost estimate not found"</div><div class="d">No estimate for material/plant/year.</div><div class="f">Run CK11N, then mark/release via CK24.</div></div>
+            <div class="err"><div class="t">"Standard cost not released"</div><div class="d">GR values material at zero.</div><div class="f">Release via CK24.</div></div>
+            <div class="err"><div class="t">"WIP calculation not possible"</div><div class="d">Order not fully confirmed.</div><div class="f">Complete confirmations, re-run KKAO.</div></div>
+            <div class="err"><div class="t">"Settlement rule missing"</div><div class="d">KO88 fails.</div><div class="f">Maintain in CO02.</div></div>
           </div>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> Interview Preparation</h3>
+          <h3><span class="dot"></span> Interview Prep</h3>
           <div class="qa">
-            <div class="qa-item">
-              <div class="qa-q">Q1: What is the difference between standard cost and actual cost?</div>
-              <div class="qa-a">Standard cost is the pre-calculated expected cost of producing one unit, based on BOM, routing, and planned prices. It is used for inventory valuation and variance analysis. Actual cost is what was actually incurred during production (real material consumption, real labour hours, real overheads). The difference between them is the variance — favourable if actual &lt; standard, unfavourable if actual &gt; standard.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q2: What is WIP and when is it calculated?</div>
-              <div class="qa-a">WIP (Work in Process) is the value of partially completed production at period end. It is calculated at month end using KKAO. For orders that are not fully delivered, the system compares the actual costs incurred to the portion of the order that has been delivered and posts the shortfall as WIP on the balance sheet. This prevents the P&amp;L from being distorted by costs that relate to unfinished work.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q3: Walk me through the settlement process for a production order.</div>
-              <div class="qa-a">At period end: (1) All goods movements and confirmations are complete. (2) KKAO calculates WIP for orders not fully delivered. (3) KKS1 calculates variances for fully delivered orders. (4) KO88 (single) or KO8G (collective) settles the variance to the receiver defined in the settlement rule — usually COGS in FI, or a profitability segment in CO-PA. After settlement, the order balance is zero.</div>
-            </div>
+            <div class="qa-item"><div class="qa-q">Q1: Standard cost vs actual cost?</div><div class="qa-a">Standard = pre-calculated expected cost (used for inventory valuation). Actual = real cost incurred. Difference = variance.</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: What is WIP and when is it calculated?</div><div class="qa-a">Work in Process = value of partially completed production at period end. Calculated via KKAO. Prevents P&amp;L distortion by deferring costs related to unfinished work.</div></div>
+            <div class="qa-item"><div class="qa-q">Q3: Walk me through the settlement process.</div><div class="qa-a">(1) All confirmations posted. (2) KKAO calculates WIP for incomplete orders. (3) KKS1 calculates variances for complete orders. (4) KO88/KO8G settles variance to receiver (COGS, CO-PA). Order balance → zero.</div></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ═══════════════ TAB 6: INTEGRATION & S/4 ═══════════════ -->
-    <div class="panel" id="panel-t6">
+    <!-- ═══════════════ TAB 8: MATERIAL LEDGER ═══════════════ -->
+    <div class="panel" id="panel-t8">
       <div class="card">
-        <h2><span class="num">6</span> Integration &amp; S/4HANA</h2>
-        <p class="sub">How FI integrates with other modules and what changes in S/4HANA with the Universal Journal.</p>
+        <h2><span class="num">8</span> Material Ledger (ML)</h2>
+        <p class="sub">Actual costing, price differences, and multi-currency valuation — the bridge between MM, PP, and FI/CO.</p>
 
         <div class="sec">
           <h3><span class="dot"></span> Meaning</h3>
           <div class="meaning">
             <div class="label">What is it?</div>
-            <p>SAP modules are not isolated — they share data through <strong>integration points</strong>. When a goods receipt is posted in MM, it automatically creates an FI document. When a billing document is created in SD, it posts revenue to FI and updates CO-PA. Understanding these integration points is critical because most production issues surface at these boundaries.</p>
+            <p>The Material Ledger (ML) records the <strong>actual cost</strong> of materials, in <strong>multiple currencies</strong> and <strong>multiple valuation approaches</strong>. It tracks every goods movement for a material, compares standard cost to actual cost, and calculates <strong>price differences</strong> that are posted to inventory or COGS at period end.</p>
+            <p>In S/4HANA, Material Ledger is <strong>mandatory</strong> and is the foundation of actual costing.</p>
           </div>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> FI-MM Integration</h3>
-          <p>Material movements in MM trigger automatic FI postings through <strong>account determination (OBYC)</strong>:</p>
+          <h3><span class="dot"></span> Why Material Ledger Matters</h3>
+          <ul>
+            <li><strong>Actual costing:</strong> Not just standard — real cost of materials in real currency.</li>
+            <li><strong>Multi-currency:</strong> Value materials in company code currency, group currency, and hard currency.</li>
+            <li><strong>Price differences:</strong> Purchase price variance (PPV) is tracked and settled at period end.</li>
+            <li><strong>Valuation alternatives:</strong> Legal valuation, group valuation, profit center valuation.</li>
+            <li><strong>Foundation for CO-PA:</strong> Actual cost component split feeds profitability analysis.</li>
+            <li><strong>Inventory accuracy:</strong> Ensures inventory is valued at true cost, not just standard.</li>
+          </ul>
+        </div>
 
+        <div class="sec">
+          <h3><span class="dot"></span> Core Concepts</h3>
+          <div class="concept-grid">
+            <div class="concept"><div class="ct">Valuation Area (BWKEY)</div><div class="cd">Usually the plant. Each material-plant combination has its own valuation record.</div></div>
+            <div class="concept"><div class="ct">Standard Price (S)</div><div class="cd">Fixed price. Price differences are collected and settled at period end.</div></div>
+            <div class="concept"><div class="ct">Moving Average Price (V)</div><div class="cd">Recalculated with every goods movement. Price differences absorbed immediately.</div></div>
+            <div class="concept"><div class="ct">Price Difference Categories</div><div class="cd">PPV (purchase), PRD (production), PRV (other), KDM/KDV (exchange rate).</div></div>
+            <div class="concept"><div class="ct">Cost Component Split</div><div class="cd">Breakdown of cost into material, labour, overhead — used for CO-PA.</div></div>
+            <div class="concept"><div class="ct">Periodic Actual Costing</div><div class="cd">Month-end run (CKMLCP) that revalues inventory and COGS to actual cost.</div></div>
+            <div class="concept"><div class="ct">Single-Level vs Multilevel</div><div class="cd">Single-level revalues each material independently. Multilevel propagates differences through the BOM.</div></div>
+            <div class="concept"><div class="ct">Valuation Views</div><div class="cd">Legal view (statutory), Group view (consolidated), Profit Center view (management).</div></div>
+            <div class="concept"><div class="ct">Material Ledger Document</div><div class="cd">Every movement creates an ML document — records quantity, value, price, currency.</div></div>
+            <div class="concept"><div class="ct">Settlement</div><div class="cd">At period end, price differences are settled to inventory or COGS.</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Real-World Example — Price Difference Settlement</h3>
+          <div class="example">
+            <div class="label">Scenario</div>
+            <p>ABC Ltd. buys a raw material <strong>RM-100</strong>. Standard price: ₹100/kg. During April 2024:</p>
+            <ul>
+              <li>Purchased 1,000 kg at ₹105/kg (₹5,000 more than standard)</li>
+              <li>Consumed 800 kg for production</li>
+              <li>200 kg remain in inventory at month end</li>
+            </ul>
+          </div>
+
+          <p><strong>Step 1 — Purchase at ₹105 (above standard):</strong></p>
+          <table class="je">
+            <thead><tr><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
+            <tbody>
+              <tr><td class="acct">Inventory RM-100 @ standard ₹100</td><td class="dr">1,00,000</td><td></td></tr>
+              <tr><td class="acct">Price Difference (ML)</td><td class="dr">5,000</td><td></td></tr>
+              <tr><td class="acct">Vendor</td><td></td><td class="cr">1,05,000</td></tr>
+            </tbody>
+          </table>
+          <p>The ₹5,000 price difference is held in a Material Ledger account (not yet in P&amp;L).</p>
+
+          <p><strong>Step 2 — Month-end actual costing run (CKMLCP):</strong></p>
+          <ul>
+            <li>Selection → Determine → Revalue → WIP → Settlement → Post-Close</li>
+            <li>The ₹5,000 price difference is distributed between:</li>
+          </ul>
+          <table class="je">
+            <thead><tr><th>Receiver</th><th>Quantity</th><th>Share of Difference</th><th>Amount (₹)</th></tr></thead>
+            <tbody>
+              <tr><td>Inventory (200 kg)</td><td>20%</td><td>₹1,000</td><td class="dr">1,000</td></tr>
+              <tr><td>COGS (800 kg consumed)</td><td>80%</td><td>₹4,000</td><td class="dr">4,000</td></tr>
+            </tbody>
+          </table>
+
+          <p><strong>Step 3 — Settlement entry:</strong></p>
+          <table class="je">
+            <thead><tr><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
+            <tbody>
+              <tr><td class="acct">Inventory RM-100 (revaluation)</td><td class="dr">1,000</td><td></td></tr>
+              <tr><td class="acct">COGS — Price Variance</td><td class="dr">4,000</td><td></td></tr>
+              <tr><td class="acct">Price Difference (ML)</td><td></td><td class="cr">5,000</td></tr>
+            </tbody>
+          </table>
+
+          <div class="note">
+            <div class="label">Outcome</div>
+            <p>Inventory is now valued at actual cost (₹101/kg blended), and COGS reflects the ₹4,000 PPV. Material Ledger account is cleared. Standard price in the material master stays at ₹100 — but ML now knows the true cost.</p>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Material Ledger Tables</h3>
+          <table class="cfg">
+            <thead><tr><th>Table</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">CKMLHD</td><td>Material Ledger Header — one per material/valuation area</td></tr>
+              <tr><td class="mono">CKMLPP</td><td>Periodic Material Ledger — quantities per period</td></tr>
+              <tr><td class="mono">CKMLCR</td><td>Material Ledger — currency amounts per period</td></tr>
+              <tr><td class="mono">CKMLCT</td><td>Currency types per material ledger record</td></tr>
+              <tr><td class="mono">MLIT</td><td>Material Ledger Document — line items (S/4HANA)</td></tr>
+              <tr><td class="mono">MLCD</td><td>Material Ledger — Cost Component Split</td></tr>
+              <tr><td class="mono">MLHD</td><td>Material Ledger Document Header</td></tr>
+              <tr><td class="mono">MBEW</td><td>Material Valuation — standard price, MAP, valuation class</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> The Actual Costing Run (CKMLCP)</h3>
+          <p>The monthly actual costing run is the heart of ML. Sequence:</p>
+          <ol>
+            <li><strong>Selection:</strong> Choose materials, period, valuation area.</li>
+            <li><strong>Determination:</strong> Collect all goods movements, invoices, and production postings.</li>
+            <li><strong>Multilevel Price Determination:</strong> Propagate price differences through the BOM.</li>
+            <li><strong>Revaluation:</strong> Revalue inventory to actual cost.</li>
+            <li><strong>WIP:</strong> Calculate WIP for production orders (interfaces with CO-PP).</li>
+            <li><strong>Settlement:</strong> Post differences to inventory and COGS.</li>
+            <li><strong>Post-Close:</strong> Lock the period, mark as closed.</li>
+          </ol>
+          <p><strong>T-codes:</strong> <span class="tcode">CKMLCP</span> Actual Costing Run <span class="tcode">CKM3</span> Material Price Analysis <span class="tcode">CKMLCPAVR</span> Alternative Valuation Run <span class="tcode">CKMLQS</span> Quantity Structure</p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Material Ledger in S/4HANA</h3>
+          <div class="note">
+            <div class="label">Key change</div>
+            <p>In S/4HANA, Material Ledger is <strong>mandatory</strong>. It is no longer an optional add-on. All materials, in all valuation areas, use ML. The ML data is integrated into ACDOCA — every ML posting also appears in the Universal Journal. This eliminates the historical reconciliation between ML and FI.</p>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Common Errors &amp; Fixes</h3>
+          <div class="err-grid">
+            <div class="err"><div class="t">"Material Ledger not active for valuation area"</div><div class="d">ML not activated for the plant.</div><div class="f">Activate ML via OMWD / OLMB for the valuation area.</div></div>
+            <div class="err"><div class="t">"Actual costing run already executed"</div><div class="d">Trying to rerun CKMLCP for the same period.</div><div class="f">Reverse the prior run or use post-close step cautiously.</div></div>
+            <div class="err"><div class="t">"Price difference not distributed"</div><div class="d">Selection missing some materials.</div><div class="f">Expand selection criteria or check material status.</div></div>
+            <div class="err"><div class="t">"Multilevel price determination fails"</div><div class="d">BOM hierarchy broken or missing cost estimates.</div><div class="f">Verify BOM and cost estimate for finished products.</div></div>
+            <div class="err"><div class="t">"Currency type not defined"</div><div class="d">Trying to value in a currency not configured.</div><div class="f">Maintain currency types via OMX1 / 8KEM.</div></div>
+            <div class="err"><div class="t">"Inventory differs from ML value"</div><div class="d">Reconciliation issue between MM-FI and ML.</div><div class="f">Run CKM3 / CKMLCP to identify mismatched materials.</div></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Interview Prep</h3>
+          <div class="qa">
+            <div class="qa-item"><div class="qa-q">Q1: What is the purpose of Material Ledger?</div><div class="qa-a">ML records actual cost of materials in multiple currencies and valuation views, calculates price differences, and enables monthly actual costing. It bridges the gap between standard cost (used for daily postings) and actual cost (true economic cost).</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: How does ML handle price differences?</div><div class="qa-a">When a material is purchased at a price different from standard, the difference is posted to a Material Ledger price-difference account (not P&amp;L). At month end, the actual costing run (CKMLCP) distributes this difference proportionally between inventory (remaining) and COGS (consumed).</div></div>
+            <div class="qa-item"><div class="qa-q">Q3: What is single-level vs multilevel price determination?</div><div class="qa-a">Single-level revalues a material based on its own price differences. Multilevel propagates differences through the BOM — e.g., if raw material is ₹5 more, then every finished good that uses it inherits part of that difference. Multilevel gives a truer cost for manufactured products.</div></div>
+            <div class="qa-item"><div class="qa-q">Q4: What changes in S/4HANA for Material Ledger?</div><div class="qa-a">ML becomes mandatory. It is integrated into ACDOCA (Universal Journal), eliminating the traditional ML-FI reconciliation. The actual costing run (CKMLCP) is still used but now writes to ACDOCA. The Material Ledger document (MLIT) replaces the older CKMLPP/CKMLCR views for most reporting.</div></div>
+            <div class="qa-item"><div class="qa-q">Q5: How does Material Ledger support CO-PA?</div><div class="qa-a">ML produces an <strong>actual cost component split</strong> — material, labour, overhead — for every material. CO-PA uses this to build a cost-of-sales view by product. Without ML, CO-PA would only have standard cost; with ML, CO-PA reflects the true cost of goods sold, including purchase price variances.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ TAB 9: INTEGRATION & S/4 ═══════════════ -->
+    <div class="panel" id="panel-t9">
+      <div class="card">
+        <h2><span class="num">9</span> Integration &amp; S/4HANA</h2>
+        <p class="sub">How FI integrates with other modules and what changes in S/4HANA.</p>
+
+        <div class="sec">
+          <h3><span class="dot"></span> Meaning</h3>
+          <div class="meaning">
+            <div class="label">What is it?</div>
+            <p>Modules share data through <strong>integration points</strong>. When a goods receipt posts in MM, it creates an FI document. When a billing document is created in SD, it posts revenue to FI and updates CO-PA. Most production issues surface at these boundaries.</p>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> FI-MM Integration (OBYC)</h3>
           <table class="cfg">
             <thead><tr><th>MM Event</th><th>FI Entry</th><th>Transaction Key</th></tr></thead>
             <tbody>
@@ -935,57 +1347,43 @@
               <tr><td>Invoice Receipt (IR)</td><td>Dr GR/IR Clearing / Cr Vendor</td><td class="mono">WRX · KDM</td></tr>
               <tr><td>Price Difference</td><td>Dr/Cr Price Difference</td><td class="mono">PRD</td></tr>
               <tr><td>Goods Issue to Production</td><td>Dr Production Order / Cr Inventory</td><td class="mono">BSX · GBB-VBR</td></tr>
-              <tr><td>Goods Issue to Cost Center</td><td>Dr Expense / Cr Inventory</td><td class="mono">GBB-VBR</td></tr>
               <tr><td>Physical Inventory Adjustment</td><td>Dr/Cr Inventory / Dr/Cr Adjustment</td><td class="mono">BSX · GBB</td></tr>
-            </tbody>
-          </table>
-
-          <div class="example">
-            <div class="label">Example — GR then IR</div>
-            <p>PO for 100 units at ₹1,000 = ₹1,00,000. GR posted, then invoice received at ₹1,050/unit = ₹1,05,000.</p>
-          </div>
-
-          <p><strong>GR posting:</strong></p>
-          <table class="je">
-            <thead><tr><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
-            <tbody>
-              <tr><td class="acct">Inventory</td><td class="dr">1,00,000</td><td></td></tr>
-              <tr><td class="acct">GR/IR Clearing</td><td></td><td class="cr">1,00,000</td></tr>
-            </tbody>
-          </table>
-
-          <p><strong>IR posting:</strong></p>
-          <table class="je">
-            <thead><tr><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
-            <tbody>
-              <tr><td class="acct">GR/IR Clearing</td><td class="dr">1,00,000</td><td></td></tr>
-              <tr><td class="acct">Price Difference</td><td class="dr">5,000</td><td></td></tr>
-              <tr><td class="acct">Vendor</td><td></td><td class="cr">1,05,000</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> FI-SD Integration</h3>
-          <p>Billing documents in SD create FI postings through <strong>account determination (VKOA)</strong>:</p>
-
+          <h3><span class="dot"></span> FI-SD Integration (VKOA)</h3>
           <table class="je">
             <thead><tr><th>SD Event</th><th>Account</th><th>Dr (₹)</th><th>Cr (₹)</th></tr></thead>
             <tbody>
               <tr><td>Billing</td><td class="acct">Customer Receivable</td><td class="dr">1,18,000</td><td></td></tr>
               <tr><td>Billing</td><td class="acct">Revenue</td><td></td><td class="cr">1,00,000</td></tr>
               <tr><td>Billing</td><td class="acct">GST Output</td><td></td><td class="cr">18,000</td></tr>
-              <tr><td>Payment</td><td class="acct">Bank</td><td class="dr">1,18,000</td><td></td></tr>
-              <tr><td>Payment</td><td class="acct">Customer Receivable</td><td></td><td class="cr">1,18,000</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> S/4HANA — The Universal Journal (ACDOCA)</h3>
+          <h3><span class="dot"></span> FI-BL Integration</h3>
+          <p>Bank statement (EBS) → FI document. Payment runs (F110) → FI document + payment file. Cash position (FF7A) draws from GL bank balances.</p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> FI-IHB Integration</h3>
+          <p>IHC produces FI postings on behalf of subsidiaries. Intercompany payables/receivables replace traditional bank movements. Netting replaces gross payments.</p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> FI-ML Integration</h3>
+          <p>Every material movement creates both an MM document and an ML document. ML feeds the actual cost component split into CO-PA and updates inventory value in FI.</p>
+        </div>
+
+        <div class="sec">
+          <h3><span class="dot"></span> S/4HANA — Universal Journal (ACDOCA)</h3>
           <div class="meaning">
             <div class="label">What changed?</div>
-            <p>In classic ECC, FI and CO stored data in separate tables: BKPF/BSEG for FI, COBK/COEP/COSP/COSS for CO. In S/4HANA, all of these are <strong>replaced by one table</strong> — <code>ACDOCA</code>, the Universal Journal. This single source of truth contains FI line items, CO line items, AA postings, ML postings, and CO-PA characteristics in one place. This eliminates reconciliation between FI and CO and massively simplifies reporting.</p>
+            <p>In ECC, FI and CO stored data in separate tables (BKPF/BSEG for FI, COBK/COEP/COSP/COSS for CO). In S/4HANA, all are <strong>replaced by ACDOCA</strong> — one table containing FI + CO + AA + ML + CO-PA line items. This eliminates reconciliation and enables real-time analytics.</p>
           </div>
 
           <table class="cfg">
@@ -994,83 +1392,71 @@
               <tr><td>BKPF</td><td>BKPF (still physical)</td><td>Header</td></tr>
               <tr><td>BSEG</td><td>ACDOCA (view: BSEG)</td><td>Line items</td></tr>
               <tr><td>BSID / BSIK / BSIS</td><td>Views on ACDOCA</td><td>Open items</td></tr>
-              <tr><td>COEP</td><td>ACDOCA (view: COEP)</td><td>CO line items</td></tr>
-              <tr><td>COSP / COSS</td><td>Views on ACDOCA</td><td>CO totals</td></tr>
-              <tr><td>CE1xxxx (CO-PA)</td><td>ACDOCA (PAOBJNR)</td><td>CO-PA line items</td></tr>
+              <tr><td>COEP / COSP / COSS</td><td>ACDOCA (views)</td><td>CO line items</td></tr>
+              <tr><td>CE1xxxx (CO-PA)</td><td>ACDOCA (PAOBJNR)</td><td>CO-PA</td></tr>
               <tr><td>ANEP (AA)</td><td>ACDOCA (integrated)</td><td>AA postings</td></tr>
+              <tr><td>CKMLPP / CKMLCR (ML)</td><td>ACDOCA / MLIT</td><td>ML postings</td></tr>
             </tbody>
           </table>
 
           <div class="note">
             <div class="label">Key fields in ACDOCA</div>
-            <p><code>RCLNT</code> (client), <code>RLDNR</code> (ledger), <code>RBUKRS</code> (company code), <code>BELNR</code> (document), <code>GJAHR</code> (fiscal year), <code>DOCLN</code> (line item), <code>RACCT</code> (account), <code>KOSTL</code> (cost center), <code>PRCTR</code> (profit center), <code>OBJNR</code> (CO object), <code>MATNR</code> (material), <code>PAOBJNR</code> (CO-PA object), <code>KSTAR</code> (cost element), <code>HSL</code> (amount).</p>
+            <p><code>RCLNT</code>, <code>RLDNR</code>, <code>RBUKRS</code>, <code>BELNR</code>, <code>GJAHR</code>, <code>DOCLN</code>, <code>RACCT</code>, <code>KOSTL</code>, <code>PRCTR</code>, <code>OBJNR</code>, <code>MATNR</code>, <code>PAOBJNR</code>, <code>KSTAR</code>, <code>HSL</code>, <code>DRCRK</code>.</p>
           </div>
         </div>
 
         <div class="sec">
           <h3><span class="dot"></span> Migration Considerations</h3>
           <ul>
-            <li><strong>Data volume</strong> — BSEG + COEP + COSP + COSS + CE1xxxx into one ACDOCA table can be very large; archiving and aggregation strategy is critical.</li>
-            <li><strong>Custom reports</strong> — any report written against COSP/COSS/COEP must be reviewed and often rewritten against ACDOCA.</li>
-            <li><strong>New GL</strong> — S/4HANA requires New GL (classic GL is not supported). Parallel ledgers must be configured before migration.</li>
-            <li><strong>Material Ledger</strong> — becomes mandatory in S/4HANA and is the basis for actual costing.</li>
-            <li><strong>CO-PA</strong> — costing-based CO-PA continues to work but is stored in ACDOCA. Account-based CO-PA is the recommended model.</li>
-            <li><strong>Credit management</strong> — the old FI-AR credit management is replaced by SAP Credit Management (FSCM).</li>
+            <li><strong>Custom reports</strong> — any report reading COSP/COSS/COEP/CE1xxxx must be reviewed. In S/4HANA these are compatibility views on ACDOCA — performance may suffer.</li>
+            <li><strong>New GL required</strong> — classic GL is not supported. Parallel ledgers must be configured before migration.</li>
+            <li><strong>Material Ledger mandatory</strong> — if ML is not currently active, full implementation is required (often the longest workstream).</li>
+            <li><strong>Business Partner</strong> — customer/vendor master migration to Business Partner (BP) model.</li>
+            <li><strong>Credit Management</strong> — FI-AR credit management replaced by FSCM.</li>
+            <li><strong>Classic CO-PA</strong> — costing-based CO-PA continues but stored in ACDOCA. Account-based is the recommended path.</li>
           </ul>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> Interview Preparation</h3>
+          <h3><span class="dot"></span> Interview Prep</h3>
           <div class="qa">
-            <div class="qa-item">
-              <div class="qa-q">Q1: What is the Universal Journal and why is it important?</div>
-              <div class="qa-a">The Universal Journal (ACDOCA) is a single, unified table in S/4HANA that stores all financial line items — FI, CO, AA, ML, and CO-PA. It eliminates the need for reconciliation between FI and CO because they are no longer separate ledgers. It simplifies reporting, reduces data redundancy, and enables real-time analytics.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q2: How does account determination work in MM-FI integration?</div>
-              <div class="qa-a">Account determination uses the <strong>OBYC</strong> configuration. When a material movement occurs, SAP determines the GL accounts to debit and credit by looking at: (1) the transaction key (e.g., BSX for inventory, WRX for GR/IR, PRD for price difference), (2) the chart of accounts, (3) the valuation class of the material, and (4) the valuation grouping code (usually the plant). The combination produces a unique GL account for that posting.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q3: What is the biggest challenge in an S/4HANA migration from an FI/CO perspective?</div>
-              <div class="qa-a">The biggest challenge is usually the <strong>volume of custom code and reports</strong> that reference ECC tables like COSP, COSS, COEP, or CE1xxxx. In S/4HANA these are compatibility views on ACDOCA, but performance can be poor if not optimised. Migration teams must review every custom report, rewrite it to use ACDOCA directly, and test it thoroughly. Data migration and reconciliation of the New GL also demand careful planning.</div>
-            </div>
+            <div class="qa-item"><div class="qa-q">Q1: What is the Universal Journal?</div><div class="qa-a">ACDOCA — single table for all financial line items (FI, CO, AA, ML, CO-PA). Eliminates FI-CO reconciliation. Enables real-time analytics.</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: How does OBYC work?</div><div class="qa-a">OBYC maps transaction keys (BSX, WRX, PRD, GBB) + chart of accounts + valuation class + valuation grouping code → GL account. Determines which accounts get debited/credited in MM-FI postings.</div></div>
+            <div class="qa-item"><div class="qa-q">Q3: Biggest S/4HANA FI/CO challenge?</div><div class="qa-a">Volume of custom code referencing old tables (COSP, COSS, COEP, CE1xxxx). Migration requires rewriting reports against ACDOCA. Also ML activation and BP migration are significant workstreams.</div></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ═══════════════ TAB 7: CLOSE & TROUBLESHOOT ═══════════════ -->
-    <div class="panel" id="panel-t7">
+    <!-- ═══════════════ TAB 10: CLOSE & TROUBLESHOOT ═══════════════ -->
+    <div class="panel" id="panel-t10">
       <div class="card">
-        <h2><span class="num">7</span> Period-End Close &amp; Troubleshooting</h2>
-        <p class="sub">The structured sequence of activities that closes the books each month, quarter, and year.</p>
+        <h2><span class="num">10</span> Period-End Close &amp; Troubleshooting</h2>
+        <p class="sub">The structured close sequence — now including BL, IHB, and ML activities.</p>
 
         <div class="sec">
-          <h3><span class="dot"></span> Meaning</h3>
-          <div class="meaning">
-            <div class="label">What is it?</div>
-            <p>Period-end close is the process of finalising the books for a period. It involves cut-off activities, accruals, reconciliations, adjustments, FX valuation, and reporting. A well-run close follows a <strong>close calendar</strong> with defined tasks, owners, and deadlines. For most companies, the target is a "fast close" — complete within 3–5 business days.</p>
-          </div>
-        </div>
-
-        <div class="sec">
-          <h3><span class="dot"></span> Typical Close Calendar (Day 1 – Day 5)</h3>
+          <h3><span class="dot"></span> Typical Close Calendar (Day 1 – Day 6)</h3>
           <table class="cfg">
             <thead><tr><th>Day</th><th>Activity</th><th>Transaction</th><th>Owner</th></tr></thead>
             <tbody>
               <tr><td>Day 1</td><td>Cut-off — block new postings for prior period</td><td class="mono">OB52</td><td>FI Team</td></tr>
+              <tr><td>Day 1</td><td>Process final EBS / bank statements</td><td class="mono">FF.5 / FEBAN</td><td>BL Team</td></tr>
               <tr><td>Day 1</td><td>Post GR/IR reclassification</td><td class="mono">F.19</td><td>AP Team</td></tr>
               <tr><td>Day 2</td><td>Run AP payment program</td><td class="mono">F110</td><td>AP Team</td></tr>
-              <tr><td>Day 2</td><td>Post accruals and prepayments</td><td class="mono">FBS1 / F-02</td><td>GL Team</td></tr>
+              <tr><td>Day 2</td><td>Accruals and prepayments</td><td class="mono">FBS1 / F-02</td><td>GL Team</td></tr>
               <tr><td>Day 2</td><td>Asset depreciation run</td><td class="mono">AFAB</td><td>AA Team</td></tr>
               <tr><td>Day 3</td><td>Foreign currency valuation</td><td class="mono">FAGL_FC_VAL</td><td>GL Team</td></tr>
+              <tr><td>Day 3</td><td>Intercompany reconciliation &amp; IHC netting</td><td class="mono">IHC Netting</td><td>IHB Team</td></tr>
               <tr><td>Day 3</td><td>CO assessment and distribution cycles</td><td class="mono">KSU5 / KSV5</td><td>CO Team</td></tr>
               <tr><td>Day 3</td><td>WIP calculation and variance</td><td class="mono">KKAO / KKS1</td><td>CO Team</td></tr>
               <tr><td>Day 4</td><td>Settlement of orders</td><td class="mono">KO8G</td><td>CO Team</td></tr>
-              <tr><td>Day 4</td><td>Bank reconciliations</td><td class="mono">FF67 / manual</td><td>GL Team</td></tr>
-              <tr><td>Day 4</td><td>Subledger to GL reconciliation</td><td class="mono">FBL1N / FBL5N</td><td>AP/AR</td></tr>
-              <tr><td>Day 5</td><td>Close periods for prior month</td><td class="mono">OB52</td><td>FI Team</td></tr>
-              <tr><td>Day 5</td><td>Publish management reports</td><td class="mono">—</td><td>Finance</td></tr>
+              <tr><td>Day 4</td><td>Material Ledger actual costing run</td><td class="mono">CKMLCP</td><td>ML Team</td></tr>
+              <tr><td>Day 4</td><td>ML settlement — price differences to inventory / COGS</td><td class="mono">CKMLCP (settle)</td><td>ML Team</td></tr>
+              <tr><td>Day 5</td><td>Bank reconciliations</td><td class="mono">FF67 / manual</td><td>BL Team</td></tr>
+              <tr><td>Day 5</td><td>Subledger to GL reconciliation</td><td class="mono">FBL1N / FBL5N</td><td>AP/AR</td></tr>
+              <tr><td>Day 5</td><td>IHC reconciliation with subsidiaries</td><td class="mono">IHC Reports</td><td>IHB Team</td></tr>
+              <tr><td>Day 6</td><td>Close prior period</td><td class="mono">OB52</td><td>FI Team</td></tr>
+              <tr><td>Day 6</td><td>Publish management reports</td><td class="mono">—</td><td>Finance</td></tr>
             </tbody>
           </table>
         </div>
@@ -1078,92 +1464,54 @@
         <div class="sec">
           <h3><span class="dot"></span> Key Close Activities Explained</h3>
 
-          <p><strong>1. Accruals (FBS1):</strong> Expenses that have been incurred but not yet invoiced. Example: rent for the month, salaries for the last week, utilities. Entry: Dr Expense / Cr Accrual Liability. Reversed at start of next month.</p>
-
-          <p><strong>2. Prepayments (F-02):</strong> Payments made in advance for future periods. Example: annual insurance premium paid in January covers 12 months. Entry: Dr Prepaid Expense / Cr Bank. Then monthly: Dr Expense / Cr Prepaid.</p>
-
-          <p><strong>3. GR/IR Reclassification (F.19):</strong> At month end, GR/IR clearing account may have balances. F.19 reclassifies them to "Goods Received Not Invoiced" or "Invoice Received Not Delivered". Reversed at start of next month.</p>
-
-          <p><strong>4. Foreign Currency Valuation (FAGL_FC_VAL):</strong> Open items in foreign currency are revalued at the closing rate. The difference is posted as an unrealised FX gain/loss. Entry: Dr/Cr FX Adjustment / Cr/Dr Unrealised Gain/Loss.</p>
-
-          <p><strong>5. Depreciation Run (AFAB):</strong> Posts depreciation for all assets for the period. Entry: Dr Depreciation Expense / Cr Accumulated Depreciation.</p>
-
-          <p><strong>6. CO Assessment (KSU5) / Distribution (KSV5):</strong> Allocates overhead costs from sender cost centers to receivers.</p>
-
-          <p><strong>7. WIP (KKAO) / Variance (KKS1) / Settlement (KO8G):</strong> Closes production orders as described in Tab 5.</p>
+          <p><strong>1. Accruals (FBS1):</strong> Expenses incurred but not invoiced. Dr Expense / Cr Accrual Liability. Reversed next period.</p>
+          <p><strong>2. Prepayments (F-02):</strong> Payments made in advance. Dr Prepaid / Cr Bank, then monthly Dr Expense / Cr Prepaid.</p>
+          <p><strong>3. GR/IR Reclassification (F.19):</strong> Reclassifies GR/IR balance to "Goods Received Not Invoiced" or "Invoice Received Not Delivered". Reversed next period.</p>
+          <p><strong>4. FX Valuation (FAGL_FC_VAL):</strong> Revalues open FX items at closing rate. Dr/Cr FX Adjustment / Cr/Dr Unrealised Gain/Loss.</p>
+          <p><strong>5. Depreciation Run (AFAB):</strong> Dr Depreciation Expense / Cr Accumulated Depreciation.</p>
+          <p><strong>6. CO Assessment (KSU5) / Distribution (KSV5):</strong> Allocates overhead to receivers.</p>
+          <p><strong>7. WIP (KKAO) / Variance (KKS1) / Settlement (KO8G):</strong> Closes production orders.</p>
+          <p><strong>8. Material Ledger (CKMLCP):</strong> Runs actual costing, distributes price differences, revalues inventory and COGS.</p>
+          <p><strong>9. IHC Netting:</strong> Consolidates intercompany payables/receivables, settles only net amounts.</p>
         </div>
 
         <div class="sec">
           <h3><span class="dot"></span> Common Close-Time Errors</h3>
           <div class="err-grid">
-            <div class="err">
-              <div class="t">"Posting period is closed"</div>
-              <div class="d">A late invoice arrives after OB52 has closed the prior period.</div>
-              <div class="f">Either reopen the period temporarily (with approval) or post in the current period with a note.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Subledger does not reconcile to GL"</div>
-              <div class="d">AP balance ≠ GL reconciliation account.</div>
-              <div class="f">Run RFAGL_SUBLEDGER_RECON or FBL1N vs FAGLL03; investigate any manual postings to reconciliation accounts.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Depreciation already posted for period"</div>
-              <div class="d">AFAB has already run and cannot run again.</div>
-              <div class="f">Use AFAB in restart mode, or reverse the prior run with AFABR first.</div>
-            </div>
-            <div class="err">
-              <div class="t">"FX valuation produces incorrect result"</div>
-              <div class="d">Exchange rates have not been updated in the system.</div>
-              <div class="f">Maintain rates in OB08 before running FAGL_FC_VAL.</div>
-            </div>
-            <div class="err">
-              <div class="t">"GR/IR account has a large unexplained balance"</div>
-              <div class="d">Old GRs never invoiced or old invoices never received.</div>
-              <div class="f">Run MR11 to clear small differences; investigate large ones with the purchasing team.</div>
-            </div>
-            <div class="err">
-              <div class="t">"Order cannot be settled — settlement rule missing"</div>
-              <div class="d">KO8G fails for some orders.</div>
-              <div class="f">Maintain settlement rules via KO02 in bulk or use KOB1 to identify problematic orders.</div>
-            </div>
+            <div class="err"><div class="t">"Posting period closed"</div><div class="d">Late invoice after OB52 close.</div><div class="f">Reopen temporarily with approval, or post in current period.</div></div>
+            <div class="err"><div class="t">"Subledger does not reconcile to GL"</div><div class="d">AP balance ≠ GL recon.</div><div class="f">Run RFAGL_SUBLEDGER_RECON; investigate manual postings to recon account.</div></div>
+            <div class="err"><div class="t">"Depreciation already posted"</div><div class="d">AFAB run twice.</div><div class="f">Restart mode or reverse prior run with AFABR.</div></div>
+            <div class="err"><div class="t">"FX valuation incorrect"</div><div class="d">Rates not updated.</div><div class="f">Maintain rates in OB08 before FAGL_FC_VAL.</div></div>
+            <div class="err"><div class="t">"GR/IR balance large"</div><div class="d">Old GRs never invoiced or vice versa.</div><div class="f">Run MR11 to clear small; escalate large ones to purchasing.</div></div>
+            <div class="err"><div class="t">"ML actual costing fails"</div><div class="d">Some materials missing cost estimates or BOM broken.</div><div class="f">Fix cost estimates and BOM; re-run CKMLCP.</div></div>
+            <div class="err"><div class="t">"IHC netting proposal empty"</div><div class="d">Wrong cut-off or missing invoices.</div><div class="f">Verify cut-off dates and invoice posting dates.</div></div>
+            <div class="err"><div class="t">"Bank reconciliation difference"</div><div class="d">Outstanding cheques or deposits in transit.</div><div class="f">Investigate and clear stale items.</div></div>
           </div>
         </div>
 
         <div class="sec">
-          <h3><span class="dot"></span> Interview Preparation</h3>
+          <h3><span class="dot"></span> Interview Prep</h3>
           <div class="qa">
-            <div class="qa-item">
-              <div class="qa-q">Q1: Walk me through a typical month-end close in SAP.</div>
-              <div class="qa-a">Day 1: Cut-off and GR/IR reclassification (F.19). Day 2: AP payment run (F110), accruals (FBS1), depreciation (AFAB). Day 3: FX valuation (FAGL_FC_VAL), CO assessment/distribution (KSU5/KSV5), WIP and variance (KKAO/KKS1). Day 4: Order settlement (KO8G), bank and subledger reconciliations. Day 5: Close prior period (OB52), publish reports. The exact sequence varies by company but the principle is to complete all adjustments before closing the period.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q2: How do you handle a late invoice after the period is closed?</div>
-              <div class="qa-a">If materiality is low and the period is closed for internal reporting, post it in the current period and disclose in the notes. If materiality is high, reopen the prior period (with approval from the controller), post the invoice, and re-close. Reopening should be exceptional and documented — it signals a breakdown in cut-off controls.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q3: What is the subledger-to-GL reconciliation and why is it critical?</div>
-              <div class="qa-a">It is the process of confirming that the AP subledger balance (sum of open vendor items in BSIK) equals the GL vendor reconciliation account balance. This is a fundamental control because it detects unauthorised manual postings to the reconciliation account. In SAP, use RFAGL_SUBLEDGER_RECON or compare FBL1N to FAGLL03. Any difference must be investigated and corrected before close.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">Q4: How does foreign currency valuation work?</div>
-              <div class="qa-a">FAGL_FC_VAL revalues open items denominated in foreign currency using the closing exchange rate (maintained in OB08). For each open item, the system calculates the difference between the rate at posting and the closing rate, and posts an unrealised gain or loss. The entry is Dr/Cr the open item / Cr/Dr unrealised FX gain/loss. The revaluation is typically reversed at the start of the next period so that the actual settlement rate is used when the item clears.</div>
-            </div>
+            <div class="qa-item"><div class="qa-q">Q1: Walk me through a typical month-end close.</div><div class="qa-a">Day 1: Cut-off, EBS final processing, GR/IR reclassification. Day 2: Payment run, accruals, depreciation. Day 3: FX valuation, IHC netting, CO assessments, WIP/variance. Day 4: Settlement, ML actual costing. Day 5: Reconciliations. Day 6: Close and report.</div></div>
+            <div class="qa-item"><div class="qa-q">Q2: How do you handle a late invoice after period close?</div><div class="qa-a">If immaterial, post in current period. If material, reopen prior period with approval, post, re-close. Document as a control breakdown.</div></div>
+            <div class="qa-item"><div class="qa-q">Q3: Why is subledger-to-GL reconciliation critical?</div><div class="qa-a">Detects unauthorised manual postings to reconciliation accounts. Confirms AP subledger = GL vendor recon account. Any difference must be investigated before close.</div></div>
+            <div class="qa-item"><div class="qa-q">Q4: How does FX valuation work?</div><div class="qa-a">FAGL_FC_VAL revalues open FX items at closing rate. Difference = unrealised FX gain/loss. Reversed at start of next period so settlement rate is used when item clears.</div></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ═══════════════ TAB 8: INTERVIEW PREP ═══════════════ -->
-    <div class="panel" id="panel-t8">
+    <!-- ═══════════════ TAB 11: INTERVIEW PREP ═══════════════ -->
+    <div class="panel" id="panel-t11">
       <div class="card">
-        <h2><span class="num">8</span> Interview &amp; Scenario Practice</h2>
-        <p class="sub">Scenario-based questions, configuration reasoning, and end-to-end troubleshooting — structured for SAP FICO interviews.</p>
+        <h2><span class="num">11</span> Interview &amp; Scenario Practice</h2>
+        <p class="sub">Scenario-based questions spanning FI, CO, BL, IHB, and ML.</p>
 
         <div class="sec">
-          <h3><span class="dot"></span> How to Structure Your Answer</h3>
+          <h3><span class="dot"></span> Answer Framework</h3>
           <div class="note">
             <div class="label">The 5-Point Framework</div>
-            <p>For any FICO scenario question, structure your answer as: <strong>(1)</strong> Business context — what is happening? <strong>(2)</strong> Configuration / process — what setup enables this? <strong>(3)</strong> Journal entry — what are the Dr/Cr postings? <strong>(4)</strong> Integration points — which modules are involved? <strong>(5)</strong> Common errors — what usually goes wrong and how to fix it.</p>
+            <p><strong>(1)</strong> Business context. <strong>(2)</strong> Configuration / process. <strong>(3)</strong> Journal entry. <strong>(4)</strong> Integration points. <strong>(5)</strong> Common errors and fixes.</p>
           </div>
         </div>
 
@@ -1172,74 +1520,106 @@
 
           <div class="qa">
             <div class="qa-item">
-              <div class="qa-q">Scenario 1: A vendor invoice of ₹1,18,000 (including 18% GST) has been posted. Payment is made 30 days later with a 2% cash discount. Walk me through both entries.</div>
+              <div class="qa-q">Scenario 1: A vendor invoice of ₹1,18,000 (18% GST) is posted and paid 30 days later with 2% cash discount. Show both entries.</div>
               <div class="qa-a">
-                <p><strong>Step 1 — Invoice (FB60):</strong></p>
+                <p><strong>Invoice (FB60):</strong></p>
                 <ul>
                   <li>Dr Expense / Inventory — ₹1,00,000</li>
-                  <li>Dr GST Input Credit — ₹18,000</li>
+                  <li>Dr GST Input — ₹18,000</li>
                   <li>Cr Vendor — ₹1,18,000</li>
                 </ul>
-                <p><strong>Step 2 — Payment with discount (F-53):</strong></p>
+                <p><strong>Payment with discount (F-53):</strong></p>
                 <ul>
                   <li>Dr Vendor — ₹1,18,000</li>
                   <li>Cr Bank — ₹1,15,640</li>
-                  <li>Cr Cash Discount Received — ₹2,000 (on base amount only)</li>
+                  <li>Cr Cash Discount Received — ₹2,000</li>
                   <li>Cr GST Adjustment — ₹360 (reversal of input credit on discount)</li>
                 </ul>
-                <p><strong>Key configuration:</strong> Payment terms (OBB8) with a 2% discount within 10 days. The discount is calculated on the base amount, not the GST portion, unless configured otherwise.</p>
+                <p><strong>Config:</strong> Payment terms (OBB8) with 2%/10 days. Discount calculated on base amount only.</p>
               </div>
             </div>
 
             <div class="qa-item">
-              <div class="qa-q">Scenario 2: A production order for 1,000 units has been fully delivered. The actual cost is ₹5,10,000 and the standard cost of goods received is ₹5,00,000. How is the variance calculated and settled?</div>
+              <div class="qa-q">Scenario 2: A production order for 1,000 units costs ₹5,10,000 actual; standard is ₹5,00,000. How is the variance calculated and settled?</div>
               <div class="qa-a">
-                <p><strong>Variance calculation (KKS1):</strong> The ₹10,000 difference is decomposed into:</p>
+                <p><strong>Variance (KKS1) decomposed into:</strong></p>
                 <ul>
-                  <li><strong>Input price variance</strong> — material purchased at a different price</li>
-                  <li><strong>Input quantity variance</strong> — more material consumed than standard</li>
-                  <li><strong>Resource usage variance</strong> — more machine/labour hours than planned</li>
-                  <li><strong>Remaining variance</strong> — overhead differences</li>
+                  <li>Input price variance (material purchase price)</li>
+                  <li>Input quantity variance (more material used)</li>
+                  <li>Resource usage variance (more hours)</li>
+                  <li>Remaining variance (overhead)</li>
                 </ul>
-                <p><strong>Settlement (KO88):</strong> Dr Variance (COGS) / Cr Production Order for ₹10,000. After settlement, the order balance is zero. If the settlement receiver is a profitability segment in CO-PA, the variance reduces margin by ₹10,000.</p>
+                <p><strong>Settlement (KO88):</strong> Dr Variance ₹10,000 / Cr Production Order ₹10,000. Order balance → zero.</p>
               </div>
             </div>
 
             <div class="qa-item">
-              <div class="qa-q">Scenario 3: Your client reports that the vendor reconciliation account in the GL does not match the AP subledger. How do you investigate?</div>
+              <div class="qa-q">Scenario 3: Vendor reconciliation account doesn't match AP subledger. How do you investigate?</div>
               <div class="qa-a">
-                <p><strong>Step 1 — Confirm the mismatch:</strong> Compare FBL1N (vendor line items) balance to FAGLL03 (GL line items) for the reconciliation account.</p>
-                <p><strong>Step 2 — Look for manual postings:</strong> Run FAGLL03 on the reconciliation account and filter for manual document types (SA, DR). Direct postings to reconciliation accounts are usually the cause.</p>
-                <p><strong>Step 3 — Check for missing postings:</strong> Verify that all subledger postings flow to the GL. Look for parked documents, blocked documents, or reversal errors.</p>
-                <p><strong>Step 4 — Correct:</strong> Reverse the manual posting or use F-02 to post a correcting entry. Then document the control breakdown and recommend a new preventive control (e.g., field status group that blocks direct posting to reconciliation accounts).</p>
+                <p><strong>Steps:</strong></p>
+                <ol>
+                  <li>Compare FBL1N (subledger) to FAGLL03 (GL recon account).</li>
+                  <li>Filter GL for manual document types (SA, DR) — direct postings to recon accounts are usually the cause.</li>
+                  <li>Check for parked/blocked documents, reversal errors.</li>
+                  <li>Reverse or correct. Recommend field status group that blocks direct posting.</li>
+                </ol>
               </div>
             </div>
 
             <div class="qa-item">
-              <div class="qa-q">Scenario 4: A user is trying to post a cost to a cost center, but SAP gives the error "Cost element not created for GL account." What do you do?</div>
+              <div class="qa-q">Scenario 4: Explain how EBS auto-matches a customer payment.</div>
               <div class="qa-a">
-                <p><strong>Diagnosis:</strong> The GL account being used in the posting is a P&amp;L account that has not been linked to a cost element in CO. Without a cost element, CO cannot receive the cost.</p>
-                <p><strong>Fix:</strong> Create a primary cost element using KA01 for the GL account. In S/4HANA, this is automatic — every P&amp;L account has a corresponding cost element by default. In ECC, it must be created manually.</p>
-                <p><strong>Prevention:</strong> Always create the cost element when creating a new P&amp;L GL account. Add this to the master data checklist.</p>
+                <p><strong>Three-layer matching:</strong></p>
+                <ul>
+                  <li><strong>Interpretation algorithms</strong> identify transaction type from bank code/text.</li>
+                  <li><strong>Posting rules</strong> define which algorithms to run and in what order.</li>
+                  <li><strong>Search algorithms</strong> find matching open item by invoice number, amount, customer code.</li>
+                </ul>
+                <p>If matched → auto-cleared. If not → goes to FEBAN for manual processing.</p>
               </div>
             </div>
 
             <div class="qa-item">
-              <div class="qa-q">Scenario 5: Explain how a goods receipt in MM creates an FI document without any manual intervention.</div>
+              <div class="qa-q">Scenario 5: ABC Group has 3 subsidiaries with mutual payables/receivables. How does IHC netting reduce transactions?</div>
               <div class="qa-a">
-                <p><strong>Mechanism:</strong> When a goods receipt is posted (MIGO / MB31), SAP reads the material master to determine the valuation class, then reads the account determination configuration (OBYC) to find the GL accounts. The transaction key BSX (inventory) determines the debit account; WRX (GR/IR clearing) determines the credit account.</p>
-                <p><strong>Entry:</strong> Dr Inventory / Cr GR/IR Clearing.</p>
-                <p><strong>Integration:</strong> The document is created automatically in FI (BKPF + BSEG) with reference to the MM document. It also updates the Material Ledger in S/4HANA.</p>
-                <p><strong>Common failure:</strong> If the valuation class or account determination is missing, the GR will fail with "Account determination for entry ... not possible." Fix by maintaining the valuation class in the material master and the account keys in OBYC.</p>
+                <p><strong>Without IHC:</strong> 3 gross cross-border payments.</p>
+                <p><strong>With IHC netting:</strong> Subsidiaries post to IHC instead of each other. IHC computes net positions:</p>
+                <ul>
+                  <li>IN01: −50,000 (net pay)</li>
+                  <li>SG01: +5,00,000 (net receive)</li>
+                  <li>DE01: −4,50,000 (net pay)</li>
+                </ul>
+                <p>Only 2 net payments made — 60–80% reduction. FX exposure also centralised.</p>
               </div>
             </div>
 
             <div class="qa-item">
-              <div class="qa-q">Scenario 6: A client wants to migrate from ECC to S/4HANA. What are the top 3 FI/CO considerations you would flag?</div>
+              <div class="qa-q">Scenario 6: A raw material is standard ₹100/kg but purchased at ₹105/kg. 1,000 kg bought, 800 kg consumed. How does ML handle the price difference?</div>
               <div class="qa-a">
-                <p><strong>1. Custom reports and enhancements:</strong> Any custom ABAP report that reads COSP, COSS, COEP, or CE1xxxx must be reviewed. In S/4HANA these are compatibility views on ACDOCA and may not perform well. Budget time to rewrite them against ACDOCA.</p>
-                <p><strong>2. New GL and parallel ledgers:</strong> S/4HANA requires New GL. If the client currently uses classic GL, they must migrate to New GL and set up any required parallel ledgers (IFRS, local GAAP, tax) during the migration.</p>
-                <p><strong>3. Material Ledger:</strong> Material Ledger becomes mandatory in S/4HANA. If the client is not using it in ECC, a full ML implementation and historical valuation migration is required — this is often the longest workstream in an S/4 project.</p>
+                <p><strong>Purchase entry:</strong></p>
+                <ul>
+                  <li>Dr Inventory — ₹1,00,000 (at standard)</li>
+                  <li>Dr Price Difference (ML) — ₹5,000</li>
+                  <li>Cr Vendor — ₹1,05,000</li>
+                </ul>
+                <p><strong>Month-end CKMLCP settlement distributes ₹5,000:</strong></p>
+                <ul>
+                  <li>Inventory (200 kg remaining) — 20% → ₹1,000</li>
+                  <li>COGS (800 kg consumed) — 80% → ₹4,000</li>
+                </ul>
+                <p>ML account cleared. Inventory revalued to actual cost.</p>
+              </div>
+            </div>
+
+            <div class="qa-item">
+              <div class="qa-q">Scenario 7: Client wants to migrate ECC → S/4HANA. Top 3 FI/CO considerations?</div>
+              <div class="qa-a">
+                <ol>
+                  <li><strong>Custom reports referencing COSP/COSS/COEP/CE1xxxx</strong> — must be rewritten against ACDOCA. Budget significant time.</li>
+                  <li><strong>New GL + Parallel ledgers</strong> — mandatory in S/4HANA. If on classic GL, full migration required.</li>
+                  <li><strong>Material Ledger activation</strong> — mandatory in S/4HANA. If not currently used, full ML implementation + historical valuation migration needed. Often the longest workstream.</li>
+                </ol>
+                <p>Additional: Business Partner migration (customer/vendor), FSCM Credit Management, classic CO-PA → account-based CO-PA.</p>
               </div>
             </div>
           </div>
@@ -1248,30 +1628,18 @@
         <div class="sec">
           <h3><span class="dot"></span> Rapid-Fire Questions</h3>
           <div class="qa">
-            <div class="qa-item">
-              <div class="qa-q">What is the difference between FI and CO?</div>
-              <div class="qa-a">FI is external financial accounting — legal entity view, statutory reporting, balance sheet, P&amp;L. CO is internal management accounting — cost object view, departmental and product profitability, allocations, variance analysis. FI is mandatory; CO is a management tool.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">What is a cost object?</div>
-              <div class="qa-a">Any object to which costs can be assigned — cost center, internal order, production order, WBS element, profit center. Cost objects are the backbone of CO.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">What is a document splitting?</div>
-              <div class="qa-a">Document splitting is a New GL feature that ensures every FI document is balanced not only in total but also by dimensions like profit center, segment, or business area. It enables real-time segment reporting and full balance sheet by profit center.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">What is the difference between a reconciliation account and a normal GL account?</div>
-              <div class="qa-a">A reconciliation account is a GL account linked to a subledger (AP, AR, AA). You cannot post directly to it — all postings must go through the subledger. A normal GL account can be posted directly. Reconciliation accounts ensure the subledger always matches the GL.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">What are the different types of CO documents?</div>
-              <div class="qa-a">CO documents are created for cost postings, activity allocations, assessments, distributions, settlements, and internal order postings. They are stored in COBK (header) and COEP (line items). In S/4HANA they are integrated into ACDOCA.</div>
-            </div>
-            <div class="qa-item">
-              <div class="qa-q">What is a substitution and when would you use one?</div>
-              <div class="qa-a">A substitution is a rule that automatically fills or replaces field values during posting. Example: automatically derive the profit center from the cost center on every P&amp;L posting. Implemented via OBBH. Used to enforce data completeness and reduce manual entry.</div>
-            </div>
+            <div class="qa-item"><div class="qa-q">FI vs CO?</div><div class="qa-a">FI = external/legal/statutory. CO = internal/management/cost objects.</div></div>
+            <div class="qa-item"><div class="qa-q">Primary vs secondary cost element?</div><div class="qa-a">Primary = has FI GL counterpart. Secondary = CO-only (assessments, allocations).</div></div>
+            <div class="qa-item"><div class="qa-q">Distribution vs assessment?</div><div class="qa-a">Distribution preserves original cost elements. Assessment consolidates under a secondary CE.</div></div>
+            <div class="qa-item"><div class="qa-q">Cost center vs profit center?</div><div class="qa-a">Cost center = collects costs by department. Profit center = internal P&amp;L and balance sheet.</div></div>
+            <div class="qa-item"><div class="qa-q">House Bank vs Account ID?</div><div class="qa-a">House Bank = banking partner (HDFC). Account ID = specific account within that bank. Together they form BANKL + BNKACC.</div></div>
+            <div class="qa-item"><div class="qa-q">EBS vs Lockbox?</div><div class="qa-a">EBS = processes the entire bank statement (all transactions). Lockbox = specific tool for automated customer receipt matching at high volume.</div></div>
+            <div class="qa-item"><div class="qa-q">Cash Position vs Liquidity Forecast?</div><div class="qa-a">Cash Position = snapshot (today). Liquidity Forecast = projection (future).</div></div>
+            <div class="qa-item"><div class="qa-q">What is IHC?</div><div class="qa-a">In-House Cash — group internal bank. Centralises cash, nets intercompany payments, reduces external transactions.</div></div>
+            <div class="qa-item"><div class="qa-q">Material Ledger purpose?</div><div class="qa-a">Records actual cost of materials in multiple currencies and views. Enables actual costing and price difference settlement.</div></div>
+            <div class="qa-item"><div class="qa-q">Standard price vs moving average price?</div><div class="qa-a">Standard (S) = fixed, differences tracked in ML. Moving Average (V) = recalculated with every movement, differences absorbed immediately.</div></div>
+            <div class="qa-item"><div class="qa-q">Universal Journal?</div><div class="qa-a">ACDOCA — single table for FI + CO + AA + ML + CO-PA in S/4HANA. Eliminates FI-CO reconciliation.</div></div>
+            <div class="qa-item"><div class="qa-q">What changed in ML for S/4HANA?</div><div class="qa-a">ML becomes mandatory. Integrated into ACDOCA. MLIT replaces older ML tables for most reporting.</div></div>
           </div>
         </div>
       </div>
@@ -1325,9 +1693,6 @@
 
 <script src="../script.js"></script>
 <script>
-/* ═══════════════════════════════════════════════════════════
-   TAB NAVIGATION
-   ═══════════════════════════════════════════════════════════ */
 document.querySelectorAll('#ftr .tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('#ftr .tab').forEach(t => t.classList.remove('active'));
@@ -1337,14 +1702,8 @@ document.querySelectorAll('#ftr .tab').forEach(tab => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
-
-/* ═══════════════════════════════════════════════════════════
-   Q&A TOGGLE
-   ═══════════════════════════════════════════════════════════ */
 document.querySelectorAll('#ftr .qa-item').forEach(item => {
-  item.querySelector('.qa-q').addEventListener('click', () => {
-    item.classList.toggle('open');
-  });
+  item.querySelector('.qa-q').addEventListener('click', () => item.classList.toggle('open'));
 });
 </script>
 </body>
