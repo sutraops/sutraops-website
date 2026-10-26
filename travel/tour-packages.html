@@ -1,0 +1,1728 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Domestic & International Tour Packages | SutraOps Solutions</title>
+  <meta name="description" content="Explore domestic India holidays and international tour packages with SutraOps Solutions. Discover family holidays, group tours, beach escapes, mountains, heritage and custom travel experiences.">
+  <meta name="theme-color" content="#08234d">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #08234d;
+      --orange: #f58216;
+      --ink: #17243b;
+      --muted: #68778b;
+      --light: #f4f7fb;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* Header and existing SutraOps branding */
+
+    .top-line {
+      height: 4px;
+      background: var(--orange);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.97);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      width: min(1200px, calc(100% - 36px));
+      margin: auto;
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      display: block;
+      color: var(--navy);
+      font-size: 25px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+
+    .brand-name span { color: var(--orange); }
+
+    .brand-sub {
+      display: block;
+      margin-top: 3px;
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 5px;
+    }
+
+    .brand-tagline {
+      display: block;
+      margin-top: 5px;
+      color: var(--navy);
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .brand-tagline b {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 21px;
+    }
+
+    .nav a {
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: .3px;
+    }
+
+    .nav a:hover { color: var(--orange); }
+
+    .nav .nav-cta {
+      padding: 12px 15px;
+      background: var(--orange);
+      color: white;
+      border-radius: 7px;
+    }
+
+    .nav .nav-cta:hover { color: white; background: #d96d0b; }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      background: white;
+      color: var(--navy);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Hero */
+
+    .hero {
+      min-height: 510px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(4,21,48,.92) 0%, rgba(4,21,48,.72) 47%, rgba(4,21,48,.12) 100%),
+        url("https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=90")
+        center 55% / cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 740px;
+      padding: 82px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffb16c;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      height: 3px;
+      width: 27px;
+      background: var(--orange);
+    }
+
+    .hero h1 {
+      margin: 20px 0;
+      font-size: clamp(42px, 6vw, 76px);
+      font-weight: 800;
+      letter-spacing: -4px;
+      line-height: 1.02;
+    }
+
+    .hero h1 span { color: #ff9a3c; }
+
+    .hero p {
+      max-width: 630px;
+      margin: 0;
+      color: #e2eaf5;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 19px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform .2s, background .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-orange {
+      color: white;
+      background: var(--orange);
+    }
+
+    .btn-orange:hover { background: #d96d0b; }
+
+    .btn-outline {
+      color: white;
+      border: 1px solid #ffffff90;
+      background: #ffffff0b;
+    }
+
+    /* Quick benefits */
+
+    .benefits { background: var(--navy); color: white; }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .benefit {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 22px 18px;
+      border-right: 1px solid #ffffff25;
+    }
+
+    .benefit:last-child { border-right: 0; }
+
+    .benefit-icon { font-size: 25px; }
+
+    .benefit strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .benefit small {
+      display: block;
+      margin-top: 4px;
+      color: #c9d7e9;
+      font-size: 11px;
+    }
+
+    /* Section headings */
+
+    .section { padding: 76px 0; }
+
+    .section-soft { background: var(--light); }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 28px;
+    }
+
+    .section-heading h2 {
+      max-width: 680px;
+      margin: 9px 0 0;
+      color: var(--navy);
+      font-size: clamp(29px, 4vw, 43px);
+      line-height: 1.15;
+      letter-spacing: -1.6px;
+    }
+
+    .section-heading p {
+      max-width: 440px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* Destination search and filters */
+
+    .search-bar {
+      display: flex;
+      gap: 10px;
+      margin: 25px 0 18px;
+    }
+
+    .search-bar input {
+      min-width: 0;
+      flex: 1;
+      padding: 14px 16px;
+      border: 1px solid #d8e1ed;
+      border-radius: 8px;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .search-bar input:focus {
+      outline: 2px solid #f5821644;
+      border-color: var(--orange);
+    }
+
+    .search-bar button {
+      border: 0;
+      border-radius: 8px;
+      padding: 0 20px;
+      background: var(--navy);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 26px;
+    }
+
+    .filter-btn {
+      padding: 9px 14px;
+      border: 1px solid #d8e1ed;
+      border-radius: 30px;
+      background: white;
+      color: var(--navy);
+      font: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: white;
+    }
+
+    /* Destination cards */
+
+    .destination-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .destination-card {
+      min-width: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 6px 24px #08234d08;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .destination-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px #08234d12;
+    }
+
+    .destination-card[hidden] { display: none; }
+
+    .destination-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #dce4ef;
+    }
+
+    .destination-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 17px;
+    }
+
+    .destination-type {
+      color: #c66a13;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .destination-info h3 {
+      margin: 7px 0;
+      color: var(--navy);
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .destination-info p {
+      flex: 1;
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .destination-link {
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .destination-link:hover { color: var(--orange); }
+
+    .no-results {
+      display: none;
+      padding: 25px;
+      border: 1px dashed #ccd7e5;
+      border-radius: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .no-results.visible { display: block; }
+
+    /* Regions list */
+
+    .region-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .region-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+    }
+
+    .region-card h3 {
+      margin: 0 0 9px;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .region-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .custom-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      margin-top: 27px;
+      padding: 26px;
+      border: 1px solid #ffdfbf;
+      border-radius: 13px;
+      background: #fff5eb;
+    }
+
+    .custom-banner h3 {
+      margin: 0 0 7px;
+      color: var(--navy);
+      font-size: 17px;
+    }
+
+    .custom-banner p {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .custom-banner .btn { flex-shrink: 0; }
+
+    /* Holiday styles */
+
+    .holiday-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .holiday-card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+    }
+
+    .holiday-card .emoji { font-size: 26px; }
+
+    .holiday-card h3 {
+      margin: 10px 0 7px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    .holiday-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* Enquiry process */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
+    .step {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+    }
+
+    .step-number {
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
+
+    .step h3 {
+      margin: 10px 0 8px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .disclaimer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.9;
+    }
+
+    /* Final call to action */
+
+    .final-cta {
+      padding: 54px 0;
+      color: white;
+      background: linear-gradient(115deg, #08234d, #164a78);
+    }
+
+    .final-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .final-inner h2 {
+      margin: 0 0 10px;
+      font-size: clamp(27px, 4vw, 39px);
+      letter-spacing: -1.3px;
+      line-height: 1.2;
+    }
+
+    .final-inner p {
+      max-width: 720px;
+      margin: 0;
+      color: #d6e2f0;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* Footer */
+
+    .footer {
+      padding: 45px 0 0;
+      color: #d6e0ed;
+      background: #061a37;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 30px;
+      padding-bottom: 35px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand img {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+    }
+
+    .footer-brand strong {
+      color: white;
+      font-size: 21px;
+    }
+
+    .footer-brand strong span { color: var(--orange); }
+
+    .footer-tagline {
+      margin: 0 0 12px;
+      color: #ffb16c;
+      font-size: 10px;
+    }
+
+    .footer-desc {
+      max-width: 300px;
+      margin: 0;
+      color: #aebed2;
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    .footer h3 {
+      margin: 0 0 15px;
+      color: white;
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a,
+    .footer-links span {
+      color: #b9c8da;
+      font-size: 11px;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-links a:hover { color: #ffad62; }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px 0;
+      border-top: 1px solid #ffffff20;
+      color: #aebed2;
+      font-size: 10px;
+    }
+
+    .footer-bottom p { margin: 0; }
+
+    .whatsapp {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 53px;
+      height: 53px;
+      border-radius: 50%;
+      background: #168c52;
+      color: white;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 6px 20px #0003;
+    }
+
+    /* Responsive layout */
+
+    @media (max-width: 1000px) {
+      .nav { gap: 12px; }
+      .nav a { font-size: 10px; }
+      .destination-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .benefit { padding: 18px 10px; }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner { min-height: 72px; }
+      .brand img { width: 44px; height: 44px; }
+      .brand-name { font-size: 22px; }
+      .brand-sub { font-size: 9px; letter-spacing: 4px; }
+      .brand-tagline { font-size: 8px; }
+      .menu-toggle { display: block; }
+
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: white;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 10px 20px #0000000b;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .nav.open { display: flex; }
+      .nav a { padding: 13px 8px; font-size: 12px; }
+      .nav .nav-cta { margin-top: 8px; text-align: center; }
+      .hero { min-height: 480px; background-position: 60% center; }
+      .hero-content { padding: 65px 0; }
+      .hero h1 { letter-spacing: -2px; }
+      .section { padding: 55px 0; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 14px; }
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefit:nth-child(2) { border-right: 0; }
+      .benefit:nth-child(-n+2) { border-bottom: 1px solid #ffffff25; }
+      .destination-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .destination-card img { height: 145px; }
+      .destination-info { padding: 13px; }
+      .destination-info h3 { font-size: 15px; }
+      .destination-info p { font-size: 11px; }
+      .region-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .holiday-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .steps { grid-template-columns: 1fr; }
+      .custom-banner, .final-inner { align-items: flex-start; flex-direction: column; }
+      .footer-grid { gap: 25px; }
+    }
+
+    @media (max-width: 420px) {
+      .container { width: calc(100% - 28px); }
+      .brand-tagline { white-space: normal; max-width: 205px; }
+      .hero h1 { font-size: 42px; }
+      .hero p { font-size: 14px; }
+      .destination-grid { grid-template-columns: 1fr; }
+      .destination-card { display: grid; grid-template-columns: 120px 1fr; }
+      .destination-card img { height: 100%; min-height: 170px; }
+      .region-grid, .holiday-grid { grid-template-columns: 1fr; }
+      .search-bar { flex-direction: column; }
+      .search-bar button { min-height: 44px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-line"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" aria-label="SutraOps Solutions home">
+        <!-- Reuses the existing logo asset in the website repository. -->
+        <img src="../assets/so-icon.png" alt="SutraOps logo">
+        <span>
+          <span class="brand-name">Sutra<span>Ops</span></span>
+          <span class="brand-sub">SOLUTIONS</span>
+          <span class="brand-tagline">
+            Smart Travel<b>,</b> Smart Finance<b>,</b> Smart Operations<b>.</b>
+          </span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button"
+              aria-label="Open navigation" aria-expanded="false"
+              aria-controls="main-nav">☰</button>
+
+      <nav class="nav" id="main-nav" aria-label="Main navigation">
+        <a href="../index.html">HOME</a>
+        <a href="../about.html">ABOUT US</a>
+        <a href="../services.html">SERVICES</a>
+        <a href="travel-services.html">TRAVEL SERVICES</a>
+        <a href="../insights.html">INSIGHTS</a>
+        <a href="../contact.html" class="nav-cta">SEND AN ENQUIRY ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <span class="eyebrow">Discover with SutraOps</span>
+        <h1>Your next journey.<br><span>Your kind of world.</span></h1>
+        <p>
+          Explore India's incredible destinations and experiences around the
+          world. From family holidays and mountain escapes to international
+          adventures, tell us what you have in mind and enquire about a trip
+          that suits you.
+        </p>
+        <div class="hero-buttons">
+          <a class="btn btn-orange" href="#domestic">Explore India ↓</a>
+          <a class="btn btn-outline" href="#international">Explore International Tours ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits" aria-label="Tour package services">
+      <div class="container benefits-grid">
+        <div class="benefit">
+          <span class="benefit-icon">🇮🇳</span>
+          <div><strong>Explore India</strong><small>Regions, culture and nature</small></div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-icon">🌍</span>
+          <div><strong>Go International</strong><small>Popular global destinations</small></div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-icon">👨‍👩‍👧</span>
+          <div><strong>Every Kind of Traveller</strong><small>Solo, family and groups</small></div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-icon">🧭</span>
+          <div><strong>Tailored Enquiries</strong><small>Share your travel preferences</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOMESTIC DESTINATIONS -->
+    <section class="section" id="domestic">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" style="color:#bd650f">01 / Incredible India</span>
+            <h2>Domestic tour packages</h2>
+          </div>
+          <p>
+            From Himalayan scenery and historic cities to tropical beaches,
+            spiritual journeys and wildlife escapes, discover holiday ideas
+            across India's regions.
+          </p>
+        </div>
+
+        <div class="search-bar">
+          <input id="domestic-search" type="search"
+                 placeholder="Search India: Goa, Kashmir, Kerala, Rajasthan..."
+                 aria-label="Search domestic destinations">
+          <button type="button" data-search="domestic">Search</button>
+        </div>
+
+        <div class="filter-row" aria-label="Filter domestic destinations">
+          <button class="filter-btn active" type="button" data-region="all" data-scope="domestic">All India</button>
+          <button class="filter-btn" type="button" data-region="north" data-scope="domestic">North India</button>
+          <button class="filter-btn" type="button" data-region="south" data-scope="domestic">South India</button>
+          <button class="filter-btn" type="button" data-region="west" data-scope="domestic">West & Central</button>
+          <button class="filter-btn" type="button" data-region="east" data-scope="domestic">East & Northeast</button>
+          <button class="filter-btn" type="button" data-region="islands" data-scope="domestic">Islands</button>
+        </div>
+
+        <div class="destination-grid" id="domestic-grid">
+
+          <article class="destination-card" data-region="north" data-search="kashmir srinagar gulmarg pahalgam dal lake">
+            <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=750&q=85" alt="Mountain scenery in Kashmir" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Mountains & Lakes</span>
+              <h3>Kashmir</h3>
+              <p>Srinagar, Dal Lake, Gulmarg, Pahalgam and scenic mountain escapes.</p>
+              <a class="destination-link" href="../contact.html?destination=Kashmir">Enquire about Kashmir →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="north" data-search="ladakh leh nubra pangong mountains adventure">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=750&q=85" alt="Mountain peaks beneath a starry sky" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Adventure</span>
+              <h3>Ladakh</h3>
+              <p>Leh, Nubra Valley, Pangong Lake, monasteries and high-altitude landscapes.</p>
+              <a class="destination-link" href="../contact.html?destination=Ladakh">Enquire about Ladakh →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="north" data-search="himachal shimla manali dharamshala kasol spiti">
+            <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=750&q=85" alt="Himalayan valley scenery" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Hill Stations</span>
+              <h3>Himachal Pradesh</h3>
+              <p>Shimla, Manali, Dharamshala, Kasol, Kullu and Spiti Valley.</p>
+              <a class="destination-link" href="../contact.html?destination=Himachal">Enquire about Himachal →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="north" data-search="uttarakhand nainital mussoorie rishikesh haridwar jim corbett char dham">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=750&q=85" alt="A scenic nature escape" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Nature & Spiritual</span>
+              <h3>Uttarakhand</h3>
+              <p>Mussoorie, Nainital, Rishikesh, Haridwar, Auli and pilgrimage routes.</p>
+              <a class="destination-link" href="../contact.html?destination=Uttarakhand">Enquire about Uttarakhand →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="north" data-search="rajasthan jaipur udaipur jodhpur jaisalmer pushkar">
+            <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=750&q=85" alt="Historic architecture in Jaipur" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Royal Heritage</span>
+              <h3>Rajasthan</h3>
+              <p>Jaipur, Udaipur, Jodhpur, Jaisalmer, Pushkar, forts and desert stays.</p>
+              <a class="destination-link" href="../contact.html?destination=Rajasthan">Enquire about Rajasthan →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="north" data-search="delhi agra taj mahal golden triangle mathura vrindavan">
+            <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=750&q=85" alt="Taj Mahal in Agra" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">History & Culture</span>
+              <h3>Delhi, Agra & Uttar Pradesh</h3>
+              <p>Taj Mahal, Delhi landmarks, Mathura, Vrindavan, Lucknow and Varanasi.</p>
+              <a class="destination-link" href="../contact.html?destination=Delhi%20Agra%20UP">Explore North India →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="south" data-search="kerala kochi munnar alleppey thekkady kovalam wayanad">
+            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=750&q=85" alt="Kerala tropical greenery and backwaters" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Backwaters & Nature</span>
+              <h3>Kerala</h3>
+              <p>Munnar, Alleppey, Kochi, Thekkady, Wayanad and coastal retreats.</p>
+              <a class="destination-link" href="../contact.html?destination=Kerala">Enquire about Kerala →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="south" data-search="tamil nadu chennai madurai ooty kodaikanal rameswaram tiruchirappalli">
+            <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=750&q=85" alt="Traditional South Indian temple architecture" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Culture & Pilgrimage</span>
+              <h3>Tamil Nadu</h3>
+              <p>Chennai, Madurai, Rameswaram, Ooty, Kodaikanal and temple circuits.</p>
+              <a class="destination-link" href="../contact.html?destination=Tamil%20Nadu">Enquire about Tamil Nadu →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="south" data-search="karnataka bengaluru mysuru hampi coorg chikmagalur gokarna">
+            <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=750&q=85" alt="Historic stone architecture in Karnataka" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Heritage & Green Escapes</span>
+              <h3>Karnataka</h3>
+              <p>Mysuru, Hampi, Coorg, Chikmagalur, Gokarna and Bengaluru.</p>
+              <a class="destination-link" href="../contact.html?destination=Karnataka">Enquire about Karnataka →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="south" data-search="andhra pradesh tirupati visakhapatnam araku vijayawada">
+            <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=750&q=85" alt="Coastal scenery" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Coast & Pilgrimage</span>
+              <h3>Andhra Pradesh</h3>
+              <p>Tirupati, Visakhapatnam, Araku Valley and regional heritage.</p>
+              <a class="destination-link" href="../contact.html?destination=Andhra%20Pradesh">Enquire about Andhra Pradesh →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="south" data-search="telangana hyderabad warangal ramappa temple">
+            <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=750&q=85" alt="Historic Indian architecture" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">City & Heritage</span>
+              <h3>Telangana</h3>
+              <p>Hyderabad, Golconda Fort, Warangal, temples and food experiences.</p>
+              <a class="destination-link" href="../contact.html?destination=Telangana">Enquire about Telangana →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="west" data-search="goa beaches north goa south goa old goa">
+            <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=750&q=85" alt="Goa beach and tropical coast" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Beach Holidays</span>
+              <h3>Goa</h3>
+              <p>North and South Goa, beaches, heritage, local food and leisure stays.</p>
+              <a class="destination-link" href="../contact.html?destination=Goa">Enquire about Goa →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="west" data-search="maharashtra mumbai pune mahabaleshwar lonavala ajanta ellora">
+            <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=750&q=85" alt="Mumbai city skyline" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Cities & Landscapes</span>
+              <h3>Maharashtra</h3>
+              <p>Mumbai, Pune, Lonavala, Mahabaleshwar, Ajanta and Ellora.</p>
+              <a class="destination-link" href="../contact.html?destination=Maharashtra">Enquire about Maharashtra →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="west" data-search="gujarat ahmedabad rann of kutch dwarka somnath gir">
+            <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?auto=format&fit=crop&w=750&q=85" alt="Traditional Indian architecture" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Culture & Wildlife</span>
+              <h3>Gujarat</h3>
+              <p>Ahmedabad, Rann of Kutch, Dwarka, Somnath and Gir.</p>
+              <a class="destination-link" href="../contact.html?destination=Gujarat">Enquire about Gujarat →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="west" data-search="madhya pradesh bhopal khajuraho orchha kanha bandhavgarh">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=750&q=85" alt="Nature and forest landscape" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Wildlife & Heritage</span>
+              <h3>Madhya Pradesh</h3>
+              <p>Khajuraho, Orchha, Bhopal, Sanchi and tiger reserves.</p>
+              <a class="destination-link" href="../contact.html?destination=Madhya%20Pradesh">Enquire about Madhya Pradesh →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="east" data-search="west bengal kolkata darjeeling sundarbans">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=750&q=85" alt="Eastern Himalayan mountain scenery" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Culture & Mountains</span>
+              <h3>West Bengal</h3>
+              <p>Kolkata, Darjeeling, Kalimpong, Sundarbans and tea country.</p>
+              <a class="destination-link" href="../contact.html?destination=West%20Bengal">Enquire about West Bengal →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="east" data-search="sikkim gangtok pelling lachen lachung yumthang">
+            <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=750&q=85" alt="Scenic mountain travel landscape" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Himalayan Escape</span>
+              <h3>Sikkim</h3>
+              <p>Gangtok, Pelling, mountain viewpoints and regional monasteries.</p>
+              <a class="destination-link" href="../contact.html?destination=Sikkim">Enquire about Sikkim →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="east" data-search="assam meghalaya shillong cherrapunji kaziranga guwahati">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=750&q=85" alt="Lush forest and nature" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Nature & Greenery</span>
+              <h3>Assam & Meghalaya</h3>
+              <p>Guwahati, Shillong, Cherrapunji, living root bridges and Kaziranga.</p>
+              <a class="destination-link" href="../contact.html?destination=Assam%20Meghalaya">Explore the Northeast →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="east" data-search="odisha bhubaneswar puri konark chilika">
+            <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=750&q=85" alt="Indian heritage destination" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Heritage & Coast</span>
+              <h3>Odisha</h3>
+              <p>Puri, Konark, Bhubaneswar, Chilika Lake and cultural sites.</p>
+              <a class="destination-link" href="../contact.html?destination=Odisha">Enquire about Odisha →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="islands" data-search="andaman nicobar port blair havelock neil island">
+            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=750&q=85" alt="Tropical island beach" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Island Holidays</span>
+              <h3>Andaman & Nicobar</h3>
+              <p>Port Blair, Havelock, Neil Island, beaches and marine activities.</p>
+              <a class="destination-link" href="../contact.html?destination=Andaman%20Nicobar">Enquire about Andaman →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="islands" data-search="lakshadweep islands lagoon beach">
+            <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=750&q=85" alt="Turquoise ocean waves" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Island Escape</span>
+              <h3>Lakshadweep</h3>
+              <p>Island scenery, lagoons and marine experiences, subject to permits and availability.</p>
+              <a class="destination-link" href="../contact.html?destination=Lakshadweep">Enquire about Lakshadweep →</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="no-results" id="domestic-empty">No matching destinations found. Try another destination or select “All India”.</p>
+
+        <div class="custom-banner">
+          <div>
+            <h3>Your preferred Indian destination isn't listed?</h3>
+            <p>Enquire about other states, cities, pilgrimage routes, wildlife parks, weekend breaks or multi-city holidays across India.</p>
+          </div>
+          <a class="btn btn-orange" href="../contact.html?type=domestic-tour">Plan an India Tour ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERNATIONAL DESTINATIONS -->
+    <section class="section section-soft" id="international">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" style="color:#bd650f">02 / Explore the World</span>
+            <h2>International tour packages</h2>
+          </div>
+          <p>
+            Explore Asian getaways, European classics, island escapes, cultural
+            adventures and long-haul destinations. Select a country to start
+            your enquiry.
+          </p>
+        </div>
+
+        <div class="search-bar">
+          <input id="international-search" type="search"
+                 placeholder="Search: Singapore, Dubai, Japan, Europe..."
+                 aria-label="Search international destinations">
+          <button type="button" data-search="international">Search</button>
+        </div>
+
+        <div class="filter-row" aria-label="Filter international destinations">
+          <button class="filter-btn active" type="button" data-region="all" data-scope="international">All Destinations</button>
+          <button class="filter-btn" type="button" data-region="asia" data-scope="international">Asia</button>
+          <button class="filter-btn" type="button" data-region="middle-east" data-scope="international">Middle East</button>
+          <button class="filter-btn" type="button" data-region="europe" data-scope="international">Europe</button>
+          <button class="filter-btn" type="button" data-region="islands" data-scope="international">Islands</button>
+          <button class="filter-btn" type="button" data-region="long-haul" data-scope="international">Long-Haul</button>
+        </div>
+
+        <div class="destination-grid" id="international-grid">
+
+          <article class="destination-card" data-region="asia" data-search="thailand bangkok phuket krabi pattaya chiang mai">
+            <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=750&q=85" alt="Bangkok city in Thailand" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">City & Beach</span>
+              <h3>Thailand</h3>
+              <p>Bangkok, Phuket, Krabi, Pattaya, Chiang Mai and island escapes.</p>
+              <a class="destination-link" href="../contact.html?destination=Thailand">Enquire about Thailand →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="asia" data-search="singapore sentosa marina bay gardens family">
+            <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=750&q=85" alt="Singapore skyline" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">City & Family</span>
+              <h3>Singapore</h3>
+              <p>Marina Bay, Gardens by the Bay, Sentosa and family attractions.</p>
+              <a class="destination-link" href="../contact.html?destination=Singapore">Enquire about Singapore →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="asia" data-search="malaysia kuala lumpur langkawi penang borneo">
+            <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=750&q=85" alt="Kuala Lumpur skyline" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">City & Nature</span>
+              <h3>Malaysia</h3>
+              <p>Kuala Lumpur, Langkawi, Penang and tropical nature experiences.</p>
+              <a class="destination-link" href="../contact.html?destination=Malaysia">Enquire about Malaysia →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="asia" data-search="indonesia bali ubud nusa penida jakarta">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=750&q=85" alt="Balinese temple and tropical landscape" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Tropical Escape</span>
+              <h3>Indonesia</h3>
+              <p>Bali, Ubud, Nusa Penida, beaches, temples and nature.</p>
+              <a class="destination-link" href="../contact.html?destination=Indonesia%20Bali">Enquire about Indonesia →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="asia" data-search="vietnam hanoi halong bay danang hoi an ho chi minh">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=750&q=85" alt="Vietnamese landscape and traditional boats" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Culture & Scenery</span>
+              <h3>Vietnam</h3>
+              <p>Hanoi, Ha Long Bay, Da Nang, Hoi An and Ho Chi Minh City.</p>
+              <a class="destination-link" href="../contact.html?destination=Vietnam">Enquire about Vietnam →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="asia" data-search="japan tokyo kyoto osaka fuji hokkaido">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=750&q=85" alt="Traditional Japanese street" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Culture & Modern Cities</span>
+              <h3>Japan</h3>
+              <p>Tokyo, Kyoto, Osaka, Mount Fuji, gardens and seasonal scenery.</p>
+              <a class="destination-link" href="../contact.html?destination=Japan">Enquire about Japan →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="asia" data-search="south korea seoul busan jeju island">
+            <img src="https://images.unsplash.com/photo-1538485399081-7c8a8b8a7b7b?auto=format&fit=crop&w=750&q=85" alt="South Korean cityscape" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">City & Culture</span>
+              <h3>South Korea</h3>
+              <p>Seoul, Busan, Jeju Island, food, culture and modern city life.</p>
+              <a class="destination-link" href="../contact.html?destination=South%20Korea">Enquire about South Korea →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="asia" data-search="china beijing shanghai great wall xian">
+            <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=750&q=85" alt="Great Wall of China" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Heritage & Cities</span>
+              <h3>China</h3>
+              <p>Beijing, Shanghai, the Great Wall and historic cultural sites.</p>
+              <a class="destination-link" href="../contact.html?destination=China">Enquire about China →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="asia" data-search="sri lanka colombo kandy ella galle">
+            <img src="https://images.unsplash.com/photo-1588598198321-9735fd5f2f5f?auto=format&fit=crop&w=750&q=85" alt="Sri Lankan scenic destination" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Nature & Heritage</span>
+              <h3>Sri Lanka</h3>
+              <p>Kandy, Ella, Galle, tea country, beaches and cultural sites.</p>
+              <a class="destination-link" href="../contact.html?destination=Sri%20Lanka">Enquire about Sri Lanka →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="asia" data-search="nepal kathmandu pokhara everest himalayas">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=750&q=85" alt="Himalayan mountains in Nepal" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Mountains & Culture</span>
+              <h3>Nepal</h3>
+              <p>Kathmandu, Pokhara, Himalayan scenery and adventure options.</p>
+              <a class="destination-link" href="../contact.html?destination=Nepal">Enquire about Nepal →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="middle-east" data-search="uae dubai abu dhabi desert safari burj khalifa">
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=750&q=85" alt="Dubai skyline" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Luxury & City</span>
+              <h3>Dubai & UAE</h3>
+              <p>Dubai, Abu Dhabi, desert safaris, architecture and shopping.</p>
+              <a class="destination-link" href="../contact.html?destination=Dubai%20UAE">Enquire about UAE →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="middle-east" data-search="oman muscat salalah desert mountains">
+            <img src="https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=750&q=85" alt="Desert architecture and landscape" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Desert & Culture</span>
+              <h3>Oman</h3>
+              <p>Muscat, desert landscapes, forts, coastlines and mountain scenery.</p>
+              <a class="destination-link" href="../contact.html?destination=Oman">Enquire about Oman →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="middle-east" data-search="jordan petra wadi rum dead sea amman">
+            <img src="https://images.unsplash.com/photo-1548786811-dd6e453ccca7?auto=format&fit=crop&w=750&q=85" alt="Petra archaeological site in Jordan" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">History & Adventure</span>
+              <h3>Jordan</h3>
+              <p>Petra, Wadi Rum, the Dead Sea and historic Amman.</p>
+              <a class="destination-link" href="../contact.html?destination=Jordan">Enquire about Jordan →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="middle-east" data-search="saudi arabia riyadh jeddah al ula">
+            <img src="https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=750&q=85" alt="Desert landscape" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Heritage & City</span>
+              <h3>Saudi Arabia</h3>
+              <p>Riyadh, Jeddah, AlUla and eligible cultural or pilgrimage travel.</p>
+              <a class="destination-link" href="../contact.html?destination=Saudi%20Arabia">Enquire about Saudi Arabia →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="islands" data-search="maldives resort lagoon island honeymoon">
+            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=750&q=85" alt="Maldives tropical island and turquoise sea" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Island & Honeymoon</span>
+              <h3>Maldives</h3>
+              <p>Turquoise lagoons, island resorts, snorkelling and romantic escapes.</p>
+              <a class="destination-link" href="../contact.html?destination=Maldives">Enquire about Maldives →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="islands" data-search="mauritius seychelles beaches island">
+            <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=750&q=85" alt="Clear tropical ocean" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Indian Ocean</span>
+              <h3>Mauritius & Seychelles</h3>
+              <p>Coastal scenery, island experiences, marine life and relaxation.</p>
+              <a class="destination-link" href="../contact.html?destination=Mauritius%20Seychelles">Enquire about island tours →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="islands" data-search="fiji bali phuket island beaches tropical">
+            <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=750&q=85" alt="Tropical island travel destination" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Tropical Getaways</span>
+              <h3>Other Island Escapes</h3>
+              <p>Explore other tropical destinations, subject to travel eligibility and availability.</p>
+              <a class="destination-link" href="../contact.html?destination=Island%20holiday">Enquire about islands →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="europe" data-search="france paris eiffel tower nice lyon">
+            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=750&q=85" alt="Paris street and architecture" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Art & Culture</span>
+              <h3>France</h3>
+              <p>Paris, the Riviera, historic towns, museums and French cuisine.</p>
+              <a class="destination-link" href="../contact.html?destination=France">Enquire about France →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="europe" data-search="italy rome venice florence milan amalfi">
+            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=750&q=85" alt="Italian coastal town" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">History & Cuisine</span>
+              <h3>Italy</h3>
+              <p>Rome, Venice, Florence, Milan, lakes and coastal villages.</p>
+              <a class="destination-link" href="../contact.html?destination=Italy">Enquire about Italy →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="europe" data-search="switzerland zurich lucerne interlaken jungfrau alps">
+            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=750&q=85" alt="Alpine mountain scenery" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Alpine Landscapes</span>
+              <h3>Switzerland</h3>
+              <p>Zurich, Lucerne, Interlaken, alpine rail journeys and lakes.</p>
+              <a class="destination-link" href="../contact.html?destination=Switzerland">Enquire about Switzerland →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="europe" data-search="united kingdom uk london scotland england wales">
+            <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=750&q=85" alt="London historic city" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Cities & Heritage</span>
+              <h3>United Kingdom</h3>
+              <p>London, Scotland, historic towns, castles and countryside.</p>
+              <a class="destination-link" href="../contact.html?destination=United%20Kingdom">Enquire about the UK →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="europe" data-search="greece santorini athens mykonos islands">
+            <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=750&q=85" alt="Santorini buildings and sea" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Islands & History</span>
+              <h3>Greece</h3>
+              <p>Athens, Santorini, Mykonos, ancient sites and Aegean islands.</p>
+              <a class="destination-link" href="../contact.html?destination=Greece">Enquire about Greece →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="europe" data-search="spain barcelona madrid seville granada">
+            <img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=750&q=85" alt="Spanish city architecture" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Cities & Lifestyle</span>
+              <h3>Spain</h3>
+              <p>Barcelona, Madrid, Seville, architecture, food and coastal towns.</p>
+              <a class="destination-link" href="../contact.html?destination=Spain">Enquire about Spain →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="europe" data-search="netherlands amsterdam canals tulips">
+            <img src="https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=750&q=85" alt="Amsterdam canals and architecture" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">City Breaks</span>
+              <h3>Netherlands</h3>
+              <p>Amsterdam, canals, museums, countryside and seasonal flower fields.</p>
+              <a class="destination-link" href="../contact.html?destination=Netherlands">Enquire about Netherlands →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="europe" data-search="austria vienna salzburg alpine">
+            <img src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=750&q=85" alt="European city and mountain scenery" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Culture & Mountains</span>
+              <h3>Austria & Central Europe</h3>
+              <p>Vienna, Salzburg, Prague and other historic Central European cities.</p>
+              <a class="destination-link" href="../contact.html?destination=Central%20Europe">Enquire about Central Europe →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="long-haul" data-search="australia sydney melbourne gold coast great barrier reef">
+            <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=750&q=85" alt="Sydney harbour and city" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Cities & Nature</span>
+              <h3>Australia</h3>
+              <p>Sydney, Melbourne, the Gold Coast and natural landmarks.</p>
+              <a class="destination-link" href="../contact.html?destination=Australia">Enquire about Australia →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="long-haul" data-search="new zealand auckland queenstown rotorua milford sound">
+            <img src="https://images.unsplash.com/photo-1469521669194-babb45599def?auto=format&fit=crop&w=750&q=85" alt="New Zealand style mountain and lake landscape" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Nature & Adventure</span>
+              <h3>New Zealand</h3>
+              <p>Queenstown, Auckland, scenic lakes, mountains and outdoor experiences.</p>
+              <a class="destination-link" href="../contact.html?destination=New%20Zealand">Enquire about New Zealand →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="long-haul" data-search="united states usa new york california las vegas orlando">
+            <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=750&q=85" alt="New York city skyline" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">City & Road Trips</span>
+              <h3>United States</h3>
+              <p>New York, California, Las Vegas, Orlando and national parks.</p>
+              <a class="destination-link" href="../contact.html?destination=United%20States">Enquire about the USA →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="long-haul" data-search="canada toronto vancouver banff montreal">
+            <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=750&q=85" alt="Toronto skyline" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Cities & Outdoors</span>
+              <h3>Canada</h3>
+              <p>Toronto, Vancouver, Montreal, the Rockies and scenic landscapes.</p>
+              <a class="destination-link" href="../contact.html?destination=Canada">Enquire about Canada →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="long-haul" data-search="south africa cape town safari johannesburg">
+            <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=750&q=85" alt="African wildlife and landscape" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Wildlife & Nature</span>
+              <h3>South Africa</h3>
+              <p>Cape Town, scenic drives, wildlife experiences and city stays.</p>
+              <a class="destination-link" href="../contact.html?destination=South%20Africa">Enquire about South Africa →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="long-haul" data-search="egypt cairo pyramids luxor nile">
+            <img src="https://images.unsplash.com/photo-1539768942893-daf53e448371?auto=format&fit=crop&w=750&q=85" alt="Pyramids of Egypt" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Ancient History</span>
+              <h3>Egypt</h3>
+              <p>Cairo, the pyramids, Luxor, temples and Nile experiences.</p>
+              <a class="destination-link" href="../contact.html?destination=Egypt">Enquire about Egypt →</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-region="long-haul" data-search="turkey türkiye istanbul cappadocia pamukkale">
+            <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=750&q=85" alt="Istanbul city and historic architecture" loading="lazy">
+            <div class="destination-info">
+              <span class="destination-type">Culture & Landscapes</span>
+              <h3>Türkiye (Turkey)</h3>
+              <p>Istanbul, Cappadocia, coastal towns and historic landmarks.</p>
+              <a class="destination-link" href="../contact.html?destination=Turkey">Enquire about Türkiye →</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="no-results" id="international-empty">No matching destinations found. Try another search or select “All Destinations”.</p>
+
+        <div class="custom-banner">
+          <div>
+            <h3>Your dream country isn't listed?</h3>
+            <p>Ask about other countries, multi-country itineraries, cruises, city breaks, cultural journeys and adventure holidays.</p>
+          </div>
+          <a class="btn btn-orange" href="../contact.html?type=international-tour">Plan an International Tour ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOLIDAY TYPES -->
+    <section class="section" id="holiday-types">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" style="color:#bd650f">03 / Travel Your Way</span>
+            <h2>What kind of holiday are you planning?</h2>
+          </div>
+          <p>Start with your travel style. You can enquire for a domestic or international destination.</p>
+        </div>
+
+        <div class="holiday-grid">
+          <article class="holiday-card">
+            <span class="emoji">👨‍👩‍👧‍👦</span>
+            <h3>Family Holidays</h3>
+            <p>Family-friendly stays, sightseeing, activities and flexible itineraries.</p>
+          </article>
+          <article class="holiday-card">
+            <span class="emoji">💑</span>
+            <h3>Honeymoon & Couples</h3>
+            <p>Romantic getaways, scenic stays, island escapes and special occasions.</p>
+          </article>
+          <article class="holiday-card">
+            <span class="emoji">🏖️</span>
+            <h3>Beach & Island Breaks</h3>
+            <p>Coastal holidays, island resorts, relaxation and water activities.</p>
+          </article>
+          <article class="holiday-card">
+            <span class="emoji">🏔️</span>
+            <h3>Mountains & Adventure</h3>
+            <p>Hill stations, scenic routes, outdoor activities and nature-focused trips.</p>
+          </article>
+          <article class="holiday-card">
+            <span class="emoji">🙏</span>
+            <h3>Pilgrimage & Spiritual</h3>
+            <p>Religious destinations, temple circuits and spiritual journeys.</p>
+          </article>
+          <article class="holiday-card">
+            <span class="emoji">🏢</span>
+            <h3>Groups & Corporate</h3>
+            <p>Group travel, company outings, incentive trips and multi-person itineraries.</p>
+          </article>
+        </div>
+
+        <div class="custom-banner">
+          <div>
+            <h3>Need flights, hotels, transfers or sightseeing too?</h3>
+            <p>Your tour enquiry can include accommodation, transport, activities and other requested travel arrangements, subject to provider availability.</p>
+          </div>
+          <a class="btn btn-orange" href="travel-services.html">View Travel Services ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENQUIRY PROCESS -->
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" style="color:#bd650f">04 / Simple Planning</span>
+            <h2>From your idea to your itinerary.</h2>
+          </div>
+          <p>Start with an enquiry. Package options and booking conditions can be discussed before you confirm.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <span class="step-number">STEP 01</span>
+            <h3>Share your requirements</h3>
+            <p>Tell us your destination, travel dates, departure city, number of travellers and approximate budget.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">STEP 02</span>
+            <h3>Discuss your trip</h3>
+            <p>Tell us your preferred hotels, transport, sightseeing, activities, meal preferences and travel style.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">STEP 03</span>
+            <h3>Review your options</h3>
+            <p>Review available proposals, inclusions, prices and cancellation conditions before confirming a booking.</p>
+          </article>
+        </div>
+
+        <p class="disclaimer">
+          Destination listings are examples for enquiry and inspiration; they do not guarantee availability or a fixed package price.
+          Actual rates, transport, accommodation, entry requirements, visa rules, permits and inclusions vary by destination, date and provider.
+          Visa assistance is guidance/support only and does not guarantee visa approval. Confirm current travel and entry requirements before booking.
+          Photographs are illustrative and may depict a location or experience different from a specific package.
+        </p>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-inner">
+        <div>
+          <h2>Where would you like to go next?</h2>
+          <p>Share your destination, travel dates and number of travellers with SutraOps. Start an enquiry for your next domestic or international holiday.</p>
+        </div>
+        <a class="btn btn-orange" href="../contact.html?type=tour-package-enquiry">Enquire About a Tour ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/so-icon.png" alt="SutraOps logo">
+          <strong>Sutra<span>Ops</span></strong>
+        </div>
+        <p class="footer-tagline">Smart Travel, Smart Finance, Smart Operations.</p>
+        <p class="footer-desc">
+          Helping individuals, families, groups and businesses explore travel
+          options while delivering smart finance and operations solutions.
+        </p>
+      </div>
+
+      <div>
+        <h3>Quick Links</h3>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../about.html">About Us</a>
+          <a href="../services.html">Services</a>
+          <a href="../insights.html">Insights</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+      </div>
+
+      <div>
+        <h3>Travel Packages</h3>
+        <div class="footer-links">
+          <a href="#domestic">Domestic Tours</a>
+          <a href="#international">International Tours</a>
+          <a href="#holiday-types">Holiday Types</a>
+          <a href="travel-services.html">All Travel Services</a>
+        </div>
+      </div>
+
+      <div>
+        <h3>Contact SutraOps</h3>
+        <div class="footer-links">
+          <a href="mailto:info.sutraops@gmail.com">info.sutraops@gmail.com</a>
+          <a href="https://wa.me/919288223003" target="_blank" rel="noopener">WhatsApp Enquiry</a>
+          <a href="../contact.html">Send an Enquiry</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> SutraOps Solutions. All rights reserved.</p>
+      <p>Smart Travel · Smart Finance · Smart Operations</p>
+    </div>
+  </footer>
+
+  <a class="whatsapp" href="https://wa.me/919288223003"
+     target="_blank" rel="noopener" aria-label="Contact SutraOps on WhatsApp">✆</a>
+
+  <script>
+    // Mobile navigation
+    const menuButton = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector("#main-nav");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navigation.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+      menuButton.textContent = isOpen ? "✕" : "☰";
+    });
+
+    navigation.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navigation.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
+      });
+    });
+
+    // Search and regional filters for both destination collections
+    const activeRegions = {
+      domestic: "all",
+      international: "all"
+    };
+
+    function filterDestinations(scope) {
+      const grid = document.getElementById(scope + "-grid");
+      const searchInput = document.getElementById(scope + "-search");
+      const emptyMessage = document.getElementById(scope + "-empty");
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      grid.querySelectorAll(".destination-card").forEach(card => {
+        const region = card.dataset.region;
+        const searchText = (
+          card.dataset.search + " " + card.innerText
+        ).toLowerCase();
+
+        const matchesRegion =
+          activeRegions[scope] === "all" ||
+          region === activeRegions[scope];
+
+        const matchesSearch = !query || searchText.includes(query);
+        const show = matchesRegion && matchesSearch;
+
+        card.hidden = !show;
+        if (show) visibleCount++;
+      });
+
+      emptyMessage.classList.toggle("visible", visibleCount === 0);
+    }
+
+    document.querySelectorAll(".filter-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const scope = button.dataset.scope;
+        activeRegions[scope] = button.dataset.region;
+
+        document.querySelectorAll(
+          '.filter-btn[data-scope="' + scope + '"]'
+        ).forEach(item => item.classList.remove("active"));
+
+        button.classList.add("active");
+        filterDestinations(scope);
+      });
+    });
+
+    document.querySelectorAll("[data-search]").forEach(button => {
+      button.addEventListener("click", () => {
+        filterDestinations(button.dataset.search);
+      });
+    });
+
+    ["domestic", "international"].forEach(scope => {
+      document.getElementById(scope + "-search")
+        .addEventListener("input", () => filterDestinations(scope));
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
